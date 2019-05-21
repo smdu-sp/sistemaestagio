@@ -49519,16 +49519,135 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 89 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: c:/Development/api/resources/assets/js/components/Estagiario/CadastroEstagiario.vue: Unexpected token, expected ; (103:23)\n\n\u001b[0m \u001b[90m 101 | \u001b[39m    }\u001b[33m,\u001b[39m\n \u001b[90m 102 | \u001b[39m    mounted() {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 | \u001b[39m        cartaoAcesso() {\n \u001b[90m     | \u001b[39m                       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 | \u001b[39m            let uri \u001b[33m=\u001b[39m \u001b[32m'localhost:8000/api/cartao'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 105 | \u001b[39m            \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39maxios\n \u001b[90m 106 | \u001b[39m            \u001b[33m.\u001b[39mget(uri)\u001b[0m\n");
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            post: {},
+            cartao_acesso: null
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        var uri = 'localhost:8000/api/cartao';
+        this.axios.get(uri).then(function (response) {
+            _this.cartao_acesso = response;
+            console.log(_this.cartao_acesso);
+        });
+        // .catch(function(error) {
+        //     console.log("Erro");
+        // });
+    },
+
+    methods: {
+        inserirEstagiario: function inserirEstagiario() {}
+    }
+});
 
 /***/ }),
 /* 90 */

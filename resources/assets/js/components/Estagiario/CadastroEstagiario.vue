@@ -99,19 +99,17 @@ export default {
             cartao_acesso: null
         }
     },
-    mounted() {
-        cartaoAcesso() {
-            let uri = 'localhost:8000/api/cartao';
-            this.axios
-            .get(uri)
-            .then((response) => {
-                this.cartao_acesso = response;
-                console.log(this.cartao_acesso);
-            });
-            // .catch(function(error) {
-            //     console.log("Erro");
-            // });
-        }
+    created() {
+        let uri = 'localhost:8000/api/cartao';
+        this.axios
+        .get(uri)
+        .then((response) => {
+            this.cartao_acesso = response;
+            console.log(this.cartao_acesso);
+        });
+        // .catch(function(error) {
+        //     console.log("Erro");
+        // });
     },
     methods: {
         inserirEstagiario() {
