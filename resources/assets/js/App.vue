@@ -9,7 +9,6 @@
 </template>
 
 <style>
-/* @import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'; */
 
     .fade-enter-active, .fade-leave-active {
       transition: opacity .5s

@@ -65,9 +65,13 @@
     },
     methods: {
       inserirVaga(){
-        let uri = 'http://localhost/vagas';
-        this.axios.post(uri, this.post).then((response) => {
-            this.$router.push({name: 'posts'});
+        let uri = 'http://localhost:8000/api/vagas';
+        this.axios.post(uri, this.post)
+        .then((response) => {
+            console.log('ok');
+        })
+        .catch(function (error) {
+            console.log('error');
         });
       }
     }

@@ -11,7 +11,6 @@
     <body>
         <div id="app">
           <example-component></example-component>
-          <h1>{{ csrf_token() }}</h1>
         </div>
         <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
     </body>

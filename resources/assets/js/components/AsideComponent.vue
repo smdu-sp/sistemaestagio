@@ -33,37 +33,6 @@
                         <i class="fas fa-chevron-down mr-2"></i>
                         Consulta
                     </a>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Estagiários
-                            </a>
-                        </li>
-                    </ul>
-                    
-                    <ul class="submenu d-flex flex-column">
-                        <li>Ativos</li>
-                        <li>Solicitação de Login</li>
-                        <li>Em renovação</li>
-                    </ul>
-
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Vagas
-                            </a>
-                        </li>
-                    </ul>
-
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Supervisores
-                            </a>
-                        </li>
-                    </ul>
-
-                </li>
                 <li>
                     <i class="fas fa-chevron-down mr-2"></i>
                     <router-link to="/cadastro">Cadastro</router-link>
