@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Nome</label>
-                        <input type="text" class="form-control" v-model="post.nome">
+                        <input type="text" class="form-control" >
                     </div>
                 </div>
             </div>
@@ -20,13 +20,14 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label>Nome Social</label>
-                        <input type="text" class="form-control" v-model="post.nome_social">
+                        <input type="text" class="form-control" >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="contratadtante">Contratado Por</label>
-                        <select class="form-control" id="contratante" v-model="post.contratado_por">
+                        <select class="form-control" id="contratante" >
+                            <option></option>
                             <option>SMDU</option>
                             <option>SEL</option>
                             <option>SMUL</option>
@@ -57,7 +58,7 @@
                     <div class="form-group">
                         <label for="cartao">Cartão Acesso</label>
                         <select class="form-control" id="cartao" v-model="post.cartao_acesso">
-                            <option>SMDU</option>
+                            <option v-for="cartao of cartoes">{{ cartao.id }}</option>
                         </select>
                     </div>
                 </div>
@@ -88,7 +89,6 @@
         </form>
             </div>
         </div><!-- /row -->
-        </div> <!-- /container -->
     </div>
 </template>
 <script>
@@ -96,20 +96,13 @@ export default {
     data() {
         return {
             post: {},
-            cartao_acesso: null
+            cartoes: {}
         }
     },
     created() {
-        let uri = 'localhost:8000/api/cartao';
-        this.axios
-        .get(uri)
-        .then((response) => {
-            this.cartao_acesso = response;
-            console.log(this.cartao_acesso);
-        });
-        // .catch(function(error) {
-        //     console.log("Erro");
-        // });
+        let uri = 'http://localhost:8000/api/cartao';
+        this.axios.get(uri).then(response => this.cartoes = response.data);
+        
     },
     methods: {
         inserirEstagiario() {

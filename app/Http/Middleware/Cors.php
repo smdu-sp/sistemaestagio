@@ -8,18 +8,20 @@ class Cors {
     public function handle($request, Closure $next)
     {
         header("Access-Control-Allow-Origin: *");
-        // Allow Option Method
+        //ALLOW OPTIONS METHOD
         $headers = [
-            'Access-Control-Allow-Methods' => 'POST, GET, OPTION, PUT, PATCH, DELETE',
-            'Access-Control-Allow-Headers' => 'Content-Type, X-Auth-Token, Origin, Authorization'
+            'Access-Control-Allow-Methods' => '*',
+            'Access-Control-Allow-Headers' => 'Content-Type, X-Auth-Token, Origin, Authorization',
         ];
-        if ($request->getMethod() == "OPTIONS") {
-            return response()->json('OK', 200, $headers);
+        if ($request->getMethod() == "OPTIONS"){
+            //The client-side application can set only headers allowed in Access-Control-Allow-Headers
+            return response()->json('OK',200,$headers);
         }
         $response = $next($request);
-        foreach($headers as $key => $value) {
+        foreach ($headers as $key => $value) {
             $response->header($key, $value);
         }
         return $response;
+
     }
 }

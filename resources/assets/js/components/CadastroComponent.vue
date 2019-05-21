@@ -63,6 +63,11 @@
           post:{}
         }
     },
+    created() {
+        let uri = 'http://localhost:8000/api/vagas';
+        this.axios.get(uri).then(response => console.log(response));
+
+    },
     methods: {
       inserirVaga(){
         let uri = 'http://localhost:8000/api/vagas';

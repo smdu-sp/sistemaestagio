@@ -25,7 +25,7 @@ Route::name('api.')->group(function() {
 
     // Rotas vagas
     Route::prefix('vagas')->group(function() {
-        Route::get('/', 'VagaController@getVagas')->name('vagas'); // Retornar todas as vagas
+        Route::get('/', 'VagaController@getVagas')->middleware('cors')->name('vagas'); // Retornar todas as vagas
         Route::get('/{id}', 'VagaController@getVagasById')->name('vaga_por_id'); // Retorna a vaga pelo id
         Route::post('/', 'VagaController@setVaga')->middleware('cors')->name('cadastrar_vaga'); // Cadastra vaga
         Route::patch('/{id}', 'VagaController@update')->name('editar_vaga'); // Atualizar Vaga

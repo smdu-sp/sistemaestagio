@@ -1388,7 +1388,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(81);
+module.exports = __webpack_require__(86);
 
 
 /***/ }),
@@ -1414,7 +1414,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_MainComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_MainComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_CadastroComponent_vue__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_CadastroComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_CadastroComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Estagiario_CadastroEstagiario_vue__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Estagiario_CadastroEstagiario_vue__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Estagiario_CadastroEstagiario_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Estagiario_CadastroEstagiario_vue__);
 
 /**
@@ -49154,6 +49154,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       post: {}
     };
   },
+  created: function created() {
+    var uri = 'http://localhost:8000/api/vagas';
+    this.axios.get(uri).then(function (response) {
+      return console.log(response);
+    });
+  },
 
   methods: {
     inserirVaga: function inserirVaga() {
@@ -49425,28 +49431,18 @@ if (false) {
 
 /***/ }),
 /* 81 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(87)
+  __webpack_require__(82)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(89)
+var __vue_script__ = __webpack_require__(84)
 /* template */
-var __vue_template__ = __webpack_require__(90)
+var __vue_template__ = __webpack_require__(85)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49485,13 +49481,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 87 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(88);
+var content = __webpack_require__(83);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49511,7 +49507,7 @@ if(false) {
 }
 
 /***/ }),
-/* 88 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -49519,13 +49515,13 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 89 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49628,20 +49624,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             post: {},
-            cartao_acesso: null
+            cartoes: {}
         };
     },
     created: function created() {
         var _this = this;
 
-        var uri = 'localhost:8000/api/cartao';
+        var uri = 'http://localhost:8000/api/cartao';
         this.axios.get(uri).then(function (response) {
-            _this.cartao_acesso = response;
-            console.log(_this.cartao_acesso);
+            return _this.cartoes = response.data;
         });
-        // .catch(function(error) {
-        //     console.log("Erro");
-        // });
     },
 
     methods: {
@@ -49650,7 +49642,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 90 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49682,115 +49674,9 @@ var render = function() {
               }
             },
             [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Nome")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.post.nome,
-                          expression: "post.nome"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text" },
-                      domProps: { value: _vm.post.nome },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.post, "nome", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ])
-              ]),
+              _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-8" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Nome Social")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.post.nome_social,
-                          expression: "post.nome_social"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text" },
-                      domProps: { value: _vm.post.nome_social },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.post, "nome_social", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "contratadtante" } }, [
-                      _vm._v("Contratado Por")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.post.contratado_por,
-                            expression: "post.contratado_por"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "contratante" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.post,
-                              "contratado_por",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", [_vm._v("SMDU")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("SEL")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("SMUL")])
-                      ]
-                    )
-                  ])
-                ])
-              ]),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-md-3" }, [
@@ -49924,7 +49810,10 @@ var render = function() {
                           }
                         }
                       },
-                      [_c("option", [_vm._v("SMDU")])]
+                      _vm._l(_vm.cartoes, function(cartao) {
+                        return _c("option", [_vm._v(_vm._s(cartao.id))])
+                      }),
+                      0
                     )
                   ])
                 ])
@@ -50017,7 +49906,7 @@ var render = function() {
               ]),
               _c("br"),
               _vm._v(" "),
-              _vm._m(0)
+              _vm._m(2)
             ]
           )
         ],
@@ -50027,6 +49916,56 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Nome")]),
+          _vm._v(" "),
+          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Nome Social")]),
+          _vm._v(" "),
+          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "contratadtante" } }, [
+            _vm._v("Contratado Por")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            { staticClass: "form-control", attrs: { id: "contratante" } },
+            [
+              _c("option"),
+              _vm._v(" "),
+              _c("option", [_vm._v("SMDU")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("SEL")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("SMUL")])
+            ]
+          )
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -50044,6 +49983,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-3c8e4c81", module.exports)
   }
 }
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
