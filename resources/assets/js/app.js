@@ -30,6 +30,7 @@ import HeaderComponent from './components/HeaderComponent.vue';
 import MainComponent from './components/MainComponent.vue';
 import CadastroComponent from './components/CadastroComponent.vue';
 import CadastroEstagiario from './components/Estagiario/CadastroEstagiario.vue';
+import NavEstagiario from './components/Estagiario/NavEstagiario.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -37,6 +38,7 @@ Vue.component('header-component', HeaderComponent);
 Vue.component('main-component', MainComponent);
 Vue.component('cadastro-component', CadastroComponent);
 Vue.component('cadastro-estagiario', CadastroEstagiario);
+Vue.component('nav-estagiario', NavEstagiario);
 
 const routes = [
     {
@@ -48,6 +50,11 @@ const routes = [
         name: 'cadastro',
         path: '/cadastro',
         component: CadastroEstagiario
+    },
+    {
+        name: 'nav',
+        path: '/nav',
+        component: NavEstagiario
     }
 ];
 

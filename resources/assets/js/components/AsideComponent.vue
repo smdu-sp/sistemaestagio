@@ -64,10 +64,6 @@ div .col-6 {
   padding-right: 0;
 }
 
-.container {
-  max-width: 1100px;
-}
-
 .col-6 {
   background-color: gray;
 }
@@ -78,7 +74,7 @@ div .col-6 {
 
 aside {
     background-color: #3A4248;
-    height: 100vh;
+    height: 100%;
 }
 
 .linha {
