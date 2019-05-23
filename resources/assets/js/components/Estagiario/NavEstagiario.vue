@@ -9,31 +9,36 @@
                 <h1 class="d-flex justify-content-center">Cadastro de Estagiário</h1>
             
             <div>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <h1>Teste</h1>
-                        <p>lkjsabnfiçojb</p>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <h1>Teste2</h1>
-                        <p>lkjsabnfiçojb</p>
-                    </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <h1>Teste3</h1>
-                        <p>lkjsabnfiçojb</p>
-                    </div>
-                </div>
+            <b-card no-body>
+                <b-tabs card>
+                    <b-tab title="Dados Pessoais" active>
+                        <b-card-text>
+                                <dados-pessoais 
+                                :post="post" 
+                                :cartoes="cartoes"
+                                :estados="estados"
+                                :instituicoes="instituicoes"
+                                :cursos="cursos" />
+                        </b-card-text>
+                    </b-tab>
+                    <b-tab title="Informações Contratuais">
+                        <b-card-text>
+                            <informacoes-contratuais
+                            :post="post"
+                            :departamentos="departamentos"
+                            :supervisores="supervisores" />
+                        </b-card-text>
+                    </b-tab>
+                    <b-tab title="Dados Bancários">
+                        <b-card-text>
+                            <dados-bancarios 
+                            :post="post"/>
+                        </b-card-text>
+                    </b-tab>
+                    <hr>
+                    <botoes-component></botoes-component>
+                </b-tabs>
+            </b-card>
             </div>
             
             </div>
@@ -42,7 +47,33 @@
 </template>
 <script>
 export default {
-    
+    data() {
+        return {
+            post: {},
+            cartoes: {},
+            estados: {},
+            instituicoes: {},
+            cursos: {},
+            departamentos: {},
+            supervisores: {}
+        }
+    },
+    created() {
+        let uriCartoes = 'http://localhost:8000/api/cartao';
+        let uriEstados = 'http://localhost:8000/api/estados';
+        let uriInstituicoes = 'http://localhost:8000/api/instituicao';
+        let uriCursos = 'http://localhost:8000/api/cursos';
+        let uriDepartamentos = 'http://localhost:8000/api/departamentos';
+        let uriSupervisores = 'http://localhost:8000/api/supervisores'; 
+
+        this.axios.get(uriCartoes).then(response => this.cartoes = response.data);
+        this.axios.get(uriEstados).then(response => this.estados = response.data);
+        this.axios.get(uriInstituicoes).then(response => this.instituicoes = response.data);        
+        this.axios.get(uriCursos).then(response => this.cursos = response.data);
+        this.axios.get(uriDepartamentos).then(response => this.departamentos = response.data);
+        this.axios.get(uriSupervisores).then(response => this.supervisores = response.data);
+      
+    },
 }
 </script>
 <style>

@@ -1,13 +1,5 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <aside-component></aside-component>
-            </div>
-            <div class="col-9">
-                <header-component></header-component>
-                        <h1 class="d-flex justify-content-center">Cadastro de Estagiário</h1>
-        <form @submit.prevent="inserirEstagiario">
+    <form @submit.prevent="inserirEstagiario">
             <!--row-->
             <div class="row">
                 <div class="col-md-12">
@@ -337,54 +329,13 @@
                     </div>
                 </div>
             </div>
-
-            <hr>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-12 d-flex justify-content-end">
-                        <button class="btn btn-success">Solicitar cartão de acesso</button>
-                        <button class="btn btn-primary ml-2">Cadastrar</button>
-                        <button class="btn btn-warning ml-2">Voltar</button>
-                        <button class="btn btn-danger ml-2">Sair</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-            </div>
-        </div><!-- /row -->
-    </div>
+    </form>
 </template>
 <script>
 export default {
-    data() {
-        return {
-            post: {},
-            cartoes: {},
-            estados: {},
-            instituicoes: {},
-            cursos: {}
-        }
-    },
-    created() {
-        let uriCartoes = 'http://localhost:8000/api/cartao';
-        let uriEstados = 'http://localhost:8000/api/estados';
-        let uriInstituicoes = 'http://localhost:8000/api/instituicao';
-        let uriCursos = 'http://localhost:8000/api/cursos';
-        this.axios.get(uriCartoes).then(response => this.cartoes = response.data);
-        this.axios.get(uriEstados).then(response => this.estados = response.data);
-        this.axios.get(uriInstituicoes).then(response => this.instituicoes = response.data);        
-        this.axios.get(uriCursos).then(response => this.cursos = response.data);        
-    },
-    methods: {
-        inserirEstagiario() {
-
-        }
-    }
+    
+    props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos']
 }
 </script>
 <style>
-.container {
-
-}
 </style>
