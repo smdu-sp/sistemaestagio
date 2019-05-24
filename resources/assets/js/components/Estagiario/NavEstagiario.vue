@@ -18,7 +18,8 @@
                                 :cartoes="cartoes"
                                 :estados="estados"
                                 :instituicoes="instituicoes"
-                                :cursos="cursos" />
+                                :cursos="cursos" 
+                                :inserirEstagiario="inserirEstagiario"/>
                         </b-card-text>
                     </b-tab>
                     <b-tab title="Informações Contratuais">
@@ -26,13 +27,15 @@
                             <informacoes-contratuais
                             :post="post"
                             :departamentos="departamentos"
-                            :supervisores="supervisores" />
+                            :supervisores="supervisores"
+                            :inserirEstagiario="inserirEstagiario"/>
                         </b-card-text>
                     </b-tab>
                     <b-tab title="Dados Bancários">
                         <b-card-text>
                             <dados-bancarios 
-                            :post="post"/>
+                            :post="post"
+                            :inserirEstagiario="inserirEstagiario"/>
                         </b-card-text>
                     </b-tab>
                     <hr>
@@ -74,6 +77,11 @@ export default {
         this.axios.get(uriSupervisores).then(response => this.supervisores = response.data);
       
     },
+    methods: {
+        inserirEstagiario() {
+            console.log(this.post)
+        }
+    }
 }
 </script>
 <style>

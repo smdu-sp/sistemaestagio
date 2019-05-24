@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="inserirEstagiario">
+    <form @submit="inserirEstagiario" method="post">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -57,18 +57,18 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="">Horário de Entrada</label>
-                    <input type="text" class="form-control" v-model="horario_entrada">
+                    <input type="text" class="form-control" v-model="post.horario_entrada">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="">Horário de Saída</label>
-                    <input type="text" class="form-control" v-model="horario_saida">
+                    <input type="text" class="form-control" v-model="post.horario_saida">
                 </div>
             </div>
             <div class="col-md-4 d-flex flex-column justify-content-center">
                 <div class="form-group">
-                    <input type="checkbox" v-model="horario_variavel">Horário variável
+                    <input type="checkbox" v-model="post.horario_variavel">Horário variável
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@
 <script>
 export default {
 
-    props: ['post', 'departamentos', 'supervisores']
+    props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario']
 
 }
 </script>

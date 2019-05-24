@@ -51,7 +51,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-12 linha-horizontal">
-                    <span class="acesso-rapido d-flex justify-content-center">ACESSO RÁPIDO</span>
+                    <span class="acesso-rapido d-flex justify-content-center">MAIS ACESSADOS</span>
                 </div>
             </div>
         </div>         

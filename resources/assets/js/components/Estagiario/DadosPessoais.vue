@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="inserirEstagiario">
+    <form @submit="inserirEstagiario" method="post">
             <!--row-->
             <div class="row">
                 <div class="col-md-12">
@@ -334,7 +334,7 @@
 <script>
 export default {
     
-    props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos']
+    props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario']
 }
 </script>
 <style>
