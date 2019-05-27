@@ -51,23 +51,7 @@ Vue.component('informacoes-contratuais', InformacoesContratuais);
 Vue.component('dados-bancarios', DadosBancarios);
 Vue.component('botoes-component', Botoes);
 
-const routes = [
-    {
-        name: 'home',
-        path: '/',
-        component: HomeComponent
-    },
-    {
-        name: 'cadastro',
-        path: '/cadastro',
-        component: DadosPessoais
-    },
-    {
-        name: 'nav',
-        path: '/nav',
-        component: NavEstagiario
-    }
-];
+import { routes } from './routes.js';
 
 const router = new VueRouter({
     mode: 'history',
