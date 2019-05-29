@@ -78522,7 +78522,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\ndiv .col-6 {\r\n  background: transparent;\n}\n.col-3 {\r\n  padding-right: 0;\n}\n.col-6 {\r\n  background-color: gray;\n}\n.yellow {\r\n  background-color: yellow;\n}\naside {\r\n    background-color: #3A4248;\r\n    height: 100%;\n}\n.linha {\r\n    width: 35px;\r\n    height: 4px;\r\n    background-color: #94AFB5;\r\n    margin-bottom: 3px;\r\n    border-radius: 2px;\n}\nnav ul {\r\n    list-style: none;\n}\nnav ul li {\r\n    color: #fff;\r\n    margin-bottom: 5px;\n}\n.dashboard {\r\n    background: rgba(255, 255, 255, 0.1);\n}\nnav ul li a {\r\n    color: white;\n}\nnav ul li a:link {\r\n    color: white;\n}\nnav ul li a:hover {\r\n    text-decoration: none;\r\n    color: white;\n}\n.submenu {\r\n    background: rgba(255, 255, 255, 0.1);\r\n    padding-right: 10px;\r\n    padding-left: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\ndiv .col-6 {\r\n  background: transparent;\n}\n.col-3 {\r\n  padding-right: 0;\n}\n.col-6 {\r\n  background-color: gray;\n}\n.yellow {\r\n  background-color: yellow;\n}\naside {\r\n    background-color: #3A4248;\n}\n.linha {\r\n    width: 35px;\r\n    height: 4px;\r\n    background-color: #94AFB5;\r\n    margin-bottom: 3px;\r\n    border-radius: 2px;\n}\nnav ul {\r\n    list-style: none;\n}\nnav ul li {\r\n    color: #fff;\r\n    margin-bottom: 5px;\n}\n.dashboard {\r\n    background: rgba(255, 255, 255, 0.1);\n}\nnav ul li a {\r\n    color: white;\n}\nnav ul li a:link {\r\n    color: white;\n}\nnav ul li a:hover {\r\n    text-decoration: none;\r\n    color: white;\n}\n.submenu {\r\n    background: rgba(255, 255, 255, 0.1);\r\n    padding-right: 10px;\r\n    padding-left: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -79987,7 +79987,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -80368,320 +80368,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'vagas', 'statusVaga', 'selectVaga', 'alteracaoSupervisor', 'horarioVariavel']
+    props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'vagas', 'statusVaga', 'selectVaga', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'validaNome', 'validaCodEstudante', 'codValido', 'nomeValido', 'contratoValido', 'validaContrato', 'validaContratante', 'contratanteValido', 'validaVaga', 'vagaValida', 'validaEndereco', 'enderecoValido']
 });
 
 /***/ }),
@@ -80699,7 +80388,11 @@ var render = function() {
       on: {
         submit: function($event) {
           $event.preventDefault()
-          _vm.inserirEstagiario, _vm.alteracaoSupervisor, _vm.horarioVariavel
+          _vm.inserirEstagiario(),
+            _vm.alteracaoSupervisor(),
+            _vm.horarioVariavel(),
+            _vm.dataModificacao(),
+            _vm.horaModificacao()
         }
       }
     },
@@ -80719,13 +80412,16 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": _vm.nomeValido },
               attrs: {
                 type: "text",
+                maxlength: "170",
                 id: "inputNome",
                 placeholder: "Digite o Nome Completo"
               },
               domProps: { value: _vm.post.nome },
               on: {
+                blur: _vm.validaNome,
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -80733,37 +80429,19 @@ var render = function() {
                   _vm.$set(_vm.post, "nome", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.nomeValido
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                    Digite o nome por favor\n                "
+                  )
+                ])
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Nome Social")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.nome_social,
-                  expression: "post.nome_social"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.post.nome_social },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "nome_social", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
+        _vm._m(0)
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -80783,9 +80461,16 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputEstudante", max: "20" },
+              class: { "is-invalid": _vm.codValido },
+              attrs: {
+                type: "text",
+                maxlength: "20",
+                id: "inputEstudante",
+                max: "20"
+              },
               domProps: { value: _vm.post.cod_estudante },
               on: {
+                blur: _vm.validaCodEstudante,
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -80793,7 +80478,15 @@ var render = function() {
                   _vm.$set(_vm.post, "cod_estudante", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.nomeValido
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                    Código não pode ser vazio\n                "
+                  )
+                ])
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -80813,9 +80506,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputContrato" },
+              class: { "is-invalid": _vm.codValido },
+              attrs: { type: "text", maxlength: "20", id: "inputContrato" },
               domProps: { value: _vm.post.contrato },
               on: {
+                blur: _vm.validaContrato,
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -80823,7 +80518,15 @@ var render = function() {
                   _vm.$set(_vm.post, "contrato", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.contratoValido
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                    Contrato não pode ser vazio\n                "
+                  )
+                ])
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -80843,7 +80546,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputTceSuperEstagios" },
+              attrs: {
+                type: "text",
+                maxlength: "11",
+                id: "inputTceSuperEstagios"
+              },
               domProps: { value: _vm.post.tc_superestagios },
               on: {
                 input: function($event) {
@@ -80875,8 +80582,10 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": _vm.contratanteValido },
                 attrs: { id: "selectContratante" },
                 on: {
+                  blur: _vm.validaContratante,
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
                       .call($event.target.options, function(o) {
@@ -80903,7 +80612,15 @@ var render = function() {
                 _vm._v(" "),
                 _c("option", [_vm._v("SMUL")])
               ]
-            )
+            ),
+            _vm._v(" "),
+            _vm.contratanteValido
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                    Contratante não pode ser vazio\n                "
+                  )
+                ])
+              : _vm._e()
           ])
         ])
       ]),
@@ -80927,9 +80644,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": _vm.vagaValida },
                 attrs: { type: "text", id: "selectVaga" },
                 on: {
                   click: _vm.selectVaga,
+                  blur: _vm.validaVaga,
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
                       .call($event.target.options, function(o) {
@@ -80947,11 +80666,23 @@ var render = function() {
                   }
                 }
               },
-              _vm._l(_vm.vagas, function(vaga) {
-                return _c("option", [_vm._v(_vm._s(vaga.id))])
-              }),
-              0
-            )
+              [
+                _c("option"),
+                _vm._v(" "),
+                _vm._l(_vm.vagas, function(vaga) {
+                  return _c("option", [_vm._v(_vm._s(vaga.id))])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _vm.vagaValida
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                    Vaga não pode ser vazia\n                "
+                  )
+                ])
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -80983,7 +80714,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputLogin" },
+              attrs: { type: "text", maxlength: "7", id: "inputLogin" },
               domProps: { value: _vm.post.login },
               on: {
                 input: function($event) {
@@ -81064,9 +80795,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputEndereco" },
+              class: { "is-valid": _vm.enderecoValido },
+              attrs: { type: "text", maxlength: "150", id: "inputEndereco" },
               domProps: { value: _vm.post.endereco },
               on: {
+                blur: _vm.validaEndereco,
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -81074,7 +80807,15 @@ var render = function() {
                   _vm.$set(_vm.post, "endereco", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.contratanteValido
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                    Contratante não pode ser vazio\n                "
+                  )
+                ])
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -81094,7 +80835,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputComplemento" },
+              attrs: { type: "text", maxlength: "20", id: "inputComplemento" },
               domProps: { value: _vm.post.nro },
               on: {
                 input: function($event) {
@@ -81122,7 +80863,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputBairro" },
+              attrs: { type: "text", maxlength: "70", id: "inputBairro" },
               domProps: { value: _vm.post.bairro },
               on: {
                 input: function($event) {
@@ -81201,7 +80942,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputCep" },
+              attrs: { type: "text", maxlength: "10", id: "inputCep" },
               domProps: { value: _vm.post.cep },
               on: {
                 input: function($event) {
@@ -81229,7 +80970,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputFone" },
+              attrs: { type: "text", maxlength: "15", id: "inputFone" },
               domProps: { value: _vm.post.fone_residencial },
               on: {
                 input: function($event) {
@@ -81259,7 +81000,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputCel" },
+              attrs: { type: "text", maxlength: "16", id: "inputCel" },
               domProps: { value: _vm.post.fone_celular },
               on: {
                 input: function($event) {
@@ -81321,7 +81062,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputNaturalidade" },
+              attrs: { type: "text", maxlength: "30", id: "inputNaturalidade" },
               domProps: { value: _vm.post.naturalidade },
               on: {
                 input: function($event) {
@@ -81351,7 +81092,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputNacionalidade" },
+              attrs: {
+                type: "text",
+                maxlength: "20",
+                id: "inputNacionalidade"
+              },
               domProps: { value: _vm.post.nacionalidade },
               on: {
                 input: function($event) {
@@ -81479,7 +81224,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputCpf" },
+              attrs: { type: "text", maxlength: "15", id: "inputCpf" },
               domProps: { value: _vm.post.cpf },
               on: {
                 input: function($event) {
@@ -81507,7 +81252,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputRg" },
+              attrs: { type: "text", maxlength: "13", id: "inputRg" },
               domProps: { value: _vm.post.rg },
               on: {
                 input: function($event) {
@@ -81624,7 +81369,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text" },
+              attrs: { type: "text", maxlength: "30" },
               domProps: { value: _vm.post.rne },
               on: {
                 input: function($event) {
@@ -81710,7 +81455,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputMae" },
+              attrs: { type: "text", maxlength: "170", id: "inputMae" },
               domProps: { value: _vm.post.nome_mae },
               on: {
                 input: function($event) {
@@ -81740,7 +81485,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputPai" },
+              attrs: { type: "text", maxlength: "170", id: "inputPai" },
               domProps: { value: _vm.post.nome_pai },
               on: {
                 input: function($event) {
@@ -81772,7 +81517,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "email", id: "inputEmailPessoal" },
+              attrs: {
+                type: "email",
+                maxlength: "100",
+                id: "inputEmailPessoal"
+              },
               domProps: { value: _vm.post.email_pessoal },
               on: {
                 input: function($event) {
@@ -81802,7 +81551,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "email", id: "inputEmailCorporativo" },
+              attrs: {
+                type: "email",
+                maxlength: "100",
+                id: "inputEmailCorporativo"
+              },
               domProps: { value: _vm.post.email_corporativo },
               on: {
                 input: function($event) {
@@ -82061,7 +81814,9 @@ var render = function() {
         _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputDuracaoCurso" } }, [
-              _vm._v("Duração do Curso")
+              _vm._v(
+                "\n                    Duração do Curso (em semestres)\n                "
+              )
             ]),
             _vm._v(" "),
             _c("input", {
@@ -82138,7 +81893,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputMatricula" },
+              attrs: { type: "text", maxlength: "20", id: "inputMatricula" },
               domProps: { value: _vm.post.matricula },
               on: {
                 input: function($event) {
@@ -82190,7 +81945,27 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Nome Social")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            maxlength: "170",
+            "mav-model": "post.nome_social"
+          }
+        })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -82235,7 +82010,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n.col-3 {\r\n    height: 100vh;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.card-body {\r\n    height: auto;\n}\naside{\r\n    height: 100%;\n}\n.white {\r\n    width: 100%;\r\n    background-color: white;\r\n    height: 323px;\n}\r\n", ""]);
 
 // exports
 
@@ -82246,6 +82021,24 @@ exports.push([module.i, "\n.col-3 {\r\n    height: 100vh;\n}\r\n\r\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -82322,7 +82115,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dadosPessoais: {},
             informacoesContratuais: {},
             dadosBancarios: {},
-            validacaoNome: false,
+            nomeValido: false,
+            codValido: false,
+            contratoValido: false,
+            contratanteValido: false,
+            vagaValida: false,
+            enderecoValido: false,
             msg: {}
         };
     },
@@ -82362,15 +82160,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         inserirEstagiario: function inserirEstagiario() {
+            var _this2 = this;
+
             var uriEstagiarios = 'http://localhost:8000/api/estagiarios';
-            // this.axios
-            // .post(uriEstagiarios, this.post)
-            // .then(response => {
-            //     this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
-            // })
-            // .catch(e => {
-            //     this.msg.erro = 'Erro ao cadastrar estagiário';
-            // })
+            this.axios.post(uriEstagiarios, this.post).then(function (response) {
+                _this2.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
+            }).catch(function (e) {
+                _this2.msg.erro = 'Erro ao cadastrar estagiário';
+            });
             console.log(this.post);
         },
         alteracaoSupervisor: function alteracaoSupervisor() {
@@ -82386,12 +82183,75 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         selectVaga: function selectVaga() {
-            var _this2 = this;
+            var _this3 = this;
 
             var uriStatusVaga = 'http://localhost:8000/api/vagas/' + this.post.cod_vaga;
             this.axios.get(uriStatusVaga).then(function (response) {
-                return _this2.statusVaga = response.data;
+                return _this3.statusVaga = response.data;
             });
+        },
+        dataModificacao: function dataModificacao() {
+            var date = new Date();
+            var ano = date.getFullYear();
+            var mes = date.getMonth() + 1;
+            var dia = date.getDate();
+
+            var data = ano + '-' + mes + '-' + dia + ' 00:00:00';
+            this.post.data_modificacao = data;
+        },
+        horaModificacao: function horaModificacao() {
+            var date = new Date();
+            var ano = date.getFullYear();
+            var mes = date.getMonth() + 1;
+            var dia = date.getDate();
+            var hora = date.getHours();
+            var minuto = date.getMinutes();
+            var segundo = date.getSeconds();
+
+            var dataHora = ano + '-' + mes + '-' + dia + ' ' + hora + ':' + minuto + ':' + segundo;
+            this.post.hora_modificacao = dataHora;
+        },
+        validaNome: function validaNome(nome) {
+            if (!nome.target.value) {
+                this.nomeValido = true;
+            } else {
+                this.nomeValido = false;
+            }
+        },
+        validaCodEstudante: function validaCodEstudante(cod) {
+            if (!cod.target.value) {
+                this.codValido = true;
+            } else {
+                this.codValido = false;
+            }
+        },
+        validaContrato: function validaContrato(num) {
+            if (!num.target.value) {
+                this.contratoValido = true;
+            } else {
+                this.contratoValido = false;
+            }
+        },
+        validaContratante: function validaContratante(contrato) {
+            if (!contrato.target.value) {
+                this.contratanteValido = true;
+            } else {
+                this.contratanteValido = false;
+            }
+        },
+        validaVaga: function validaVaga(vaga) {
+            if (!vaga.target.value) {
+                this.vagaValida = true;
+            } else {
+                this.vagaValida = false;
+            }
+        },
+        validaEndereco: function validaEndereco(endereco) {
+            if (!endereco.target.value) {
+                this.enderecoValido = true;
+            } else {
+                this.enderecoValido = false;
+            }
         }
     }
 });
@@ -82428,10 +82288,11 @@ var render = function() {
                 [
                   _c(
                     "b-tab",
-                    { attrs: { title: "Dados Pessoais" } },
+                    { attrs: { title: "Dados Pessoais", active: "" } },
                     [
                       _c(
                         "b-card-text",
+                        { attrs: { id: "dado" } },
                         [
                           _c("dados-pessoais", {
                             attrs: {
@@ -82445,7 +82306,21 @@ var render = function() {
                               cursos: _vm.cursos,
                               inserirEstagiario: _vm.inserirEstagiario,
                               alteracaoSupervisor: _vm.alteracaoSupervisor,
-                              horarioVariavel: _vm.horarioVariavel
+                              horarioVariavel: _vm.horarioVariavel,
+                              dataModificacao: _vm.dataModificacao,
+                              horaModificacao: _vm.horaModificacao,
+                              validaNome: _vm.validaNome,
+                              nomeValido: _vm.nomeValido,
+                              validaCodEstudante: _vm.validaCodEstudante,
+                              codValido: _vm.codValido,
+                              validaContrato: _vm.validaContrato,
+                              contratoValido: _vm.contratoValido,
+                              validaContratante: _vm.validaContratante,
+                              contratanteValido: _vm.contratanteValido,
+                              validaVaga: _vm.validaVaga,
+                              vagaValida: _vm.vagaValida,
+                              validaEndereco: _vm.enderecoValido,
+                              enderecoValido: _vm.enderecoValido
                             }
                           })
                         ],
@@ -82469,7 +82344,9 @@ var render = function() {
                               supervisores: _vm.supervisores,
                               inserirEstagiario: _vm.inserirEstagiario,
                               alteracaoSupervisor: _vm.alteracaoSupervisor,
-                              horarioVariavel: _vm.horarioVariavel
+                              horarioVariavel: _vm.horarioVariavel,
+                              dataModificacao: _vm.dataModificacao,
+                              horaModificacao: _vm.horaModificacao
                             }
                           })
                         ],
@@ -82481,7 +82358,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "b-tab",
-                    { attrs: { title: "Dados Bancários", active: "" } },
+                    { attrs: { title: "Dados Bancários" } },
                     [
                       _c(
                         "b-card-text",
@@ -82491,7 +82368,9 @@ var render = function() {
                               post: _vm.post,
                               inserirEstagiario: _vm.inserirEstagiario,
                               alteracaoSupervisor: _vm.alteracaoSupervisor,
-                              horarioVariavel: _vm.horarioVariavel
+                              horarioVariavel: _vm.horarioVariavel,
+                              dataModificacao: _vm.dataModificacao,
+                              horaModificacao: _vm.horaModificacao
                             }
                           })
                         ],
@@ -82608,7 +82487,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -82722,109 +82601,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel']
+    props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao']
 
 });
 
@@ -82843,9 +82623,11 @@ var render = function() {
       on: {
         submit: function($event) {
           $event.preventDefault()
-          _vm.inserirEstagiario(),
-            _vm.alteracaoSupervisor(),
-            _vm.horarioVariavel()
+          _vm.inserirEstagiario,
+            _vm.alteracaoSupervisor,
+            _vm.horarioVariavel,
+            _vm.dataModificacao,
+            _vm.horaModificacao
         }
       }
     },
@@ -83118,7 +82900,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputHorarioEntrada" },
+              attrs: { type: "time", id: "inputHorarioEntrada" },
               domProps: { value: _vm.post.horario_entrada },
               on: {
                 input: function($event) {
@@ -83148,7 +82930,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "inputHorarioSaida" },
+              attrs: { type: "time", id: "inputHorarioSaida" },
               domProps: { value: _vm.post.horario_saida },
               on: {
                 input: function($event) {
@@ -83406,7 +83188,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -83491,79 +83273,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['post', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel']
+    props: ['post', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao']
 });
 
 /***/ }),
@@ -83581,7 +83293,11 @@ var render = function() {
       on: {
         submit: function($event) {
           $event.preventDefault()
-          _vm.inserirEstagiario, _vm.alteracaoSupervisor, _vm.horarioVariavel
+          _vm.inserirEstagiario,
+            _vm.alteracaoSupervisor,
+            _vm.horarioVariavel,
+            _vm.dataModificacao,
+            _vm.horaModificacao
         }
       }
     },

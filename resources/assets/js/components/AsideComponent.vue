@@ -73,7 +73,6 @@ div .col-6 {
 
 aside {
     background-color: #3A4248;
-    height: 100%;
 }
 
 .linha {

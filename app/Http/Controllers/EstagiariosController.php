@@ -103,10 +103,10 @@ class EstagiariosController extends Controller
             'instituicao_bancaria'=>$request->input('instituicao_bancaria'),
             'agencia'=>$request->input('agencia'),
             'conta'=>$request->input('conta'),
-            'operacao'=>$request->input('operacao')
-            // 'data_modificacao'=>$request->input('data_modificacao'),
-            // 'hora_modificacao'=>$request->input('hora_modificacao'),
-            // 'houve_alteracao_supervisor'=>$request->input('houve_alteracao_supervisor')
+            'operacao'=>$request->input('operacao'),
+            'data_modificacao'=>$request->input('data_modificacao'),
+            'hora_modificacao'=>$request->input('hora_modificacao'),
+            'houve_alteracao_supervisor'=>$request->input('houve_alteracao_supervisor')
         ]);
 
         return $estagiario;

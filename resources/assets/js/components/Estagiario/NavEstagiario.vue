@@ -12,8 +12,8 @@
                 <!-- Formulários -->
                 <b-card no-body>
                     <b-tabs card>
-                        <b-tab title="Dados Pessoais">
-                            <b-card-text>
+                        <b-tab title="Dados Pessoais" active>
+                            <b-card-text id="dado">
                                 <dados-pessoais
                                 :post="post"
                                 :vagas="vagas"
@@ -26,6 +26,20 @@
                                 :inserirEstagiario="inserirEstagiario"
                                 :alteracaoSupervisor="alteracaoSupervisor"
                                 :horarioVariavel="horarioVariavel"
+                                :dataModificacao="dataModificacao"
+                                :horaModificacao="horaModificacao"
+                                :validaNome="validaNome"
+                                :nomeValido="nomeValido"
+                                :validaCodEstudante="validaCodEstudante"
+                                :codValido="codValido"
+                                :validaContrato="validaContrato"
+                                :contratoValido="contratoValido"
+                                :validaContratante="validaContratante"
+                                :contratanteValido="contratanteValido"
+                                :validaVaga="validaVaga"
+                                :vagaValida="vagaValida"
+                                :validaEndereco="enderecoValido"
+                                :enderecoValido="enderecoValido"
                                 />
                             </b-card-text>
                         </b-tab>
@@ -38,16 +52,20 @@
                                 :inserirEstagiario="inserirEstagiario"
                                 :alteracaoSupervisor="alteracaoSupervisor"
                                 :horarioVariavel="horarioVariavel"
+                                :dataModificacao="dataModificacao"
+                                :horaModificacao="horaModificacao"
                                 />
                             </b-card-text>
                         </b-tab>
-                        <b-tab title="Dados Bancários" active>
+                        <b-tab title="Dados Bancários">
                             <b-card-text>
                                 <dados-bancarios 
                                 :post="post"
                                 :inserirEstagiario="inserirEstagiario"
                                 :alteracaoSupervisor="alteracaoSupervisor"
                                 :horarioVariavel="horarioVariavel"
+                                :dataModificacao="dataModificacao"
+                                :horaModificacao="horaModificacao"
                                 />
                             </b-card-text>
                         </b-tab>
@@ -74,7 +92,12 @@ export default {
             dadosPessoais: {},
             informacoesContratuais: {},
             dadosBancarios: {},
-            validacaoNome: false,
+            nomeValido: false,
+            codValido: false,
+            contratoValido: false,
+            contratanteValido: false,
+            vagaValida: false,
+            enderecoValido: false,
             msg: {}
         }
     },
@@ -98,14 +121,14 @@ export default {
     methods: {
         inserirEstagiario() {
             let uriEstagiarios = 'http://localhost:8000/api/estagiarios';
-            // this.axios
-            // .post(uriEstagiarios, this.post)
-            // .then(response => {
-            //     this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
-            // })
-            // .catch(e => {
-            //     this.msg.erro = 'Erro ao cadastrar estagiário';
-            // })
+            this.axios
+            .post(uriEstagiarios, this.post)
+            .then(response => {
+                this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
+            })
+            .catch(e => {
+                this.msg.erro = 'Erro ao cadastrar estagiário';
+            })
             console.log(this.post)
         },
         alteracaoSupervisor() {
@@ -124,13 +147,84 @@ export default {
         selectVaga() {
             let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
             this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
+        },
+        dataModificacao() {
+            let date = new Date();
+            let ano = date.getFullYear();
+            let mes = date.getMonth() + 1;
+            let dia = date.getDate();
+
+            let data = `${ano}-${mes}-${dia} 00:00:00`;
+            this.post.data_modificacao = data
+        },
+        horaModificacao() {
+            let date = new Date();
+            let ano = date.getFullYear();
+            let mes = date.getMonth() + 1;
+            let dia = date.getDate();
+            let hora = date.getHours();
+            let minuto = date.getMinutes();
+            let segundo = date.getSeconds();
+
+            let dataHora = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`
+            this.post.hora_modificacao = dataHora
+
+        },
+        validaNome(nome) {
+            if(!nome.target.value) {
+                this.nomeValido = true
+            } else {
+                this.nomeValido = false
+            }
+        },
+        validaCodEstudante(cod) {
+            if(!cod.target.value) {
+                this.codValido = true
+            } else {
+                this.codValido = false
+            }
+        },
+        validaContrato(num) {
+            if(!num.target.value) {
+                this.contratoValido = true
+            } else {
+                this.contratoValido = false
+            }
+        },
+        validaContratante(contrato) {
+            if(!contrato.target.value) {
+                this.contratanteValido = true
+            } else {
+                this.contratanteValido = false
+            }
+        },
+        validaVaga(vaga) {
+            if(!vaga.target.value) {
+                this.vagaValida = true
+            } else {
+                this.vagaValida = false
+            }
+        },
+        validaEndereco(endereco) {
+            if(!endereco.target.value) {
+                this.enderecoValido = true
+            } else {
+                this.enderecoValido = false
+            }
         }
     }
 }
 </script>
 <style>
-.col-3 {
-    height: 100vh;
+.card-body {
+    height: auto;
 }
-
+aside{
+    height: 100%;
+}
+.white {
+    width: 100%;
+    background-color: white;
+    height: 323px;
+}
 </style>
