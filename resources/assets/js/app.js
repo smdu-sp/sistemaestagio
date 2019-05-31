@@ -23,6 +23,9 @@ import BootstrapVue from 'bootstrap-vue';
 Vue.use(BootstrapVue);
 Vue.use(PortalVue);
 
+import vueTheMask from 'vue-the-mask';
+Vue.use(vueTheMask);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

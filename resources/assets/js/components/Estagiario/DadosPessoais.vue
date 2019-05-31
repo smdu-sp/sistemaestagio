@@ -1,11 +1,18 @@
 <template>
-    <form @submit.prevent="inserirEstagiario(), alteracaoSupervisor(), horarioVariavel(), dataModificacao(), horaModificacao()" method="post">
+    <form @submit.prevent="inserirEstagiario" method="post">
     <!--row-->
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="inputNome">Nome</label>
-                <input type="text" @blur="validaNome" maxlength="170" :class="{'is-invalid': nomeValido}" class="form-control" id="inputNome" placeholder="Digite o Nome Completo" v-model="post.nome" >
+                <input type="text" 
+                    @blur="validaNome" 
+                    maxlength="170" 
+                    :class="{'is-invalid': nomeValido}" 
+                    class="form-control" 
+                    id="inputNome" 
+                    placeholder="Digite o Nome Completo" 
+                    v-model="post.nome" >
                 <div v-if="nomeValido" class="invalid-feedback">
                     Digite o nome por favor
                 </div>
@@ -22,31 +29,27 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputEstudante">Cód. Estudante</label>
-                <input type="text" @blur="validaCodEstudante" class="form-control" maxlength="20" :class="{'is-invalid': codValido}" id="inputEstudante" v-model="post.cod_estudante" max="20">
+                <input type="text" 
+                    @blur="validaCodEstudante" 
+                    maxlength="20" 
+                    :class="{'is-invalid': codValido}" 
+                    class="form-control" 
+                    id="inputEstudante" 
+                    v-model="post.cod_estudante" 
+                    >
                 <div v-if="nomeValido" class="invalid-feedback">
                     Código não pode ser vazio
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="form-group">
-                <label for="inputContrato">Contrato CIEE</label>
-                <input type="text" @blur="validaContrato" :class="{'is-invalid': codValido}" class="form-control" maxlength="20" id="inputContrato" v-model="post.contrato" >
-                <div v-if="contratoValido" class="invalid-feedback">
-                    Contrato não pode ser vazio
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="inputTceSuperEstagios">TCE Super Estágios</label>
-                <input type="text" class="form-control" maxlength="11" id="inputTceSuperEstagios" v-model="post.tc_superestagios">
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="selectContratante">Contratado Por</label>
-                <select class="form-control" @blur="validaContratante" :class="{'is-invalid': contratanteValido}" id="selectContratante" v-model="post.contratado_por" >
+                <label for="selectContratante">Contratante</label>
+                <select class="form-control" 
+                    @blur="validaContratante" 
+                    :class="{'is-invalid': contratanteValido}" 
+                    id="selectContratante" 
+                    v-model="post.contratado_por" >
                     <option></option>
                     <option>SMDU</option>
                     <option>SEL</option>
@@ -57,35 +60,13 @@
                 </div>
             </div>
         </div>
-    </div><!--/row-->
-
-    <!--row-->
-    <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="selectVaga">Codigo Vaga</label>
-                <select type="text" class="form-control" id="selectVaga" :class="{'is-invalid': vagaValida}" v-model="post.cod_vaga" @click="selectVaga" @blur="validaVaga">
-                    <option></option>
-                    <option v-for="vaga of vagas">{{ vaga.id }}</option>
-                </select>
-                <div v-if="vagaValida" class="invalid-feedback">
-                    Vaga não pode ser vazia
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="selectStatus">Status Vaga</label>
-                <input type="text" :value="statusVaga.situacao" id="selectStatus" class="form-control" disabled>
-            </div>
-        </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputLogin">Login</label>
-                <input type="text" class="form-control" maxlength="7" id="inputLogin" v-model="post.login">
+                <input type="text" class="form-control" maxlength="7" id="inputLogin" v-model="post.login" placeholder="Ex: x455214">
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="selectCartao">Cartão Acesso</label>
                 <select class="form-control" id="selectCartao" v-model="post.cartao_acesso">
@@ -94,86 +75,175 @@
                 </select>
             </div>
         </div>
+    </div><!--/row-->
+
+    <!--row-->
+    <div class="row">
+        
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="inputEndereco">Endereço</label>
-                <input type="text" @blur="validaEndereco" :class="{'is-valid': enderecoValido}" class="form-control" maxlength="150" id="inputEndereco" v-model="post.endereco" >
-                <div v-if="contratanteValido" class="invalid-feedback">
+                <input type="text" 
+                    @blur="validaEndereco" 
+                    maxlength="150" 
+                    :class="{'is-invalid': enderecoValido}" 
+                    class="form-control" 
+                    id="inputEndereco" 
+                    v-model="post.endereco" 
+                    placeholder="Ex: Rua São Bento">
+                <div v-if="enderecoValido" class="invalid-feedback">
                     Contratante não pode ser vazio
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label for="inputComplemento">nº / Complemento</label>
-                <input type="text" class="form-control" maxlength="20" id="inputComplemento" v-model="post.nro" >
+                <label for="inputComplemento">Nº / Comp.</label>
+                <input type="text"
+                    @blur="validaComplemento" 
+                    maxlength="20" 
+                    :class="{'is-invalid': complementoValido}"
+                    class="form-control" 
+                    id="inputComplemento" 
+                    v-model="post.nro"
+                    placeholder="Ex: 102 Apto 3" >
+                <div v-if="complementoValido" class="invalid-feedback">
+                    nº não pode ser vazio
+                </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputBairro">Bairro</label>
-                <input type="text" class="form-control" maxlength="70" id="inputBairro" v-model="post.bairro" >
+                <input type="text" 
+                    @blur="validaBairro"
+                    maxlength="70" 
+                    :class="{'is-invalid': bairroValido}"
+                    class="form-control" 
+                    id="inputBairro" 
+                    v-model="post.bairro" >
+                <div v-if="bairroValido" class="invalid-feedback">
+                    Bairro não pode ser vazio
+                </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="selectEstado">Estado</label>
-                <select class="form-control" id="selectEstado" v-model="post.estado" >
-                    <option></option>
-                    <option v-for="estado of estados" :value="estado.estado">{{ estado.estado }}</option>
-                </select>
+    </div>
+    <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="inputCep">CEP</label>
+                    <the-mask type="text" 
+                        @blur="validaCep"
+                        maxlength="10" 
+                        :class="{'is-invalid': cepValido}"
+                        class="form-control" 
+                        id="inputCep" 
+                        v-model="post.cep" 
+                        mask="#####-###"
+                        placeholder="Ex: 02010-050"></the-mask>
+                    <div v-if="cepValido" class="invalid-feedback">
+                        CEP não pode ser vazio
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="selectEstado">Estado</label>
+                    <select class="form-control" 
+                        @blur="validaEstado"
+                        :class="{'is-invalid': estadoValido}"
+                        id="selectEstado" 
+                        v-model="post.estado" >
+                        <option></option>
+                        <option v-for="estado of estados" :value="estado.estado">{{ estado.estado }}</option>
+                    </select>
+                    <div v-if="estadoValido" class="invalid-feedback">
+                        Estado não pode ser vazio
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="inputFone">Fone Res.</label>
+                    <the-mask type="text" 
+                        maxlength="15" 
+                        class="form-control" 
+                        id="inputFone" 
+                        v-model="post.fone_residencial"
+                        mask="(##) ####-####"
+                        placeholder="Ex: (11) 2222-0000"></the-mask>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="inputCel">Fone celular</label>
+                    <the-mask type="text" 
+                        @blur="validaCelular"
+                        maxlength="16" 
+                        :class="{'is-invalid': celularValido}"
+                        class="form-control" 
+                        id="inputCel" 
+                        v-model="post.fone_celular"
+                        :mask="['(##) ####-####', '(##) #####-####']"
+                        placeholder="Ex: (11) 22222-0000"></the-mask>
+                    <div v-if="celularValido" class="invalid-feedback">
+                        Celular não pode ser vazio
+                    </div>
+                </div>
             </div>
         </div>
     </div><!--/row-->
 
     <!--row-->
     <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="inputCep">CEP</label>
-                <input type="text" class="form-control" maxlength="10" id="inputCep" v-model="post.cep" >
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="inputFone">Fone Res.</label>
-                <input type="text" class="form-control"  maxlength="15" id="inputFone" v-model="post.fone_residencial">
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="inputCel">Fone celular</label>
-                <input type="text" class="form-control" maxlength="16" id="inputCel" v-model="post.fone_celular">
-            </div>
-        </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputNascimento">Nascimento</label>
-                <input type="date" class="form-control" id="inputNascimento" v-model="post.data_nascimento" >
+                <input type="date" style="font-size: 0.95rem" class="form-control" id="inputNascimento" v-model="post.data_nascimento" >
             </div>
         </div>
-    </div><!--/row-->
-
-    <!--row-->
-    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputNaturalidade">Naturalidade</label>
-                <input type="text" class="form-control" maxlength="30" id="inputNaturalidade" v-model="post.naturalidade">
+                <input type="text" 
+                @blur="validaNaturalidade" 
+                :class="{'is-invalid': naturalidadeValida}"
+                class="form-control" 
+                maxlength="30" 
+                id="inputNaturalidade" 
+                v-model="post.naturalidade"
+                placeholder="Ex: São Paulo - SP">
+                <div v-if="naturalidadeValida" class="invalid-feedback">
+                    Naturalidade não pode ser vazia
+                </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputNacionalidade">Nacionalidade</label>
-                <input type="text" class="form-control" maxlength="20" id="inputNacionalidade" v-model="post.nacionalidade" >
+                <input type="text" 
+                    @blur="validaNacionalidade"
+                    :class="{'is-invalid': nacionalidadeValida}"
+                    class="form-control" 
+                    maxlength="20" 
+                    id="inputNacionalidade" 
+                    v-model="post.nacionalidade" 
+                    placeholder="Ex: Brasileira">
+                    <div v-if="nacionalidadeValida" class="invalid-feedback">
+                        Nacionalidade não pode ser vazia
+                    </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputRaca">Raça/Cor</label>
-                <select class="form-control" id="inputRaca" v-model="post.raca_cor" >
+                <select class="form-control" 
+                    @blur="validaRaca"
+                    :class="{'is-invalid': racaValida}"
+                    id="inputRaca" 
+                    v-model="post.raca_cor" >
                     <option value="0">Não Definido</option>
                     <option value="1">Branco(a)</option>
                     <option value="2">Pardo(a)</option>
@@ -181,8 +251,15 @@
                     <option value="4">Preto(a)</option>
                     <option value="5">Indígena</option>
                 </select>
+                <div v-if="racaValida" class="invalid-feedback">
+                    Raça não pode ser vazio
+                </div>
             </div>
         </div>
+    </div><!--/row-->
+
+    <!--row-->
+    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label for="selectSexo">Sexo</label>
@@ -192,20 +269,36 @@
                 </select>
             </div>
         </div>
-    </div><!--/row-->
-
-    <!--row-->
-    <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="inputCpf">CPF</label>
-                <input type="text" class="form-control" maxlength="15" id="inputCpf" v-model="post.cpf" >
+                <the-mask type="text" 
+                    @blur="validaCpf"
+                    maxlength="14" 
+                    :class="{'is-invalid': cpfValido}"
+                    class="form-control" 
+                    id="inputCpf" 
+                    v-model="post.cpf" 
+                    placeholder="Ex: 000.000.000-00"
+                    mask="###.###.###-##"></the-mask>
+                    <div v-if="cpfValido" class="invalid-feedback">
+                        CPF não pode ser vazio
+                    </div>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label for="inputRg">RG</label>
-                <input type="text" class="form-control" maxlength="13" id="inputRg" v-model="post.rg" >
+                <input type="text" 
+                    @blur="validaRg"
+                    maxlength="13" 
+                    :class="{'is-invalid': rgValido}"
+                    class="form-control" 
+                    id="inputRg" 
+                    v-model="post.rg" >
+                    <div v-if="rgValido" class="invalid-feedback">
+                        RG não pode ser vazio
+                    </div>
             </div>
         </div>
         <div class="col-md-2">
@@ -224,13 +317,17 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-2">
+    </div><!--/row-->
+
+    <!--row-->
+    <div class="row">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="inputRne">RNE</label>
                 <input type="text" class="form-control" maxlength="30" v-model="post.rne">
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="selectEstadoCivil">Estado Civil</label>
                 <select type="text" class="form-control" id="selectEstadoCivil" v-model="post.estado_civil" >
@@ -243,56 +340,78 @@
                 </select>
             </div>
         </div>
-    </div><!--/row-->
-
-    <!--row-->
-    <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="inputMae">Nome da Mãe</label>
                 <input type="text" class="form-control" maxlength="170" id="inputMae" v-model="post.nome_mae">
             </div>
         </div>
+    </div><!--/row-->
+
+    <!--row-->
+    <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="inputPai">Nome do Pai</label>
                 <input type="text" class="form-control" maxlength="170" id="inputPai" v-model="post.nome_pai">
             </div>
         </div>
-    </div><!--/row-->
-
-    <!--row-->
-    <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="inputEmailPessoal">E-mail pessoal</label>
-                <input type="email" class="form-control" maxlength="100" id="inputEmailPessoal" v-model="post.email_pessoal" >
+                <input type="email" 
+                    @blur="validaEmail"
+                    maxlength="100" 
+                    :class="{'is-invalid': emailValido}"
+                    class="form-control" 
+                    id="inputEmailPessoal" 
+                    v-model="post.email_pessoal" >
+                    <div v-if="emailValido" class="invalid-feedback">
+                        E-mail não pode ser vazio
+                    </div>
             </div>
         </div>
+    </div><!--/row-->
+    <!--row-->
+    <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="inputEmailCorporativo">E-mail corporativo</label>
                 <input type="email" class="form-control" maxlength="100" id="inputEmailCorporativo" v-model="post.email_corporativo">
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="selectInstituicao">Instituíção de Ensino</label>
+                <select class="form-control" 
+                    @blur="validaInstituicao"
+                    :class="{'is-invalid': instituicaoValida}"
+                    id="selectInstituicao" 
+                    v-model="post.instituicao_ensino" >
+                    <option v-for="instituicao of instituicoes" :value="instituicao.razao_social">{{ instituicao.razao_social }}</option>
+                </select>
+                <div v-if="instituicaoValida" class="invalid-feedback">
+                    RG não pode ser vazio
+                </div>
+            </div>
+        </div>
     </div><!--/row-->
 
     <!--row-->
     <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <label for="selectInstituicao">Instituíção de Ensino</label>
-                <select class="form-control" id="selectInstituicao" v-model="post.instituicao_ensino" >
-                    <option v-for="instituicao of instituicoes" :value="instituicao.razao_social">{{ instituicao.razao_social }}</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="selectCurso">Curso/Formação</label>
-                <select class="form-control" id="selectCurso" v-model="post.curso_formacao" >
+                <select class="form-control" 
+                    @blur="validaCurso"
+                    :class="{'is-invalid':cursoValido}"
+                    id="selectCurso" 
+                    v-model="post.curso_formacao" >
                     <option v-for="curso of cursos" :value="curso.id">{{ curso.formacao }}</option>
                 </select>
+                <div v-if="cursoValido" class="invalid-feedback">
+                    Curso não pode ser vazio
+                </div>
             </div>
         </div>
         <div class="col-md-2">
@@ -312,10 +431,6 @@
                 </select>
             </div>
         </div>
-    </div><!--/row-->
-    
-    <!--row-->
-    <div class="row">
         <div class="col-md-2">
             <div class="form-group">
                 <label for="selectPeriodo">Período</label>
@@ -329,22 +444,33 @@
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <label for="inputHorario">Horário</label>
-                <input type="text" class="form-control" id="inputHorario" v-model="post.horario">
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
                 <label for="inputDuracaoCurso">
-                    Duração do Curso (em semestres)
+                    Semestres
                 </label>
                 <input type="number" class="form-control" id="inputDuracaoCurso" v-model="post.duracao_curso">
+            </div>
+        </div>
+    </div><!--/row-->
+    
+    <!--row-->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="inputHorario">Horário</label>
+                <the-mask type="text" class="form-control" v-b-tooltip.hover title="Somente números" id="inputHorario" v-model="post.horario" mask="##:## às ##:##"></the-mask>
+
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputMesConclusao">Mês/Ano de Conclusão</label>
-                <input type="text" class="form-control" id="inputMesConclusao" v-model="post.mes_ano_previsto_curso" >
+                <the-mask type="text" 
+                    class="form-control"
+                    id="inputMesConclusao"
+                    v-model="post.mes_ano_previsto_curso" 
+                    placeholder="Ex: 12/2022"
+                    v-b-tooltip.hover title="Somente números"
+                    mask="##/####"></the-mask>
             </div>
         </div>
         <div class="col-md-2">
@@ -364,6 +490,12 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+            </div>
+        </div>
+    </div>
     <botoes-component></botoes-component>
 </form>
 
@@ -377,25 +509,28 @@ export default {
         'instituicoes', 
         'cursos', 
         'inserirEstagiario', 
-        'vagas', 
-        'statusVaga', 
-        'selectVaga', 
         'alteracaoSupervisor', 
         'horarioVariavel',
         'dataModificacao',
         'horaModificacao',
-        'validaNome',
-        'validaCodEstudante',
-        'codValido',
-        'nomeValido',
-        'contratoValido',
-        'validaContrato',
-        'validaContratante',
-        'contratanteValido',
-        'validaVaga',
-        'vagaValida',
-        'validaEndereco',
-        'enderecoValido'
+        'validaNome','nomeValido',
+        'validaCodEstudante','codValido',
+        'validaContratante','contratanteValido',
+        'validaEndereco','enderecoValido',
+        'validaEstado','estadoValido',
+        'validaCep','cepValido',
+        'validaBairro', 'bairroValido',
+        'validaComplemento', 'complementoValido',
+        'validaCelular','celularValido',
+        'validaNacionalidade','nacionalidadeValida',
+        'validaNaturalidade', 'naturalidadeValida',
+        'validaRaca','racaValida',
+        'validaCpf','cpfValido',
+        'validaRg','rgValido',
+        'validaEmail','emailValido',
+        'validaInstituicao','instituicaoValida',
+        'validaCurso','cursoValido',
+        'converteCep'
     ]
 }
 </script>

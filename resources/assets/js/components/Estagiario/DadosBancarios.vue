@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="inserirEstagiario, alteracaoSupervisor, horarioVariavel, dataModificacao, horaModificacao" method="post">
+    <form @submit.prevent="inserirEstagiario" method="post">
         <div class="row">
             <div class="col-md-8">
                 <div class="form-group">

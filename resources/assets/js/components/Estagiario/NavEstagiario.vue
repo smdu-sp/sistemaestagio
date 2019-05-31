@@ -9,6 +9,12 @@
             <div class="col-9">
                 <header-component></header-component>
                 <h1 class="d-flex justify-content-center">Cadastro de Estagiário</h1>
+                <div v-if="msg.erro" class="alert alert-danger">
+                    {{ msg.erro }}
+                </div>
+                <div v-if="msg.sucesso" class="alert alert-danger">
+                    {{ msg.sucesso }}
+                </div>
                 <!-- Formulários -->
                 <b-card no-body>
                     <b-tabs card>
@@ -16,30 +22,45 @@
                             <b-card-text id="dado">
                                 <dados-pessoais
                                 :post="post"
-                                :vagas="vagas"
-                                :statusVaga="statusVaga"
-                                :selectVaga="selectVaga"
                                 :cartoes="cartoes"
                                 :estados="estados"
                                 :instituicoes="instituicoes"
                                 :cursos="cursos"
                                 :inserirEstagiario="inserirEstagiario"
-                                :alteracaoSupervisor="alteracaoSupervisor"
-                                :horarioVariavel="horarioVariavel"
-                                :dataModificacao="dataModificacao"
-                                :horaModificacao="horaModificacao"
                                 :validaNome="validaNome"
                                 :nomeValido="nomeValido"
                                 :validaCodEstudante="validaCodEstudante"
                                 :codValido="codValido"
-                                :validaContrato="validaContrato"
-                                :contratoValido="contratoValido"
                                 :validaContratante="validaContratante"
                                 :contratanteValido="contratanteValido"
-                                :validaVaga="validaVaga"
-                                :vagaValida="vagaValida"
-                                :validaEndereco="enderecoValido"
+                                :validaEndereco="validaEndereco"
                                 :enderecoValido="enderecoValido"
+                                :validaCep="validaCep"
+                                :cepValido="cepValido"
+                                :validaBairro="validaBairro"
+                                :bairroValido="bairroValido"
+                                :validaComplemento="validaComplemento"
+                                :complementoValido="complementoValido"
+                                :validaEstado="validaEstado"
+                                :estadoValido="estadoValido"
+                                :validaCelular="validaCelular"
+                                :celularValido="celularValido"
+                                :validaNaturalidade="validaNaturalidade"
+                                :naturalidadeValida="naturalidadeValida"
+                                :validaNacionalidade="validaNacionalidade"
+                                :nacionalidadeValida="nacionalidadeValida"
+                                :validaRaca="validaRaca"
+                                :racaValida="racaValida"
+                                :validaCpf="validaCpf"
+                                :cpfValido="cpfValido"
+                                :validaRg="validaRg"
+                                :rgValido="rgValido"
+                                :validaEmail="validaEmail"
+                                :emailValido="emailValido"
+                                :validaInstituicao="validaInstituicao"
+                                :instituicaoValida="instituicaoValida"
+                                :validaCurso="validaCurso"
+                                :cursoValido="cursoValido"
                                 />
                             </b-card-text>
                         </b-tab>
@@ -50,10 +71,11 @@
                                 :departamentos="departamentos"
                                 :supervisores="supervisores"
                                 :inserirEstagiario="inserirEstagiario"
-                                :alteracaoSupervisor="alteracaoSupervisor"
-                                :horarioVariavel="horarioVariavel"
-                                :dataModificacao="dataModificacao"
-                                :horaModificacao="horaModificacao"
+                                :vagas="vagas"
+                                :statusVaga="statusVaga"
+                                :selectVaga="selectVaga"
+                                :validaVaga="validaVaga"
+                                :vagaValida="vagaValida"
                                 />
                             </b-card-text>
                         </b-tab>
@@ -62,10 +84,6 @@
                                 <dados-bancarios 
                                 :post="post"
                                 :inserirEstagiario="inserirEstagiario"
-                                :alteracaoSupervisor="alteracaoSupervisor"
-                                :horarioVariavel="horarioVariavel"
-                                :dataModificacao="dataModificacao"
-                                :horaModificacao="horaModificacao"
                                 />
                             </b-card-text>
                         </b-tab>
@@ -94,10 +112,23 @@ export default {
             dadosBancarios: {},
             nomeValido: false,
             codValido: false,
-            contratoValido: false,
             contratanteValido: false,
             vagaValida: false,
             enderecoValido: false,
+            complementoValido: false,
+            bairroValido: false,
+            estadoValido: false,
+            cepValido: false,
+            celularValido: false,
+            nacionalidadeValida: false,
+            naturalidadeValida: false,
+            racaValida: false,
+            cpfValido: false,
+            rgValido: false,
+            emailValido: false,
+            instituicaoValida: false,
+            cursoValido: false,
+            vagaAlterada: '',
             msg: {}
         }
     },
@@ -110,26 +141,44 @@ export default {
         let uriSupervisores = 'http://localhost:8000/api/supervisores'; 
         let uriVagas = 'http://localhost:8000/api/vagas';
 
-        this.axios.get(uriCartoes).then(response => this.cartoes = response.data);
-        this.axios.get(uriEstados).then(response => this.estados = response.data);
-        this.axios.get(uriInstituicoes).then(response => this.instituicoes = response.data);        
-        this.axios.get(uriCursos).then(response => this.cursos = response.data);
-        this.axios.get(uriDepartamentos).then(response => this.departamentos = response.data);
-        this.axios.get(uriSupervisores).then(response => this.supervisores = response.data);
-        this.axios.get(uriVagas).then(response => this.vagas = response.data);
+        this.requisicaoGet(uriCartoes, 'cartoes');
+        this.requisicaoGet(uriEstados, 'estados');
+        this.requisicaoGet(uriInstituicoes, 'instituicoes');
+        this.requisicaoGet(uriCursos, 'cursos');
+        this.requisicaoGet(uriDepartamentos, 'departamentos');
+        this.requisicaoGet(uriSupervisores, 'supervisores');
+        this.requisicaoGet(uriVagas, 'vagas');
     },
     methods: {
         inserirEstagiario() {
-            let uriEstagiarios = 'http://localhost:8000/api/estagiarios';
-            this.axios
-            .post(uriEstagiarios, this.post)
-            .then(response => {
-                this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
+            this.converteCep();
+            this.alteracaoSupervisor();
+            this.horarioVariavel();
+            this.dataModificacao();
+            this.horaModificacao();
+            this.converteCelular();
+            this.converteFone();
+            this.converteConclusaoCurso();
+            this.alteraStatusVaga();
+            this.cadastraBanco();
+        },
+        requisicaoGet(uri, variavel) {
+            this.axios.get(uri).then(response => {
+                this[variavel] = response.data
             })
-            .catch(e => {
-                this.msg.erro = 'Erro ao cadastrar estagiário';
-            })
-            console.log(this.post)
+        },
+        alteraStatusVaga() {
+            let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
+            this.axios.patch(uriVagas, this.statusVaga).then(response => console.log(response));
+        },
+        converteCep() {
+            let cep = this.post.cep;
+            if(cep) {
+                let cep1 = cep.substr(0,5);
+                let cep2 = cep.substr(5, 7);
+                let cepFormatado = `${cep1}-${cep2}`;
+                this.post.cep = cepFormatado;
+            }
         },
         alteracaoSupervisor() {
             if(!this.post.houve_alteracao_supervisor) {
@@ -142,11 +191,6 @@ export default {
             } else {
                 this.post.horario_variavel = 1;
             }
-        }
-        ,
-        selectVaga() {
-            let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
-            this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
         },
         dataModificacao() {
             let date = new Date();
@@ -168,52 +212,81 @@ export default {
 
             let dataHora = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`
             this.post.hora_modificacao = dataHora
-
         },
-        validaNome(nome) {
-            if(!nome.target.value) {
-                this.nomeValido = true
-            } else {
-                this.nomeValido = false
+        cadastraBanco() {
+            let uriEstagiarios = 'http://localhost:8000/api/estagiarios';
+            this.axios
+            .post(uriEstagiarios, this.post)
+            .then(response => {
+                this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
+            })
+            .catch(e => {
+                this.msg.erro = 'Erro ao cadastrar estagiário';
+            })
+            console.log(this.post)
+        },
+        converteCelular(){
+            let celular = this.post.fone_celular;
+            if(celular) {
+                let codArea = celular.substr(0,2);
+                let telParte1 = celular.substr(2,5);
+                let telParte2 = celular.substr(7, celular.length);
+                let celFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
+                this.post.fone_celular = celFormatado;
             }
         },
-        validaCodEstudante(cod) {
-            if(!cod.target.value) {
-                this.codValido = true
-            } else {
-                this.codValido = false
+        converteFone() {
+        let fone = this.post.fone_residencial;
+            if(fone) {
+                let codArea = fone.substr(0,2);
+                let telParte1 = fone.substr(2,4);
+                let telParte2 = fone.substr(6, fone.length);
+                let foneFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
+                this.post.fone_residencial = foneFormatado;                    
             }
         },
-        validaContrato(num) {
-            if(!num.target.value) {
-                this.contratoValido = true
-            } else {
-                this.contratoValido = false
+        selectVaga() {
+            let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
+            this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
+        },
+        converteConclusaoCurso() {
+            let data = this.post.mes_ano_previsto_curso;
+            if(data) {
+                let mes = data.substr(0,2);
+                let ano = data.substr(3, data.length);
+                let dataFormatada = `${mes}${ano}`;
+                this.post.mes_ano_previsto_curso = dataFormatada;
             }
         },
-        validaContratante(contrato) {
-            if(!contrato.target.value) {
-                this.contratanteValido = true
+        validaNome(nome) { this.validacao(nome, 'nomeValido') },
+        validaCodEstudante(cod) { this.validacao(cod, 'codValido') },
+        validaContratante(contratante) { this.validacao(contratante, 'contratanteValido') },
+        validaVaga(vaga) { this.validacao(vaga, 'vagaValida'); },
+        validaEndereco(endereco) { this.validacao(endereco, 'enderecoValido') },
+        validaComplemento(complemento) { this.validacao(complemento, 'complementoValido') },
+        validaBairro(bairro) { this.validacao(bairro, 'bairroValido') },
+        validaEstado(estado) { this.validacao(estado, 'estadoValido')},
+        validaCep(cep) { this.validacao(cep, 'cepValido'); },
+        validaFone(fone) { this.validacao(fone, 'foneValido') },
+        validaCelular(celular) { this.validacao(celular, 'celularValido') },
+        validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'nacionalidadeValida') },
+        validaNaturalidade(naturalidade) { this.validacao(naturalidade, 'naturalidadeValida') },
+        validaRaca(raca) { this.validacao(raca, 'racaValida') },
+        validaCpf(cpf) { this.validacao(cpf, 'cpfValido') },
+        validaRg(rg) { this.validacao(rg, 'rgValido') },
+        validaEmail(email) { this.validacao(email, 'emailValido') },
+        validaInstituicao(instituicao) { this.validacao(instituicao, 'instituicaoValida') },
+        validaCurso(curso) { this.validacao(curso, 'cursoValido') },
+        validacao(valorCampo, variavelBooleana) {
+            if(!valorCampo.target.value) {
+                this[variavelBooleana] = true
             } else {
-                this.contratanteValido = false
-            }
-        },
-        validaVaga(vaga) {
-            if(!vaga.target.value) {
-                this.vagaValida = true
-            } else {
-                this.vagaValida = false
-            }
-        },
-        validaEndereco(endereco) {
-            if(!endereco.target.value) {
-                this.enderecoValido = true
-            } else {
-                this.enderecoValido = false
+                this[variavelBooleana] = false
             }
         }
     }
 }
+
 </script>
 <style>
 .card-body {

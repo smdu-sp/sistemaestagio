@@ -1,5 +1,59 @@
 <template>
-    <form @submit.prevent="inserirEstagiario, alteracaoSupervisor, horarioVariavel, dataModificacao, horaModificacao" method="post">
+    <form @submit.prevent="inserirEstagiario" method="post">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="selectVaga">Codigo Vaga</label>
+                    <select type="text" 
+                        @change="selectVaga"
+                        @blur="validaVaga"
+                        :class="{'is-invalid': vagaValida}" 
+                        class="form-control" 
+                        id="selectVaga" 
+                        v-model="post.cod_vaga" 
+                        >
+                        <option></option>
+                        <option v-for="vaga of vagas">{{ vaga.id }}</option>
+                    </select>
+                    <div v-if="vagaValida" class="invalid-feedback">
+                        Vaga não pode ser vazia
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="selectStatus">Status Vaga</label>
+                    <select type="text" id="selectStatus" class="form-control" v-model="statusVaga.status">
+                        <option default>{{ statusVaga.status }}</option>
+                        <option v-if="statusVaga.status != 'OCUPADA'">OCUPADA</option>
+                        <option v-if="statusVaga.status != 'EM SELEÇÃO'">EM SELEÇÃO</option>
+                        <option v-if="statusVaga.status != 'LIVRE'">LIVRE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="inputContrato">Contrato CIEE</label>
+                    <input type="text" 
+                        maxlength="20"  
+                        class="form-control" 
+                        id="inputContrato" 
+                        v-model="post.contrato" >
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="inputTceSuperEstagios">TCE Super Estágios</label>
+                    <input type="text" 
+                        maxlength="11" 
+                        class="form-control" 
+                        id="inputTceSuperEstagios" 
+                        v-model="post.tc_superestagios">
+                </div>
+            </div>
+        </div>
+
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -112,7 +166,12 @@ export default {
         'alteracaoSupervisor', 
         'horarioVariavel',
         'dataModificacao',
-        'horaModificacao'
+        'horaModificacao',
+        'vagas',
+        'validaVaga',
+        'vagaValida',
+        'selectVaga',
+        'statusVaga'
     ]
 
 }
