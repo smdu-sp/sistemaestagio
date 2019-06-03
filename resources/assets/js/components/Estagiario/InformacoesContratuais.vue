@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label for="inputContrato">Contrato CIEE</label>
                     <input type="text" 
-                        maxlength="20"  
+                        maxlength="20"
                         class="form-control" 
                         id="inputContrato" 
                         v-model="post.contrato" >
@@ -58,80 +58,88 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="selectDepartamento">Dep. Hierárquico</label>
-                <select class="form-control" id="selectDepartamento" v-model="post.dep_hierarquico" required>
+                <select class="form-control" @blur="validaDepartamento" :class="{'is-invalid':departamentoValido}" id="selectDepartamento" v-model="post.dep_hierarquico" required>
                     <option></option>
                     <option v-for="departamento of departamentos" v-if="departamento.tipo == 'PAI'">{{ departamento.sigla }}</option>
                 </select>
+                <div class="invalid-feedback">
+                    Departamento não pode ficar em branco
+                </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="setor-estag">
                 <label for="selectSetor">Setor Estagiado</label>
-                <select class="form-control" id="selectSetor" v-model="post.setor_estagiado" required>
+                <select class="form-control" @blur="validaSetor" :class="{'is-invalid':setorValido}" id="selectSetor" v-model="post.setor_estagiado" required>
                     <option></option>
                     <option v-for="departamento of departamentos" v-if="departamento.tipo == 'FILHO'">{{ departamento.sigla }}</option>
                 </select>
+                <div class="invalid-feedback">
+                    Setor não pode ser vazio
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="inputSupervisor">Supervisor</label>
-                <select class="form-control" id="inputSupervisor" v-model="post.supervisor" required>
+                <select class="form-control" @blur="validaSupervisor" :class="{'is-invalid':supervisorValido}" id="inputSupervisor" v-model="post.supervisor" required>
                     <option></option>
                     <option v-for="supervisor of supervisores">{{ supervisor.nome }}</option>
                 </select>
+                <div class="invalid-feedback">
+                    Supervisor não pode ser vazio
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="inputInicio">Data Início</label>
                     <input type="date" class="form-control" id="inputInicio" v-model="post.dt_inicio" required>
+
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="inputTermino">Data Término</label>
                     <input type="date" class="form-control" id="inputTermino" v-model="post.dt_termino" required>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="inputTerminoInicial">Data Término Inicial</label>
-                    <input type="date" class="form-control" id="inputTerminoInicial" v-model="post.dt_termino_inicial_lauda">
-            </div>
-        </div>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="inputHorarioEntrada">Horário de Entrada</label>
-                <input type="time" class="form-control" id="inputHorarioEntrada" v-model="post.horario_entrada">
+                <input type="time" @blur="validaHorarioEntrada" :class="{'is-invalid':horarioEntradaValido}" class="form-control" id="inputHorarioEntrada" v-model="post.horario_entrada">
+                <div class="invalid-feedback">
+                    Horário de entrada não pode ser vazio
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="inputHorarioSaida">Horário de Saída</label>
-                <input type="time" class="form-control" id="inputHorarioSaida" v-model="post.horario_saida">
+                <input type="time" @blur="validaHorarioSaida" :class="{'is-invalid':horarioSaidaValido}" class="form-control" id="inputHorarioSaida" v-model="post.horario_saida">
+                <div class="invalid-feedback">
+                    Horário de saída não pode ser vazio
+                </div>
             </div>
         </div>
-        <div class="col-md-4 d-flex flex-column justify-content-center">
+        <div class="col-md-3 d-flex flex-column justify-content-center">
             <div class="form-group">
-                <input type="checkbox" v-model="post.horario_variavel">Horário variável
+                <span>Horário variável</span><br>
+                <input type="checkbox" v-model="post.horario_variavel">
+                <div class="invalid-feedback">
+                    Data de término não pode ser vazio
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="inputSituacao">Situação</label>
-                <select id="inputSituacao" class="form-control" v-model="post.situacao" required>
+                <select id="inputSituacao" @blur="validaSituacao" :class="{'is-invalid':situacaoValida}" class="form-control" v-model="post.situacao" required>
                     <option>CONTRATADO</option>
                     <option>DESLIGADO</option>
                     <option>EM CONTRATAÇÃO</option>
@@ -139,6 +147,9 @@
                     <option>EM RENOVAÇÃO</option>
                     <option>TCE CANCELADO</option>
                 </select>
+                <div class="invalid-feedback">
+                    Situação não pode ser vazia
+                </div>
             </div>
         </div>
     </div>
@@ -171,7 +182,13 @@ export default {
         'validaVaga',
         'vagaValida',
         'selectVaga',
-        'statusVaga'
+        'statusVaga',
+        'validaDepartamento', 'departamentoValido',
+        'validaSetor', 'setorValido',
+        'validaSupervisor', 'supervisorValido',
+        'validaHorarioEntrada', 'horarioEntradaValido',
+        'validaHorarioSaida', 'horarioSaidaValido',
+        'validaSituacao', 'situacaoValida'
     ]
 
 }

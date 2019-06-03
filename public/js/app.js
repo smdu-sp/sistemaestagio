@@ -82284,6 +82284,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -82319,6 +82331,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             instituicaoValida: false,
             cursoValido: false,
             vagaAlterada: '',
+            departamentoValido: false,
+            setorValido: false,
+            supervisorValido: false,
+            dataInicioValida: false,
+            dataFimValida: false,
+            horarioEntradaValido: false,
+            horarioSaidaValido: false,
+            situacaoValida: false,
             msg: {}
         };
     },
@@ -82351,6 +82371,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.converteFone();
             this.converteConclusaoCurso();
             this.alteraStatusVaga();
+            this.converteDatas();
             this.cadastraBanco();
         },
         requisicaoGet: function requisicaoGet(uri, variavel) {
@@ -82390,8 +82411,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         dataModificacao: function dataModificacao() {
             var date = new Date();
             var ano = date.getFullYear();
-            var mes = date.getMonth() + 1;
-            var dia = date.getDate();
+            var mes = date.getMonth() >= 10 ? date.getMonth() : '0' + (date.getMonth() + 1);
+            var dia = date.getDate() >= 10 ? date.getDate() : '0' + date.getDate();
 
             var data = ano + '-' + mes + '-' + dia + ' 00:00:00';
             this.post.data_modificacao = data;
@@ -82399,11 +82420,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         horaModificacao: function horaModificacao() {
             var date = new Date();
             var ano = date.getFullYear();
-            var mes = date.getMonth() + 1;
-            var dia = date.getDate();
-            var hora = date.getHours();
-            var minuto = date.getMinutes();
-            var segundo = date.getSeconds();
+            var mes = date.getMonth() >= 10 ? date.getMonth() : '0' + (date.getMonth() + 1);
+            var dia = date.getDate() >= 10 ? date.getDate() : '0' + date.getDate();
+            var hora = date.getHours() >= 10 ? date.getHours() : '0' + date.getHours();
+            var minuto = date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes();
+            var segundo = date.getSeconds() >= 10 ? date.getSeconds() : '0' + date.getSeconds();
 
             var dataHora = ano + '-' + mes + '-' + dia + ' ' + hora + ':' + minuto + ':' + segundo;
             this.post.hora_modificacao = dataHora;
@@ -82455,6 +82476,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var dataFormatada = '' + mes + ano;
                 this.post.mes_ano_previsto_curso = dataFormatada;
             }
+        },
+        converteDatas: function converteDatas() {
+            this.post.data_nascimento == this.post.data_nascimento.substr(0, 10) + ' 00:00:00' ? this.post.data_nascimento : this.post.data_nascimento += ' 00:00:00';
+            this.post.dt_inicio == this.post.dt_inicio.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicio : this.post.dt_inicio += ' 00:00:00';
+            this.post.dt_termino == this.post.dt_termino.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
+            this.post.dt_termino_inicial_lauda = this.post.dt_termino;
+            this.post.horario_entrada = this.post.horario_entrada.length == 5 ? '1899-12-30 ' + this.post.horario_entrada + ':00' : this.post.horario_entrada;
+            this.post.horario_saida = this.post.horario_saida.length == 5 ? '1899-12-30 ' + this.post.horario_saida + ':00' : this.post.horario_saida;
         },
         validaNome: function validaNome(nome) {
             this.validacao(nome, 'nomeValido');
@@ -82512,6 +82541,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         validaCurso: function validaCurso(curso) {
             this.validacao(curso, 'cursoValido');
+        },
+        validaDepartamento: function validaDepartamento(departamento) {
+            this.validacao(departamento, 'departamentoValido');
+        },
+        validaSetor: function validaSetor(setor) {
+            this.validacao(setor, 'setorValido');
+        },
+        validaSupervisor: function validaSupervisor(supervisor) {
+            this.validacao(supervisor, 'supervisorValido');
+        },
+        validaHorarioEntrada: function validaHorarioEntrada(horaEntrada) {
+            this.validacao(horaEntrada, 'horarioEntradaValido');
+        },
+        validaHorarioSaida: function validaHorarioSaida(HoraSaida) {
+            this.validacao(HoraSaida, 'horarioSaidaValido');
+        },
+        validaSituacao: function validaSituacao(situacao) {
+            this.validacao(situacao, 'situacaoValida');
         },
         validacao: function validacao(valorCampo, variavelBooleana) {
             if (!valorCampo.target.value) {
@@ -82647,7 +82694,19 @@ var render = function() {
                               statusVaga: _vm.statusVaga,
                               selectVaga: _vm.selectVaga,
                               validaVaga: _vm.validaVaga,
-                              vagaValida: _vm.vagaValida
+                              vagaValida: _vm.vagaValida,
+                              validaDepartamento: _vm.validaDepartamento,
+                              departamentoValido: _vm.departamentoValido,
+                              validaSetor: _vm.validaSetor,
+                              setorValido: _vm.setorValido,
+                              validaSupervisor: _vm.validaSupervisor,
+                              supervisorValido: _vm.supervisorValido,
+                              validaHorarioEntrada: _vm.validaHorarioEntrada,
+                              horarioEntradaValido: _vm.horarioEntradaValido,
+                              validaHorarioSaida: _vm.validaHorarioSaida,
+                              horarioSaidaValido: _vm.horarioSaidaValido,
+                              validaSituacao: _vm.validaSituacao,
+                              situacaoValida: _vm.situacaoValida
                             }
                           })
                         ],
@@ -82784,7 +82843,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -82952,10 +83011,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga']
+    props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida']
 
 });
 
@@ -83186,8 +83256,10 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": _vm.departamentoValido },
                 attrs: { id: "selectDepartamento", required: "" },
                 on: {
+                  blur: _vm.validaDepartamento,
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
                       .call($event.target.options, function(o) {
@@ -83215,7 +83287,13 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Departamento não pode ficar em branco\n                "
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -83237,8 +83315,10 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": _vm.setorValido },
                 attrs: { id: "selectSetor", required: "" },
                 on: {
+                  blur: _vm.validaSetor,
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
                       .call($event.target.options, function(o) {
@@ -83266,13 +83346,19 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Setor não pode ser vazio\n                "
+              )
+            ])
           ])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputSupervisor" } }, [
               _vm._v("Supervisor")
@@ -83290,8 +83376,10 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": _vm.supervisorValido },
                 attrs: { id: "inputSupervisor", required: "" },
                 on: {
+                  blur: _vm.validaSupervisor,
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
                       .call($event.target.options, function(o) {
@@ -83317,13 +83405,17 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Supervisor não pode ser vazio\n                "
+              )
+            ])
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-4" }, [
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputInicio" } }, [
               _vm._v("Data Início")
@@ -83353,7 +83445,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputTermino" } }, [
               _vm._v("Data Término")
@@ -83381,45 +83473,11 @@ var render = function() {
               }
             })
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputTerminoInicial" } }, [
-              _vm._v("Data Término Inicial")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_termino_inicial_lauda,
-                  expression: "post.dt_termino_inicial_lauda"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date", id: "inputTerminoInicial" },
-              domProps: { value: _vm.post.dt_termino_inicial_lauda },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.post,
-                    "dt_termino_inicial_lauda",
-                    $event.target.value
-                  )
-                }
-              }
-            })
-          ])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputHorarioEntrada" } }, [
               _vm._v("Horário de Entrada")
@@ -83435,9 +83493,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": _vm.horarioEntradaValido },
               attrs: { type: "time", id: "inputHorarioEntrada" },
               domProps: { value: _vm.post.horario_entrada },
               on: {
+                blur: _vm.validaHorarioEntrada,
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -83445,11 +83505,17 @@ var render = function() {
                   _vm.$set(_vm.post, "horario_entrada", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Horário de entrada não pode ser vazio\n                "
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputHorarioSaida" } }, [
               _vm._v("Horário de Saída")
@@ -83465,9 +83531,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": _vm.horarioSaidaValido },
               attrs: { type: "time", id: "inputHorarioSaida" },
               domProps: { value: _vm.post.horario_saida },
               on: {
+                blur: _vm.validaHorarioSaida,
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -83475,15 +83543,24 @@ var render = function() {
                   _vm.$set(_vm.post, "horario_saida", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Horário de saída não pode ser vazio\n                "
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-md-4 d-flex flex-column justify-content-center" },
+          { staticClass: "col-md-3 d-flex flex-column justify-content-center" },
           [
             _c("div", { staticClass: "form-group" }, [
+              _c("span", [_vm._v("Horário variável")]),
+              _c("br"),
+              _vm._v(" "),
               _c("input", {
                 directives: [
                   {
@@ -83528,14 +83605,17 @@ var render = function() {
                   }
                 }
               }),
-              _vm._v("Horário variável\n            ")
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n                    Data de término não pode ser vazio\n                "
+                )
+              ])
             ])
           ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputSituacao" } }, [
               _vm._v("Situação")
@@ -83553,8 +83633,10 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": _vm.situacaoValida },
                 attrs: { id: "inputSituacao", required: "" },
                 on: {
+                  blur: _vm.validaSituacao,
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
                       .call($event.target.options, function(o) {
@@ -83585,7 +83667,13 @@ var render = function() {
                 _vm._v(" "),
                 _c("option", [_vm._v("TCE CANCELADO")])
               ]
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Situação não pode ser vazia\n                "
+              )
+            ])
           ])
         ])
       ]),

@@ -76,6 +76,18 @@
                                 :selectVaga="selectVaga"
                                 :validaVaga="validaVaga"
                                 :vagaValida="vagaValida"
+                                :validaDepartamento="validaDepartamento"
+                                :departamentoValido="departamentoValido"
+                                :validaSetor="validaSetor"
+                                :setorValido="setorValido"
+                                :validaSupervisor="validaSupervisor"
+                                :supervisorValido="supervisorValido"
+                                :validaHorarioEntrada="validaHorarioEntrada"
+                                :horarioEntradaValido="horarioEntradaValido"
+                                :validaHorarioSaida="validaHorarioSaida"
+                                :horarioSaidaValido="horarioSaidaValido"
+                                :validaSituacao="validaSituacao"
+                                :situacaoValida="situacaoValida"
                                 />
                             </b-card-text>
                         </b-tab>
@@ -129,6 +141,14 @@ export default {
             instituicaoValida: false,
             cursoValido: false,
             vagaAlterada: '',
+            departamentoValido: false,
+            setorValido: false,
+            supervisorValido: false,
+            dataInicioValida: false,
+            dataFimValida: false,
+            horarioEntradaValido: false,
+            horarioSaidaValido: false,
+            situacaoValida: false,
             msg: {}
         }
     },
@@ -160,6 +180,7 @@ export default {
             this.converteFone();
             this.converteConclusaoCurso();
             this.alteraStatusVaga();
+            this.converteDatas();
             this.cadastraBanco();
         },
         requisicaoGet(uri, variavel) {
@@ -195,8 +216,8 @@ export default {
         dataModificacao() {
             let date = new Date();
             let ano = date.getFullYear();
-            let mes = date.getMonth() + 1;
-            let dia = date.getDate();
+            let mes = date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth() + 1}`;
+            let dia = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
 
             let data = `${ano}-${mes}-${dia} 00:00:00`;
             this.post.data_modificacao = data
@@ -204,11 +225,11 @@ export default {
         horaModificacao() {
             let date = new Date();
             let ano = date.getFullYear();
-            let mes = date.getMonth() + 1;
-            let dia = date.getDate();
-            let hora = date.getHours();
-            let minuto = date.getMinutes();
-            let segundo = date.getSeconds();
+            let mes = date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth() + 1}`;
+            let dia = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
+            let hora = date.getHours() >= 10 ? date.getHours() : `0${date.getHours()}`;
+            let minuto = date.getMinutes() >= 10 ? date.getMinutes() : `0${date.getMinutes()}`;
+            let segundo = date.getSeconds() >= 10 ? date.getSeconds() : `0${date.getSeconds()}`;
 
             let dataHora = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`
             this.post.hora_modificacao = dataHora
@@ -258,6 +279,14 @@ export default {
                 this.post.mes_ano_previsto_curso = dataFormatada;
             }
         },
+        converteDatas() {
+            this.post.data_nascimento == `${this.post.data_nascimento.substr(0,10)} 00:00:00` ? this.post.data_nascimento : this.post.data_nascimento += ' 00:00:00';
+            this.post.dt_inicio == `${this.post.dt_inicio.substr(0,10)} 00:00:00` ? this.post.dt_inicio  : this.post.dt_inicio += ' 00:00:00';
+            this.post.dt_termino == `${this.post.dt_termino.substr(0,10)} 00:00:00` ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
+            this.post.dt_termino_inicial_lauda = this.post.dt_termino;
+            this.post.horario_entrada = this.post.horario_entrada.length == 5 ? `1899-12-30 ${this.post.horario_entrada}:00` : this.post.horario_entrada;
+            this.post.horario_saida = this.post.horario_saida.length == 5 ? `1899-12-30 ${this.post.horario_saida}:00` : this.post.horario_saida;
+        },
         validaNome(nome) { this.validacao(nome, 'nomeValido') },
         validaCodEstudante(cod) { this.validacao(cod, 'codValido') },
         validaContratante(contratante) { this.validacao(contratante, 'contratanteValido') },
@@ -277,6 +306,12 @@ export default {
         validaEmail(email) { this.validacao(email, 'emailValido') },
         validaInstituicao(instituicao) { this.validacao(instituicao, 'instituicaoValida') },
         validaCurso(curso) { this.validacao(curso, 'cursoValido') },
+        validaDepartamento(departamento) { this.validacao(departamento, 'departamentoValido') },
+        validaSetor(setor) { this.validacao(setor, 'setorValido') },
+        validaSupervisor(supervisor) { this.validacao(supervisor, 'supervisorValido') },
+        validaHorarioEntrada(horaEntrada) { this.validacao(horaEntrada, 'horarioEntradaValido') },
+        validaHorarioSaida(HoraSaida) { this.validacao(HoraSaida, 'horarioSaidaValido') },
+        validaSituacao(situacao) { this.validacao(situacao, 'situacaoValida') },
         validacao(valorCampo, variavelBooleana) {
             if(!valorCampo.target.value) {
                 this[variavelBooleana] = true
