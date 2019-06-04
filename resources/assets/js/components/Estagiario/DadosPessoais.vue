@@ -21,7 +21,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Nome Social</label>
-                <input type="text" class="form-control" maxlength="170" mav-model="post.nome_social">
+                <input type="text" class="form-control" maxlength="170" v-model="post.nome_social">
             </div>
         </div>
     </div>

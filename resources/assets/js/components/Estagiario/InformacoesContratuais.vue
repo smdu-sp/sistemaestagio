@@ -140,12 +140,12 @@
             <div class="form-group">
                 <label for="inputSituacao">Situação</label>
                 <select id="inputSituacao" @blur="validaSituacao" :class="{'is-invalid':situacaoValida}" class="form-control" v-model="post.situacao" required>
-                    <option>CONTRATADO</option>
-                    <option>DESLIGADO</option>
-                    <option>EM CONTRATAÇÃO</option>
-                    <option>EM DESLIGAMENTO</option>
-                    <option>EM RENOVAÇÃO</option>
-                    <option>TCE CANCELADO</option>
+                    <option value="1">CONTRATADO</option>
+                    <option value="5">DESLIGADO</option>
+                    <option value="2">EM CONTRATAÇÃO</option>
+                    <option value="3">EM DESLIGAMENTO</option>
+                    <option value="4">EM RENOVAÇÃO</option>
+                    <option value="6">TCE CANCELADO</option>
                 </select>
                 <div class="invalid-feedback">
                     Situação não pode ser vazia

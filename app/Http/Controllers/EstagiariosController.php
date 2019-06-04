@@ -42,7 +42,7 @@ class EstagiariosController extends Controller
             'email_pessoal'=>$request->input('email_pessoal'),
             'email_corporativo'=>$request->input('email_corporativo'),
             'instituicao_ensino'=>$request->input('instituicao_ensino'),
-            'campus'=>$request->input('campus'),
+            // 'campus'=>$request->input('campus'),
             'curso_formacao'=>$request->input('curso_formacao'),
             'ano_semestre'=>$request->input('ano_semestre'),
             'periodo'=>$request->input('periodo'),

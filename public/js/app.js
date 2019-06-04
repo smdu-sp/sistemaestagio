@@ -80580,7 +80580,33 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Nome Social")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.post.nome_social,
+                  expression: "post.nome_social"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", maxlength: "170" },
+              domProps: { value: _vm.post.nome_social },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.post, "nome_social", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -82095,7 +82121,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(1),
+      _vm._m(0),
       _vm._v(" "),
       _c("botoes-component")
     ],
@@ -82103,25 +82129,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("Nome Social")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            maxlength: "170",
-            "mav-model": "post.nome_social"
-          }
-        })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -82296,6 +82303,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -82339,10 +82348,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             horarioEntradaValido: false,
             horarioSaidaValido: false,
             situacaoValida: false,
-            msg: {}
+            msg: {
+                error: false,
+                success: false
+            }
         };
     },
-    created: function created() {
+    beforeMount: function beforeMount() {
         var uriCartoes = 'http://localhost:8000/api/cartao';
         var uriEstados = 'http://localhost:8000/api/estados';
         var uriInstituicoes = 'http://localhost:8000/api/instituicao';
@@ -82384,7 +82396,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         alteraStatusVaga: function alteraStatusVaga() {
             var uriVagas = 'http://localhost:8000/api/vagas/' + this.statusVaga.id;
             this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
-                return console.log(response);
+                return response;
             });
         },
         converteCep: function converteCep() {
@@ -82435,29 +82447,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var uriEstagiarios = 'http://localhost:8000/api/estagiarios';
             this.axios.post(uriEstagiarios, this.post).then(function (response) {
                 _this2.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
+                _this2.msg.success = true;
             }).catch(function (e) {
                 _this2.msg.erro = 'Erro ao cadastrar estagiário';
+                _this2.msg.error = true;
             });
-            console.log(this.post);
         },
         converteCelular: function converteCelular() {
             var celular = this.post.fone_celular;
             if (celular) {
-                var codArea = celular.substr(0, 2);
-                var telParte1 = celular.substr(2, 5);
-                var telParte2 = celular.substr(7, celular.length);
-                var celFormatado = '(' + codArea + ') ' + telParte1 + '-' + telParte2;
-                this.post.fone_celular = celFormatado;
+                if (celular.substr(0, 1) != '(') {
+                    var codArea = celular.substr(0, 2);
+                    var telParte1 = celular.substr(2, 5);
+                    var telParte2 = celular.substr(7, celular.length);
+                    var celFormatado = '(' + codArea + ') ' + telParte1 + '-' + telParte2;
+                    this.post.fone_celular = celFormatado;
+                }
             }
         },
         converteFone: function converteFone() {
             var fone = this.post.fone_residencial;
             if (fone) {
-                var codArea = fone.substr(0, 2);
-                var telParte1 = fone.substr(2, 4);
-                var telParte2 = fone.substr(6, fone.length);
-                var foneFormatado = '(' + codArea + ') ' + telParte1 + '-' + telParte2;
-                this.post.fone_residencial = foneFormatado;
+                if (fone.substr(0, 1) != '(') {
+                    var codArea = fone.substr(0, 2);
+                    var telParte1 = fone.substr(2, 4);
+                    var telParte2 = fone.substr(6, fone.length);
+                    var foneFormatado = '(' + codArea + ') ' + telParte1 + '-' + telParte2;
+                    this.post.fone_residencial = foneFormatado;
+                }
             }
         },
         selectVaga: function selectVaga() {
@@ -82478,12 +82495,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         converteDatas: function converteDatas() {
-            this.post.data_nascimento == this.post.data_nascimento.substr(0, 10) + ' 00:00:00' ? this.post.data_nascimento : this.post.data_nascimento += ' 00:00:00';
-            this.post.dt_inicio == this.post.dt_inicio.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicio : this.post.dt_inicio += ' 00:00:00';
-            this.post.dt_termino == this.post.dt_termino.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
-            this.post.dt_termino_inicial_lauda = this.post.dt_termino;
-            this.post.horario_entrada = this.post.horario_entrada.length == 5 ? '1899-12-30 ' + this.post.horario_entrada + ':00' : this.post.horario_entrada;
-            this.post.horario_saida = this.post.horario_saida.length == 5 ? '1899-12-30 ' + this.post.horario_saida + ':00' : this.post.horario_saida;
+            if (this.post.dt_inicio) {
+                this.post.dt_inicio == this.post.dt_inicio.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicio : this.post.dt_inicio += ' 00:00:00';
+            }
+            if (this.post.dt_termino) {
+                this.post.dt_termino == this.post.dt_termino.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
+            }
+            if (this.post.dt_termino) {
+                this.post.dt_termino_inicial_lauda = this.post.dt_termino;
+            }
+            if (this.post.horario_entrada) {
+                this.post.horario_entrada = this.post.horario_entrada.length == 5 ? '1899-12-30 ' + this.post.horario_entrada + ':00' : this.post.horario_entrada;
+            }
+            if (this.post.horario_saida) {
+                this.post.horario_saida = this.post.horario_saida.length == 5 ? '1899-12-30 ' + this.post.horario_saida + ':00' : this.post.horario_saida;
+            }
         },
         validaNome: function validaNome(nome) {
             this.validacao(nome, 'nomeValido');
@@ -82592,7 +82618,7 @@ var render = function() {
             _vm._v("Cadastro de Estagiário")
           ]),
           _vm._v(" "),
-          _vm.msg.erro
+          _vm.msg.error
             ? _c("div", { staticClass: "alert alert-danger" }, [
                 _vm._v(
                   "\n                " + _vm._s(_vm.msg.erro) + "\n            "
@@ -82600,8 +82626,8 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
-          _vm.msg.sucesso
-            ? _c("div", { staticClass: "alert alert-danger" }, [
+          _vm.msg.success
+            ? _c("div", { staticClass: "alert alert-success" }, [
                 _vm._v(
                   "\n                " +
                     _vm._s(_vm.msg.sucesso) +
@@ -83655,17 +83681,25 @@ var render = function() {
                 }
               },
               [
-                _c("option", [_vm._v("CONTRATADO")]),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("CONTRATADO")]),
                 _vm._v(" "),
-                _c("option", [_vm._v("DESLIGADO")]),
+                _c("option", { attrs: { value: "5" } }, [_vm._v("DESLIGADO")]),
                 _vm._v(" "),
-                _c("option", [_vm._v("EM CONTRATAÇÃO")]),
+                _c("option", { attrs: { value: "2" } }, [
+                  _vm._v("EM CONTRATAÇÃO")
+                ]),
                 _vm._v(" "),
-                _c("option", [_vm._v("EM DESLIGAMENTO")]),
+                _c("option", { attrs: { value: "3" } }, [
+                  _vm._v("EM DESLIGAMENTO")
+                ]),
                 _vm._v(" "),
-                _c("option", [_vm._v("EM RENOVAÇÃO")]),
+                _c("option", { attrs: { value: "4" } }, [
+                  _vm._v("EM RENOVAÇÃO")
+                ]),
                 _vm._v(" "),
-                _c("option", [_vm._v("TCE CANCELADO")])
+                _c("option", { attrs: { value: "6" } }, [
+                  _vm._v("TCE CANCELADO")
+                ])
               ]
             ),
             _vm._v(" "),
@@ -84235,7 +84269,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -84261,7 +84295,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        btnSair: false;
+    },
+    sair: function sair(e) {
+        if (post) {
+            btnSair = true;
+        }
+    },
+
+    props: ['sair']
+});
 
 /***/ }),
 /* 398 */
@@ -84295,7 +84340,11 @@ var render = function() {
             _vm._v(" "),
             _c(
               "router-link",
-              { staticClass: "btn btn-danger ml-2 mr-2", attrs: { to: "/" } },
+              {
+                staticClass: "btn btn-danger ml-2 mr-2",
+                attrs: { to: "/" },
+                on: { click: _vm.sair }
+              },
               [_vm._v("Sair")]
             )
           ],

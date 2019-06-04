@@ -9,12 +9,14 @@
             <div class="col-9">
                 <header-component></header-component>
                 <h1 class="d-flex justify-content-center">Cadastro de Estagiário</h1>
-                <div v-if="msg.erro" class="alert alert-danger">
+
+                <div  v-if="msg.error" class="alert alert-danger">
                     {{ msg.erro }}
                 </div>
-                <div v-if="msg.sucesso" class="alert alert-danger">
+                <div v-if="msg.success" class="alert alert-success">
                     {{ msg.sucesso }}
                 </div>
+
                 <!-- Formulários -->
                 <b-card no-body>
                     <b-tabs card>
@@ -149,10 +151,13 @@ export default {
             horarioEntradaValido: false,
             horarioSaidaValido: false,
             situacaoValida: false,
-            msg: {}
+            msg: {
+                error: false,
+                success: false,
+            }
         }
     },
-    created() {
+    beforeMount() {
         let uriCartoes = 'http://localhost:8000/api/cartao';
         let uriEstados = 'http://localhost:8000/api/estados';
         let uriInstituicoes = 'http://localhost:8000/api/instituicao';
@@ -190,7 +195,7 @@ export default {
         },
         alteraStatusVaga() {
             let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
-            this.axios.patch(uriVagas, this.statusVaga).then(response => console.log(response));
+            this.axios.patch(uriVagas, this.statusVaga).then(response => response);
         },
         converteCep() {
             let cep = this.post.cep;
@@ -240,31 +245,36 @@ export default {
             .post(uriEstagiarios, this.post)
             .then(response => {
                 this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
+                this.msg.success = true;
             })
             .catch(e => {
                 this.msg.erro = 'Erro ao cadastrar estagiário';
+                this.msg.error = true;
             })
-            console.log(this.post)
         },
         converteCelular(){
             let celular = this.post.fone_celular;
             if(celular) {
-                let codArea = celular.substr(0,2);
-                let telParte1 = celular.substr(2,5);
-                let telParte2 = celular.substr(7, celular.length);
-                let celFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
-                this.post.fone_celular = celFormatado;
+                if(celular.substr(0,1) != '(') {
+                    let codArea = celular.substr(0,2);
+                    let telParte1 = celular.substr(2,5);
+                    let telParte2 = celular.substr(7, celular.length);
+                    let celFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
+                    this.post.fone_celular = celFormatado;
+                }
             }
         },
         converteFone() {
         let fone = this.post.fone_residencial;
-            if(fone) {
+        if(fone) {
+            if(fone.substr(0,1) != '(') {
                 let codArea = fone.substr(0,2);
                 let telParte1 = fone.substr(2,4);
                 let telParte2 = fone.substr(6, fone.length);
                 let foneFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
                 this.post.fone_residencial = foneFormatado;                    
             }
+        }
         },
         selectVaga() {
             let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
@@ -280,12 +290,21 @@ export default {
             }
         },
         converteDatas() {
-            this.post.data_nascimento == `${this.post.data_nascimento.substr(0,10)} 00:00:00` ? this.post.data_nascimento : this.post.data_nascimento += ' 00:00:00';
-            this.post.dt_inicio == `${this.post.dt_inicio.substr(0,10)} 00:00:00` ? this.post.dt_inicio  : this.post.dt_inicio += ' 00:00:00';
-            this.post.dt_termino == `${this.post.dt_termino.substr(0,10)} 00:00:00` ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
-            this.post.dt_termino_inicial_lauda = this.post.dt_termino;
-            this.post.horario_entrada = this.post.horario_entrada.length == 5 ? `1899-12-30 ${this.post.horario_entrada}:00` : this.post.horario_entrada;
-            this.post.horario_saida = this.post.horario_saida.length == 5 ? `1899-12-30 ${this.post.horario_saida}:00` : this.post.horario_saida;
+            if(this.post.dt_inicio) {
+                this.post.dt_inicio == `${this.post.dt_inicio.substr(0,10)} 00:00:00` ? this.post.dt_inicio  : this.post.dt_inicio += ' 00:00:00';
+            }
+            if(this.post.dt_termino) {
+                this.post.dt_termino == `${this.post.dt_termino.substr(0,10)} 00:00:00` ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
+            }
+            if(this.post.dt_termino) {
+                this.post.dt_termino_inicial_lauda = this.post.dt_termino;
+            }
+            if(this.post.horario_entrada) {
+                this.post.horario_entrada = this.post.horario_entrada.length == 5 ? `1899-12-30 ${this.post.horario_entrada}:00` : this.post.horario_entrada;
+            }
+            if(this.post.horario_saida) {
+                this.post.horario_saida = this.post.horario_saida.length == 5 ? `1899-12-30 ${this.post.horario_saida}:00` : this.post.horario_saida;
+            }
         },
         validaNome(nome) { this.validacao(nome, 'nomeValido') },
         validaCodEstudante(cod) { this.validacao(cod, 'codValido') },
