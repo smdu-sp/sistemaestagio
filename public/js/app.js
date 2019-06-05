@@ -79998,7 +79998,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -80009,6 +80009,17 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -80937,7 +80948,7 @@ var render = function() {
                 staticClass: "form-control",
                 class: { "is-invalid": _vm.cepValido },
                 attrs: {
-                  type: "text",
+                  type: "tel",
                   maxlength: "10",
                   id: "inputCep",
                   mask: "#####-###",
@@ -81036,7 +81047,7 @@ var render = function() {
               _c("the-mask", {
                 staticClass: "form-control",
                 attrs: {
-                  type: "text",
+                  type: "tel",
                   maxlength: "15",
                   id: "inputFone",
                   mask: "(##) ####-####",
@@ -81068,7 +81079,7 @@ var render = function() {
                 staticClass: "form-control",
                 class: { "is-invalid": _vm.celularValido },
                 attrs: {
-                  type: "text",
+                  type: "tel",
                   maxlength: "16",
                   id: "inputCel",
                   mask: ["(##) ####-####", "(##) #####-####"],
@@ -81194,8 +81205,7 @@ var render = function() {
               attrs: {
                 type: "text",
                 maxlength: "20",
-                id: "inputNacionalidade",
-                placeholder: "Ex: Brasileira"
+                id: "inputNacionalidade"
               },
               domProps: { value: _vm.post.nacionalidade },
               on: {
@@ -81340,7 +81350,7 @@ var render = function() {
                 staticClass: "form-control",
                 class: { "is-invalid": _vm.cpfValido },
                 attrs: {
-                  type: "text",
+                  type: "tel",
                   maxlength: "14",
                   id: "inputCpf",
                   placeholder: "Ex: 000.000.000-00",
@@ -82305,6 +82315,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -82351,7 +82365,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             msg: {
                 error: false,
                 success: false
-            }
+            },
+            arrayCamposInvalidos: [],
+            revisarCampos: false,
+            camposValidacao: []
         };
     },
     beforeMount: function beforeMount() {
@@ -82380,11 +82397,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dataModificacao();
             this.horaModificacao();
             this.converteCelular();
-            this.converteFone();
             this.converteConclusaoCurso();
             this.alteraStatusVaga();
             this.converteDatas();
-            this.cadastraBanco();
+            this.validaCampos();
+        },
+        validaCampos: function validaCampos() {
+            this.camposValidacao = [{ nomeValido: this.post.nome }, { codValido: this.post.cod_estudante }, { vagaValida: this.post.cod_vaga }, { contratanteValido: this.post.contratado_por }, { enderecoValido: this.post.endereco }, { complementoValido: this.post.nro }, { bairroValido: this.post.bairro }, { estadoValido: this.post.estado }, { cepValido: this.post.cep }, { celularValido: this.post.fone_celular }, { nacionalidadeValida: this.post.nacionalidade }, { naturalidadeValida: this.post.naturalidade }, { racaValida: this.post.raca_cor }, { cpfValido: this.post.cpf }, { rgValido: this.post.rg }, { emailValido: this.post.email_pessoal }, { instituicaoValida: this.post.instituicao_ensino }, { cursoValido: this.post.curso_formacao }, { departamentoValido: this.post.dep_hierarquico }, { setorValido: this.post.setor_estagiado }, { supervisorValido: this.post.supervisor }, { dataInicioValida: this.post.dt_inicio }, { dataFimValida: this.post.dt_inicio }, { horarioEntradaValido: this.post.horario_entrada }, { horarioSaidaValido: this.post.saida }, { situacaoValida: this.post.situacao }];
+
+            var contadorCamposInvalidos = 0;
+            for (var i = 0; i <= this.camposValidacao.length; i++) {
+                for (var key in this.camposValidacao[i]) {
+                    if (this.camposValidacao[i][key]) {
+                        this[key] = false;
+                        this.revisarCampos = false;
+                    } else {
+                        this[key] = true;
+                        this.revisarCampos = true;
+                        contadorCamposInvalidos++;
+                    }
+                }
+            }
+
+            if (contadorCamposInvalidos == 0) {
+                this.cadastraBanco();
+            } else {
+                console.log(contadorCamposInvalidos);
+            }
         },
         requisicaoGet: function requisicaoGet(uri, variavel) {
             var _this = this;
@@ -82538,14 +82577,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         validaCep: function validaCep(cep) {
             this.validacao(cep, 'cepValido');
         },
-        validaFone: function validaFone(fone) {
-            this.validacao(fone, 'foneValido');
-        },
         validaCelular: function validaCelular(celular) {
             this.validacao(celular, 'celularValido');
         },
         validaNacionalidade: function validaNacionalidade(nacionalidade) {
-            this.validacao(nacionalidade, 'nacionalidadeValida');
+            this.validacao(nacionalidade, 'naturalidadeValida');
         },
         validaNaturalidade: function validaNaturalidade(naturalidade) {
             this.validacao(naturalidade, 'naturalidadeValida');
@@ -82580,8 +82616,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         validaHorarioEntrada: function validaHorarioEntrada(horaEntrada) {
             this.validacao(horaEntrada, 'horarioEntradaValido');
         },
-        validaHorarioSaida: function validaHorarioSaida(HoraSaida) {
-            this.validacao(HoraSaida, 'horarioSaidaValido');
+        validaHorarioSaida: function validaHorarioSaida(horaSaida) {
+            this.validacao(horaSaida, 'horarioSaidaValido');
         },
         validaSituacao: function validaSituacao(situacao) {
             this.validacao(situacao, 'situacaoValida');
@@ -82632,6 +82668,14 @@ var render = function() {
                   "\n                " +
                     _vm._s(_vm.msg.sucesso) +
                     "\n            "
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.revisarCampos
+            ? _c("div", { staticClass: "alert alert-danger" }, [
+                _vm._v(
+                  "\n                Revise os campos em vermelho\n            "
                 )
               ])
             : _vm._e(),
@@ -84269,7 +84313,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -84295,18 +84339,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        btnSair: false;
-    },
-    sair: function sair(e) {
-        if (post) {
-            btnSair = true;
-        }
-    },
-
-    props: ['sair']
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 /* 398 */
@@ -84340,11 +84373,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "router-link",
-              {
-                staticClass: "btn btn-danger ml-2 mr-2",
-                attrs: { to: "/" },
-                on: { click: _vm.sair }
-              },
+              { staticClass: "btn btn-danger ml-2 mr-2", attrs: { to: "/" } },
               [_vm._v("Sair")]
             )
           ],

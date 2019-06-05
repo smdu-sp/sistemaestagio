@@ -17,6 +17,10 @@
                     {{ msg.sucesso }}
                 </div>
 
+                <div v-if="revisarCampos" class="alert alert-danger">
+                    Revise os campos em vermelho
+                </div>
+
                 <!-- Formulários -->
                 <b-card no-body>
                     <b-tabs card>
@@ -154,7 +158,10 @@ export default {
             msg: {
                 error: false,
                 success: false,
-            }
+            },
+            arrayCamposInvalidos: [],
+            revisarCampos: false,
+            camposValidacao: []
         }
     },
     beforeMount() {
@@ -182,11 +189,60 @@ export default {
             this.dataModificacao();
             this.horaModificacao();
             this.converteCelular();
-            this.converteFone();
             this.converteConclusaoCurso();
             this.alteraStatusVaga();
             this.converteDatas();
-            this.cadastraBanco();
+            this.validaCampos();
+        },
+        validaCampos() {
+            this.camposValidacao = [
+                {nomeValido: this.post.nome},
+                {codValido: this.post.cod_estudante},
+                {vagaValida: this.post.cod_vaga},
+                {contratanteValido: this.post.contratado_por},
+                {enderecoValido: this.post.endereco},
+                {complementoValido: this.post.nro},
+                {bairroValido: this.post.bairro},
+                {estadoValido: this.post.estado},
+                {cepValido: this.post.cep},
+                {celularValido: this.post.fone_celular},
+                {nacionalidadeValida: this.post.nacionalidade},
+                {naturalidadeValida: this.post.naturalidade},
+                {racaValida: this.post.raca_cor},
+                {cpfValido: this.post.cpf},
+                {rgValido: this.post.rg},
+                {emailValido: this.post.email_pessoal},
+                {instituicaoValida: this.post.instituicao_ensino},
+                {cursoValido: this.post.curso_formacao},
+                {departamentoValido: this.post.dep_hierarquico},
+                {setorValido: this.post.setor_estagiado},
+                {supervisorValido: this.post.supervisor},
+                {dataInicioValida: this.post.dt_inicio},
+                {dataFimValida: this.post.dt_inicio},
+                {horarioEntradaValido: this.post.horario_entrada},
+                {horarioSaidaValido: this.post.saida},
+                {situacaoValida: this.post.situacao}
+            ]
+            
+            let contadorCamposInvalidos = 0
+            for(let i = 0; i <= this.camposValidacao.length; i++) {
+                for(let key in this.camposValidacao[i]) {
+                    if(this.camposValidacao[i][key]) {
+                        this[key] = false
+                        this.revisarCampos = false;
+                    } else {
+                        this[key] = true;
+                        this.revisarCampos = true;
+                        contadorCamposInvalidos++;
+                    }
+                }
+            }
+
+            if(contadorCamposInvalidos == 0) {
+                this.cadastraBanco();
+            } else {
+                console.log(contadorCamposInvalidos)
+            }
         },
         requisicaoGet(uri, variavel) {
             this.axios.get(uri).then(response => {
@@ -315,9 +371,8 @@ export default {
         validaBairro(bairro) { this.validacao(bairro, 'bairroValido') },
         validaEstado(estado) { this.validacao(estado, 'estadoValido')},
         validaCep(cep) { this.validacao(cep, 'cepValido'); },
-        validaFone(fone) { this.validacao(fone, 'foneValido') },
         validaCelular(celular) { this.validacao(celular, 'celularValido') },
-        validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'nacionalidadeValida') },
+        validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'naturalidadeValida')},
         validaNaturalidade(naturalidade) { this.validacao(naturalidade, 'naturalidadeValida') },
         validaRaca(raca) { this.validacao(raca, 'racaValida') },
         validaCpf(cpf) { this.validacao(cpf, 'cpfValido') },
@@ -329,7 +384,7 @@ export default {
         validaSetor(setor) { this.validacao(setor, 'setorValido') },
         validaSupervisor(supervisor) { this.validacao(supervisor, 'supervisorValido') },
         validaHorarioEntrada(horaEntrada) { this.validacao(horaEntrada, 'horarioEntradaValido') },
-        validaHorarioSaida(HoraSaida) { this.validacao(HoraSaida, 'horarioSaidaValido') },
+        validaHorarioSaida(horaSaida) { this.validacao(horaSaida, 'horarioSaidaValido') },
         validaSituacao(situacao) { this.validacao(situacao, 'situacaoValida') },
         validacao(valorCampo, variavelBooleana) {
             if(!valorCampo.target.value) {

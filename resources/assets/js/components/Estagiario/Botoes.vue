@@ -6,7 +6,7 @@
             <div class="col-md-12 d-flex justify-content-end">
                 <button class="btn btn-success">Solicitar cartão de acesso</button>
                 <button type="submit" class="btn btn-primary ml-2">Cadastrar</button>
-                <router-link to="/" class="btn btn-danger ml-2 mr-2" @click="sair">Sair</router-link>
+                <router-link to="/" class="btn btn-danger ml-2 mr-2">Sair</router-link>
             </div>
         </div>
     </div>
@@ -14,15 +14,6 @@
 </template>
 <script>
 export default {
-    data() {
-        btnSair: false
-    },
-    sair(e) {
-        if(post) {
-            btnSair = true;
-        }
-    },
-    props: ['sair']
 }
 </script>
 <style>

@@ -134,7 +134,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="inputCep">CEP</label>
-                    <the-mask type="text" 
+                    <the-mask type="tel" 
                         @blur="validaCep"
                         maxlength="10" 
                         :class="{'is-invalid': cepValido}"
@@ -167,7 +167,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="inputFone">Fone Res.</label>
-                    <the-mask type="text" 
+                    <the-mask type="tel" 
                         maxlength="15" 
                         class="form-control" 
                         id="inputFone" 
@@ -179,7 +179,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="inputCel">Fone celular</label>
-                    <the-mask type="text" 
+                    <the-mask type="tel" 
                         @blur="validaCelular"
                         maxlength="16" 
                         :class="{'is-invalid': celularValido}"
@@ -223,17 +223,28 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputNacionalidade">Nacionalidade</label>
-                <input type="text" 
-                    @blur="validaNacionalidade"
-                    :class="{'is-invalid': nacionalidadeValida}"
+                <!-- <select type="text" 
+                    @blur="validaNacionalidade" 
+                    :class="{'is-invalid': nacionalidadeValida}" 
                     class="form-control" 
-                    maxlength="20" 
+                    maxlength="20"  
                     id="inputNacionalidade" 
-                    v-model="post.nacionalidade" 
-                    placeholder="Ex: Brasileira">
+                    v-model="post.nacionalidade">
+                    <option value="Brasileira">Brasileira</option>
+                </select>
                     <div v-if="nacionalidadeValida" class="invalid-feedback">
                         Nacionalidade não pode ser vazia
-                    </div>
+                    </div> -->
+                <input type="text"
+                    @blur="validaNacionalidade"
+                    maxlength="20"
+                    :class="{'is-invalid': nacionalidadeValida}"
+                    class="form-control"
+                    id="inputNacionalidade"
+                    v-model="post.nacionalidade">
+                    <div v-if="nacionalidadeValida" class="invalid-feedback">
+                        Nacionalidade não pode ser vazia
+                    </div>             
             </div>
         </div>
         <div class="col-md-3">
@@ -272,7 +283,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputCpf">CPF</label>
-                <the-mask type="text" 
+                <the-mask type="tel" 
                     @blur="validaCpf"
                     maxlength="14" 
                     :class="{'is-invalid': cpfValido}"
