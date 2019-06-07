@@ -37,11 +37,13 @@ import AsideComponent from './components/AsideComponent.vue';
 import HeaderComponent from './components/HeaderComponent.vue';
 import MainComponent from './components/MainComponent.vue';
 import CadastroComponent from './components/CadastroComponent.vue';
-import DadosPessoais from './components/Estagiario/DadosPessoais.vue';
-import NavEstagiario from './components/Estagiario/NavEstagiario.vue';
-import InformacoesContratuais from './components/Estagiario/InformacoesContratuais.vue';
-import DadosBancarios from './components/Estagiario/DadosBancarios.vue';
-import Botoes from './components/Estagiario/Botoes.vue';
+import DadosPessoais from './components/cadastrar_estagiario/DadosPessoais.vue';
+import NavEstagiario from './components/cadastrar_estagiario/NavEstagiario.vue';
+import InformacoesContratuais from './components/cadastrar_estagiario/InformacoesContratuais.vue';
+import DadosBancarios from './components/cadastrar_estagiario/DadosBancarios.vue';
+import Botoes from './components/cadastrar_estagiario/Botoes.vue';
+import Modal from './components/ModalConsulta.vue';
+import DadosPessoaisAtualizar from './components/atualizar_estagiario/DadosPessoais.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -53,6 +55,8 @@ Vue.component('nav-estagiario', NavEstagiario);
 Vue.component('informacoes-contratuais', InformacoesContratuais);
 Vue.component('dados-bancarios', DadosBancarios);
 Vue.component('botoes-component', Botoes);
+Vue.component('modal-component', Modal);
+Vue.component('dados-pessoais-atualizar', DadosPessoaisAtualizar);
 
 import { routes } from './routes.js';
 
@@ -60,4 +64,5 @@ const router = new VueRouter({
     mode: 'history',
     routes: routes
 });
+
 const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');

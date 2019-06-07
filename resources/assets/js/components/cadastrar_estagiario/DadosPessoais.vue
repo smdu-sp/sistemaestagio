@@ -223,18 +223,6 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputNacionalidade">Nacionalidade</label>
-                <!-- <select type="text" 
-                    @blur="validaNacionalidade" 
-                    :class="{'is-invalid': nacionalidadeValida}" 
-                    class="form-control" 
-                    maxlength="20"  
-                    id="inputNacionalidade" 
-                    v-model="post.nacionalidade">
-                    <option value="Brasileira">Brasileira</option>
-                </select>
-                    <div v-if="nacionalidadeValida" class="invalid-feedback">
-                        Nacionalidade não pode ser vazia
-                    </div> -->
                 <input type="text"
                     @blur="validaNacionalidade"
                     maxlength="20"

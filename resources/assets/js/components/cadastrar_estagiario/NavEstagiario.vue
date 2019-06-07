@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <!--row-->
         <div class="row">
             <div class="col-3">
@@ -220,7 +220,7 @@ export default {
                 {dataInicioValida: this.post.dt_inicio},
                 {dataFimValida: this.post.dt_inicio},
                 {horarioEntradaValido: this.post.horario_entrada},
-                {horarioSaidaValido: this.post.saida},
+                {horarioSaidaValido: this.post.horario_saida},
                 {situacaoValida: this.post.situacao}
             ]
             
@@ -240,8 +240,9 @@ export default {
 
             if(contadorCamposInvalidos == 0) {
                 this.cadastraBanco();
+                console.log(contadorCamposInvalidos);
             } else {
-                console.log(contadorCamposInvalidos)
+                console.log(contadorCamposInvalidos);
             }
         },
         requisicaoGet(uri, variavel) {
@@ -398,6 +399,25 @@ export default {
 
 </script>
 <style>
+* {
+    margin: 0;
+    padding: 0;
+}
+.col-3 {
+    margin: 0;
+    padding: 0;
+}
+.col-2 {
+    margin: 0;
+    padding: 0;
+}
+b-card {
+    max-width: 100%;
+}
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
 .card-body {
     height: auto;
 }

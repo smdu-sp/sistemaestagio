@@ -1,5 +1,7 @@
 import HomeComponent from './components/HomeComponent.vue';
 import NavEstagiario from './components/Estagiario/NavEstagiario.vue';
+import Teste from './components/teste.vue';
+import Consulta from './components/consulta';
 
 export const routes = [
     {
@@ -11,5 +13,16 @@ export const routes = [
         name: 'cadastro',
         path: '/cadastro',
         component: NavEstagiario
+    },
+    {
+        name: 'teste',
+        path: '/teste',
+        component: Teste
+    },
+    {
+        name: 'consulta',
+        path: '/consulta',
+        component: Consulta
     }
+
 ];

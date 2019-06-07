@@ -1,6 +1,6 @@
 <template>    
     <!-- aside -->
-    <aside class="d-flex flex-column">
+    <aside class="d-flex flex-column base">
 
         <a href="#" class="mt-3 mb-3 mr-2">
             <div class="d-flex justify-content-end">
@@ -26,16 +26,23 @@
 
         
 
-        <nav class="row mt-4">
+        <nav class="row mt-4 ml-4">
             <ul>
                 <li>
                     <a href="#">
-                        <i class="fas fa-chevron-down mr-2"></i>
-                        Consulta
+                        
+                        <li id="show-btn" @click="showModal">
+                            <i class="fas fa-chevron-down mr-2"></i>
+                            Consulta
+                        </li>
                     </a>
                 <li>
                     <i class="fas fa-chevron-down mr-2"></i>
                     <router-link to="/cadastro">Cadastro</router-link>
+                </li>
+                <li>
+                    <i class="fas fa-chevron-down mr-2"></i>
+                    <router-link to="/teste">Teste</router-link>
                 </li>
                 <li>
                     <i class="fas fa-chevron-down mr-2"></i>
@@ -52,6 +59,7 @@
 </template>
 <script>
 export default {
+    props: ['showModal']
 }
 </script>
 <style>

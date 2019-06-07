@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <header-component></header-component>
         <h1 class="d-flex justify-content-center">Cadastro de Vagas</h1>
         <form @submit.prevent="inserirVaga">
@@ -82,3 +82,9 @@
     }
   }
 </script>
+<style scoped>
+* {
+    margin: 0;
+    padding: 0;
+}
+</style>
