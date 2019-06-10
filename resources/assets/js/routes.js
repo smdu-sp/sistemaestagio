@@ -1,5 +1,5 @@
 import HomeComponent from './components/HomeComponent.vue';
-import NavEstagiario from './components/Estagiario/NavEstagiario.vue';
+import NavEstagiario from './components/cadastrar_estagiario/NavEstagiario.vue';
 import Teste from './components/teste.vue';
 import Consulta from './components/consulta';
 
@@ -24,5 +24,4 @@ export const routes = [
         path: '/consulta',
         component: Consulta
     }
-
 ];

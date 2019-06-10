@@ -44,6 +44,7 @@ import DadosBancarios from './components/cadastrar_estagiario/DadosBancarios.vue
 import Botoes from './components/cadastrar_estagiario/Botoes.vue';
 import Modal from './components/ModalConsulta.vue';
 import DadosPessoaisAtualizar from './components/atualizar_estagiario/DadosPessoais.vue';
+import InformacoesContratuaisAtualizar from './components/atualizar_estagiario/InformacoesContratuais.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -57,6 +58,7 @@ Vue.component('dados-bancarios', DadosBancarios);
 Vue.component('botoes-component', Botoes);
 Vue.component('modal-component', Modal);
 Vue.component('dados-pessoais-atualizar', DadosPessoaisAtualizar);
+Vue.component('informacoes-contratuais-atualizar', InformacoesContratuaisAtualizar);
 
 import { routes } from './routes.js';
 

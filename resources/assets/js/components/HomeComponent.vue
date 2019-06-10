@@ -6,12 +6,13 @@
         <div class="col-3">
             <aside-component :showModal="showModal"></aside-component>
 
+          <!--Modal-->
           <div>
             <b-modal ref="my-modal" hide-footer title="Consulta de Estagiários">
-              <b-form ref="form" @submit="validaCpf" action="/teste">
+              <b-form ref="form" @submit="validaCpf">
                   <label for="inputCpf">Digite o CPF do Estagiário</label>
                     <the-mask type="text"
-                      @input="validaCpf"
+                      @input="validacaoCpf"
                       class="form-control mt-2" 
                       maxlength="14"
                       :class="{'is-invalid': cpfInvalido, 'is-valid': cpfValido}"
@@ -29,6 +30,8 @@
                 </div>
             </b-modal>
           </div>
+          <!--Modal-->
+
         </div>
         <div class="col-9">
             <header-component></header-component>
@@ -45,9 +48,10 @@
                 <b-card no-body>
                     <b-tabs card>
                         <b-tab title="Dados Pessoais" active>
-                            <b-card-text id="dado">
-                              <dados-pessoais
+                            <b-card-text>
+                              <dados-pessoais-atualizar
                                 :post="post"
+                                :inserirEstagiario="inserirEstagiario"
                                 :validaNome="validaNome"
                                 :nomeValido="nomeValido"
                                 :validaCodEstudante="validaCodEstudante"
@@ -92,6 +96,41 @@
                                 />
                             </b-card-text>
                         </b-tab>
+                        <b-tab title="Informações Contratuais">
+                            <b-card-text>
+                                <informacoes-contratuais-atualizar
+                                :post="post"
+                                :departamentos="departamentos"
+                                :supervisores="supervisores"
+                                :inserirEstagiario="inserirEstagiario"
+                                :vagas="vagas"
+                                :statusVaga="statusVaga"
+                                :selectVaga="selectVaga"
+                                :validaVaga="validaVaga"
+                                :vagaValida="vagaValida"
+                                :validaDepartamento="validaDepartamento"
+                                :departamentoValido="departamentoValido"
+                                :validaSetor="validaSetor"
+                                :setorValido="setorValido"
+                                :validaSupervisor="validaSupervisor"
+                                :supervisorValido="supervisorValido"
+                                :validaHorarioEntrada="validaHorarioEntrada"
+                                :horarioEntradaValido="horarioEntradaValido"
+                                :validaHorarioSaida="validaHorarioSaida"
+                                :horarioSaidaValido="horarioSaidaValido"
+                                :validaSituacao="validaSituacao"
+                                :situacaoValida="situacaoValida"
+                                />
+                            </b-card-text>
+                        </b-tab>
+                        <b-tab title="Dados Bancários">
+                            <b-card-text>
+                              <dados-bancarios 
+                                :post="post"
+                                :inserirEstagiario="inserirEstagiario"
+                                />
+                            </b-card-text>
+                        </b-tab>
                     </b-tabs>
                 </b-card>
                 <!-- /Formulários -->
@@ -110,6 +149,8 @@ export default {
       post: {},
       cpfValido: false,
       cpfInvalido: false,
+      cpfValidoForm: false,
+      statusVaga: {},
       estagiario: {},
       main: true,
       nomeValido: false,
@@ -125,7 +166,6 @@ export default {
       nacionalidadeValida: false,
       naturalidadeValida: false,
       racaValida: false,
-      cpfValido: false,
       rgValido: false,
       emailValido: false,
       instituicaoValida: false,
@@ -149,7 +189,8 @@ export default {
       msg: {
         error: false,
         success: false
-      }
+      },
+      auxiliarCpf: ''
     }
   },
   beforeMount() {
@@ -160,7 +201,6 @@ export default {
       let uriDepartamentos = 'http://localhost:8000/api/departamentos';
       let uriSupervisores = 'http://localhost:8000/api/supervisores'; 
       let uriVagas = 'http://localhost:8000/api/vagas';
-
 
       this.requisicaoGet(uriCartoes, 'cartoes');
       this.requisicaoGet(uriEstados, 'estados');
@@ -177,7 +217,22 @@ export default {
     hideModal() {
       this.$refs['my-modal'].hide()
     },
-    validaCpf() {
+    converteNascimento() {
+      this.post.data_nascimento = this.post.data_nascimento.substr(0,10);
+    },
+    converteHorarioEntrada() {
+      this.post.horario_entrada = this.post.horario_entrada.substr(11,19);
+    },
+    converteHorarioSaida() {
+      this.post.horario_saida = this.post.horario_saida.substr(11,19);
+    },
+    converteDataInicio() {
+      this.post.dt_inicio = this.post.dt_inicio.substr(0,10);
+    },
+    converteDataTermino() {
+      this.post.dt_termino = this.post.dt_termino.substr(0,10);
+    },
+    validacaoCpf() { // Valida o CPF do Modal
       let cpf = this.post.cpf
         if(cpf.length < 11) {
           this.cpfInvalido = true;
@@ -187,7 +242,20 @@ export default {
           this.cpfValido = true;
         }
     },
+    inserirEstagiario() {
+      this.converteCep();
+      this.alteracaoSupervisor();
+      this.horarioVariavel();
+      this.dataModificacao();
+      this.horaModificacao();
+      this.converteCelular();
+      this.converteConclusaoCurso();
+      this.alteraStatusVaga();
+      this.converteDatas();
+      this.atualizaBanco();
+    },
     buscaEstagiario() {
+      this.auxiliarCpf = this.post.cpf;
       let uriEstagiario = `http://localhost:8000/api/estagiarios/${this.post.cpf}`;
       this.axios
       .get(uriEstagiario)
@@ -196,17 +264,136 @@ export default {
         this.estagiario = response.data;
         this.post = this.estagiario;
         this.main = false;
-        console.log(this.estagiario);
+        this.converteNascimento();
+        this.converteHorarioEntrada();
+        this.converteHorarioSaida();
+        this.converteDataInicio();
+        this.converteDataTermino();
+        this.selectVaga();
+        console.log(this.post);
       })
       .catch(error => {
       this.msg.error = true;
       this.msg.erro = 'A pesquisa não retornou dados';
       });
     },
+      alteraStatusVaga() {
+      let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
+      this.axios.patch(uriVagas, this.statusVaga).then(response => response);
+    },
+    converteCep() {
+      let cep = this.post.cep;
+      if(cep) {
+          let cep1 = cep.substr(0,5);
+          let cep2 = cep.substr(5, 7);
+          let cepFormatado = `${cep1}-${cep2}`;
+          this.post.cep = cepFormatado;
+      }
+    },
+    alteracaoSupervisor() {
+      if(!this.post.houve_alteracao_supervisor) {
+          this.post.houve_alteracao_supervisor = 0;
+      }
+    },
+    horarioVariavel() {
+      if(!this.post.horario_variavel) {
+          this.post.horario_variavel = 0;
+      } else {
+          this.post.horario_variavel = 1;
+      }
+    },
+    dataModificacao() {
+      let date = new Date();
+      let ano = date.getFullYear();
+      let mes = date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth() + 1}`;
+      let dia = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
+
+      let data = `${ano}-${mes}-${dia} 00:00:00`;
+      this.post.data_modificacao = data
+    },
+    horaModificacao() {
+      let date = new Date();
+      let ano = date.getFullYear();
+      let mes = date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth() + 1}`;
+      let dia = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
+      let hora = date.getHours() >= 10 ? date.getHours() : `0${date.getHours()}`;
+      let minuto = date.getMinutes() >= 10 ? date.getMinutes() : `0${date.getMinutes()}`;
+      let segundo = date.getSeconds() >= 10 ? date.getSeconds() : `0${date.getSeconds()}`;
+
+      let dataHora = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`
+      this.post.hora_modificacao = dataHora
+    },
+    atualizaBanco() {
+      let uriEstagiarios = `http://localhost:8000/api/estagiarios/${this.auxiliarCpf}`;
+      this.axios
+      .patch(uriEstagiarios, this.estagiario)
+      .then(response => {
+          this.msg.sucesso = 'Dados atualizados com sucesso!';
+          this.msg.success = true;
+      })
+      .catch(e => {
+          this.msg.erro = 'Erro ao atualizar dados';
+          this.msg.error = true;
+      })
+    },
+    converteCelular(){
+      let celular = this.post.fone_celular;
+      if(celular) {
+          if(celular.substr(0,1) != '(') {
+              let codArea = celular.substr(0,2);
+              let telParte1 = celular.substr(2,5);
+              let telParte2 = celular.substr(7, celular.length);
+              let celFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
+              this.post.fone_celular = celFormatado;
+          }
+      }
+    },
+    converteFone() {
+    let fone = this.post.fone_residencial;
+    if(fone) {
+      if(fone.substr(0,1) != '(') {
+          let codArea = fone.substr(0,2);
+          let telParte1 = fone.substr(2,4);
+          let telParte2 = fone.substr(6, fone.length);
+          let foneFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
+          this.post.fone_residencial = foneFormatado;                    
+      }
+    }
+    },
+    selectVaga() {
+      let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
+      this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
+    },
+    converteConclusaoCurso() {
+      let data = this.post.mes_ano_previsto_curso;
+      if(data) {
+          let mes = data.substr(0,2);
+          let ano = data.substr(3, data.length);
+          let dataFormatada = `${mes}${ano}`;
+          this.post.mes_ano_previsto_curso = dataFormatada;
+      }
+    },
+    converteDatas() {
+      if(this.post.dt_inicio) {
+          this.post.dt_inicio == `${this.post.dt_inicio.substr(0,10)} 00:00:00` ? this.post.dt_inicio  : this.post.dt_inicio += ' 00:00:00';
+      }
+      if(this.post.dt_termino) {
+          this.post.dt_termino == `${this.post.dt_termino.substr(0,10)} 00:00:00` ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
+      }
+      if(this.post.dt_termino) {
+          this.post.dt_termino_inicial_lauda = this.post.dt_termino;
+      }
+      if(this.post.horario_entrada) {
+          this.post.horario_entrada = this.post.horario_entrada.length == 5 ? `1899-12-30 ${this.post.horario_entrada}:00` : this.post.horario_entrada;
+      }
+      if(this.post.horario_saida) {
+          this.post.horario_saida = this.post.horario_saida.length == 5 ? `1899-12-30 ${this.post.horario_saida}:00` : this.post.horario_saida;
+      }
+    },
     requisicaoGet(uri, variavel) {
-        this.axios.get(uri).then(response => {
-            this[variavel] = response.data
-        })
+      this.axios.get(uri).then(response => {
+          this[variavel] = response.data
+      })
     },
     validaNome(nome) { this.validacao(nome, 'nomeValido') },
     validaCodEstudante(cod) { this.validacao(cod, 'codValido') },
@@ -221,7 +408,7 @@ export default {
     validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'naturalidadeValida')},
     validaNaturalidade(naturalidade) { this.validacao(naturalidade, 'naturalidadeValida') },
     validaRaca(raca) { this.validacao(raca, 'racaValida') },
-    validaCpf(cpf) { this.validacao(cpf, 'cpfValido') },
+    validaCpf(cpf) { this.validacao(cpf, 'cpfValidoForm') }, // Valida o CPF do Formulário de Update
     validaRg(rg) { this.validacao(rg, 'rgValido') },
     validaEmail(email) { this.validacao(email, 'emailValido') },
     validaInstituicao(instituicao) { this.validacao(instituicao, 'instituicaoValida') },

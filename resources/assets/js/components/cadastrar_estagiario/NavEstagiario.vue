@@ -243,6 +243,7 @@ export default {
                 console.log(contadorCamposInvalidos);
             } else {
                 console.log(contadorCamposInvalidos);
+                console.log(this.post);
             }
         },
         requisicaoGet(uri, variavel) {

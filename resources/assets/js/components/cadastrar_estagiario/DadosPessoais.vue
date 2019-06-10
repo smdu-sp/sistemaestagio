@@ -387,10 +387,11 @@
                     :class="{'is-invalid': instituicaoValida}"
                     id="selectInstituicao" 
                     v-model="post.instituicao_ensino" >
-                    <option v-for="instituicao of instituicoes" :value="instituicao.razao_social">{{ instituicao.razao_social }}</option>
+                    <option default></option>
+                    <option v-for="instituicao of instituicoes">{{ instituicao.razao_social }}</option>
                 </select>
                 <div v-if="instituicaoValida" class="invalid-feedback">
-                    RG não pode ser vazio
+                    Instituição não pode ser vazia
                 </div>
             </div>
         </div>

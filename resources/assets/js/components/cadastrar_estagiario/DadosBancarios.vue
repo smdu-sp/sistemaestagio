@@ -44,7 +44,7 @@
                             <label for="inputConta">Conta</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" class="form-control" id="inputConta" v-model="post.conta" required>
+                            <input type="tel" class="form-control" id="inputConta" v-model="post.conta" required>
                         </div>
                     </div>
                 </div>
