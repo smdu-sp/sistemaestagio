@@ -55,7 +55,7 @@
         </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="selectDepartamento">Dep. Hierárquico</label>
                 <select class="form-control" @blur="validaDepartamento" :class="{'is-invalid':departamentoValido}" id="selectDepartamento" v-model="post.dep_hierarquico" required>
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="setor-estag">
                 <label for="selectSetor">Setor Estagiado</label>
                 <select class="form-control" @blur="validaSetor" :class="{'is-invalid':setorValido}" id="selectSetor" v-model="post.setor_estagiado" required>
@@ -79,8 +79,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="inputSupervisor">Supervisor</label>
@@ -93,11 +91,13 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputInicio">Data Início</label>
                     <input type="date" class="form-control" id="inputInicio" v-model="post.dt_inicio" required>
-
             </div>
         </div>
         <div class="col-md-3">
@@ -106,25 +106,65 @@
                     <input type="date" class="form-control" id="inputTermino" v-model="post.dt_termino" required>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="inputTerminoInicial">Término Inicial</label>
+                <input type="date" class="form-control" id="inputTerminoInicial" v-model="post.dt_termino_inicial_lauda">
+            </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
-                <label for="">Término Inicial</label>
-                <input type="date" class="form-control">
+                <label for="inputPrimeiroInicioAditivo">Início Termo Aditivo 1</label>
+                <input type="date" class="form-control" id="inputPrimeiroInicioAditivo" v-model="post.dt_inicio_1_aditivo">
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label for="">1º Aditivo</label>
-                <input type="date" class="form-control">
+                <label for="inputPrimeiroTerminoAditivo">Fim Termo Aditivo 1</label>
+                <input type="date" class="form-control" id="inputPrimeiroTerminoAditivo" v-model="post.dt_termino_1_aditivo">
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label for="">2º Aditivo</label>
-                <input type="date" class="form-control">
+                <label for="inputSegundoInicioAditivo">Início Termo Aditivo 2</label>
+                <input type="date" class="form-control" id="inputSegundoInicioAditivo" v-model="post.dt_inicio_2_aditivo">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="inputSegundoTerminoAditivo">Fim Termo Aditivo 2</label>
+                <input type="date" class="form-control" id="inputSegundoTerminoAditivo" v-model="post.dt_termino_2_aditivo">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="inputTerceiroInicioAditivo">Início Termo Aditivo 3</label>
+                <input type="date" class="form-control" id="inputTerceiroInicioAditivo" v-model="post.dt_inicio_3_aditivo">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="inputTerceiroTerminoAditivo">Início Termo Aditivo 3</label>
+                <input type="date" class="form-control" id="inputTerceiroTerminoAditivo" v-model="post.dt_termino_3_aditivo">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="inputDataDesligamento">Desligado em</label>
+                <input type="date" class="form-control" id="inputDataDesligamento" v-model="post.desligado">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="inputSemestreDesligamento">Semestre de desligamento</label>
+                <input type="number" class="form-control" id="inputSemestreDesligamento" v-model="post.semestre_desligamento">
             </div>
         </div>
     </div>

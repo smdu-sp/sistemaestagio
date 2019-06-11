@@ -45,6 +45,8 @@ import Botoes from './components/cadastrar_estagiario/Botoes.vue';
 import Modal from './components/ModalConsulta.vue';
 import DadosPessoaisAtualizar from './components/atualizar_estagiario/DadosPessoais.vue';
 import InformacoesContratuaisAtualizar from './components/atualizar_estagiario/InformacoesContratuais.vue';
+import RecessoAtualizar from './components/atualizar_estagiario/Recesso.vue';
+import FormAtualizacao from './components/atualizar_estagiario/FormAtualizacao.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -59,6 +61,8 @@ Vue.component('botoes-component', Botoes);
 Vue.component('modal-component', Modal);
 Vue.component('dados-pessoais-atualizar', DadosPessoaisAtualizar);
 Vue.component('informacoes-contratuais-atualizar', InformacoesContratuaisAtualizar);
+Vue.component('recesso-atualizar', RecessoAtualizar);
+Vue.component('form-atualizacao', FormAtualizacao);
 
 import { routes } from './routes.js';
 

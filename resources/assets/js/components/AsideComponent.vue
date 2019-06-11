@@ -26,19 +26,24 @@
 
         
 
-        <nav class="row mt-4 ml-4">
+        <nav class="row mt-4">
             <ul>
                 <li>
                     <a href="#">
                         
-                        <li id="show-btn" @click="showModal">
+                        <!-- <li id="show-btn" @click="showModal">
                             <i class="fas fa-chevron-down mr-2"></i>
                             Consulta
-                        </li>
+                        </li> -->
+                        <router-link to="/teste">Teste</router-link>
                     </a>
                 <li>
-                    <i class="fas fa-chevron-down mr-2"></i>
-                    <router-link to="/cadastro">Cadastro</router-link>
+                    <a href="#">
+                        <li id="show-btn" @click="showCadastro">
+                            <i class="fas fa-chevron-down mr-2"></i>
+                            Cadastro
+                        </li>
+                    </a>
                 </li>
                 <li>
                     <i class="fas fa-chevron-down mr-2"></i>
@@ -59,7 +64,7 @@
 </template>
 <script>
 export default {
-    props: ['showModal']
+    props: ['showModal', 'showCadastro']
 }
 </script>
 <style>
@@ -115,11 +120,5 @@ nav ul li a:link {
 nav ul li a:hover {
     text-decoration: none;
     color: white;
-}
-
-.submenu {
-    background: rgba(255, 255, 255, 0.1);
-    padding-right: 10px;
-    padding-left: 20px;
 }
 </style>

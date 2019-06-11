@@ -1,116 +1,108 @@
 <template>
-    <div class="container-fluid">
-        <!--row-->
-        <div class="row">
-            <div class="col-3">
-                <aside-component></aside-component>
-            </div>
-            <!--col-9-->
-            <div class="col-9">
-                <header-component></header-component>
-                <h1 class="d-flex justify-content-center">Cadastro de Estagiário</h1>
+<div>
+    <h1 class="d-flex justify-content-center">Cadastro de Estagiário</h1>
 
-                <div  v-if="msg.error" class="alert alert-danger">
-                    {{ msg.erro }}
-                </div>
-                <div v-if="msg.success" class="alert alert-success">
-                    {{ msg.sucesso }}
-                </div>
+    <div  v-if="msg.error" class="alert alert-danger">
+        {{ msg.erro }}
+    </div>
+    <div v-if="msg.success" class="alert alert-success">
+        {{ msg.sucesso }}
+    </div>
 
-                <div v-if="revisarCampos" class="alert alert-danger">
-                    Revise os campos em vermelho
-                </div>
+    <div v-if="revisarCampos" class="alert alert-danger">
+        Revise os campos em vermelho
+    </div>
 
-                <!-- Formulários -->
-                <b-card no-body>
-                    <b-tabs card>
-                        <b-tab title="Dados Pessoais" active>
-                            <b-card-text id="dado">
-                                <dados-pessoais
-                                :post="post"
-                                :cartoes="cartoes"
-                                :estados="estados"
-                                :instituicoes="instituicoes"
-                                :cursos="cursos"
-                                :inserirEstagiario="inserirEstagiario"
-                                :validaNome="validaNome"
-                                :nomeValido="nomeValido"
-                                :validaCodEstudante="validaCodEstudante"
-                                :codValido="codValido"
-                                :validaContratante="validaContratante"
-                                :contratanteValido="contratanteValido"
-                                :validaEndereco="validaEndereco"
-                                :enderecoValido="enderecoValido"
-                                :validaCep="validaCep"
-                                :cepValido="cepValido"
-                                :validaBairro="validaBairro"
-                                :bairroValido="bairroValido"
-                                :validaComplemento="validaComplemento"
-                                :complementoValido="complementoValido"
-                                :validaEstado="validaEstado"
-                                :estadoValido="estadoValido"
-                                :validaCelular="validaCelular"
-                                :celularValido="celularValido"
-                                :validaNaturalidade="validaNaturalidade"
-                                :naturalidadeValida="naturalidadeValida"
-                                :validaNacionalidade="validaNacionalidade"
-                                :nacionalidadeValida="nacionalidadeValida"
-                                :validaRaca="validaRaca"
-                                :racaValida="racaValida"
-                                :validaCpf="validaCpf"
-                                :cpfValido="cpfValido"
-                                :validaRg="validaRg"
-                                :rgValido="rgValido"
-                                :validaEmail="validaEmail"
-                                :emailValido="emailValido"
-                                :validaInstituicao="validaInstituicao"
-                                :instituicaoValida="instituicaoValida"
-                                :validaCurso="validaCurso"
-                                :cursoValido="cursoValido"
-                                />
-                            </b-card-text>
-                        </b-tab>
-                        <b-tab title="Informações Contratuais">
-                            <b-card-text>
-                                <informacoes-contratuais
-                                :post="post"
-                                :departamentos="departamentos"
-                                :supervisores="supervisores"
-                                :inserirEstagiario="inserirEstagiario"
-                                :vagas="vagas"
-                                :statusVaga="statusVaga"
-                                :selectVaga="selectVaga"
-                                :validaVaga="validaVaga"
-                                :vagaValida="vagaValida"
-                                :validaDepartamento="validaDepartamento"
-                                :departamentoValido="departamentoValido"
-                                :validaSetor="validaSetor"
-                                :setorValido="setorValido"
-                                :validaSupervisor="validaSupervisor"
-                                :supervisorValido="supervisorValido"
-                                :validaHorarioEntrada="validaHorarioEntrada"
-                                :horarioEntradaValido="horarioEntradaValido"
-                                :validaHorarioSaida="validaHorarioSaida"
-                                :horarioSaidaValido="horarioSaidaValido"
-                                :validaSituacao="validaSituacao"
-                                :situacaoValida="situacaoValida"
-                                />
-                            </b-card-text>
-                        </b-tab>
-                        <b-tab title="Dados Bancários">
-                            <b-card-text>
-                                <dados-bancarios 
-                                :post="post"
-                                :inserirEstagiario="inserirEstagiario"
-                                />
-                            </b-card-text>
-                        </b-tab>
-                    </b-tabs>
-                </b-card>
-                <!-- /Formulários -->
-            </div><!--/col-9-->
-        </div><!-- /row -->
-    </div><!--/container-->
+    <b-modal v-model="modalShow">Hello From Modal!</b-modal>
+
+    <!-- Formulários -->
+    <b-card no-body>
+        <b-tabs card>
+            <b-tab title="Dados Pessoais" active>
+                <b-card-text id="dado">
+                    <dados-pessoais
+                    :post="post"
+                    :cartoes="cartoes"
+                    :estados="estados"
+                    :instituicoes="instituicoes"
+                    :cursos="cursos"
+                    :inserirEstagiario="inserirEstagiario"
+                    :validaNome="validaNome"
+                    :nomeValido="nomeValido"
+                    :validaCodEstudante="validaCodEstudante"
+                    :codValido="codValido"
+                    :validaContratante="validaContratante"
+                    :contratanteValido="contratanteValido"
+                    :validaEndereco="validaEndereco"
+                    :enderecoValido="enderecoValido"
+                    :validaCep="validaCep"
+                    :cepValido="cepValido"
+                    :validaBairro="validaBairro"
+                    :bairroValido="bairroValido"
+                    :validaComplemento="validaComplemento"
+                    :complementoValido="complementoValido"
+                    :validaEstado="validaEstado"
+                    :estadoValido="estadoValido"
+                    :validaCelular="validaCelular"
+                    :celularValido="celularValido"
+                    :validaNaturalidade="validaNaturalidade"
+                    :naturalidadeValida="naturalidadeValida"
+                    :validaNacionalidade="validaNacionalidade"
+                    :nacionalidadeValida="nacionalidadeValida"
+                    :validaRaca="validaRaca"
+                    :racaValida="racaValida"
+                    :validaCpf="validaCpf"
+                    :cpfValido="cpfValido"
+                    :validaRg="validaRg"
+                    :rgValido="rgValido"
+                    :validaEmail="validaEmail"
+                    :emailValido="emailValido"
+                    :validaInstituicao="validaInstituicao"
+                    :instituicaoValida="instituicaoValida"
+                    :validaCurso="validaCurso"
+                    :cursoValido="cursoValido"
+                    />
+                </b-card-text>
+            </b-tab>
+            <b-tab title="Informações Contratuais">
+                <b-card-text>
+                    <informacoes-contratuais
+                    :post="post"
+                    :departamentos="departamentos"
+                    :supervisores="supervisores"
+                    :inserirEstagiario="inserirEstagiario"
+                    :vagas="vagas"
+                    :statusVaga="statusVaga"
+                    :selectVaga="selectVaga"
+                    :validaVaga="validaVaga"
+                    :vagaValida="vagaValida"
+                    :validaDepartamento="validaDepartamento"
+                    :departamentoValido="departamentoValido"
+                    :validaSetor="validaSetor"
+                    :setorValido="setorValido"
+                    :validaSupervisor="validaSupervisor"
+                    :supervisorValido="supervisorValido"
+                    :validaHorarioEntrada="validaHorarioEntrada"
+                    :horarioEntradaValido="horarioEntradaValido"
+                    :validaHorarioSaida="validaHorarioSaida"
+                    :horarioSaidaValido="horarioSaidaValido"
+                    :validaSituacao="validaSituacao"
+                    :situacaoValida="situacaoValida"
+                    />
+                </b-card-text>
+            </b-tab>
+            <b-tab title="Dados Bancários">
+                <b-card-text>
+                    <dados-bancarios 
+                    :post="post"
+                    :inserirEstagiario="inserirEstagiario"
+                    />
+                </b-card-text>
+            </b-tab>
+        </b-tabs>
+    </b-card>
+    <!-- /Formulários -->
+    </div>
 </template>
 <script>
 export default {
@@ -161,7 +153,8 @@ export default {
             },
             arrayCamposInvalidos: [],
             revisarCampos: false,
-            camposValidacao: []
+            camposValidacao: [],
+            modalShow: false  
         }
     },
     beforeMount() {

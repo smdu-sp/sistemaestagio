@@ -32,18 +32,13 @@
           <!--Modal-->
 
         </div>
-        <!-- <div class="col-9">
+        <div class="col-9">
             <header-component></header-component>
           <template v-if="main">
             <main-component></main-component>
-          </template> -->
+          </template>
 
-          <div class="col-9">
-            <header-component></header-component>
-            <router-view></router-view>
-          </div>
-
-          <!-- <template v-else-if="navEstagiario">
+          <template v-else-if="navEstagiario">
             <nav-estagiario></nav-estagiario>
           </template>
 
@@ -51,70 +46,104 @@
 
             <div  v-if="msg.error" class="alert alert-danger">
                 {{ msg.erro }}
-            </template>
-
-            <form-atualizacao
-                    :post="post"
-                    :inserirEstagiario="inserirEstagiario"
-                    :validaNome="validaNome"
-                    :nomeValido="nomeValido"
-                    :validaCodEstudante="validaCodEstudante"
-                    :codValido="codValido"
-                    :validaContratante="validaContratante"
-                    :contratanteValido="contratanteValido"
-                    :validaEndereco="validaEndereco"
-                    :enderecoValido="enderecoValido"
-                    :validaCep="validaCep"
-                    :cepValido="cepValido"
-                    :validaBairro="validaBairro"
-                    :bairroValido="bairroValido"
-                    :validaComplemento="validaComplemento"
-                    :complementoValido="complementoValido"
-                    :validaEstado="validaEstado"
-                    :estadoValido="estadoValido"
-                    :validaCelular="validaCelular"
-                    :celularValido="celularValido"
-                    :validaNaturalidade="validaNaturalidade"
-                    :naturalidadeValida="naturalidadeValida"
-                    :validaNacionalidade="validaNacionalidade"
-                    :nacionalidadeValida="nacionalidadeValida"
-                    :validaRaca="validaRaca"
-                    :racaValida="racaValida"
-                    :validaCpf="validaCpf"
-                    :cpfValido="cpfValido"
-                    :validaRg="validaRg"
-                    :rgValido="rgValido"
-                    :validaEmail="validaEmail"
-                    :emailValido="emailValido"
-                    :validaInstituicao="validaInstituicao"
-                    :instituicaoValida="instituicaoValida"
-                    :validaCurso="validaCurso"
-                    :cursoValido="cursoValido"
-                    :cartoes="cartoes"
-                    :estados="estados"
-                    :instituicoes="instituicoes"
-                    :cursos="cursos"
-                    :departamentos="departamentos"
-                    :supervisores="supervisores"
-                    :vagas="vagas"
-                    :statusVaga="statusVaga"
-                    :selectVaga="selectVaga"
-                    :validaVaga="validaVaga"
-                    :vagaValida="vagaValida"
-                    :validaDepartamento="validaDepartamento"
-                    :departamentoValido="departamentoValido"
-                    :validaSetor="validaSetor"
-                    :setorValido="setorValido"
-                    :validaSupervisor="validaSupervisor"
-                    :supervisorValido="supervisorValido"
-                    :validaHorarioEntrada="validaHorarioEntrada"
-                    :horarioEntradaValido="horarioEntradaValido"
-                    :validaHorarioSaida="validaHorarioSaida"
-                    :horarioSaidaValido="horarioSaidaValido"
-                    :validaSituacao="validaSituacao"
-                    :situacaoValida="situacaoValida"></form-atualizacao>
-
-          </template> -->
+            </div>
+              <!-- Formulários -->
+                <b-card-text no-body>
+                    <b-tabs card>
+                        <b-tab title="Dados Pessoais" active>
+                            <b-card-text>
+                              <dados-pessoais-atualizar
+                                :post="post"
+                                :inserirEstagiario="inserirEstagiario"
+                                :validaNome="validaNome"
+                                :nomeValido="nomeValido"
+                                :validaCodEstudante="validaCodEstudante"
+                                :codValido="codValido"
+                                :validaContratante="validaContratante"
+                                :contratanteValido="contratanteValido"
+                                :validaEndereco="validaEndereco"
+                                :enderecoValido="enderecoValido"
+                                :validaCep="validaCep"
+                                :cepValido="cepValido"
+                                :validaBairro="validaBairro"
+                                :bairroValido="bairroValido"
+                                :validaComplemento="validaComplemento"
+                                :complementoValido="complementoValido"
+                                :validaEstado="validaEstado"
+                                :estadoValido="estadoValido"
+                                :validaCelular="validaCelular"
+                                :celularValido="celularValido"
+                                :validaNaturalidade="validaNaturalidade"
+                                :naturalidadeValida="naturalidadeValida"
+                                :validaNacionalidade="validaNacionalidade"
+                                :nacionalidadeValida="nacionalidadeValida"
+                                :validaRaca="validaRaca"
+                                :racaValida="racaValida"
+                                :validaCpf="validaCpf"
+                                :cpfValido="cpfValido"
+                                :validaRg="validaRg"
+                                :rgValido="rgValido"
+                                :validaEmail="validaEmail"
+                                :emailValido="emailValido"
+                                :validaInstituicao="validaInstituicao"
+                                :instituicaoValida="instituicaoValida"
+                                :validaCurso="validaCurso"
+                                :cursoValido="cursoValido"
+                                :cartoes="cartoes"
+                                :estados="estados"
+                                :instituicoes="instituicoes"
+                                :cursos="cursos"
+                                :departamentos="departamentos"
+                                :supervisores="supervisores"
+                                :vagas="vagas"
+                                />
+                            </b-card-text>
+                        </b-tab>
+                        <b-tab title="Informações Contratuais">
+                            <b-card-text>
+                                <informacoes-contratuais-atualizar
+                                :post="post"
+                                :departamentos="departamentos"
+                                :supervisores="supervisores"
+                                :inserirEstagiario="inserirEstagiario"
+                                :vagas="vagas"
+                                :statusVaga="statusVaga"
+                                :selectVaga="selectVaga"
+                                :validaVaga="validaVaga"
+                                :vagaValida="vagaValida"
+                                :validaDepartamento="validaDepartamento"
+                                :departamentoValido="departamentoValido"
+                                :validaSetor="validaSetor"
+                                :setorValido="setorValido"
+                                :validaSupervisor="validaSupervisor"
+                                :supervisorValido="supervisorValido"
+                                :validaHorarioEntrada="validaHorarioEntrada"
+                                :horarioEntradaValido="horarioEntradaValido"
+                                :validaHorarioSaida="validaHorarioSaida"
+                                :horarioSaidaValido="horarioSaidaValido"
+                                :validaSituacao="validaSituacao"
+                                :situacaoValida="situacaoValida"
+                                />
+                            </b-card-text>
+                        </b-tab>
+                        <b-tab title="Recesso">
+                            <b-card-text>
+                              <recesso-atualizar
+                                :post="post"/>
+                            </b-card-text>
+                        </b-tab>
+                        <b-tab title="Dados Bancários">
+                            <b-card-text>
+                              <dados-bancarios 
+                                :post="post"
+                                :inserirEstagiario="inserirEstagiario"
+                                />
+                            </b-card-text>
+                        </b-tab>
+                    </b-tabs>
+                </b-card-text>
+                <!-- /Formulários -->
+          </template>
         </div>
       </div><!-- /row -->
     </div> <!-- /container -->

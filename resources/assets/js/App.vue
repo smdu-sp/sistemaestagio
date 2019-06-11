@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div>
             <transition name="fade">
-                <router-view></router-view>
+                <home-component></home-component>
             </transition>
         </div>
     </div>
