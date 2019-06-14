@@ -10,6 +10,11 @@
 
 <style>
 
+    html, body {
+        height: 100%;
+        width: 100%;
+    }
+
     .fade-enter-active, .fade-leave-active {
       transition: opacity .5s
     }
@@ -22,8 +27,8 @@
         padding: 0;
     }
     .col-3 {
-    margin: 0;
-    padding-left: 0;
+        margin: 0;
+        padding-left: 0;
     }
 
 </style>

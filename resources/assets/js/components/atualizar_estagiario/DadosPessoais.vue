@@ -387,8 +387,8 @@
                     :class="{'is-invalid': instituicaoValida}"
                     id="selectInstituicao" 
                     v-model="post.instituicao_ensino" >
-                    <option default></option>
-                    <option v-for="instituicao of instituicoes" :value="post.instituicao_ensino">{{ instituicao.razao_social }}</option>
+                    <option :value="post.instituicao_ensino">{{ post.instituicao_ensino }}</option>
+                    <option v-for="instituicao of instituicoes">{{ instituicao.razao_social }}</option>
                 </select>
                 <div v-if="instituicaoValida" class="invalid-feedback">
                     Instituição não pode ser vazia
@@ -500,11 +500,25 @@
         </div>
     </div>
     <botoes-component></botoes-component>
+
 </form>
 
 </template>
 <script>
 export default {
+    methods: {
+      showModal() {
+        this.$refs['my-modal'].show()
+      },
+      hideModal() {
+        this.$refs['my-modal'].hide()
+      },
+      toggleModal() {
+        // We pass the ID of the button that we want to return focus to
+        // when the modal has hidden
+        this.$refs['my-modal'].toggle('#toggle-btn')
+      }
+    },
     props: [
         'post', 
         'cartoes', 
@@ -533,7 +547,7 @@ export default {
         'validaEmail','emailValido',
         'validaInstituicao','instituicaoValida',
         'validaCurso','cursoValido',
-        'converteCep'
+        'converteCep', 'showModal'
     ]
 }
 </script>

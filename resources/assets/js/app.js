@@ -26,6 +26,11 @@ Vue.use(PortalVue);
 import vueTheMask from 'vue-the-mask';
 Vue.use(vueTheMask);
 
+
+import Vuesax from 'vuesax';
+import '../../../node_modules/vuesax/dist/vuesax.css';
+Vue.use(Vuesax);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -47,6 +52,7 @@ import DadosPessoaisAtualizar from './components/atualizar_estagiario/DadosPesso
 import InformacoesContratuaisAtualizar from './components/atualizar_estagiario/InformacoesContratuais.vue';
 import RecessoAtualizar from './components/atualizar_estagiario/Recesso.vue';
 import FormAtualizacao from './components/atualizar_estagiario/FormAtualizacao.vue';
+import ConsultaEstagiario from './components/atualizar_estagiario/ConsultaEstagiario.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -63,6 +69,7 @@ Vue.component('dados-pessoais-atualizar', DadosPessoaisAtualizar);
 Vue.component('informacoes-contratuais-atualizar', InformacoesContratuaisAtualizar);
 Vue.component('recesso-atualizar', RecessoAtualizar);
 Vue.component('form-atualizacao', FormAtualizacao);
+Vue.component('consulta-estagiario', ConsultaEstagiario);
 
 import { routes } from './routes.js';
 

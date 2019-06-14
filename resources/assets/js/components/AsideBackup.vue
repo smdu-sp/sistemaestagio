@@ -1,21 +1,20 @@
 <template>    
     <!-- aside -->
-    <aside>
-        <div>
-            <a href="#" class="mt-3 mb-3 mr-2">
-                <div class="d-flex justify-content-end">
-                    <span class="linha"></span>
-                </div>
+    <aside class="d-flex flex-column">
 
-                <div class="d-flex justify-content-end">
-                    <span class="linha"></span>
-                </div>
+        <a href="#" class="mt-3 mb-3 mr-2">
+            <div class="d-flex justify-content-end">
+                <span class="linha"></span>
+            </div>
 
-                <div class="d-flex justify-content-end">
-                    <span class="linha"></span>
-                </div>
-            </a>
-        </div>
+            <div class="d-flex justify-content-end">
+                <span class="linha"></span>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <span class="linha"></span>
+            </div>
+        </a>
         
 
         <div class="d-flex justify-content-center dashboard align-items-center">
@@ -27,11 +26,11 @@
 
         
 
-        <nav class="row mt-4 ml-4">
+        <nav class="row mt-4">
             <ul>
                 <li>
                     <a href="#">
-                        <li id="show-btn" @click="showModal"> <!-- Ativa modal -->
+                        <li id="show-btn" @click="showModal">
                             <i class="fas fa-chevron-down mr-2"></i>
                             <router-link to="/consulta">Consulta</router-link>
                         </li>
@@ -69,6 +68,8 @@ div .col-6 {
 
 aside {
     background-color: #3A4248;
+    height: 100vh;
+    /* position: fixed; */
 }
 
 .linha {

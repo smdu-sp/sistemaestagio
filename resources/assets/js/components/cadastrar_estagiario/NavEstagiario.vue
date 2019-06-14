@@ -9,17 +9,18 @@
         {{ msg.sucesso }}
     </div>
 
-    <div v-if="revisarCampos" class="alert alert-danger">
+    <div v-if="revisarCampos" class="alert alert-danger" id="revisar">
         Revise os campos em vermelho
     </div>
 
-    <b-modal v-model="modalShow">Hello From Modal!</b-modal>
+
+    <modal-component></modal-component><!-- Modal acionado pelo componente Botoes.vue -->
 
     <!-- Formulários -->
     <b-card no-body>
         <b-tabs card>
             <b-tab title="Dados Pessoais" active>
-                <b-card-text id="dado">
+                <b-card-text>
                     <dados-pessoais
                     :post="post"
                     :cartoes="cartoes"
@@ -187,6 +188,9 @@ export default {
             this.converteDatas();
             this.validaCampos();
         },
+        sair() {
+            console.log(this.$route);
+        },
         validaCampos() {
             this.camposValidacao = [
                 {nomeValido: this.post.nome},
@@ -233,11 +237,12 @@ export default {
 
             if(contadorCamposInvalidos == 0) {
                 this.cadastraBanco();
-                console.log(contadorCamposInvalidos);
             } else {
-                console.log(contadorCamposInvalidos);
-                console.log(this.post);
+                this.scrollTop();
             }
+        },
+        scrollTop() { 
+            window.scrollTo(0,0);
         },
         requisicaoGet(uri, variavel) {
             this.axios.get(uri).then(response => {
@@ -393,10 +398,6 @@ export default {
 
 </script>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-}
 .col-3 {
     margin: 0;
     padding: 0;

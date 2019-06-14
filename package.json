@@ -22,8 +22,11 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.20",
     "portal-vue": "^2.1.4",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.6",
-    "vue-the-mask": "^0.11.1"
+    "vue-the-mask": "^0.11.1",
+    "vuesax": "^3.8.75"
   }
 }

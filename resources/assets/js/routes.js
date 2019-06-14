@@ -1,14 +1,8 @@
-import HomeComponent from './components/HomeComponent.vue';
 import NavEstagiario from './components/cadastrar_estagiario/NavEstagiario.vue';
 import Teste from './components/teste.vue';
-import Consulta from './components/consulta';
+import Consulta from './components/atualizar_estagiario/ConsultaEstagiario.vue';
 
 export const routes = [
-    {
-        name: 'home',
-        path: '/',
-        component: HomeComponent
-    },
     {
         name: 'cadastro',
         path: '/cadastro',
