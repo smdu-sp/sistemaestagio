@@ -33,6 +33,8 @@
     </b-modal>
   <!--Modal-->
 
+  <modal-component></modal-component><!--Modal acionado pelo componente Botoes.vue-->
+
   <template v-if="mostrarConteudoConsulta">
 
     <div v-if="msg.sucess" class="alert alert-success mt-2">
@@ -70,14 +72,12 @@
                   :estadoValido="estadoValido"
                   :validaCelular="validaCelular"
                   :celularValido="celularValido"
-                  :validaNaturalidade="validaNaturalidade"
-                  :naturalidadeValida="naturalidadeValida"
                   :validaNacionalidade="validaNacionalidade"
                   :nacionalidadeValida="nacionalidadeValida"
                   :validaRaca="validaRaca"
                   :racaValida="racaValida"
-                  :validaCpf="validaCpf"
-                  :cpfValido="cpfValido"
+                  :validaCpfForm="validaCpfForm"
+                  :cpfValidoForm="cpfValidoForm"
                   :validaRg="validaRg"
                   :rgValido="rgValido"
                   :validaEmail="validaEmail"
@@ -93,6 +93,7 @@
                   :departamentos="departamentos"
                   :supervisores="supervisores"
                   :vagas="vagas"
+                  :showModal="showModal"
                   />
               </b-card-text>
           </b-tab>
@@ -165,7 +166,6 @@ export default {
       cepValido: false,
       celularValido: false,
       nacionalidadeValida: false,
-      naturalidadeValida: false,
       racaValida: false,
       rgValido: false,
       emailValido: false,
@@ -302,6 +302,7 @@ export default {
       this.axios
       .get(uriEstagiario)
       .then(response => {
+        this.msg.error = false;
         this.loading = false;
         this.hideModal();
         this.mostrarConteudoConsulta = true;
@@ -318,6 +319,7 @@ export default {
         this.converteDataDesligamento();
         this.converteSemestreDesligamento();
         this.converteRecessos();
+        this.post.cpf = this.auxiliarCpf;
       })
       .catch(error => {
         if(!this.loading) {
@@ -328,6 +330,7 @@ export default {
       this.loading = false;
       this.msg.error = true;
       this.msg.erro = 'A pesquisa não retornou dados';
+      this.post.cpf = this.auxiliarCpf;
       });
     },
     scrollTop() { 
@@ -340,10 +343,10 @@ export default {
     converteCep() {
       let cep = this.post.cep;
       if(cep) {
-          let cep1 = cep.substr(0,5);
-          let cep2 = cep.substr(5, 7);
-          let cepFormatado = `${cep1}-${cep2}`;
-          this.post.cep = cepFormatado;
+        let cep1 = cep.substr(0,5);
+        let cep2 = cep.substr(5,7);
+        let cepFormatado = `${cep1}-${cep2}`;
+        this.post.cep = cepFormatado;
       }
     },
     alteracaoSupervisor() {
@@ -381,8 +384,9 @@ export default {
     },
     atualizaBanco() {
       let uriEstagiarios = `http://localhost:8000/api/estagiarios/${this.auxiliarCpf}`;
+      this.auxiliarCpf = this.post.cpf;
       this.axios
-      .patch(uriEstagiarios, this.estagiario)
+      .patch(uriEstagiarios, this.post)
       .then(response => {
           this.msg.sucesso = 'Dados atualizados com sucesso!';
           this.msg.success = true;
@@ -392,7 +396,6 @@ export default {
           this.msg.erro = 'Erro ao atualizar dados';
           this.msg.error = true;
           this.scrollTop();
-          console.log(this.post);
       })
     },
     converteCelular(){
@@ -433,6 +436,12 @@ export default {
       }
     },
     converteDatas() {
+      if(this.post.horario_entrada) {
+          this.post.horario_entrada = this.post.horario_entrada.length == 8 ? `1899-12-30 ${this.post.horario_entrada}` : this.post.horario_entrada;
+      }
+      if(this.post.horario_saida) {
+          this.post.horario_saida = this.post.horario_saida.length == 8 ? `1899-12-30 ${this.post.horario_saida}` : this.post.horario_saida;
+      }
       if(this.post.dt_inicio) {
           this.post.dt_inicio == `${this.post.dt_inicio.substr(0,10)} 00:00:00` ? this.post.dt_inicio  : this.post.dt_inicio += ' 00:00:00';
       }
@@ -442,12 +451,86 @@ export default {
       if(this.post.dt_termino) {
           this.post.dt_termino_inicial_lauda = this.post.dt_termino;
       }
-      if(this.post.horario_entrada) {
-          this.post.horario_entrada = this.post.horario_entrada.length == 5 ? `1899-12-30 ${this.post.horario_entrada}:00` : this.post.horario_entrada;
+      if(this.post.dt_inicial_1) {
+        this.post.dt_inicial_1 == `${this.post.dt_inicial_1.substr(0,10)} 00:00:00` ? this.post.dt_inicial_1 : this.post.dt_inicial_1 += ' 00:00:00';
       }
-      if(this.post.horario_saida) {
-          this.post.horario_saida = this.post.horario_saida.length == 5 ? `1899-12-30 ${this.post.horario_saida}:00` : this.post.horario_saida;
+
+      if(this.post.dt_inicial_2) {
+        this.post.dt_inicial_2 == `${this.post.dt_inicial_2.substr(0,10)} 00:00:00` ? this.post.dt_inicial_2 : this.post.dt_inicial_2 += ' 00:00:00';
       }
+
+      if(this.post.dt_inicial_3) {
+        this.post.dt_inicial_3 == `${this.post.dt_inicial_3.substr(0,10)} 00:00:00` ? this.post.dt_inicial_3 : this.post.dt_inicial_3 += ' 00:00:00';
+      }
+
+      if(this.post.dt_inicial_4) {
+        this.post.dt_inicial_4 == `${this.post.dt_inicial_4.substr(0,10)} 00:00:00` ? this.post.dt_inicial_4 : this.post.dt_inicial_4 += ' 00:00:00';
+      }
+
+      if(this.post.dt_inicial_5) {
+        this.post.dt_inicial_5 == `${this.post.dt_inicial_5.substr(0,10)} 00:00:00` ? this.post.dt_inicial_5 : this.post.dt_inicial_5 += ' 00:00:00';
+      }
+
+      if(this.post.dt_inicial_6) {
+        this.post.dt_inicial_6 == `${this.post.dt_inicial_6.substr(0,10)} 00:00:00` ? this.post.dt_inicial_6 : this.post.dt_inicial_6 += ' 00:00:00';
+      }
+
+      if(this.post.dt_inicial_7) {
+        this.post.dt_inicial_7 == `${this.post.dt_inicial_7.substr(0,10)} 00:00:00` ? this.post.dt_inicial_7 : this.post.dt_inicial_7 += ' 00:00:00';
+      }
+
+      if(this.post.dt_inicio_1_aditivo) {
+        this.post.dt_inicio_1_aditivo == `${this.post.dt_inicio_1_aditivo.substr(0,10)} 00:00:00` ? this.post.dt_inicio_1_aditivo : this.post.dt_inicio_1_aditivo += ' 00:00:00';
+      }
+
+      if(this.post.dt_inicio_2_aditivo) {
+        this.post.dt_inicio_2_aditivo == `${this.post.dt_inicio_2_aditivo.substr(0,10)} 00:00:00` ? this.post.dt_inicio_2_aditivo : this.post.dt_inicio_2_aditivo += ' 00:00:00';
+      }
+
+      if(this.post.dt_termino_1_aditivo) {
+        this.post.dt_termino_1_aditivo == `${this.post.dt_termino_1_aditivo.substr(0,10)} 00:00:00` ? this.post.dt_termino_1_aditivo : this.post.dt_termino_1_aditivo += ' 00:00:00';
+      }
+
+      if(this.post.dt_termino_2_aditivo) {
+        this.post.dt_termino_2_aditivo == `${this.post.dt_termino_2_aditivo.substr(0,10)} 00:00:00` ? this.post.dt_termino_2_aditivo : this.post.dt_termino_2_aditivo += ' 00:00:00';
+      }
+
+      if(this.post.dt_termino_1) {
+        this.post.dt_termino_1 == `${this.post.dt_termino_1.substr(0,10)} 00:00:00` ? this.post.dt_termino_1 : this.post.dt_termino_1 += ' 00:00:00';
+      }
+
+      if(this.post.dt_termino_2) {
+        this.post.dt_termino_2 == `${this.post.dt_termino_2.substr(0,10)} 00:00:00` ? this.post.dt_termino_2 : this.post.dt_termino_2 += ' 00:00:00';
+      }
+
+      if(this.post.dt_termino_3) {
+        this.post.dt_termino_3 == `${this.post.dt_termino_3.substr(0,10)} 00:00:00` ? this.post.dt_termino_3 : this.post.dt_termino_3 += ' 00:00:00';
+      }
+
+      if(this.post.dt_termino_4) {
+        this.post.dt_termino_4 == `${this.post.dt_termino_4.substr(0,10)} 00:00:00` ? this.post.dt_termino_4 : this.post.dt_termino_4 += ' 00:00:00';
+      }
+
+      if(this.post.dt_termino_5) {
+        this.post.dt_termino_5 == `${this.post.dt_termino_5.substr(0,10)} 00:00:00` ? this.post.dt_termino_5 : this.post.dt_termino_5 += ' 00:00:00';
+      }
+
+      if(this.post.dt_termino_6) {
+        this.post.dt_termino_6 == `${this.post.dt_termino_6.substr(0,10)} 00:00:00` ? this.post.dt_termino_6 : this.post.dt_termino_6 += ' 00:00:00';
+      }
+
+      if(this.post.dt_termino_7) {
+        this.post.dt_termino_7 == `${this.post.dt_termino_7.substr(0,10)} 00:00:00` ? this.post.dt_termino_7 : this.post.dt_termino_7 += ' 00:00:00';
+      }
+
+      if(this.post.data_nascimento) {
+        this.post.data_nascimento == `${this.post.data_nascimento.substr(0,10)} 00:00:00` ? this.post.data_nascimento : this.post.data_nascimento += ' 00:00:00';
+      }
+
+      if(this.post.desligado) {
+        this.post.desligado == `${this.post.desligado.substr(0,10)} 00:00:00` ? this.post.desligado : this.post.desligado += ' 00:00:00';
+      }
+
     },
     requisicaoGet(uri, variavel) {
       this.axios.get(uri).then(response => {
@@ -464,10 +547,10 @@ export default {
     validaEstado(estado) { this.validacao(estado, 'estadoValido')},
     validaCep(cep) { this.validacao(cep, 'cepValido'); },
     validaCelular(celular) { this.validacao(celular, 'celularValido') },
-    validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'naturalidadeValida')},
-    validaNaturalidade(naturalidade) { this.validacao(naturalidade, 'naturalidadeValida') },
+    validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'nacionalidadeValida')},
     validaRaca(raca) { this.validacao(raca, 'racaValida') },
-    validaCpf(cpf) { this.validacao(cpf, 'cpfValidoForm') }, // Valida o CPF do Formulário de Update
+    validaCpf(cpf) { this.validacao(cpf, 'cpfValido')},
+    validaCpfForm(cpf) { this.validacao(cpf, 'cpfValidoForm') }, // Valida o CPF do Formulário de Update
     validaRg(rg) { this.validacao(rg, 'rgValido') },
     validaEmail(email) { this.validacao(email, 'emailValido') },
     validaInstituicao(instituicao) { this.validacao(instituicao, 'instituicaoValida') },
@@ -489,7 +572,8 @@ export default {
   mounted() {
     this.showModal()
     this.hideModal()
-  },
+  }
+  
 }
 </script>
 

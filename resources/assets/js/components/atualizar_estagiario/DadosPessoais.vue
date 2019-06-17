@@ -1,5 +1,16 @@
 <template>
     <form @submit.prevent="inserirEstagiario" method="post">
+
+    <!--ROW Campos Não preenchiveis -->
+    <div class="row">
+        <input type="hidden" v-model="post.foto">
+        <input type="hidden" v-model="post.campus">
+        <input type="hidden" v-model="post.aditivo1">
+        <input type="hidden" v-model="post.aditivo2">
+        <input type="hidden" v-model="post.aditivo3">
+        <input type="hidden" v-model="post.qt_horas_estagiada">
+    </div>
+
     <!--row-->
     <div class="row">
         <div class="col-md-6">
@@ -77,10 +88,6 @@
         </div>
     </div><!--/row-->
 
-    <!--row-->
-    <div class="row">
-        
-    </div>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -208,16 +215,11 @@
             <div class="form-group">
                 <label for="inputNaturalidade">Naturalidade</label>
                 <input type="text" 
-                @blur="validaNaturalidade" 
-                :class="{'is-invalid': naturalidadeValida}"
                 class="form-control" 
                 maxlength="30" 
                 id="inputNaturalidade" 
                 v-model="post.naturalidade"
                 placeholder="Ex: São Paulo - SP">
-                <div v-if="naturalidadeValida" class="invalid-feedback">
-                    Naturalidade não pode ser vazia
-                </div>
             </div>
         </div>
         <div class="col-md-3">
@@ -263,8 +265,8 @@
             <div class="form-group">
                 <label for="selectSexo">Sexo</label>
                 <select class="form-control" id="selectSexo" v-model="post.sexo" >
-                    <option>Masculino</option>
-                    <option>Feminino</option>
+                    <option>{{ post.sexo }}</option>
+                    <option>{{ post.sexo == 'MASCULINO' ? 'FEMININO' : 'MASCULINO'}}</option>
                 </select>
             </div>
         </div>
@@ -272,15 +274,15 @@
             <div class="form-group">
                 <label for="inputCpf">CPF</label>
                 <the-mask type="tel" 
-                    @blur="validaCpf"
+                    @blur="validaCpfForm"
                     maxlength="14" 
-                    :class="{'is-invalid': cpfValido}"
+                    :class="{'is-invalid': cpfValidoForm}"
                     class="form-control" 
                     id="inputCpf" 
                     v-model="post.cpf"
                     placeholder="Ex: 000.000.000-00"
                     mask="###.###.###-##"></the-mask>
-                    <div v-if="cpfValido" class="invalid-feedback">
+                    <div v-if="cpfValidoForm" class="invalid-feedback">
                         CPF não pode ser vazio
                     </div>
             </div>
@@ -506,19 +508,6 @@
 </template>
 <script>
 export default {
-    methods: {
-      showModal() {
-        this.$refs['my-modal'].show()
-      },
-      hideModal() {
-        this.$refs['my-modal'].hide()
-      },
-      toggleModal() {
-        // We pass the ID of the button that we want to return focus to
-        // when the modal has hidden
-        this.$refs['my-modal'].toggle('#toggle-btn')
-      }
-    },
     props: [
         'post', 
         'cartoes', 
@@ -540,9 +529,8 @@ export default {
         'validaComplemento', 'complementoValido',
         'validaCelular','celularValido',
         'validaNacionalidade','nacionalidadeValida',
-        'validaNaturalidade', 'naturalidadeValida',
         'validaRaca','racaValida',
-        'validaCpf','cpfValido',
+        'validaCpfForm','cpfValidoForm',
         'validaRg','rgValido',
         'validaEmail','emailValido',
         'validaInstituicao','instituicaoValida',

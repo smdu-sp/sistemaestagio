@@ -98392,11 +98392,10 @@ var render = function() {
           { staticClass: "d-flex justify-content-end mt-4" },
           [
             _c(
-              "b-button",
+              "router-link",
               {
-                staticClass: "mt-3",
-                attrs: { flex: "", variant: "outline-primary" },
-                on: { click: _vm.sair }
+                staticClass: "btn btn-outline-primary mt-3",
+                attrs: { to: "/", flex: "" }
               },
               [_vm._v("Sim")]
             ),
@@ -98518,7 +98517,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -99035,22 +99034,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    showModal: function showModal() {
-      this.$refs['my-modal'].show();
-    },
-    hideModal: function hideModal() {
-      this.$refs['my-modal'].hide();
-    },
-    toggleModal: function toggleModal() {
-      // We pass the ID of the button that we want to return focus to
-      // when the modal has hidden
-      this.$refs['my-modal'].toggle('#toggle-btn');
-    }
-  },
-  props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'validaNome', 'nomeValido', 'validaCodEstudante', 'codValido', 'validaContratante', 'contratanteValido', 'validaEndereco', 'enderecoValido', 'validaEstado', 'estadoValido', 'validaCep', 'cepValido', 'validaBairro', 'bairroValido', 'validaComplemento', 'complementoValido', 'validaCelular', 'celularValido', 'validaNacionalidade', 'nacionalidadeValida', 'validaNaturalidade', 'naturalidadeValida', 'validaRaca', 'racaValida', 'validaCpf', 'cpfValido', 'validaRg', 'rgValido', 'validaEmail', 'emailValido', 'validaInstituicao', 'instituicaoValida', 'validaCurso', 'cursoValido', 'converteCep', 'showModal']
+    props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'validaNome', 'nomeValido', 'validaCodEstudante', 'codValido', 'validaContratante', 'contratanteValido', 'validaEndereco', 'enderecoValido', 'validaEstado', 'estadoValido', 'validaCep', 'cepValido', 'validaBairro', 'bairroValido', 'validaComplemento', 'complementoValido', 'validaCelular', 'celularValido', 'validaNacionalidade', 'nacionalidadeValida', 'validaRaca', 'racaValida', 'validaCpfForm', 'cpfValidoForm', 'validaRg', 'rgValido', 'validaEmail', 'emailValido', 'validaInstituicao', 'instituicaoValida', 'validaCurso', 'cursoValido', 'converteCep', 'showModal']
 });
 
 /***/ }),
@@ -99073,6 +99061,134 @@ var render = function() {
       }
     },
     [
+      _c("div", { staticClass: "row" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.post.foto,
+              expression: "post.foto"
+            }
+          ],
+          attrs: { type: "hidden" },
+          domProps: { value: _vm.post.foto },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.post, "foto", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.post.campus,
+              expression: "post.campus"
+            }
+          ],
+          attrs: { type: "hidden" },
+          domProps: { value: _vm.post.campus },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.post, "campus", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.post.aditivo1,
+              expression: "post.aditivo1"
+            }
+          ],
+          attrs: { type: "hidden" },
+          domProps: { value: _vm.post.aditivo1 },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.post, "aditivo1", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.post.aditivo2,
+              expression: "post.aditivo2"
+            }
+          ],
+          attrs: { type: "hidden" },
+          domProps: { value: _vm.post.aditivo2 },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.post, "aditivo2", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.post.aditivo3,
+              expression: "post.aditivo3"
+            }
+          ],
+          attrs: { type: "hidden" },
+          domProps: { value: _vm.post.aditivo3 },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.post, "aditivo3", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.post.qt_horas_estagiada,
+              expression: "post.qt_horas_estagiada"
+            }
+          ],
+          attrs: { type: "hidden" },
+          domProps: { value: _vm.post.qt_horas_estagiada },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.post, "qt_horas_estagiada", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "form-group" }, [
@@ -99329,8 +99445,6 @@ var render = function() {
           ])
         ])
       ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6" }, [
@@ -99682,7 +99796,6 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              class: { "is-invalid": _vm.naturalidadeValida },
               attrs: {
                 type: "text",
                 maxlength: "30",
@@ -99691,7 +99804,6 @@ var render = function() {
               },
               domProps: { value: _vm.post.naturalidade },
               on: {
-                blur: _vm.validaNaturalidade,
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -99699,15 +99811,7 @@ var render = function() {
                   _vm.$set(_vm.post, "naturalidade", $event.target.value)
                 }
               }
-            }),
-            _vm._v(" "),
-            _vm.naturalidadeValida
-              ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                    Naturalidade não pode ser vazia\n                "
-                  )
-                ])
-              : _vm._e()
+            })
           ])
         ]),
         _vm._v(" "),
@@ -99857,9 +99961,15 @@ var render = function() {
                 }
               },
               [
-                _c("option", [_vm._v("Masculino")]),
+                _c("option", [_vm._v(_vm._s(_vm.post.sexo))]),
                 _vm._v(" "),
-                _c("option", [_vm._v("Feminino")])
+                _c("option", [
+                  _vm._v(
+                    _vm._s(
+                      _vm.post.sexo == "MASCULINO" ? "FEMININO" : "MASCULINO"
+                    )
+                  )
+                ])
               ]
             )
           ])
@@ -99874,7 +99984,7 @@ var render = function() {
               _vm._v(" "),
               _c("the-mask", {
                 staticClass: "form-control",
-                class: { "is-invalid": _vm.cpfValido },
+                class: { "is-invalid": _vm.cpfValidoForm },
                 attrs: {
                   type: "tel",
                   maxlength: "14",
@@ -99882,7 +99992,7 @@ var render = function() {
                   placeholder: "Ex: 000.000.000-00",
                   mask: "###.###.###-##"
                 },
-                on: { blur: _vm.validaCpf },
+                on: { blur: _vm.validaCpfForm },
                 model: {
                   value: _vm.post.cpf,
                   callback: function($$v) {
@@ -99892,7 +100002,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _vm.cpfValido
+              _vm.cpfValidoForm
                 ? _c("div", { staticClass: "invalid-feedback" }, [
                     _vm._v(
                       "\n                        CPF não pode ser vazio\n                    "
@@ -102114,7 +102224,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -102125,6 +102235,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -102901,19 +103019,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.post.dt_termino_6,
-                  expression: "post.dt_termino_6"
+                  value: _vm.post.dt_inicial_6,
+                  expression: "post.dt_inicial_6"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "date", disabled: "" },
-              domProps: { value: _vm.post.dt_termino_6 },
+              domProps: { value: _vm.post.dt_inicial_6 },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.post, "dt_termino_6", $event.target.value)
+                  _vm.$set(_vm.post, "dt_inicial_6", $event.target.value)
                 }
               }
             })
@@ -102993,19 +103111,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.post.dt_termino_7,
-                  expression: "post.dt_termino_7"
+                  value: _vm.post.dt_inicial_7,
+                  expression: "post.dt_inicial_7"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "date", disabled: "" },
-              domProps: { value: _vm.post.dt_termino_7 },
+              domProps: { value: _vm.post.dt_inicial_7 },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.post, "dt_termino_7", $event.target.value)
+                  _vm.$set(_vm.post, "dt_inicial_7", $event.target.value)
                 }
               }
             })
@@ -103034,6 +103152,38 @@ var render = function() {
                     return
                   }
                   _vm.$set(_vm.post, "dt_termino_7", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "textareaObservacoes3" } }, [
+              _vm._v("Observações")
+            ]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.post.observacoes3,
+                  expression: "post.observacoes3"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "textareaObservacoes3", cols: "30", rows: "5" },
+              domProps: { value: _vm.post.observacoes3 },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.post, "observacoes3", $event.target.value)
                 }
               }
             })
@@ -103456,7 +103606,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -103467,6 +103617,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -103634,7 +103785,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       cepValido: false,
       celularValido: false,
       nacionalidadeValida: false,
-      naturalidadeValida: false,
       racaValida: false,
       rgValido: false,
       emailValido: false,
@@ -103816,6 +103966,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.auxiliarCpf = this.post.cpf;
       var uriEstagiario = 'http://localhost:8000/api/estagiarios/' + this.post.cpf;
       this.axios.get(uriEstagiario).then(function (response) {
+        _this.msg.error = false;
         _this.loading = false;
         _this.hideModal();
         _this.mostrarConteudoConsulta = true;
@@ -103832,6 +103983,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.converteDataDesligamento();
         _this.converteSemestreDesligamento();
         _this.converteRecessos();
+        _this.post.cpf = _this.auxiliarCpf;
       }).catch(function (error) {
         if (!_this.loading) {
           setTimeout(function () {
@@ -103841,6 +103993,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.loading = false;
         _this.msg.error = true;
         _this.msg.erro = 'A pesquisa não retornou dados';
+        _this.post.cpf = _this.auxiliarCpf;
       });
     },
     scrollTop: function scrollTop() {
@@ -103898,7 +104051,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       var uriEstagiarios = 'http://localhost:8000/api/estagiarios/' + this.auxiliarCpf;
-      this.axios.patch(uriEstagiarios, this.estagiario).then(function (response) {
+      this.auxiliarCpf = this.post.cpf;
+      this.axios.patch(uriEstagiarios, this.post).then(function (response) {
         _this2.msg.sucesso = 'Dados atualizados com sucesso!';
         _this2.msg.success = true;
         _this2.scrollTop();
@@ -103906,7 +104060,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.msg.erro = 'Erro ao atualizar dados';
         _this2.msg.error = true;
         _this2.scrollTop();
-        console.log(_this2.post);
       });
     },
     converteCelular: function converteCelular() {
@@ -103951,6 +104104,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     converteDatas: function converteDatas() {
+      if (this.post.horario_entrada) {
+        this.post.horario_entrada = this.post.horario_entrada.length == 8 ? '1899-12-30 ' + this.post.horario_entrada : this.post.horario_entrada;
+      }
+      if (this.post.horario_saida) {
+        this.post.horario_saida = this.post.horario_saida.length == 8 ? '1899-12-30 ' + this.post.horario_saida : this.post.horario_saida;
+      }
       if (this.post.dt_inicio) {
         this.post.dt_inicio == this.post.dt_inicio.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicio : this.post.dt_inicio += ' 00:00:00';
       }
@@ -103960,11 +104119,84 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.post.dt_termino) {
         this.post.dt_termino_inicial_lauda = this.post.dt_termino;
       }
-      if (this.post.horario_entrada) {
-        this.post.horario_entrada = this.post.horario_entrada.length == 5 ? '1899-12-30 ' + this.post.horario_entrada + ':00' : this.post.horario_entrada;
+      if (this.post.dt_inicial_1) {
+        this.post.dt_inicial_1 == this.post.dt_inicial_1.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicial_1 : this.post.dt_inicial_1 += ' 00:00:00';
       }
-      if (this.post.horario_saida) {
-        this.post.horario_saida = this.post.horario_saida.length == 5 ? '1899-12-30 ' + this.post.horario_saida + ':00' : this.post.horario_saida;
+
+      if (this.post.dt_inicial_2) {
+        this.post.dt_inicial_2 == this.post.dt_inicial_2.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicial_2 : this.post.dt_inicial_2 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_3) {
+        this.post.dt_inicial_3 == this.post.dt_inicial_3.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicial_3 : this.post.dt_inicial_3 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_4) {
+        this.post.dt_inicial_4 == this.post.dt_inicial_4.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicial_4 : this.post.dt_inicial_4 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_5) {
+        this.post.dt_inicial_5 == this.post.dt_inicial_5.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicial_5 : this.post.dt_inicial_5 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_6) {
+        this.post.dt_inicial_6 == this.post.dt_inicial_6.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicial_6 : this.post.dt_inicial_6 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_7) {
+        this.post.dt_inicial_7 == this.post.dt_inicial_7.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicial_7 : this.post.dt_inicial_7 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicio_1_aditivo) {
+        this.post.dt_inicio_1_aditivo == this.post.dt_inicio_1_aditivo.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicio_1_aditivo : this.post.dt_inicio_1_aditivo += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicio_2_aditivo) {
+        this.post.dt_inicio_2_aditivo == this.post.dt_inicio_2_aditivo.substr(0, 10) + ' 00:00:00' ? this.post.dt_inicio_2_aditivo : this.post.dt_inicio_2_aditivo += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_1_aditivo) {
+        this.post.dt_termino_1_aditivo == this.post.dt_termino_1_aditivo.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino_1_aditivo : this.post.dt_termino_1_aditivo += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_2_aditivo) {
+        this.post.dt_termino_2_aditivo == this.post.dt_termino_2_aditivo.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino_2_aditivo : this.post.dt_termino_2_aditivo += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_1) {
+        this.post.dt_termino_1 == this.post.dt_termino_1.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino_1 : this.post.dt_termino_1 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_2) {
+        this.post.dt_termino_2 == this.post.dt_termino_2.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino_2 : this.post.dt_termino_2 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_3) {
+        this.post.dt_termino_3 == this.post.dt_termino_3.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino_3 : this.post.dt_termino_3 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_4) {
+        this.post.dt_termino_4 == this.post.dt_termino_4.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino_4 : this.post.dt_termino_4 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_5) {
+        this.post.dt_termino_5 == this.post.dt_termino_5.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino_5 : this.post.dt_termino_5 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_6) {
+        this.post.dt_termino_6 == this.post.dt_termino_6.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino_6 : this.post.dt_termino_6 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_7) {
+        this.post.dt_termino_7 == this.post.dt_termino_7.substr(0, 10) + ' 00:00:00' ? this.post.dt_termino_7 : this.post.dt_termino_7 += ' 00:00:00';
+      }
+
+      if (this.post.data_nascimento) {
+        this.post.data_nascimento == this.post.data_nascimento.substr(0, 10) + ' 00:00:00' ? this.post.data_nascimento : this.post.data_nascimento += ' 00:00:00';
+      }
+
+      if (this.post.desligado) {
+        this.post.desligado == this.post.desligado.substr(0, 10) + ' 00:00:00' ? this.post.desligado : this.post.desligado += ' 00:00:00';
       }
     },
     requisicaoGet: function requisicaoGet(uri, variavel) {
@@ -104005,15 +104237,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.validacao(celular, 'celularValido');
     },
     validaNacionalidade: function validaNacionalidade(nacionalidade) {
-      this.validacao(nacionalidade, 'naturalidadeValida');
-    },
-    validaNaturalidade: function validaNaturalidade(naturalidade) {
-      this.validacao(naturalidade, 'naturalidadeValida');
+      this.validacao(nacionalidade, 'nacionalidadeValida');
     },
     validaRaca: function validaRaca(raca) {
       this.validacao(raca, 'racaValida');
     },
     validaCpf: function validaCpf(cpf) {
+      this.validacao(cpf, 'cpfValido');
+    },
+    validaCpfForm: function validaCpfForm(cpf) {
       this.validacao(cpf, 'cpfValidoForm');
     },
     // Valida o CPF do Formulário de Update
@@ -104178,6 +104410,8 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c("modal-component"),
+      _vm._v(" "),
       _vm.mostrarConteudoConsulta
         ? [
             _vm.msg.sucess
@@ -104231,14 +104465,12 @@ var render = function() {
                                 estadoValido: _vm.estadoValido,
                                 validaCelular: _vm.validaCelular,
                                 celularValido: _vm.celularValido,
-                                validaNaturalidade: _vm.validaNaturalidade,
-                                naturalidadeValida: _vm.naturalidadeValida,
                                 validaNacionalidade: _vm.validaNacionalidade,
                                 nacionalidadeValida: _vm.nacionalidadeValida,
                                 validaRaca: _vm.validaRaca,
                                 racaValida: _vm.racaValida,
-                                validaCpf: _vm.validaCpf,
-                                cpfValido: _vm.cpfValido,
+                                validaCpfForm: _vm.validaCpfForm,
+                                cpfValidoForm: _vm.cpfValidoForm,
                                 validaRg: _vm.validaRg,
                                 rgValido: _vm.rgValido,
                                 validaEmail: _vm.validaEmail,
@@ -104253,7 +104485,8 @@ var render = function() {
                                 cursos: _vm.cursos,
                                 departamentos: _vm.departamentos,
                                 supervisores: _vm.supervisores,
-                                vagas: _vm.vagas
+                                vagas: _vm.vagas,
+                                showModal: _vm.showModal
                               }
                             })
                           ],

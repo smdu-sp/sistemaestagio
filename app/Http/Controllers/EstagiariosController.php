@@ -122,13 +122,14 @@ class EstagiariosController extends Controller
 
     public function update(Request $request, Estagiario $cpf) {
         $cpf->nome = $request->input('nome');
-        $cpf->contrato= $request->input('contrato');
-        $cpf->tC_superestagios= $request->input('tC_superestagios');
+        $cpf->contrato = $request->input('contrato');
+        $cpf->tc_superestagios= $request->input('tc_superestagios');
         $cpf->cod_vaga= $request->input('cod_vaga');
         $cpf->login = $request->input('login');
+        $cpf->cod_estudante = $request->input('cod_estudante');
         $cpf->cartao_acesso = $request->input('cartao_acesso');
-        $cpf->contratado_por= $request->input('contratado_por');
-        $cpf->Nome = $request->input('Nome');
+        $cpf->contratado_por = $request->input('contratado_por');
+        $cpf->nome = $request->input('nome');
         $cpf->nome_social = $request->input('nome_social');
         $cpf->endereco= $request->input('endereco');
         $cpf->nro = $request->input('nro');
@@ -159,11 +160,11 @@ class EstagiariosController extends Controller
         $cpf->periodo = $request->input('periodo');
         $cpf->horario = $request->input('horario');
         $cpf->duracao_curso = $request->input('duracao_curso');
-        $cpf->mes_ano_previsto_para_curso = $request->input('mes_ano_previsto_para_curso');
+        $cpf->mes_ano_previsto_curso = $request->input('mes_ano_previsto_curso');
         $cpf->matricula = $request->input('matricula');
         $cpf->observacoes1 = $request->input('observacoes1');
         $cpf->foto = $request->input('foto');
-        $cpf->departamento_hierárquico = $request->input('departamento_hierárquico');
+        $cpf->dep_hierarquico = $request->input('dep_hierarquico');
         $cpf->setor_estagiado = $request->input('setor_estagiado');
         $cpf->supervisor = $request->input('supervisor');
         $cpf->dt_inicio = $request->input('dt_inicio');
@@ -210,7 +211,7 @@ class EstagiariosController extends Controller
         $cpf->qt_dias_solicitada_7 = $request->input('qt_dias_solicitada_7');
         $cpf->dt_inicial_7 = $request->input('dt_inicial_7');
         $cpf->dt_termino_7 = $request->input('dt_termino_7');
-        $cpf->Observacoes3 = $request->input('Observacoes3');
+        $cpf->observacoes3 = $request->input('observacoes3');
         $cpf->instituicao_bancaria = $request->input('instituicao_bancaria');
         $cpf->agencia = $request->input('agencia');
         $cpf->conta = $request->input('conta');
