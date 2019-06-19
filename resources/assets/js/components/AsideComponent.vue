@@ -30,6 +30,12 @@
         <nav class="row mt-4 ml-4">
             <ul>
                 <li>
+                    <li>
+                        <img src="../../../../public/icones/icons8-velocidade-50.png" alt="Dashboard" style="width: 20px;">
+                        <router-link to="/">Home</router-link>
+                    </li>
+                <li>
+                <li>
                     <a href="#">
                         <li id="show-btn" @click="showModal"> <!-- Ativa modal -->
                             <i class="fas fa-chevron-down mr-2"></i>

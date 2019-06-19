@@ -223,7 +223,7 @@
             </div>
         </div>
     </div>
-    <botoes-component></botoes-component>
+    <botoes-component :titulo="nomeBotao = 'Salvar'"></botoes-component>
 </form>
 
 </template>

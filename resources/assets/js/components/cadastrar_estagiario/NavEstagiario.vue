@@ -155,7 +155,7 @@ export default {
             arrayCamposInvalidos: [],
             revisarCampos: false,
             camposValidacao: [],
-            modalShow: false  
+            modalShow: false,
         }
     },
     beforeMount() {

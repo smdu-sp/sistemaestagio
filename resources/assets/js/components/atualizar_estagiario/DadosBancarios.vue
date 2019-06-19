@@ -7,7 +7,7 @@
                         <div class="col-md-4">
                             <label for="selectBanco">Instituição Bancária</label>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <select class="form-control" id="selectBanco" v-model="post.instituicao_bancaria" required>
                                 <option></option>
                                 <option>BANCO DO BRASIL</option>
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component>
+        <botoes-component :titulo="nomeBotao = 'Salvar'"></botoes-component>
     </form>
 
 </template>
@@ -85,5 +85,4 @@ export default {
 }
 </script>
 <style>
-
 </style>

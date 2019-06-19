@@ -148,7 +148,7 @@
                         class="form-control" 
                         id="inputCep" 
                         v-model="post.cep" 
-                        mask="#####-###"
+                        :mask="['#####-###']"
                         placeholder="Ex: 02010-050"></the-mask>
                     <div v-if="cepValido" class="invalid-feedback">
                         CEP não pode ser vazio
@@ -273,15 +273,15 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputCpf">CPF</label>
-                <the-mask type="tel" 
+                <input type="tel"
                     @blur="validaCpfForm"
                     maxlength="14" 
                     :class="{'is-invalid': cpfValidoForm}"
-                    class="form-control" 
+                    class="form-control"
                     id="inputCpf" 
-                    v-model="post.cpf"
                     placeholder="Ex: 000.000.000-00"
-                    mask="###.###.###-##"></the-mask>
+                    v-b-tooltip.hover title="Somente números"
+                    v-model="post.cpf">
                     <div v-if="cpfValidoForm" class="invalid-feedback">
                         CPF não pode ser vazio
                     </div>
@@ -501,7 +501,7 @@
             </div>
         </div>
     </div>
-    <botoes-component></botoes-component>
+    <botoes-component :titulo="nomeBotao = 'Salvar'"></botoes-component>
 
 </form>
 
@@ -530,7 +530,7 @@ export default {
         'validaCelular','celularValido',
         'validaNacionalidade','nacionalidadeValida',
         'validaRaca','racaValida',
-        'validaCpfForm','cpfValidoForm',
+        'cpfValidoForm','validaCpfForm',
         'validaRg','rgValido',
         'validaEmail','emailValido',
         'validaInstituicao','instituicaoValida',

@@ -17,10 +17,10 @@
 export default {
   methods: {
     showModal() {
-      this.$refs['my-modal'].show()
+      this.$children[2].$refs['my-modal'].show(); // TODO: Criar vínculo consistente com o component Consulta
     },
     hideModal() {
-      this.$refs['my-modal'].hide()
+      this.$children[2].$refs['my-modal'].hide();
     }
   }
 }

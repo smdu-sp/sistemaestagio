@@ -37,7 +37,7 @@
 
   <template v-if="mostrarConteudoConsulta">
 
-    <div v-if="msg.sucess" class="alert alert-success mt-2">
+    <div v-if="msg.success" class="alert alert-success mt-2">
       {{ msg.sucesso }}
     </div>
 
@@ -127,12 +127,13 @@
           <b-tab title="Recesso">
               <b-card-text>
                   <recesso-atualizar
-                  :post="post"/>
+                  :post="post"
+                  />
               </b-card-text>
           </b-tab>
           <b-tab title="Dados Bancários">
               <b-card-text>
-                  <dados-bancarios 
+                  <dados-bancarios-atualizar
                   :post="post"
                   :inserirEstagiario="inserirEstagiario"
                   />
@@ -199,20 +200,20 @@ export default {
 
   beforeMount() {
     let uriCartoes = 'http://localhost:8000/api/cartao';
-      let uriEstados = 'http://localhost:8000/api/estados';
-      let uriInstituicoes = 'http://localhost:8000/api/instituicao';
-      let uriCursos = 'http://localhost:8000/api/cursos';
-      let uriDepartamentos = 'http://localhost:8000/api/departamentos';
-      let uriSupervisores = 'http://localhost:8000/api/supervisores'; 
-      let uriVagas = 'http://localhost:8000/api/vagas';
+    let uriEstados = 'http://localhost:8000/api/estados';
+    let uriInstituicoes = 'http://localhost:8000/api/instituicao';
+    let uriCursos = 'http://localhost:8000/api/cursos';
+    let uriDepartamentos = 'http://localhost:8000/api/departamentos';
+    let uriSupervisores = 'http://localhost:8000/api/supervisores'; 
+    let uriVagas = 'http://localhost:8000/api/vagas';
 
-      this.requisicaoGet(uriCartoes, 'cartoes');
-      this.requisicaoGet(uriEstados, 'estados');
-      this.requisicaoGet(uriInstituicoes, 'instituicoes');
-      this.requisicaoGet(uriCursos, 'cursos');
-      this.requisicaoGet(uriDepartamentos, 'departamentos');
-      this.requisicaoGet(uriSupervisores, 'supervisores');
-      this.requisicaoGet(uriVagas, 'vagas');
+    this.requisicaoGet(uriCartoes, 'cartoes');
+    this.requisicaoGet(uriEstados, 'estados');
+    this.requisicaoGet(uriInstituicoes, 'instituicoes');
+    this.requisicaoGet(uriCursos, 'cursos');
+    this.requisicaoGet(uriDepartamentos, 'departamentos');
+    this.requisicaoGet(uriSupervisores, 'supervisores');
+    this.requisicaoGet(uriVagas, 'vagas');
   },
   methods: {
     showModal() {
@@ -284,7 +285,6 @@ export default {
         }
     },
     inserirEstagiario() {
-      this.converteCep();
       this.alteracaoSupervisor();
       this.horarioVariavel();
       this.dataModificacao();
@@ -340,15 +340,6 @@ export default {
       let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
       this.axios.patch(uriVagas, this.statusVaga).then(response => response);
     },
-    converteCep() {
-      let cep = this.post.cep;
-      if(cep) {
-        let cep1 = cep.substr(0,5);
-        let cep2 = cep.substr(5,7);
-        let cepFormatado = `${cep1}-${cep2}`;
-        this.post.cep = cepFormatado;
-      }
-    },
     alteracaoSupervisor() {
       if(!this.post.houve_alteracao_supervisor) {
           this.post.houve_alteracao_supervisor = 0;
@@ -388,14 +379,14 @@ export default {
       this.axios
       .patch(uriEstagiarios, this.post)
       .then(response => {
-          this.msg.sucesso = 'Dados atualizados com sucesso!';
-          this.msg.success = true;
-          this.scrollTop();
+        this.msg.success = true;
+        this.msg.sucesso = 'Dados atualizados com sucesso!';
+        this.scrollTop();
       })
       .catch(e => {
-          this.msg.erro = 'Erro ao atualizar dados';
-          this.msg.error = true;
-          this.scrollTop();
+        this.msg.error = true;
+        this.msg.erro = 'Erro ao atualizar dados';
+        this.scrollTop();
       })
     },
     converteCelular(){
@@ -549,8 +540,8 @@ export default {
     validaCelular(celular) { this.validacao(celular, 'celularValido') },
     validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'nacionalidadeValida')},
     validaRaca(raca) { this.validacao(raca, 'racaValida') },
-    validaCpf(cpf) { this.validacao(cpf, 'cpfValido')},
-    validaCpfForm(cpf) { this.validacao(cpf, 'cpfValidoForm') }, // Valida o CPF do Formulário de Update
+    validaCpf(cpf) { this.validacao(cpf, 'cpfValido')},// Valida o CPF do Modal
+    validaCpfForm(cpf) { this.validacao(cpf, 'cpfValidoForm')},// Valida o CPF do Formulário de Update
     validaRg(rg) { this.validacao(rg, 'rgValido') },
     validaEmail(email) { this.validacao(email, 'emailValido') },
     validaInstituicao(instituicao) { this.validacao(instituicao, 'instituicaoValida') },
@@ -571,11 +562,16 @@ export default {
   },
   mounted() {
     this.showModal()
-    this.hideModal()
   }
   
 }
 </script>
 
 <style>
+.card {
+  width: 98%;
+}
+.card-body {
+  height: 100%;
+}
 </style>

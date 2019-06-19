@@ -134,15 +134,15 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="inputCep">CEP</label>
-                    <the-mask type="tel" 
+                    <input type="tel" 
                         @blur="validaCep"
                         maxlength="10" 
                         :class="{'is-invalid': cepValido}"
                         class="form-control" 
                         id="inputCep" 
                         v-model="post.cep" 
-                        mask="#####-###"
-                        placeholder="Ex: 02010-050"></the-mask>
+                        v-mask="'#####-###'"
+                        placeholder="Ex: 02010-050">
                     <div v-if="cepValido" class="invalid-feedback">
                         CEP não pode ser vazio
                     </div>
@@ -179,15 +179,15 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="inputCel">Fone celular</label>
-                    <the-mask type="tel" 
+                    <input type="tel" 
                         @blur="validaCelular"
                         maxlength="16" 
                         :class="{'is-invalid': celularValido}"
                         class="form-control" 
                         id="inputCel" 
                         v-model="post.fone_celular"
-                        :mask="['(##) ####-####', '(##) #####-####']"
-                        placeholder="Ex: (11) 22222-0000"></the-mask>
+                        v-mask="['(##) ####-####', '(##) #####-####']"
+                        placeholder="Ex: (11) 22222-0000">
                     <div v-if="celularValido" class="invalid-feedback">
                         Celular não pode ser vazio
                     </div>
@@ -229,7 +229,8 @@
                     :class="{'is-invalid': nacionalidadeValida}"
                     class="form-control"
                     id="inputNacionalidade"
-                    v-model="post.nacionalidade">
+                    v-model="!post.nacionalidade ? post.nacionalidade = 'Brasileira' : post.nacionalidade"
+                    >
                     <div v-if="nacionalidadeValida" class="invalid-feedback">
                         Nacionalidade não pode ser vazia
                     </div>             
@@ -496,7 +497,7 @@
             </div>
         </div>
     </div>
-    <botoes-component></botoes-component>
+    <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component>
 </form>
 
 </template>
@@ -530,7 +531,7 @@ export default {
         'validaEmail','emailValido',
         'validaInstituicao','instituicaoValida',
         'validaCurso','cursoValido',
-        'converteCep'
+        'converteCep', 'valorNacionalidade'
     ]
 }
 </script>

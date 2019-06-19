@@ -51,8 +51,10 @@ import Modal from './components/ModalConsulta.vue';
 import DadosPessoaisAtualizar from './components/atualizar_estagiario/DadosPessoais.vue';
 import InformacoesContratuaisAtualizar from './components/atualizar_estagiario/InformacoesContratuais.vue';
 import RecessoAtualizar from './components/atualizar_estagiario/Recesso.vue';
+import DadosBancariosAtualizar from './components/atualizar_estagiario/DadosBancarios.vue';
 import FormAtualizacao from './components/atualizar_estagiario/FormAtualizacao.vue';
 import ConsultaEstagiario from './components/atualizar_estagiario/ConsultaEstagiario.vue';
+import ModalConsultaCpf from './components/ModalConsultaCpf.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -70,6 +72,8 @@ Vue.component('informacoes-contratuais-atualizar', InformacoesContratuaisAtualiz
 Vue.component('recesso-atualizar', RecessoAtualizar);
 Vue.component('form-atualizacao', FormAtualizacao);
 Vue.component('consulta-estagiario', ConsultaEstagiario);
+Vue.component('dados-bancarios-atualizar', DadosBancariosAtualizar);
+Vue.component('modal-consulta-cpf', ModalConsultaCpf);
 
 import { routes } from './routes.js';
 

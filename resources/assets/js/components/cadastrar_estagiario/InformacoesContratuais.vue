@@ -162,7 +162,7 @@
             </div>
         </div>
     </div>
-    <botoes-component></botoes-component>
+    <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component>
 </form>
 
 </template>
