@@ -36,19 +36,23 @@
                     </li>
                 <li>
                 <li>
-                    <a href="#">
-                        <li id="show-btn" @click="showModal"> <!-- Ativa modal -->
-                            <i class="fas fa-chevron-down mr-2"></i>
-                            <router-link to="/consulta">Consulta</router-link>
-                        </li>
-                    </a>
+                    <li id="show-btn" @click="showModal"> <!-- Ativa modal -->
+                        <i class="fas fa-chevron-down mr-2"></i>
+                        <router-link to="/consulta">Consulta</router-link>
+                    </li>
                 <li>
-                    <a href="#">
-                        <li id="show-btn">
-                            <i class="fas fa-chevron-down mr-2"></i>
-                            <router-link to="/cadastro">Cadastro</router-link>
-                        </li>
-                    </a>
+                    <li>
+                        <i class="fas fa-chevron-down mr-2" @click="mostrarMenuCadastro"></i>
+                        Cadastro
+                        <ul v-if="menuCadastro">
+                            <li>
+                                <router-link to="/cadastroestagiario">Estagiario</router-link>
+                            </li>
+                            <li>
+                                <router-link to="/cadastrovaga">Vaga</router-link>
+                            </li>
+                        </ul>
+                    </li>
                 </li>
             </ul>                    
         </nav><!--/nav-->
@@ -57,7 +61,7 @@
 </template>
 <script>
 export default {
-    props: ['showModal']
+    props: ['showModal', 'menuCadastro', 'mostrarMenuCadastro']
 }
 </script>
 <style>

@@ -1,7 +1,7 @@
 import NavEstagiario from './components/cadastrar_estagiario/NavEstagiario.vue';
-import Teste from './components/teste.vue';
 import Consulta from './components/atualizar_estagiario/ConsultaEstagiario.vue';
 import Main from './components/MainComponent.vue';
+import CadastroVaga from './components/CadastroComponent.vue';
 
 export const routes = [
     {
@@ -10,18 +10,18 @@ export const routes = [
         component: Main
     },
     {
-        name: 'cadastro',
-        path: '/cadastro',
+        name: 'cadastroEstagiario',
+        path: '/cadastroestagiario',
         component: NavEstagiario
-    },
-    {
-        name: 'teste',
-        path: '/teste',
-        component: Teste
     },
     {
         name: 'consulta',
         path: '/consulta',
         component: Consulta
+    },
+    {
+        name: 'cadastroVaga',
+        path: '/cadastrovaga',
+        component: CadastroVaga
     }
 ];

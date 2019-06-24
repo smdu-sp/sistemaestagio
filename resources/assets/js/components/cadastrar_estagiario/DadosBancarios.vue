@@ -8,7 +8,7 @@
                             <label for="selectBanco">Instituição Bancária</label>
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control" id="selectBanco" v-model="post.instituicao_bancaria" required>
+                            <select class="form-control" id="selectBanco" v-model="post.instituicao_bancaria">
                                 <option></option>
                                 <option>BANCO DO BRASIL</option>
                                 <option>BRADESCO</option>
@@ -29,7 +29,7 @@
                             <label for="inputAgencia">Agência</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" class="form-control" id="inputAgencia" v-model="post.agencia" required>
+                            <input type="number" class="form-control" id="inputAgencia" v-model="post.agencia">
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             <label for="inputConta">Conta</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="tel" class="form-control" id="inputConta" v-model="post.conta" required>
+                            <input type="tel" class="form-control" id="inputConta" v-model="post.conta">
                         </div>
                     </div>
                 </div>

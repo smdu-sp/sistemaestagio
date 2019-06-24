@@ -2,7 +2,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-3">
-        <aside-component :showModal="showModal"></aside-component>
+        <aside-component 
+        :showModal="showModal" 
+        :menuCadastro="menuCadastro" 
+        :mostrarMenuCadastro="mostrarMenuCadastro"></aside-component>
       </div>
         <div class="col-9 d-flex flex-column">
           <header-component></header-component>
@@ -15,12 +18,20 @@
 
 <script>
 export default {
+  data() {
+    return {
+      menuCadastro: false
+    }
+  },
   methods: {
     showModal() {
       this.$children[2].$refs['my-modal'].show(); // TODO: Criar vínculo consistente com o component Consulta
     },
     hideModal() {
       this.$children[2].$refs['my-modal'].hide();
+    },
+    mostrarMenuCadastro() {
+      this.menuCadastro = !this.menuCadastro;
     }
   }
 }

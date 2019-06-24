@@ -128,6 +128,7 @@
               <b-card-text>
                   <recesso-atualizar
                   :post="post"
+                  :inserirEstagiario="inserirEstagiario"
                   />
               </b-card-text>
           </b-tab>
@@ -215,6 +216,9 @@ export default {
     this.requisicaoGet(uriSupervisores, 'supervisores');
     this.requisicaoGet(uriVagas, 'vagas');
   },
+  mounted() {
+    this.showModal()
+  },
   methods: {
     showModal() {
       this.$refs['my-modal'].show()
@@ -222,6 +226,52 @@ export default {
     hideModal() {
       this.$refs['my-modal'].hide()
     },
+    validacaoCpf() { // Valida o CPF do Modal
+      let cpf = this.post.cpf
+        if(cpf.length < 11) {
+          this.cpfInvalido = true;
+          this.cpfValido = false;
+        } else {
+          this.cpfInvalido = false;
+          this.cpfValido = true;
+        }
+    },
+    requisicaoGet(uri, variavel) {
+      this.axios.get(uri).then(response => {
+          this[variavel] = response.data
+      })
+    },
+    validacao(valorCampo, variavelBooleana) {
+        if(!valorCampo.target.value) {
+            this[variavelBooleana] = true
+        } else {
+            this[variavelBooleana] = false
+        }
+    },
+    validaNome(nome) { this.validacao(nome, 'nomeValido') },
+    validaCodEstudante(cod) { this.validacao(cod, 'codValido') },
+    validaContratante(contratante) { this.validacao(contratante, 'contratanteValido') },
+    validaVaga(vaga) { this.validacao(vaga, 'vagaValida'); },
+    validaEndereco(endereco) { this.validacao(endereco, 'enderecoValido') },
+    validaComplemento(complemento) { this.validacao(complemento, 'complementoValido') },
+    validaBairro(bairro) { this.validacao(bairro, 'bairroValido') },
+    validaEstado(estado) { this.validacao(estado, 'estadoValido')},
+    validaCep(cep) { this.validacao(cep, 'cepValido'); },
+    validaCelular(celular) { this.validacao(celular, 'celularValido') },
+    validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'nacionalidadeValida')},
+    validaRaca(raca) { this.validacao(raca, 'racaValida') },
+    validaCpf(cpf) { this.validacao(cpf, 'cpfValido')},// Valida o CPF do Modal
+    validaCpfForm(cpf) { this.validacao(cpf, 'cpfValidoForm')},// Valida o CPF do Formulário de Update
+    validaRg(rg) { this.validacao(rg, 'rgValido') },
+    validaEmail(email) { this.validacao(email, 'emailValido') },
+    validaInstituicao(instituicao) { this.validacao(instituicao, 'instituicaoValida') },
+    validaCurso(curso) { this.validacao(curso, 'cursoValido') },
+    validaDepartamento(departamento) { this.validacao(departamento, 'departamentoValido') },
+    validaSetor(setor) { this.validacao(setor, 'setorValido') },
+    validaSupervisor(supervisor) { this.validacao(supervisor, 'supervisorValido') },
+    validaHorarioEntrada(horaEntrada) { this.validacao(horaEntrada, 'horarioEntradaValido') },
+    validaHorarioSaida(horaSaida) { this.validacao(horaSaida, 'horarioSaidaValido') },
+    validaSituacao(situacao) { this.validacao(situacao, 'situacaoValida') },
     converteNascimento() {
       this.post.data_nascimento = this.post.data_nascimento.substr(0,10);
     },
@@ -243,18 +293,16 @@ export default {
       if(this.post.dt_inicio_3_aditivo) { this.post.dt_inicio_3_aditivo = this.post.dt_inicio_3_aditivo.substr(0,10); }
       if(this.post.dt_termino_1_aditivo) { this.post.dt_termino_1_aditivo = this.post.dt_termino_1_aditivo.substr(0,10); }
       if(this.post.dt_termino_2_aditivo) { this.post.dt_termino_2_aditivo = this.post.dt_termino_2_aditivo.substr(0,10); }
-
       if(this.post.dt_termino_3_aditivo) { this.post.dt_termino_3_aditivo = this.post.dt_termino_3_aditivo.substr(0,10); }
-
+    },
+    converteDataInicialLauda() {
+      if(this.post.dt_termino_inicial_lauda) { this.post.dt_termino_inicial_lauda = this.post.dt_termino_inicial_lauda.substr(0,10); }
     },
     converteDataDesligamento() {
       if(this.post.desligado) { this.post.desligado = this.post.desligado.substr(0,10); }
     },
     converteSemestreDesligamento() {
       if(this.post.semestre_desligamento) { this.post.semestre_desligamento = this.post.semestre_desligamento.substr(0,10); }
-    },
-    converteDataInicialLauda() {
-      if(this.post.dt_termino_inicial_lauda) { this.post.dt_termino_inicial_lauda = this.post.dt_termino_inicial_lauda.substr(0,10); }
     },
     converteRecessos() {
       if(this.post.dt_inicial_1) { this.post.dt_inicial_1 =  this.post.dt_inicial_1.substr(0,10); }
@@ -272,28 +320,6 @@ export default {
       if(this.post.dt_termino_5) { this.post.dt_termino_5 =  this.post.dt_termino_5.substr(0,10); }
       if(this.post.dt_termino_6) { this.post.dt_termino_6 =  this.post.dt_termino_6.substr(0,10); }
       if(this.post.dt_termino_7) { this.post.dt_termino_7 =  this.post.dt_termino_7.substr(0,10); }
-
-    },
-    validacaoCpf() { // Valida o CPF do Modal
-      let cpf = this.post.cpf
-        if(cpf.length < 11) {
-          this.cpfInvalido = true;
-          this.cpfValido = false;
-        } else {
-          this.cpfInvalido = false;
-          this.cpfValido = true;
-        }
-    },
-    inserirEstagiario() {
-      this.alteracaoSupervisor();
-      this.horarioVariavel();
-      this.dataModificacao();
-      this.horaModificacao();
-      this.converteCelular();
-      this.converteConclusaoCurso();
-      this.alteraStatusVaga();
-      this.converteDatas();
-      this.atualizaBanco();
     },
     buscaEstagiario() {
       this.loading = true;
@@ -333,13 +359,6 @@ export default {
       this.post.cpf = this.auxiliarCpf;
       });
     },
-    scrollTop() { 
-        window.scrollTo(0,0);
-    },
-      alteraStatusVaga() {
-      let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
-      this.axios.patch(uriVagas, this.statusVaga).then(response => response);
-    },
     alteracaoSupervisor() {
       if(!this.post.houve_alteracao_supervisor) {
           this.post.houve_alteracao_supervisor = 0;
@@ -373,22 +392,6 @@ export default {
       let dataHora = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`
       this.post.hora_modificacao = dataHora
     },
-    atualizaBanco() {
-      let uriEstagiarios = `http://localhost:8000/api/estagiarios/${this.auxiliarCpf}`;
-      this.auxiliarCpf = this.post.cpf;
-      this.axios
-      .patch(uriEstagiarios, this.post)
-      .then(response => {
-        this.msg.success = true;
-        this.msg.sucesso = 'Dados atualizados com sucesso!';
-        this.scrollTop();
-      })
-      .catch(e => {
-        this.msg.error = true;
-        this.msg.erro = 'Erro ao atualizar dados';
-        this.scrollTop();
-      })
-    },
     converteCelular(){
       let celular = this.post.fone_celular;
       if(celular) {
@@ -401,6 +404,19 @@ export default {
           }
       }
     },
+    converteConclusaoCurso() {
+      let data = this.post.mes_ano_previsto_curso;
+      if(data) {
+          let mes = data.substr(0,2);
+          let ano = data.substr(3, data.length);
+          let dataFormatada = `${mes}${ano}`;
+          this.post.mes_ano_previsto_curso = dataFormatada;
+      }
+    },
+    alteraStatusVaga() {
+    let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
+    this.axios.patch(uriVagas, this.statusVaga).then(response => response);
+    },
     converteFone() {
     let fone = this.post.fone_residencial;
       if(fone) {
@@ -411,19 +427,6 @@ export default {
             let foneFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
             this.post.fone_residencial = foneFormatado;                    
         }
-      }
-    },
-    selectVaga() {
-      let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
-      this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
-    },
-    converteConclusaoCurso() {
-      let data = this.post.mes_ano_previsto_curso;
-      if(data) {
-          let mes = data.substr(0,2);
-          let ano = data.substr(3, data.length);
-          let dataFormatada = `${mes}${ano}`;
-          this.post.mes_ano_previsto_curso = dataFormatada;
       }
     },
     converteDatas() {
@@ -523,47 +526,110 @@ export default {
       }
 
     },
-    requisicaoGet(uri, variavel) {
-      this.axios.get(uri).then(response => {
-          this[variavel] = response.data
-      })
+    scrollTop() { 
+        window.scrollTo(0,0);
     },
-    validaNome(nome) { this.validacao(nome, 'nomeValido') },
-    validaCodEstudante(cod) { this.validacao(cod, 'codValido') },
-    validaContratante(contratante) { this.validacao(contratante, 'contratanteValido') },
-    validaVaga(vaga) { this.validacao(vaga, 'vagaValida'); },
-    validaEndereco(endereco) { this.validacao(endereco, 'enderecoValido') },
-    validaComplemento(complemento) { this.validacao(complemento, 'complementoValido') },
-    validaBairro(bairro) { this.validacao(bairro, 'bairroValido') },
-    validaEstado(estado) { this.validacao(estado, 'estadoValido')},
-    validaCep(cep) { this.validacao(cep, 'cepValido'); },
-    validaCelular(celular) { this.validacao(celular, 'celularValido') },
-    validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'nacionalidadeValida')},
-    validaRaca(raca) { this.validacao(raca, 'racaValida') },
-    validaCpf(cpf) { this.validacao(cpf, 'cpfValido')},// Valida o CPF do Modal
-    validaCpfForm(cpf) { this.validacao(cpf, 'cpfValidoForm')},// Valida o CPF do Formulário de Update
-    validaRg(rg) { this.validacao(rg, 'rgValido') },
-    validaEmail(email) { this.validacao(email, 'emailValido') },
-    validaInstituicao(instituicao) { this.validacao(instituicao, 'instituicaoValida') },
-    validaCurso(curso) { this.validacao(curso, 'cursoValido') },
-    validaDepartamento(departamento) { this.validacao(departamento, 'departamentoValido') },
-    validaSetor(setor) { this.validacao(setor, 'setorValido') },
-    validaSupervisor(supervisor) { this.validacao(supervisor, 'supervisorValido') },
-    validaHorarioEntrada(horaEntrada) { this.validacao(horaEntrada, 'horarioEntradaValido') },
-    validaHorarioSaida(horaSaida) { this.validacao(horaSaida, 'horarioSaidaValido') },
-    validaSituacao(situacao) { this.validacao(situacao, 'situacaoValida') },
-    validacao(valorCampo, variavelBooleana) {
-        if(!valorCampo.target.value) {
-            this[variavelBooleana] = true
-        } else {
-            this[variavelBooleana] = false
+    inserirEstagiario() {
+      this.alteracaoSupervisor();
+      this.horarioVariavel();
+      this.dataModificacao();
+      this.horaModificacao();
+      this.converteCelular();
+      this.converteConclusaoCurso();
+      this.alteraStatusVaga();
+      this.converteDatas();
+      this.atualizaBanco();
+    },
+    atualizaBanco() {
+      let uriEstagiarios = `http://localhost:8000/api/estagiarios/${this.auxiliarCpf}`;
+      this.auxiliarCpf = this.post.cpf;   
+      this.axios
+      .patch(uriEstagiarios, this.post)
+      .then(response => {
+        this.converteNascimento();
+        this.converteRecessos();
+        if(this.post.dt_inicio) {
+          this.post.dt_inicio = this.post.dt_inicio.substr(0,10);
         }
+        if(this.post.dt_termino) {
+          this.post.dt_termino = this.post.dt_termino.substr(0,10);
+        }
+        if(this.post.dt_termino_inicial_lauda) {
+          this.post.dt_termino_inicial_lauda = this.post.dt_termino_inicial_lauda.substr(0,10);
+        }
+        if(this.post.dt_inicio_1_aditivo) {
+          this.post.dt_inicio_1_aditivo = this.post.dt_inicio_1_aditivo.substr(0,10);
+        }
+        if(this.post.dt_termino_1_aditivo) {
+          this.post.dt_termino_1_aditivo = this.post.dt_termino_1_aditivo.substr(0,10);
+        }
+        if(this.post.dt_inicio_2_aditivo) {
+          this.post.dt_inicio_2_aditivo = this.post.dt_inicio_2_aditivo.substr(0,10);
+        }
+        if(this.post.dt_termino_2_aditivo) {
+          this.post.dt_termino_2_aditivo = this.post.dt_termino_2_aditivo.substr(0,10);
+        }
+        if(this.post.dt_inicio_3_aditivo) {
+          this.post.dt_inicio_3_aditivo = this.post.dt_inicio_3_aditivo.substr(0,10);
+        }
+        if(this.post.dt_termino_3_aditivo) {
+          this.post.dt_termino_3_aditivo = this.post.dt_termino_3_aditivo.substr(0,10);
+        }
+        if(this.post.desligado) {
+          this.post.desligado = this.post.desligado.substr(0,10);
+        }
+        this.converteHorarioEntrada();
+        this.converteHorarioSaida();
+        this.msg.success = true;
+        this.msg.sucesso = 'Dados atualizados com sucesso!';
+        this.scrollTop();
+      })
+      .catch(e => {
+        this.converteNascimento();
+        this.converteRecessos();
+        if(this.post.dt_inicio) {
+          this.post.dt_inicio = this.post.dt_inicio.substr(0,10);
+        }
+        if(this.post.dt_termino) {
+          this.post.dt_termino = this.post.dt_termino.substr(0,10);
+        }
+        if(this.post.dt_termino_inicial_lauda) {
+          this.post.dt_termino_inicial_lauda = this.post.dt_termino_inicial_lauda.substr(0,10);
+        }
+        if(this.post.dt_inicio_1_aditivo) {
+          this.post.dt_inicio_1_aditivo = this.post.dt_inicio_1_aditivo.substr(0,10);
+        }
+        if(this.post.dt_termino_1_aditivo) {
+          this.post.dt_termino_1_aditivo = this.post.dt_termino_1_aditivo.substr(0,10);
+        }
+        if(this.post.dt_inicio_2_aditivo) {
+          this.post.dt_inicio_2_aditivo = this.post.dt_inicio_2_aditivo.substr(0,10);
+        }
+        if(this.post.dt_termino_2_aditivo) {
+          this.post.dt_termino_2_aditivo = this.post.dt_termino_2_aditivo.substr(0,10);
+        }
+        if(this.post.dt_inicio_3_aditivo) {
+          this.post.dt_inicio_3_aditivo = this.post.dt_inicio_3_aditivo.substr(0,10);
+        }
+        if(this.post.dt_termino_3_aditivo) {
+          this.post.dt_termino_3_aditivo = this.post.dt_termino_3_aditivo.substr(0,10);
+        }
+        if(this.post.desligado) {
+          this.post.desligado = this.post.desligado.substr(0,10);
+        }
+        this.converteHorarioEntrada();
+        this.converteHorarioSaida();
+        this.msg.error = true;
+        this.msg.erro = 'Erro ao atualizar dados';
+        this.scrollTop();
+      })
+      console.log(this.post)
+    },
+    selectVaga() {
+      let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
+      this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
     }
-  },
-  mounted() {
-    this.showModal()
   }
-  
 }
 </script>
 
