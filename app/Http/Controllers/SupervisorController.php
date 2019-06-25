@@ -24,7 +24,7 @@ class SupervisorController extends Controller
             'formacao'=>$request->input('formacao'),
             'conselho_profissional'=>$request->input('conselho_profissional'),
             'tel_contato'=>$request->input('tel_contato'),
-            'e_mail'=>$request->input('e-mail'),
+            'e_mail'=>$request->input('e_mail'),
             'atividades_estagiario'=>$request->input('atividades_estagiario'),
             'situacao'=>$request->input('situacao'),
             'cpf'=>$request->input('cpf')

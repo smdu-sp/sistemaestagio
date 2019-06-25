@@ -372,7 +372,7 @@ export default {
         validaEstado(estado) { this.validacao(estado, 'estadoValido')},
         validaCep(cep) { this.validacao(cep, 'cepValido'); },
         validaCelular(celular) { this.validacao(celular, 'celularValido') },
-        validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'naturalidadeValida')},
+        validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'nacionalidadeValida')},
         validaNaturalidade(naturalidade) { this.validacao(naturalidade, 'naturalidadeValida') },
         validaRaca(raca) { this.validacao(raca, 'racaValida') },
         validaCpf(cpf) { this.validacao(cpf, 'cpfValido') },

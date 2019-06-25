@@ -8,7 +8,6 @@ class Departamento extends Model
 {
     protected $table = 'tab_setores_completo';
     public $timestamps = false;
-    protected $primaryKey = 'eh';
     protected $fillable = [
         'eh',
         'secretaria',

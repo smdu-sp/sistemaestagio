@@ -1,4 +1,4 @@
-class Vaga {
+export class Vaga {
     constructor(codigo, situacao, departamentoHierarquico, sigla, status, historico = null, anexos = null) {
         this.codigo = codigo;
         this.situacao = situacao;

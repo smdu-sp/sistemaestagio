@@ -42,11 +42,16 @@
                     </li>
                 <li>
                     <li>
-                        <i class="fas fa-chevron-down mr-2" @click="mostrarMenuCadastro"></i>
-                        Cadastro
-                        <ul v-if="menuCadastro">
+                        <li @click="mostrarMenuCadastro">
+                            <i class="fas fa-chevron-down mr-2"></i>
+                            Cadastro
+                        </li>
+                        <ul v-if="menuCadastro" class="ml-4">
                             <li>
                                 <router-link to="/cadastroestagiario">Estagiario</router-link>
+                            </li>
+                            <li>
+                                <router-link to="/cadastrosupervisor">Supervisor</router-link>
                             </li>
                             <li>
                                 <router-link to="/cadastrovaga">Vaga</router-link>
@@ -91,11 +96,20 @@ aside {
 
 nav ul {
     list-style: none;
+    display: block;
+    width: 95%;
 }
 
 nav ul li {
     color: #fff;
     margin-bottom: 5px;
+    cursor: pointer;
+    display: block;
+}
+
+nav ul li:hover {
+    background-color: #f2f2f2;
+    color: #262626;
 }
 
 .dashboard {

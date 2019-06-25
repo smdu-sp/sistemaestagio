@@ -68,4 +68,9 @@ Route::middleware('cors')->name('api.')->group(function() {
         Route::delete('/{id}', 'CursoController@delete')->name('deletar_curso'); // Deleta Curso
         Route::patch('/{id}', 'CursoController@update')->name('editar_curso'); // Atualiza Curso
     });
+
+    // Rotas Cargos Supervisores
+    Route::prefix('cargos')->group(function() {
+        Route::get('/', 'CargoController@getCargo')->name('cargos'); // Retornar todos os cargos
+    });
 });

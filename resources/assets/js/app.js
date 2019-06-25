@@ -41,7 +41,7 @@ import HomeComponent from './components/HomeComponent.vue';
 import AsideComponent from './components/AsideComponent.vue';
 import HeaderComponent from './components/HeaderComponent.vue';
 import MainComponent from './components/MainComponent.vue';
-import CadastroComponent from './components/CadastroComponent.vue';
+import CadastroVaga from './components/CadastroVaga.vue';
 import DadosPessoais from './components/cadastrar_estagiario/DadosPessoais.vue';
 import NavEstagiario from './components/cadastrar_estagiario/NavEstagiario.vue';
 import InformacoesContratuais from './components/cadastrar_estagiario/InformacoesContratuais.vue';
@@ -55,12 +55,13 @@ import DadosBancariosAtualizar from './components/atualizar_estagiario/DadosBanc
 import FormAtualizacao from './components/atualizar_estagiario/FormAtualizacao.vue';
 import ConsultaEstagiario from './components/atualizar_estagiario/ConsultaEstagiario.vue';
 import ModalConsultaCpf from './components/ModalConsultaCpf.vue';
+import CadastroSupervisor from './components/CadastroSupervisor.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
 Vue.component('header-component', HeaderComponent);
 Vue.component('main-component', MainComponent);
-Vue.component('cadastro-component', CadastroComponent);
+Vue.component('cadastro-vaga-component', CadastroVaga);
 Vue.component('dados-pessoais', DadosPessoais);
 Vue.component('nav-estagiario', NavEstagiario);
 Vue.component('informacoes-contratuais', InformacoesContratuais);
@@ -74,6 +75,7 @@ Vue.component('form-atualizacao', FormAtualizacao);
 Vue.component('consulta-estagiario', ConsultaEstagiario);
 Vue.component('dados-bancarios-atualizar', DadosBancariosAtualizar);
 Vue.component('modal-consulta-cpf', ModalConsultaCpf);
+Vue.component('cadastro-supervisor-component', CadastroSupervisor);
 
 import { routes } from './routes.js';
 
