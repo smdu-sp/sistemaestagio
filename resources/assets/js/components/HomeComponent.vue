@@ -5,7 +5,9 @@
         <aside-component 
         :showModal="showModal" 
         :menuCadastro="menuCadastro" 
-        :mostrarMenuCadastro="mostrarMenuCadastro"></aside-component>
+        :mostrarMenuCadastro="mostrarMenuCadastro"
+        :mostrarMenuConsulta="mostrarMenuConsulta"
+        :menuConsulta="menuConsulta"></aside-component>
       </div>
         <div class="col-9 d-flex flex-column">
           <header-component></header-component>
@@ -20,7 +22,8 @@
 export default {
   data() {
     return {
-      menuCadastro: false
+      menuCadastro: false,
+      menuConsulta: false
     }
   },
   methods: {
@@ -31,7 +34,12 @@ export default {
       this.$children[2].$refs['my-modal'].hide();
     },
     mostrarMenuCadastro() {
+      this.menuConsulta = false;
       this.menuCadastro = !this.menuCadastro;
+    },
+    mostrarMenuConsulta() {
+      this.menuCadastro = false;
+      this.menuConsulta = !this.menuConsulta;
     }
   }
 }

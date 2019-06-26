@@ -31,32 +31,41 @@
             <ul>
                 <li>
                     <li>
-                        <img src="../../../../public/icones/icons8-velocidade-50.png" alt="Dashboard" style="width: 20px;">
+                        <img src="../../../../public/icones/icons8-velocidade-50.png" alt="Home" style="width: 20px;">
                         <router-link to="/">Home</router-link>
                     </li>
                 <li>
                 <li>
-                    <li id="show-btn" @click="showModal"> <!-- Ativa modal -->
+                    <li @click="mostrarMenuConsulta">
                         <i class="fas fa-chevron-down mr-2"></i>
-                        <router-link to="/consulta">Consulta</router-link>
+                        Consulta
                     </li>
+                    <transition name="fade">
+                        <ul v-if="menuConsulta" class="ml-4">
+                            <li id="show-btn" @click="showModal"> <!-- Ativa modal -->
+                                <router-link to="/consulta">Estagiario</router-link>
+                            </li>
+                        </ul>
+                    </transition>
                 <li>
                     <li>
                         <li @click="mostrarMenuCadastro">
                             <i class="fas fa-chevron-down mr-2"></i>
                             Cadastro
                         </li>
-                        <ul v-if="menuCadastro" class="ml-4">
-                            <li>
-                                <router-link to="/cadastroestagiario">Estagiario</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/cadastrosupervisor">Supervisor</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/cadastrovaga">Vaga</router-link>
-                            </li>
-                        </ul>
+                        <transition name="fade">
+                            <ul v-if="menuCadastro" class="ml-4">
+                                <li>
+                                    <router-link to="/cadastroestagiario">Estagiario</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/cadastrosupervisor">Supervisor</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/cadastrovaga">Vaga</router-link>
+                                </li>
+                            </ul>
+                        </transition>
                     </li>
                 </li>
             </ul>                    
@@ -66,10 +75,14 @@
 </template>
 <script>
 export default {
-    props: ['showModal', 'menuCadastro', 'mostrarMenuCadastro']
+    props: ['showModal', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta']
 }
 </script>
 <style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+
 div .col-6 {
   background: transparent;
 }
@@ -96,7 +109,6 @@ aside {
 
 nav ul {
     list-style: none;
-    display: block;
     width: 95%;
 }
 
@@ -104,13 +116,12 @@ nav ul li {
     color: #fff;
     margin-bottom: 5px;
     cursor: pointer;
-    display: block;
 }
 
-nav ul li:hover {
+/* nav ul li:hover {
     background-color: #f2f2f2;
     color: #262626;
-}
+} */
 
 .dashboard {
     background: rgba(255, 255, 255, 0.1);
