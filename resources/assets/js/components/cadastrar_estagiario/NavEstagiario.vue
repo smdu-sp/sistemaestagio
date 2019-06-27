@@ -13,13 +13,32 @@
         Revise os campos em vermelho
     </div>
 
-
     <modal-component></modal-component><!-- Modal acionado pelo componente Botoes.vue -->
+
+    <div><!-- Exibe este modal caso o usuario clique no botao de cadastrar supervisor -->
+        <b-modal v-model="exibeModalSupervisor" size="lg">
+            <cadastro-supervisor-component></cadastro-supervisor-component>
+        </b-modal>
+    </div>
+
+    <div> <!-- Exibe este modal caso o cpf já exista na base de dados -->
+        <b-modal v-model="modalCpf">
+            O CPF inserido já existe na base de dados<br/>
+            Digite outro por favor
+        </b-modal>
+    </div>
+
+    <div> <!-- Exibe este modal caso o cod de estudante já exista na base de dados -->
+        <b-modal v-model="modalCodEstudante">
+            O Código de estudante inserido já existe na base de dados<br/>
+            Digite outro por favor
+        </b-modal>
+    </div>
 
     <!-- Formulários -->
     <b-card no-body>
         <b-tabs card>
-            <b-tab title="Dados Pessoais" active>
+            <b-tab title="Dados Pessoais">
                 <b-card-text>
                     <dados-pessoais
                     :post="post"
@@ -65,7 +84,7 @@
                     />
                 </b-card-text>
             </b-tab>
-            <b-tab title="Informações Contratuais">
+            <b-tab title="Informações Contratuais" active>
                 <b-card-text>
                     <informacoes-contratuais
                     :post="post"
@@ -89,6 +108,7 @@
                     :horarioSaidaValido="horarioSaidaValido"
                     :validaSituacao="validaSituacao"
                     :situacaoValida="situacaoValida"
+                    :modalSupervisor="modalSupervisor"
                     />
                 </b-card-text>
             </b-tab>
@@ -156,6 +176,10 @@ export default {
             revisarCampos: false,
             camposValidacao: [],
             modalShow: false,
+            modalCpf: false,
+            modalCodEstudante: false,
+            exibeModalSupervisor: false,
+            contadorCadastro: 0
         }
     },
     beforeMount() {
@@ -176,20 +200,108 @@ export default {
         this.requisicaoGet(uriVagas, 'vagas');
     },
     methods: {
-        inserirEstagiario() {
-            this.converteCep();
-            this.alteracaoSupervisor();
-            this.horarioVariavel();
-            this.dataModificacao();
-            this.horaModificacao();
-            this.converteCelular();
-            this.converteConclusaoCurso();
-            this.alteraStatusVaga();
-            this.converteDatas();
-            this.validaCampos();
+        modalSupervisor() {
+            this.exibeModalSupervisor = !this.exibeModalSupervisor;
         },
-        sair() {
-            console.log(this.$route);
+        converteCep() {
+            let cep = this.post.cep;
+            if(cep) {
+                let cep1 = cep.substr(0,5);
+                let cep2 = cep.substr(5, 7);
+                let cepFormatado = `${cep1}-${cep2}`;
+                this.post.cep = cepFormatado;
+            }
+        },
+        alteracaoSupervisor() {
+            if(!this.post.houve_alteracao_supervisor) {
+                this.post.houve_alteracao_supervisor = 0;
+            }
+        },
+        horarioVariavel() {
+            if(!this.post.horario_variavel) {
+                this.post.horario_variavel = 0;
+            } else {
+                this.post.horario_variavel = 1;
+            }
+        },
+        dataModificacao() {
+            let date = new Date();
+            let ano = date.getFullYear();
+            let mes = date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth() + 1}`;
+            let dia = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
+
+            let data = `${ano}-${mes}-${dia} 00:00:00`;
+            this.post.data_modificacao = data
+        },
+        horaModificacao() {
+            let date = new Date();
+            let ano = date.getFullYear();
+            let mes = date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth() + 1}`;
+            let dia = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
+            let hora = date.getHours() >= 10 ? date.getHours() : `0${date.getHours()}`;
+            let minuto = date.getMinutes() >= 10 ? date.getMinutes() : `0${date.getMinutes()}`;
+            let segundo = date.getSeconds() >= 10 ? date.getSeconds() : `0${date.getSeconds()}`;
+
+            let dataHora = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`
+            this.post.hora_modificacao = dataHora
+        },
+        converteCelular(){
+            let celular = this.post.fone_celular;
+            if(celular) {
+                if(celular.substr(0,1) != '(') {
+                    let codArea = celular.substr(0,2);
+                    let telParte1 = celular.substr(2,5);
+                    let telParte2 = celular.substr(7, celular.length);
+                    let celFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
+                    this.post.fone_celular = celFormatado;
+                }
+            }
+        },
+        converteConclusaoCurso() {
+            let data = this.post.mes_ano_previsto_curso;
+            if(data) {
+                let mes = data.substr(0,2);
+                let ano = data.substr(3, data.length);
+                let dataFormatada = `${mes}${ano}`;
+                this.post.mes_ano_previsto_curso = dataFormatada;
+            }
+        },
+        alteraStatusVaga() {
+            let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
+            this.axios.patch(uriVagas, this.statusVaga).then(response => response);
+        },
+        converteDatas() {
+            if(this.post.dt_inicio) {
+                this.post.dt_inicio == `${this.post.dt_inicio.substr(0,10)} 00:00:00` ? this.post.dt_inicio  : this.post.dt_inicio += ' 00:00:00';
+            }
+            if(this.post.dt_termino) {
+                this.post.dt_termino == `${this.post.dt_termino.substr(0,10)} 00:00:00` ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
+            }
+            if(this.post.dt_termino) {
+                this.post.dt_termino_inicial_lauda = this.post.dt_termino;
+            }
+            if(this.post.horario_entrada) {
+                this.post.horario_entrada = this.post.horario_entrada.length == 5 ? `1899-12-30 ${this.post.horario_entrada}:00` : this.post.horario_entrada;
+            }
+            if(this.post.horario_saida) {
+                this.post.horario_saida = this.post.horario_saida.length == 5 ? `1899-12-30 ${this.post.horario_saida}:00` : this.post.horario_saida;
+            }
+        },
+        cadastraBanco() {
+            let uriEstagiarios = 'http://localhost:8000/api/estagiarios';
+            this.axios
+            .post(uriEstagiarios, this.post)
+            .then(response => {
+                this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
+                this.msg.success = true;
+            })
+            .catch(e => {
+                this.msg.erro = 'Erro ao cadastrar estagiário';
+                this.msg.error = true;
+            })
+        },
+        scrollTop() { 
+            window.scrollTo(0,0);
         },
         validaCampos() {
             this.camposValidacao = [
@@ -241,129 +353,71 @@ export default {
                 this.scrollTop();
             }
         },
-        scrollTop() { 
-            window.scrollTo(0,0);
+        inserirEstagiario() {
+            this.converteCep();
+            this.alteracaoSupervisor();
+            this.horarioVariavel();
+            this.dataModificacao();
+            this.horaModificacao();
+            this.converteCelular();
+            this.converteConclusaoCurso();
+            this.alteraStatusVaga();
+            this.converteDatas();
+            this.validaCampos();
         },
         requisicaoGet(uri, variavel) {
             this.axios.get(uri).then(response => {
                 this[variavel] = response.data
             })
         },
-        alteraStatusVaga() {
-            let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
-            this.axios.patch(uriVagas, this.statusVaga).then(response => response);
-        },
-        converteCep() {
-            let cep = this.post.cep;
-            if(cep) {
-                let cep1 = cep.substr(0,5);
-                let cep2 = cep.substr(5, 7);
-                let cepFormatado = `${cep1}-${cep2}`;
-                this.post.cep = cepFormatado;
-            }
-        },
-        alteracaoSupervisor() {
-            if(!this.post.houve_alteracao_supervisor) {
-                this.post.houve_alteracao_supervisor = 0;
-            }
-        },
-        horarioVariavel() {
-            if(!this.post.horario_variavel) {
-                this.post.horario_variavel = 0;
-            } else {
-                this.post.horario_variavel = 1;
-            }
-        },
-        dataModificacao() {
-            let date = new Date();
-            let ano = date.getFullYear();
-            let mes = date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth() + 1}`;
-            let dia = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
-
-            let data = `${ano}-${mes}-${dia} 00:00:00`;
-            this.post.data_modificacao = data
-        },
-        horaModificacao() {
-            let date = new Date();
-            let ano = date.getFullYear();
-            let mes = date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth() + 1}`;
-            let dia = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
-            let hora = date.getHours() >= 10 ? date.getHours() : `0${date.getHours()}`;
-            let minuto = date.getMinutes() >= 10 ? date.getMinutes() : `0${date.getMinutes()}`;
-            let segundo = date.getSeconds() >= 10 ? date.getSeconds() : `0${date.getSeconds()}`;
-
-            let dataHora = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`
-            this.post.hora_modificacao = dataHora
-        },
-        cadastraBanco() {
-            let uriEstagiarios = 'http://localhost:8000/api/estagiarios';
-            this.axios
-            .post(uriEstagiarios, this.post)
-            .then(response => {
-                this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
-                this.msg.success = true;
-            })
-            .catch(e => {
-                this.msg.erro = 'Erro ao cadastrar estagiário';
-                this.msg.error = true;
-            })
-        },
-        converteCelular(){
-            let celular = this.post.fone_celular;
-            if(celular) {
-                if(celular.substr(0,1) != '(') {
-                    let codArea = celular.substr(0,2);
-                    let telParte1 = celular.substr(2,5);
-                    let telParte2 = celular.substr(7, celular.length);
-                    let celFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
-                    this.post.fone_celular = celFormatado;
-                }
-            }
-        },
-        converteFone() {
-        let fone = this.post.fone_residencial;
-        if(fone) {
-            if(fone.substr(0,1) != '(') {
-                let codArea = fone.substr(0,2);
-                let telParte1 = fone.substr(2,4);
-                let telParte2 = fone.substr(6, fone.length);
-                let foneFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
-                this.post.fone_residencial = foneFormatado;                    
-            }
-        }
-        },
         selectVaga() {
             let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
             this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
         },
-        converteConclusaoCurso() {
-            let data = this.post.mes_ano_previsto_curso;
-            if(data) {
-                let mes = data.substr(0,2);
-                let ano = data.substr(3, data.length);
-                let dataFormatada = `${mes}${ano}`;
-                this.post.mes_ano_previsto_curso = dataFormatada;
+        validacao(valorCampo, variavelBooleana) {
+            if(!valorCampo.target.value) {
+                this[variavelBooleana] = true
+            } else {
+                this[variavelBooleana] = false
             }
         },
-        converteDatas() {
-            if(this.post.dt_inicio) {
-                this.post.dt_inicio == `${this.post.dt_inicio.substr(0,10)} 00:00:00` ? this.post.dt_inicio  : this.post.dt_inicio += ' 00:00:00';
+        verificaDuplicidadeCpf() {
+            if(this.post.cpf.length == 11) {
+                const uriCpf = `http://localhost:8000/api/estagiarios/${this.post.cpf}`;
+
+                this.axios
+                .get(uriCpf)
+                .then(response => {
+                    this.modalCpf = !this.modalCpf;
+                    this.cpfValido = true;
+                    this.post.cpf = '';
+                })
+                .catch(error => {
+
+                })
             }
-            if(this.post.dt_termino) {
-                this.post.dt_termino == `${this.post.dt_termino.substr(0,10)} 00:00:00` ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
-            }
-            if(this.post.dt_termino) {
-                this.post.dt_termino_inicial_lauda = this.post.dt_termino;
-            }
-            if(this.post.horario_entrada) {
-                this.post.horario_entrada = this.post.horario_entrada.length == 5 ? `1899-12-30 ${this.post.horario_entrada}:00` : this.post.horario_entrada;
-            }
-            if(this.post.horario_saida) {
-                this.post.horario_saida = this.post.horario_saida.length == 5 ? `1899-12-30 ${this.post.horario_saida}:00` : this.post.horario_saida;
+        },
+        verificaDuplicidadeCodEstudante() {
+            if(this.post.cod_estudante) {
+                const uriCodEstudante = `http://localhost:8000/api/cod/${this.post.cod_estudante}`;
+
+                this.axios
+                .get(uriCodEstudante)
+                .then(response => {
+                    this.modalCodEstudante = !this.modalCodEstudante;
+                    this.codValido = true;
+                    this.post.cod_estudante = '';
+                })
+                .catch(error => {
+
+                })
             }
         },
         validaNome(nome) { this.validacao(nome, 'nomeValido') },
-        validaCodEstudante(cod) { this.validacao(cod, 'codValido') },
+        validaCodEstudante(cod) { 
+            this.validacao(cod, 'codValido');
+            this.verificaDuplicidadeCodEstudante();
+        },
         validaContratante(contratante) { this.validacao(contratante, 'contratanteValido') },
         validaVaga(vaga) { this.validacao(vaga, 'vagaValida'); },
         validaEndereco(endereco) { this.validacao(endereco, 'enderecoValido') },
@@ -375,7 +429,10 @@ export default {
         validaNacionalidade(nacionalidade) { this.validacao(nacionalidade, 'nacionalidadeValida')},
         validaNaturalidade(naturalidade) { this.validacao(naturalidade, 'naturalidadeValida') },
         validaRaca(raca) { this.validacao(raca, 'racaValida') },
-        validaCpf(cpf) { this.validacao(cpf, 'cpfValido') },
+        validaCpf(cpf) { 
+            this.validacao(cpf, 'cpfValido');
+            this.verificaDuplicidadeCpf();            
+        },
         validaRg(rg) { this.validacao(rg, 'rgValido') },
         validaEmail(email) { this.validacao(email, 'emailValido') },
         validaInstituicao(instituicao) { this.validacao(instituicao, 'instituicaoValida') },
@@ -385,14 +442,7 @@ export default {
         validaSupervisor(supervisor) { this.validacao(supervisor, 'supervisorValido') },
         validaHorarioEntrada(horaEntrada) { this.validacao(horaEntrada, 'horarioEntradaValido') },
         validaHorarioSaida(horaSaida) { this.validacao(horaSaida, 'horarioSaidaValido') },
-        validaSituacao(situacao) { this.validacao(situacao, 'situacaoValida') },
-        validacao(valorCampo, variavelBooleana) {
-            if(!valorCampo.target.value) {
-                this[variavelBooleana] = true
-            } else {
-                this[variavelBooleana] = false
-            }
-        }
+        validaSituacao(situacao) { this.validacao(situacao, 'situacaoValida') }
     }
 }
 
@@ -415,6 +465,9 @@ b-card {
 }
 .card-body {
     height: auto;
+}
+.card {
+  width: 98%;
 }
 aside{
     height: 100%;

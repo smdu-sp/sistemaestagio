@@ -147,6 +147,7 @@
 </template>
 
 <script>
+import Supervisor from '../classes/Supervisor';
 export default {
     data() {
         return{
@@ -250,6 +251,7 @@ export default {
             window.scrollTo(0,0);
         },
         inserirSupervisor() {
+            
             const uriSupervisor = 'http://localhost:8000/api/supervisores';
             this.axios
             .post(uriSupervisor, this.supervisor)
@@ -264,7 +266,7 @@ export default {
                 this.msg.error = true;
             })
         }
-    },
+    }
 }
 </script>
 

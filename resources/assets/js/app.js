@@ -56,6 +56,7 @@ import FormAtualizacao from './components/atualizar_estagiario/FormAtualizacao.v
 import ConsultaEstagiario from './components/atualizar_estagiario/ConsultaEstagiario.vue';
 import ModalConsultaCpf from './components/ModalConsultaCpf.vue';
 import CadastroSupervisor from './components/CadastroSupervisor.vue';
+import CadastroCartaoAcesso from './components/CadastroCartaoAcesso';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -76,6 +77,7 @@ Vue.component('consulta-estagiario', ConsultaEstagiario);
 Vue.component('dados-bancarios-atualizar', DadosBancariosAtualizar);
 Vue.component('modal-consulta-cpf', ModalConsultaCpf);
 Vue.component('cadastro-supervisor-component', CadastroSupervisor);
+Vue.component('cadastro-cartao-acesso', CadastroCartaoAcesso);
 
 import { routes } from './routes.js';
 

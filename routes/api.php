@@ -69,8 +69,13 @@ Route::middleware('cors')->name('api.')->group(function() {
         Route::patch('/{id}', 'CursoController@update')->name('editar_curso'); // Atualiza Curso
     });
 
-    // Rotas Cargos Supervisores
+    // Rota Cargos Supervisores
     Route::prefix('cargos')->group(function() {
         Route::get('/', 'CargoController@getCargo')->name('cargos'); // Retornar todos os cargos
+    });
+
+    // Rota Cód. Estudante
+    Route::prefix('cod')->group(function() {
+        Route::get('/{cod_estudante}', 'CodEstudanteController@getCodById')->name('cod'); // Retorna o estagiario pelo cod digitado
     });
 });

@@ -82,16 +82,26 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="inputSupervisor">Supervisor</label>
-                <select class="form-control" @blur="validaSupervisor" :class="{'is-invalid':supervisorValido}" id="inputSupervisor" v-model="post.supervisor" required>
-                    <option></option>
-                    <option v-for="supervisor of supervisores">{{ supervisor.nome }}</option>
-                </select>
-                <div class="invalid-feedback">
-                    Supervisor não pode ser vazio
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="inputSupervisor">Supervisor</label>
+                        <select class="form-control" @blur="validaSupervisor" :class="{'is-invalid':supervisorValido}" id="inputSupervisor" v-model="post.supervisor" required>
+                            <option></option>
+                            <option v-for="supervisor of supervisores">{{ supervisor.nome }}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Supervisor não pode ser vazio
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
+                    <img class="cadastraSupervisor" @click="modalSupervisor" src="../../../../../public/icones/icons8-adicionar-usuario-masculino-16.png" alt="Adicionar Cartão de Acesso">
                 </div>
             </div>
+            
         </div>
         <div class="col-md-3">
             <div class="form-group">
@@ -170,7 +180,6 @@
 </template>
 <script>
 export default {
-
     props: [
         'post', 
         'departamentos', 
@@ -190,11 +199,13 @@ export default {
         'validaSupervisor', 'supervisorValido',
         'validaHorarioEntrada', 'horarioEntradaValido',
         'validaHorarioSaida', 'horarioSaidaValido',
-        'validaSituacao', 'situacaoValida'
+        'validaSituacao', 'situacaoValida',
+        'modalSupervisor'
     ]
-
 }
 </script>
 <style>
-
+.cadastraSupervisor {
+    cursor: pointer;
+}
 </style>

@@ -3,6 +3,7 @@ import Consulta from './components/atualizar_estagiario/ConsultaEstagiario.vue';
 import Main from './components/MainComponent.vue';
 import CadastroVaga from './components/CadastroVaga.vue';
 import CadastroSupervisor from './components/CadastroSupervisor.vue';
+import CadastroCartaoAcesso from './components/CadastroCartaoAcesso.vue';
 
 export const routes = [
     {
@@ -29,5 +30,10 @@ export const routes = [
         name: 'cadastroSupervisor',
         path: '/cadastrosupervisor',
         component: CadastroSupervisor
+    },
+    {
+        name: 'cadastroCartaoAcesso',
+        path: '/cadastrocartaoacesso',
+        component: CadastroCartaoAcesso
     }
 ];

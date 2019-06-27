@@ -59,6 +59,9 @@
                                     <router-link to="/cadastroestagiario">Estagiario</router-link>
                                 </li>
                                 <li>
+                                    <router-link to="/cadastrocartaoacesso">Cartão de Acesso</router-link>
+                                </li>
+                                <li>
                                     <router-link to="/cadastrosupervisor">Supervisor</router-link>
                                 </li>
                                 <li>

@@ -37,7 +37,7 @@
                     id="inputEstudante" 
                     v-model="post.cod_estudante" 
                     >
-                <div v-if="nomeValido" class="invalid-feedback">
+                <div v-if="codValido" class="invalid-feedback">
                     Código não pode ser vazio
                 </div>
             </div>
@@ -66,14 +66,24 @@
                 <input type="text" class="form-control" maxlength="7" id="inputLogin" v-model="post.login" placeholder="Ex: x455214">
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="selectCartao">Cartão Acesso</label>
-                <select class="form-control" id="selectCartao" v-model="post.cartao_acesso">
-                    <option></option>
-                    <option v-for="cartao of cartoes">{{ cartao.id }}</option>
-                </select>
+        <div class="col-md-3">
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="selectCartao">Cartão Acesso</label>
+                        <select class="form-control" id="selectCartao" v-model="post.cartao_acesso">
+                            <option></option>
+                            <option v-for="cartao of cartoes">{{ cartao.id }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label for="">Ñ</label>
+                    <img src="../../../../../public/icones/icons8-adicionar-usuario-masculino-16.png" alt="Adicionar Cartão de Acesso">
+                </div>
             </div>
+
         </div>
     </div><!--/row-->
 

@@ -19155,7 +19155,7 @@ var normalizeComponent = __webpack_require__(9)
 /* script */
 var __vue_script__ = __webpack_require__(382)
 /* template */
-var __vue_template__ = __webpack_require__(384)
+var __vue_template__ = __webpack_require__(383)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19200,13 +19200,13 @@ module.exports = Component.exports
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(390)
+  __webpack_require__(389)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(392)
+var __vue_script__ = __webpack_require__(391)
 /* template */
-var __vue_template__ = __webpack_require__(393)
+var __vue_template__ = __webpack_require__(392)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19251,13 +19251,13 @@ module.exports = Component.exports
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(437)
+  __webpack_require__(436)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(439)
+var __vue_script__ = __webpack_require__(438)
 /* template */
-var __vue_template__ = __webpack_require__(440)
+var __vue_template__ = __webpack_require__(439)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19302,13 +19302,13 @@ module.exports = Component.exports
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(446)
+  __webpack_require__(445)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(448)
+var __vue_script__ = __webpack_require__(447)
 /* template */
-var __vue_template__ = __webpack_require__(449)
+var __vue_template__ = __webpack_require__(448)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19351,7 +19351,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(188);
-module.exports = __webpack_require__(451);
+module.exports = __webpack_require__(450);
 
 
 /***/ }),
@@ -19387,35 +19387,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_MainComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_MainComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_CadastroVaga_vue__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_CadastroVaga_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_CadastroVaga_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_cadastrar_estagiario_DadosPessoais_vue__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_cadastrar_estagiario_DadosPessoais_vue__ = __webpack_require__(384);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_cadastrar_estagiario_DadosPessoais_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_cadastrar_estagiario_DadosPessoais_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_cadastrar_estagiario_NavEstagiario_vue__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_cadastrar_estagiario_NavEstagiario_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_cadastrar_estagiario_NavEstagiario_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_cadastrar_estagiario_InformacoesContratuais_vue__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_cadastrar_estagiario_InformacoesContratuais_vue__ = __webpack_require__(393);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_cadastrar_estagiario_InformacoesContratuais_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_cadastrar_estagiario_InformacoesContratuais_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_cadastrar_estagiario_DadosBancarios_vue__ = __webpack_require__(399);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_cadastrar_estagiario_DadosBancarios_vue__ = __webpack_require__(398);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_cadastrar_estagiario_DadosBancarios_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_cadastrar_estagiario_DadosBancarios_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_cadastrar_estagiario_Botoes_vue__ = __webpack_require__(404);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_cadastrar_estagiario_Botoes_vue__ = __webpack_require__(403);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_cadastrar_estagiario_Botoes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_cadastrar_estagiario_Botoes_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_ModalConsulta_vue__ = __webpack_require__(409);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_ModalConsulta_vue__ = __webpack_require__(408);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_ModalConsulta_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_ModalConsulta_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_atualizar_estagiario_DadosPessoais_vue__ = __webpack_require__(412);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_atualizar_estagiario_DadosPessoais_vue__ = __webpack_require__(411);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_atualizar_estagiario_DadosPessoais_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_atualizar_estagiario_DadosPessoais_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_atualizar_estagiario_InformacoesContratuais_vue__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_atualizar_estagiario_InformacoesContratuais_vue__ = __webpack_require__(416);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_atualizar_estagiario_InformacoesContratuais_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_atualizar_estagiario_InformacoesContratuais_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_atualizar_estagiario_Recesso_vue__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_atualizar_estagiario_Recesso_vue__ = __webpack_require__(421);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_atualizar_estagiario_Recesso_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_atualizar_estagiario_Recesso_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_atualizar_estagiario_DadosBancarios_vue__ = __webpack_require__(427);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_atualizar_estagiario_DadosBancarios_vue__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_atualizar_estagiario_DadosBancarios_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_atualizar_estagiario_DadosBancarios_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_atualizar_estagiario_FormAtualizacao_vue__ = __webpack_require__(432);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_atualizar_estagiario_FormAtualizacao_vue__ = __webpack_require__(431);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_atualizar_estagiario_FormAtualizacao_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_atualizar_estagiario_FormAtualizacao_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_atualizar_estagiario_ConsultaEstagiario_vue__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_atualizar_estagiario_ConsultaEstagiario_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_atualizar_estagiario_ConsultaEstagiario_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_ModalConsultaCpf_vue__ = __webpack_require__(441);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_ModalConsultaCpf_vue__ = __webpack_require__(440);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_ModalConsultaCpf_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_ModalConsultaCpf_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_CadastroSupervisor_vue__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_CadastroSupervisor_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_CadastroSupervisor_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__routes_js__ = __webpack_require__(450);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_CadastroCartaoAcesso__ = __webpack_require__(456);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_CadastroCartaoAcesso___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28__components_CadastroCartaoAcesso__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__routes_js__ = __webpack_require__(449);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -19474,6 +19476,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_7_vuesax___default.a);
 
 
 
+
 Vue.component('aside-component', __WEBPACK_IMPORTED_MODULE_10__components_AsideComponent_vue___default.a);
 Vue.component('home-component', __WEBPACK_IMPORTED_MODULE_9__components_HomeComponent_vue___default.a);
 Vue.component('header-component', __WEBPACK_IMPORTED_MODULE_11__components_HeaderComponent_vue___default.a);
@@ -19493,12 +19496,13 @@ Vue.component('consulta-estagiario', __WEBPACK_IMPORTED_MODULE_25__components_at
 Vue.component('dados-bancarios-atualizar', __WEBPACK_IMPORTED_MODULE_23__components_atualizar_estagiario_DadosBancarios_vue___default.a);
 Vue.component('modal-consulta-cpf', __WEBPACK_IMPORTED_MODULE_26__components_ModalConsultaCpf_vue___default.a);
 Vue.component('cadastro-supervisor-component', __WEBPACK_IMPORTED_MODULE_27__components_CadastroSupervisor_vue___default.a);
+Vue.component('cadastro-cartao-acesso', __WEBPACK_IMPORTED_MODULE_28__components_CadastroCartaoAcesso___default.a);
 
 
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
   mode: 'history',
-  routes: __WEBPACK_IMPORTED_MODULE_28__routes_js__["a" /* routes */]
+  routes: __WEBPACK_IMPORTED_MODULE_29__routes_js__["a" /* routes */]
 });
 
 var app = new Vue(Vue.util.extend({ router: router }, __WEBPACK_IMPORTED_MODULE_3__App_vue___default.a)).$mount('#app');
@@ -92714,6 +92718,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['showModal', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta']
@@ -92794,6 +92801,18 @@ var render = function() {
                         "router-link",
                         { attrs: { to: "/cadastroestagiario" } },
                         [_vm._v("Estagiario")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: "/cadastrocartaoacesso" } },
+                        [_vm._v("Cartão de Acesso")]
                       )
                     ],
                     1
@@ -93905,8 +93924,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 383 */,
-/* 384 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -94374,19 +94392,19 @@ if (false) {
 }
 
 /***/ }),
-/* 385 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(386)
+  __webpack_require__(385)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(388)
+var __vue_script__ = __webpack_require__(387)
 /* template */
-var __vue_template__ = __webpack_require__(389)
+var __vue_template__ = __webpack_require__(388)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -94425,13 +94443,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 386 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(387);
+var content = __webpack_require__(386);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -94451,7 +94469,7 @@ if(false) {
 }
 
 /***/ }),
-/* 387 */
+/* 386 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -94459,17 +94477,27 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 388 */
+/* 387 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -94982,7 +95010,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 389 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -95105,7 +95133,7 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            _vm.nomeValido
+            _vm.codValido
               ? _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
                     "\n                    Código não pode ser vazio\n                "
@@ -95208,52 +95236,60 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "selectCartao" } }, [
-              _vm._v("Cartão Acesso")
+        _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "selectCartao" } }, [
+                  _vm._v("Cartão Acesso")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.cartao_acesso,
+                        expression: "post.cartao_acesso"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "selectCartao" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.post,
+                          "cartao_acesso",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option"),
+                    _vm._v(" "),
+                    _vm._l(_vm.cartoes, function(cartao) {
+                      return _c("option", [_vm._v(_vm._s(cartao.id))])
+                    })
+                  ],
+                  2
+                )
+              ])
             ]),
             _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.cartao_acesso,
-                    expression: "post.cartao_acesso"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "selectCartao" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "cartao_acesso",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option"),
-                _vm._v(" "),
-                _vm._l(_vm.cartoes, function(cartao) {
-                  return _c("option", [_vm._v(_vm._s(cartao.id))])
-                })
-              ],
-              2
-            )
+            _vm._m(0)
           ])
         ])
       ]),
@@ -96617,7 +96653,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "botoes-component",
@@ -96645,6 +96681,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Ñ")]),
+      _vm._v(" "),
+      _c("img", {
+        attrs: {
+          src: __webpack_require__(455),
+          alt: "Adicionar Cartão de Acesso"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "form-group" })
@@ -96662,13 +96713,13 @@ if (false) {
 }
 
 /***/ }),
-/* 390 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(391);
+var content = __webpack_require__(390);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -96688,7 +96739,7 @@ if(false) {
 }
 
 /***/ }),
-/* 391 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -96696,17 +96747,37 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n.col-3 {\r\n    margin: 0;\r\n    padding: 0;\n}\n.col-2 {\r\n    margin: 0;\r\n    padding: 0;\n}\nb-card {\r\n    max-width: 100%;\n}\n.container-fluid {\r\n    margin: 0;\r\n    padding: 0;\n}\n.card-body {\r\n    height: auto;\n}\naside{\r\n    height: 100%;\n}\n.white {\r\n    width: 100%;\r\n    background-color: white;\r\n    height: 323px;\n}\r\n", ""]);
+exports.push([module.i, "\n.col-3 {\r\n    margin: 0;\r\n    padding: 0;\n}\n.col-2 {\r\n    margin: 0;\r\n    padding: 0;\n}\nb-card {\r\n    max-width: 100%;\n}\n.container-fluid {\r\n    margin: 0;\r\n    padding: 0;\n}\n.card-body {\r\n    height: auto;\n}\n.card {\r\n  width: 98%;\n}\naside{\r\n    height: 100%;\n}\n.white {\r\n    width: 100%;\r\n    background-color: white;\r\n    height: 323px;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 392 */
+/* 391 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -96864,7 +96935,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             arrayCamposInvalidos: [],
             revisarCampos: false,
             camposValidacao: [],
-            modalShow: false
+            modalShow: false,
+            modalCpf: false,
+            modalCodEstudante: false,
+            exibeModalSupervisor: false,
+            contadorCadastro: 0
         };
     },
     beforeMount: function beforeMount() {
@@ -96886,59 +96961,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        inserirEstagiario: function inserirEstagiario() {
-            this.converteCep();
-            this.alteracaoSupervisor();
-            this.horarioVariavel();
-            this.dataModificacao();
-            this.horaModificacao();
-            this.converteCelular();
-            this.converteConclusaoCurso();
-            this.alteraStatusVaga();
-            this.converteDatas();
-            this.validaCampos();
-        },
-        sair: function sair() {
-            console.log(this.$route);
-        },
-        validaCampos: function validaCampos() {
-            this.camposValidacao = [{ nomeValido: this.post.nome }, { codValido: this.post.cod_estudante }, { vagaValida: this.post.cod_vaga }, { contratanteValido: this.post.contratado_por }, { enderecoValido: this.post.endereco }, { complementoValido: this.post.nro }, { bairroValido: this.post.bairro }, { estadoValido: this.post.estado }, { cepValido: this.post.cep }, { celularValido: this.post.fone_celular }, { nacionalidadeValida: this.post.nacionalidade }, { naturalidadeValida: this.post.naturalidade }, { racaValida: this.post.raca_cor }, { cpfValido: this.post.cpf }, { rgValido: this.post.rg }, { emailValido: this.post.email_pessoal }, { instituicaoValida: this.post.instituicao_ensino }, { cursoValido: this.post.curso_formacao }, { departamentoValido: this.post.dep_hierarquico }, { setorValido: this.post.setor_estagiado }, { supervisorValido: this.post.supervisor }, { dataInicioValida: this.post.dt_inicio }, { dataFimValida: this.post.dt_inicio }, { horarioEntradaValido: this.post.horario_entrada }, { horarioSaidaValido: this.post.horario_saida }, { situacaoValida: this.post.situacao }];
-
-            var contadorCamposInvalidos = 0;
-            for (var i = 0; i <= this.camposValidacao.length; i++) {
-                for (var key in this.camposValidacao[i]) {
-                    if (this.camposValidacao[i][key]) {
-                        this[key] = false;
-                        this.revisarCampos = false;
-                    } else {
-                        this[key] = true;
-                        this.revisarCampos = true;
-                        contadorCamposInvalidos++;
-                    }
-                }
-            }
-
-            if (contadorCamposInvalidos == 0) {
-                this.cadastraBanco();
-            } else {
-                this.scrollTop();
-            }
-        },
-        scrollTop: function scrollTop() {
-            window.scrollTo(0, 0);
-        },
-        requisicaoGet: function requisicaoGet(uri, variavel) {
-            var _this = this;
-
-            this.axios.get(uri).then(function (response) {
-                _this[variavel] = response.data;
-            });
-        },
-        alteraStatusVaga: function alteraStatusVaga() {
-            var uriVagas = 'http://localhost:8000/api/vagas/' + this.statusVaga.id;
-            this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
-                return response;
-            });
+        modalSupervisor: function modalSupervisor() {
+            this.exibeModalSupervisor = !this.exibeModalSupervisor;
         },
         converteCep: function converteCep() {
             var cep = this.post.cep;
@@ -96982,18 +97006,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var dataHora = ano + '-' + mes + '-' + dia + ' ' + hora + ':' + minuto + ':' + segundo;
             this.post.hora_modificacao = dataHora;
         },
-        cadastraBanco: function cadastraBanco() {
-            var _this2 = this;
-
-            var uriEstagiarios = 'http://localhost:8000/api/estagiarios';
-            this.axios.post(uriEstagiarios, this.post).then(function (response) {
-                _this2.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
-                _this2.msg.success = true;
-            }).catch(function (e) {
-                _this2.msg.erro = 'Erro ao cadastrar estagiário';
-                _this2.msg.error = true;
-            });
-        },
         converteCelular: function converteCelular() {
             var celular = this.post.fone_celular;
             if (celular) {
@@ -97006,26 +97018,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
         },
-        converteFone: function converteFone() {
-            var fone = this.post.fone_residencial;
-            if (fone) {
-                if (fone.substr(0, 1) != '(') {
-                    var codArea = fone.substr(0, 2);
-                    var telParte1 = fone.substr(2, 4);
-                    var telParte2 = fone.substr(6, fone.length);
-                    var foneFormatado = '(' + codArea + ') ' + telParte1 + '-' + telParte2;
-                    this.post.fone_residencial = foneFormatado;
-                }
-            }
-        },
-        selectVaga: function selectVaga() {
-            var _this3 = this;
-
-            var uriStatusVaga = 'http://localhost:8000/api/vagas/' + this.post.cod_vaga;
-            this.axios.get(uriStatusVaga).then(function (response) {
-                return _this3.statusVaga = response.data;
-            });
-        },
         converteConclusaoCurso: function converteConclusaoCurso() {
             var data = this.post.mes_ano_previsto_curso;
             if (data) {
@@ -97034,6 +97026,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var dataFormatada = '' + mes + ano;
                 this.post.mes_ano_previsto_curso = dataFormatada;
             }
+        },
+        alteraStatusVaga: function alteraStatusVaga() {
+            var uriVagas = 'http://localhost:8000/api/vagas/' + this.statusVaga.id;
+            this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
+                return response;
+            });
         },
         converteDatas: function converteDatas() {
             if (this.post.dt_inicio) {
@@ -97052,11 +97050,110 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.post.horario_saida = this.post.horario_saida.length == 5 ? '1899-12-30 ' + this.post.horario_saida + ':00' : this.post.horario_saida;
             }
         },
+        cadastraBanco: function cadastraBanco() {
+            var _this = this;
+
+            var uriEstagiarios = 'http://localhost:8000/api/estagiarios';
+            this.axios.post(uriEstagiarios, this.post).then(function (response) {
+                _this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
+                _this.msg.success = true;
+            }).catch(function (e) {
+                _this.msg.erro = 'Erro ao cadastrar estagiário';
+                _this.msg.error = true;
+            });
+        },
+        scrollTop: function scrollTop() {
+            window.scrollTo(0, 0);
+        },
+        validaCampos: function validaCampos() {
+            this.camposValidacao = [{ nomeValido: this.post.nome }, { codValido: this.post.cod_estudante }, { vagaValida: this.post.cod_vaga }, { contratanteValido: this.post.contratado_por }, { enderecoValido: this.post.endereco }, { complementoValido: this.post.nro }, { bairroValido: this.post.bairro }, { estadoValido: this.post.estado }, { cepValido: this.post.cep }, { celularValido: this.post.fone_celular }, { nacionalidadeValida: this.post.nacionalidade }, { naturalidadeValida: this.post.naturalidade }, { racaValida: this.post.raca_cor }, { cpfValido: this.post.cpf }, { rgValido: this.post.rg }, { emailValido: this.post.email_pessoal }, { instituicaoValida: this.post.instituicao_ensino }, { cursoValido: this.post.curso_formacao }, { departamentoValido: this.post.dep_hierarquico }, { setorValido: this.post.setor_estagiado }, { supervisorValido: this.post.supervisor }, { dataInicioValida: this.post.dt_inicio }, { dataFimValida: this.post.dt_inicio }, { horarioEntradaValido: this.post.horario_entrada }, { horarioSaidaValido: this.post.horario_saida }, { situacaoValida: this.post.situacao }];
+
+            var contadorCamposInvalidos = 0;
+            for (var i = 0; i <= this.camposValidacao.length; i++) {
+                for (var key in this.camposValidacao[i]) {
+                    if (this.camposValidacao[i][key]) {
+                        this[key] = false;
+                        this.revisarCampos = false;
+                    } else {
+                        this[key] = true;
+                        this.revisarCampos = true;
+                        contadorCamposInvalidos++;
+                    }
+                }
+            }
+
+            if (contadorCamposInvalidos == 0) {
+                this.cadastraBanco();
+            } else {
+                this.scrollTop();
+            }
+        },
+        inserirEstagiario: function inserirEstagiario() {
+            this.converteCep();
+            this.alteracaoSupervisor();
+            this.horarioVariavel();
+            this.dataModificacao();
+            this.horaModificacao();
+            this.converteCelular();
+            this.converteConclusaoCurso();
+            this.alteraStatusVaga();
+            this.converteDatas();
+            this.validaCampos();
+        },
+        requisicaoGet: function requisicaoGet(uri, variavel) {
+            var _this2 = this;
+
+            this.axios.get(uri).then(function (response) {
+                _this2[variavel] = response.data;
+            });
+        },
+        selectVaga: function selectVaga() {
+            var _this3 = this;
+
+            var uriStatusVaga = 'http://localhost:8000/api/vagas/' + this.post.cod_vaga;
+            this.axios.get(uriStatusVaga).then(function (response) {
+                return _this3.statusVaga = response.data;
+            });
+        },
+        validacao: function validacao(valorCampo, variavelBooleana) {
+            if (!valorCampo.target.value) {
+                this[variavelBooleana] = true;
+            } else {
+                this[variavelBooleana] = false;
+            }
+        },
+        verificaDuplicidadeCpf: function verificaDuplicidadeCpf() {
+            var _this4 = this;
+
+            if (this.post.cpf.length == 11) {
+                var uriCpf = 'http://localhost:8000/api/estagiarios/' + this.post.cpf;
+
+                this.axios.get(uriCpf).then(function (response) {
+                    _this4.modalCpf = !_this4.modalCpf;
+                    _this4.cpfValido = true;
+                    _this4.post.cpf = '';
+                }).catch(function (error) {});
+            }
+        },
+        verificaDuplicidadeCodEstudante: function verificaDuplicidadeCodEstudante() {
+            var _this5 = this;
+
+            if (this.post.cod_estudante) {
+                var uriCodEstudante = 'http://localhost:8000/api/cod/' + this.post.cod_estudante;
+
+                this.axios.get(uriCodEstudante).then(function (response) {
+                    _this5.modalCodEstudante = !_this5.modalCodEstudante;
+                    _this5.codValido = true;
+                    _this5.post.cod_estudante = '';
+                }).catch(function (error) {});
+            }
+        },
         validaNome: function validaNome(nome) {
             this.validacao(nome, 'nomeValido');
         },
         validaCodEstudante: function validaCodEstudante(cod) {
             this.validacao(cod, 'codValido');
+            this.verificaDuplicidadeCodEstudante();
         },
         validaContratante: function validaContratante(contratante) {
             this.validacao(contratante, 'contratanteValido');
@@ -97093,6 +97190,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         validaCpf: function validaCpf(cpf) {
             this.validacao(cpf, 'cpfValido');
+            this.verificaDuplicidadeCpf();
         },
         validaRg: function validaRg(rg) {
             this.validacao(rg, 'rgValido');
@@ -97123,19 +97221,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         validaSituacao: function validaSituacao(situacao) {
             this.validacao(situacao, 'situacaoValida');
-        },
-        validacao: function validacao(valorCampo, variavelBooleana) {
-            if (!valorCampo.target.value) {
-                this[variavelBooleana] = true;
-            } else {
-                this[variavelBooleana] = false;
-            }
         }
     }
 });
 
 /***/ }),
-/* 393 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -97172,6 +97263,80 @@ var render = function() {
       _c("modal-component"),
       _vm._v(" "),
       _c(
+        "div",
+        [
+          _c(
+            "b-modal",
+            {
+              attrs: { size: "lg" },
+              model: {
+                value: _vm.exibeModalSupervisor,
+                callback: function($$v) {
+                  _vm.exibeModalSupervisor = $$v
+                },
+                expression: "exibeModalSupervisor"
+              }
+            },
+            [_c("cadastro-supervisor-component")],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c(
+            "b-modal",
+            {
+              model: {
+                value: _vm.modalCpf,
+                callback: function($$v) {
+                  _vm.modalCpf = $$v
+                },
+                expression: "modalCpf"
+              }
+            },
+            [
+              _vm._v(
+                "\r\n            O CPF inserido já existe na base de dados"
+              ),
+              _c("br"),
+              _vm._v("\r\n            Digite outro por favor\r\n        ")
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c(
+            "b-modal",
+            {
+              model: {
+                value: _vm.modalCodEstudante,
+                callback: function($$v) {
+                  _vm.modalCodEstudante = $$v
+                },
+                expression: "modalCodEstudante"
+              }
+            },
+            [
+              _vm._v(
+                "\r\n            O Código de estudante inserido já existe na base de dados"
+              ),
+              _c("br"),
+              _vm._v("\r\n            Digite outro por favor\r\n        ")
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "b-card",
         { attrs: { "no-body": "" } },
         [
@@ -97181,7 +97346,7 @@ var render = function() {
             [
               _c(
                 "b-tab",
-                { attrs: { title: "Dados Pessoais", active: "" } },
+                { attrs: { title: "Dados Pessoais" } },
                 [
                   _c(
                     "b-card-text",
@@ -97239,7 +97404,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "b-tab",
-                { attrs: { title: "Informações Contratuais" } },
+                { attrs: { title: "Informações Contratuais", active: "" } },
                 [
                   _c(
                     "b-card-text",
@@ -97266,7 +97431,8 @@ var render = function() {
                           validaHorarioSaida: _vm.validaHorarioSaida,
                           horarioSaidaValido: _vm.horarioSaidaValido,
                           validaSituacao: _vm.validaSituacao,
-                          situacaoValida: _vm.situacaoValida
+                          situacaoValida: _vm.situacaoValida,
+                          modalSupervisor: _vm.modalSupervisor
                         }
                       })
                     ],
@@ -97316,19 +97482,19 @@ if (false) {
 }
 
 /***/ }),
-/* 394 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(395)
+  __webpack_require__(394)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(397)
+var __vue_script__ = __webpack_require__(396)
 /* template */
-var __vue_template__ = __webpack_require__(398)
+var __vue_template__ = __webpack_require__(397)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -97367,13 +97533,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 395 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(396);
+var content = __webpack_require__(395);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -97393,7 +97559,7 @@ if(false) {
 }
 
 /***/ }),
-/* 396 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -97401,13 +97567,13 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.cadastraSupervisor {\r\n    cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 397 */
+/* 396 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -97582,15 +97748,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida']
-
+    props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'modalSupervisor']
 });
 
 /***/ }),
-/* 398 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -97919,59 +98093,83 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputSupervisor" } }, [
-              _vm._v("Supervisor")
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "inputSupervisor" } }, [
+                  _vm._v("Supervisor")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.supervisor,
+                        expression: "post.supervisor"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.supervisorValido },
+                    attrs: { id: "inputSupervisor", required: "" },
+                    on: {
+                      blur: _vm.validaSupervisor,
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.post,
+                          "supervisor",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option"),
+                    _vm._v(" "),
+                    _vm._l(_vm.supervisores, function(supervisor) {
+                      return _c("option", [_vm._v(_vm._s(supervisor.nome))])
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                            Supervisor não pode ser vazio\n                        "
+                  )
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c(
-              "select",
+              "div",
               {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.supervisor,
-                    expression: "post.supervisor"
-                  }
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": _vm.supervisorValido },
-                attrs: { id: "inputSupervisor", required: "" },
-                on: {
-                  blur: _vm.validaSupervisor,
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "supervisor",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
+                staticClass:
+                  "form-group d-flex flex-column align-items-baseline justify-content-end"
               },
               [
-                _c("option"),
-                _vm._v(" "),
-                _vm._l(_vm.supervisores, function(supervisor) {
-                  return _c("option", [_vm._v(_vm._s(supervisor.nome))])
+                _c("img", {
+                  staticClass: "cadastraSupervisor",
+                  attrs: {
+                    src: __webpack_require__(455),
+                    alt: "Adicionar Cartão de Acesso"
+                  },
+                  on: { click: _vm.modalSupervisor }
                 })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Supervisor não pode ser vazio\n                "
-              )
-            ])
+              ]
+            )
           ])
         ]),
         _vm._v(" "),
@@ -98310,19 +98508,19 @@ if (false) {
 }
 
 /***/ }),
-/* 399 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(400)
+  __webpack_require__(399)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(402)
+var __vue_script__ = __webpack_require__(401)
 /* template */
-var __vue_template__ = __webpack_require__(403)
+var __vue_template__ = __webpack_require__(402)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -98361,13 +98559,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 400 */
+/* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(401);
+var content = __webpack_require__(400);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -98387,7 +98585,7 @@ if(false) {
 }
 
 /***/ }),
-/* 401 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -98401,7 +98599,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 402 */
+/* 401 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98488,7 +98686,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 403 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -98752,19 +98950,19 @@ if (false) {
 }
 
 /***/ }),
-/* 404 */
+/* 403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(405)
+  __webpack_require__(404)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(407)
+var __vue_script__ = __webpack_require__(406)
 /* template */
-var __vue_template__ = __webpack_require__(408)
+var __vue_template__ = __webpack_require__(407)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -98803,13 +99001,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 405 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(406);
+var content = __webpack_require__(405);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -98829,7 +99027,7 @@ if(false) {
 }
 
 /***/ }),
-/* 406 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -98843,7 +99041,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""
 
 
 /***/ }),
-/* 407 */
+/* 406 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98872,7 +99070,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 408 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -98938,15 +99136,15 @@ if (false) {
 }
 
 /***/ }),
-/* 409 */
+/* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(410)
+var __vue_script__ = __webpack_require__(409)
 /* template */
-var __vue_template__ = __webpack_require__(411)
+var __vue_template__ = __webpack_require__(410)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -98985,7 +99183,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 410 */
+/* 409 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99008,7 +99206,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
-/* 411 */
+/* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -99068,19 +99266,19 @@ if (false) {
 }
 
 /***/ }),
-/* 412 */
+/* 411 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(413)
+  __webpack_require__(412)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(415)
+var __vue_script__ = __webpack_require__(414)
 /* template */
-var __vue_template__ = __webpack_require__(416)
+var __vue_template__ = __webpack_require__(415)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -99119,13 +99317,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 413 */
+/* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(414);
+var content = __webpack_require__(413);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -99145,7 +99343,7 @@ if(false) {
 }
 
 /***/ }),
-/* 414 */
+/* 413 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -99159,7 +99357,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 415 */
+/* 414 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99678,7 +99876,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 416 */
+/* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -101454,19 +101652,19 @@ if (false) {
 }
 
 /***/ }),
-/* 417 */
+/* 416 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(418)
+  __webpack_require__(417)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(420)
+var __vue_script__ = __webpack_require__(419)
 /* template */
-var __vue_template__ = __webpack_require__(421)
+var __vue_template__ = __webpack_require__(420)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -101505,13 +101703,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 418 */
+/* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(419);
+var content = __webpack_require__(418);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -101531,7 +101729,7 @@ if(false) {
 }
 
 /***/ }),
-/* 419 */
+/* 418 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -101545,7 +101743,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 420 */
+/* 419 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101787,7 +101985,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 421 */
+/* 420 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -102785,19 +102983,19 @@ if (false) {
 }
 
 /***/ }),
-/* 422 */
+/* 421 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(423)
+  __webpack_require__(422)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(425)
+var __vue_script__ = __webpack_require__(424)
 /* template */
-var __vue_template__ = __webpack_require__(426)
+var __vue_template__ = __webpack_require__(425)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -102836,13 +103034,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 423 */
+/* 422 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(424);
+var content = __webpack_require__(423);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -102862,7 +103060,7 @@ if(false) {
 }
 
 /***/ }),
-/* 424 */
+/* 423 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -102876,7 +103074,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 425 */
+/* 424 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -103062,7 +103260,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 426 */
+/* 425 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -103861,19 +104059,19 @@ if (false) {
 }
 
 /***/ }),
-/* 427 */
+/* 426 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(428)
+  __webpack_require__(427)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(430)
+var __vue_script__ = __webpack_require__(429)
 /* template */
-var __vue_template__ = __webpack_require__(431)
+var __vue_template__ = __webpack_require__(430)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -103912,13 +104110,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 428 */
+/* 427 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(429);
+var content = __webpack_require__(428);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -103938,7 +104136,7 @@ if(false) {
 }
 
 /***/ }),
-/* 429 */
+/* 428 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -103952,7 +104150,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 430 */
+/* 429 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104037,7 +104235,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 431 */
+/* 430 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -104285,19 +104483,19 @@ if (false) {
 }
 
 /***/ }),
-/* 432 */
+/* 431 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(433)
+  __webpack_require__(432)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(435)
+var __vue_script__ = __webpack_require__(434)
 /* template */
-var __vue_template__ = __webpack_require__(436)
+var __vue_template__ = __webpack_require__(435)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -104336,13 +104534,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 433 */
+/* 432 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(434);
+var content = __webpack_require__(433);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -104362,7 +104560,7 @@ if(false) {
 }
 
 /***/ }),
-/* 434 */
+/* 433 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -104376,7 +104574,7 @@ exports.push([module.i, "\n.card-body {\r\n    height: auto;\n}\r\n", ""]);
 
 
 /***/ }),
-/* 435 */
+/* 434 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104485,7 +104683,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ["post", "inserirEstagiario", "validaNome", "nomeValido", "validaCodEstudante", "codValido", "validaContratante", "contratanteValido", "validaEndereco", "enderecoValido", "validaCep", "cepValido", "validaBairro", "bairroValido", "validaComplemento", "complementoValido", "validaEstado", "estadoValido", "validaCelular", "celularValido", "validaNaturalidade", "naturalidadeValida", "validaNacionalidade", "nacionalidadeValida", "validaRaca", "racaValida", "validaCpf", "cpfValido", "validaRg", "rgValido", "validaEmail", "emailValido", "validaInstituicao", "instituicaoValida", "validaCurso", "cursoValido", "cartoes", "estados", "instituicoes", "cursos", "departamentos", "supervisores", "vagas", "departamentos", "supervisores", "vagas", "statusVaga", "selectVaga", "validaVaga", "vagaValida", "validaDepartamento", "departamentoValido", "validaSetor", "setorValido", "validaSupervisor", "supervisorValido", "validaHorarioEntrada", "horarioEntradaValido", "validaHorarioSaida", "horarioSaidaValido", "validaSituacao", "situacaoValida"] });
 
 /***/ }),
-/* 436 */
+/* 435 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -104650,13 +104848,13 @@ if (false) {
 }
 
 /***/ }),
-/* 437 */
+/* 436 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(438);
+var content = __webpack_require__(437);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -104676,7 +104874,7 @@ if(false) {
 }
 
 /***/ }),
-/* 438 */
+/* 437 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -104690,7 +104888,7 @@ exports.push([module.i, "\n.card {\r\n  width: 98%;\n}\n.card-body {\r\n  height
 
 
 /***/ }),
-/* 439 */
+/* 438 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105432,7 +105630,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 440 */
+/* 439 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105735,19 +105933,19 @@ if (false) {
 }
 
 /***/ }),
-/* 441 */
+/* 440 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(442)
+  __webpack_require__(441)
 }
 var normalizeComponent = __webpack_require__(9)
 /* script */
-var __vue_script__ = __webpack_require__(444)
+var __vue_script__ = __webpack_require__(443)
 /* template */
-var __vue_template__ = __webpack_require__(445)
+var __vue_template__ = __webpack_require__(444)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -105786,13 +105984,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 442 */
+/* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(443);
+var content = __webpack_require__(442);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -105812,7 +106010,7 @@ if(false) {
 }
 
 /***/ }),
-/* 443 */
+/* 442 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -105826,7 +106024,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 444 */
+/* 443 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105870,7 +106068,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
-/* 445 */
+/* 444 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105987,13 +106185,13 @@ if (false) {
 }
 
 /***/ }),
-/* 446 */
+/* 445 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(447);
+var content = __webpack_require__(446);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -106013,7 +106211,7 @@ if(false) {
 }
 
 /***/ }),
-/* 447 */
+/* 446 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -106027,11 +106225,12 @@ exports.push([module.i, "\n.card {\r\n  width: 98%;\n}\n.card-body {\r\n    heig
 
 
 /***/ }),
-/* 448 */
+/* 447 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Supervisor__ = __webpack_require__(461);
 //
 //
 //
@@ -106180,6 +106379,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -106310,7 +106510,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 449 */
+/* 448 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -106910,7 +107110,7 @@ if (false) {
 }
 
 /***/ }),
-/* 450 */
+/* 449 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -106925,6 +107125,9 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CadastroVaga_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_CadastroVaga_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_CadastroSupervisor_vue__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_CadastroSupervisor_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_CadastroSupervisor_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_CadastroCartaoAcesso_vue__ = __webpack_require__(456);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_CadastroCartaoAcesso_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_CadastroCartaoAcesso_vue__);
+
 
 
 
@@ -106951,13 +107154,545 @@ var routes = [{
     name: 'cadastroSupervisor',
     path: '/cadastrosupervisor',
     component: __WEBPACK_IMPORTED_MODULE_4__components_CadastroSupervisor_vue___default.a
+}, {
+    name: 'cadastroCartaoAcesso',
+    path: '/cadastrocartaoacesso',
+    component: __WEBPACK_IMPORTED_MODULE_5__components_CadastroCartaoAcesso_vue___default.a
 }];
 
 /***/ }),
-/* 451 */
+/* 450 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */
+/***/ (function(module, exports) {
+
+module.exports = "/images/icons8-adicionar-usuario-masculino-16.png?d3d13c5000a34611da4a6f8c0dca8f8a";
+
+/***/ }),
+/* 456 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(457)
+}
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(459)
+/* template */
+var __vue_template__ = __webpack_require__(460)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/CadastroCartaoAcesso.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6f56ffaa", Component.options)
+  } else {
+    hotAPI.reload("data-v-6f56ffaa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 457 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(458);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(10)("607184f8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6f56ffaa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CadastroCartaoAcesso.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6f56ffaa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CadastroCartaoAcesso.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 458 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.card {\r\n  width: 98%;\n}\n.card-body {\r\n    height: auto;\n}\nb-card {\r\n    max-width: 100%;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 459 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            cartaoAcesso: {},
+            idValido: false,
+            situacaoValida: false,
+            revisarCampos: false,
+            msg: {
+                error: false,
+                success: false,
+                camposInvalidos: false,
+                erro: "Erro ao cadastrar cartão de acesso",
+                sucesso: "Cartão de acesso cadastrado com sucesso",
+                campoInvalido: "Revise os campos em vermelho"
+            }
+        };
+    },
+
+    methods: {
+        scrollTop: function scrollTop() {
+            window.scrollTo(0, 0);
+        },
+        validaCampos: function validaCampos() {
+            this.camposValidacao = [{ idValido: this.cartaoAcesso.id }, { situacaoValida: this.cartaoAcesso.situacao }];
+
+            var contadorCamposInvalidos = 0;
+            for (var i = 0; i <= this.camposValidacao.length; i++) {
+                for (var key in this.camposValidacao[i]) {
+                    if (this.camposValidacao[i][key]) {
+                        this[key] = false;
+                        this.revisarCampos = false;
+                    } else {
+                        this[key] = true;
+                        this.revisarCampos = true;
+                        contadorCamposInvalidos++;
+                    }
+                }
+            }
+
+            if (contadorCamposInvalidos == 0) {
+                this.msg.camposInvalidos = false;
+                this.inserirCartaoAcesso();
+            } else {
+                this.msg.camposInvalidos = true;
+                this.scrollTop();
+            }
+        },
+        inserirCartaoAcesso: function inserirCartaoAcesso() {
+            var _this = this;
+
+            var uriCartaoAcesso = 'http://localhost:8000/api/cartao';
+
+            this.axios.post(uriCartaoAcesso, this.cartaoAcesso).then(function (response) {
+                _this.msg.error = false;
+                _this.msg.success = true;
+            }).catch(function (error) {
+                _this.msg.success = false;
+                _this.msg.error = true;
+            });
+        },
+        validacao: function validacao(valorCampo, variavelBooleana) {
+            if (!valorCampo.target.value) {
+                this[variavelBooleana] = true;
+            } else {
+                this[variavelBooleana] = false;
+            }
+        },
+        validaId: function validaId(id) {
+            this.validacao(id, 'idValido');
+        },
+        validaSituacao: function validaSituacao(situacao) {
+            this.validacao(situacao, 'situacaoValida');
+        }
+    }
+});
+
+/***/ }),
+/* 460 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("Cadastrar Cartão de Acesso")]),
+      _vm._v(" "),
+      _vm.msg.error
+        ? _c("div", { staticClass: "alert alert-danger" }, [
+            _vm._v("\n        " + _vm._s(_vm.msg.erro) + "\n    ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.msg.camposInvalidos
+        ? _c("div", { staticClass: "alert alert-danger" }, [
+            _vm._v("\n        " + _vm._s(_vm.msg.campoInvalido) + "\n    ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.msg.success
+        ? _c("div", { staticClass: "alert alert-success" }, [
+            _vm._v("\n        " + _vm._s(_vm.msg.sucesso) + "\n    ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "b-card",
+        { attrs: { "no-body": "" } },
+        [
+          _c(
+            "b-tabs",
+            { attrs: { card: "" } },
+            [
+              _c(
+                "b-tab",
+                { attrs: { title: "Dados do Cartão", active: "" } },
+                [
+                  _c("b-card-text", [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.validaCampos($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Cartão Nº")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cartaoAcesso.id,
+                                    expression: "cartaoAcesso.id"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: { "is-invalid": _vm.idValido },
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Ex: A00004404904135",
+                                  maxlength: "16"
+                                },
+                                domProps: { value: _vm.cartaoAcesso.id },
+                                on: {
+                                  blur: _vm.validaId,
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.cartaoAcesso,
+                                      "id",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.idValido
+                                ? _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                                        Digite o número por favor\n                                    "
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Situação")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.cartaoAcesso.situacao,
+                                      expression: "cartaoAcesso.situacao"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: { "is-invalid": _vm.situacaoValida },
+                                  on: {
+                                    blur: _vm.validaSituacao,
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.cartaoAcesso,
+                                        "situacao",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("option", [_vm._v("ATIVO")]),
+                                  _vm._v(" "),
+                                  _c("option", [_vm._v("INATIVO")]),
+                                  _vm._v(" "),
+                                  _c("option", [_vm._v("EXTRAVIADO")]),
+                                  _vm._v(" "),
+                                  _c("option", [_vm._v("COM DEFEITO")])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm.situacaoValida
+                                ? _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                                            Selecione a situação por favor\n                                        "
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _c("label", { attrs: { for: "" } }, [
+                              _vm._v("Observacoes")
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.cartaoAcesso.observacoes,
+                                  expression: "cartaoAcesso.observacoes"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { rows: "5" },
+                              domProps: { value: _vm.cartaoAcesso.observacoes },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.cartaoAcesso,
+                                    "observacoes",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("botoes-component", {
+                          attrs: { titulo: (_vm.nomebotao = "Salvar") }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6f56ffaa", module.exports)
+  }
+}
+
+/***/ }),
+/* 461 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Supervisor = function Supervisor(nome, rf, cargo, departamento, e_mail, situacao) {
+    var cpf = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+    var tel_contato = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+    var formacao = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
+    var conselho_profissional = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+    var atividades_estagiario = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : null;
+
+    _classCallCheck(this, Supervisor);
+
+    this.nome = nome;
+    this.rf = rf;
+    this.cargo = cargo;
+    this.departamento = departamento;
+    this.e_mail = e_mail;
+    this.situacao = situacao;
+    this.cpf = cpf;
+    this.tel_contato = tel_contato;
+    this.formacao = formacao;
+    this.conselho_profissional = conselho_profissional;
+    this.atividades_estagiario = atividades_estagiario;
+};
+
+/* unused harmony default export */ var _unused_webpack_default_export = (Supervisor);
 
 /***/ })
 /******/ ]);
