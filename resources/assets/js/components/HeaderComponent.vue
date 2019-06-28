@@ -8,7 +8,7 @@
                     <img src="../../../../public/logo/licenciamento.png" alt="Prefeitura de São Paulo" class="img-licenciamento"/>
                     <span class="titulo">Sistema de Controle de Estagiários</span>
                     <div class="d-flex flex-row mr-4">
-                        <div class="mr-2 mt-2">
+                        <!--<div class="mr-2 mt-2">
                             <span alt="Lembrete" class="badge1" data-badge="8">
                                 <img class="icone-lembrete" src="../../../../public/icones/icons8-lembrete-de-compromissos-50.png" />
                             </span>
@@ -19,28 +19,31 @@
                         <span class="flex-column">
                             <span class="msg-user">Olá!</span>
                             <span class="msg-user nome-user">Michael</span>
-                        </span>
+                        </span> 
                         <span class="mt-3 ml-2">
                             <p class="seta seta-direita"></p>
-                        </span>
+                        </span>-->
                     </div>
                 </header>
             </div>
         </div> <!--/row-->
         <!-- row -->
         <div class="row">
-            <div class="col-12 pagina-atual">
-                <p class="home ml-3">Home / Dashboard</p>
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ this.$route.name == 'home' ? '' : this.$route.name }}</li>
+                    </ol>
+                </nav>
             </div>
-            <!-- <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Home</li>
-            </ol>
-            </nav> -->
         </div>
         <!--/row-->
     </div>
     <!--/ Header -->
+
+    
+
 </template>
 <script>
 export default {
@@ -66,6 +69,10 @@ header {
 .titulo {
     display: inline;
     font-family: "Montserrat", sans-serif;
+    width: 260px;
+    float: left;
+    position: absolute;
+    margin-left: 34%;
 }
 
 .icone-lembrete {
@@ -139,4 +146,8 @@ header {
     margin-top: 10px;
 }
 
+.breadcrumb {
+    width: 98%;
+    margin-left: 2px;
+}
 </style>

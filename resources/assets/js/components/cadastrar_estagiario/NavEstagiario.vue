@@ -15,30 +15,37 @@
 
     <modal-component></modal-component><!-- Modal acionado pelo componente Botoes.vue -->
 
-    <div><!-- Exibe este modal caso o usuario clique no botao de cadastrar supervisor -->
-        <b-modal v-model="exibeModalSupervisor" size="lg">
-            <cadastro-supervisor-component></cadastro-supervisor-component>
-        </b-modal>
-    </div>
+   <!-- Exibe este modal caso o usuario clique no botao de cadastrar supervisor -->
+    <b-modal v-model="exibeModalSupervisor" size="lg" ok-only>
+        <cadastro-supervisor-component></cadastro-supervisor-component>
+    </b-modal>
+
+    <b-modal v-model="exibeModalCartaoAcesso" size="lg" ok-only>
+        <cadastro-cartao-acesso-component></cadastro-cartao-acesso-component>
+    </b-modal>
+
+    <b-modal v-model="exibeModalVaga" size="lg" ok-only>
+        <cadastro-vaga-component></cadastro-vaga-component>
+    </b-modal>
 
     <div> <!-- Exibe este modal caso o cpf já exista na base de dados -->
-        <b-modal v-model="modalCpf">
-            O CPF inserido já existe na base de dados<br/>
-            Digite outro por favor
+        <b-modal v-model="modalCpf" ok-only>
+            <p>O CPF inserido já existe na base de dados</p>
+            <p>Digite outro por favor</p>
         </b-modal>
     </div>
 
     <div> <!-- Exibe este modal caso o cod de estudante já exista na base de dados -->
-        <b-modal v-model="modalCodEstudante">
-            O Código de estudante inserido já existe na base de dados<br/>
-            Digite outro por favor
+        <b-modal v-model="modalCodEstudante" ok-only>
+            <p>O Código de estudante inserido já existe na base de dados</p>
+            <p>Digite outro por favor</p>
         </b-modal>
     </div>
 
     <!-- Formulários -->
     <b-card no-body>
         <b-tabs card>
-            <b-tab title="Dados Pessoais">
+            <b-tab title="Dados Pessoais" active>
                 <b-card-text>
                     <dados-pessoais
                     :post="post"
@@ -81,10 +88,12 @@
                     :instituicaoValida="instituicaoValida"
                     :validaCurso="validaCurso"
                     :cursoValido="cursoValido"
+                    :abreModalCartaoAcesso="abreModalCartaoAcesso"
+                    :carregaCartaoAcesso="carregaCartaoAcesso"
                     />
                 </b-card-text>
             </b-tab>
-            <b-tab title="Informações Contratuais" active>
+            <b-tab title="Informações Contratuais">
                 <b-card-text>
                     <informacoes-contratuais
                     :post="post"
@@ -108,7 +117,10 @@
                     :horarioSaidaValido="horarioSaidaValido"
                     :validaSituacao="validaSituacao"
                     :situacaoValida="situacaoValida"
-                    :modalSupervisor="modalSupervisor"
+                    :abreModalSupervisor="abreModalSupervisor"
+                    :carregaSupervisor="carregaSupervisor"
+                    :abreModalVaga="abreModalVaga"
+                    :carregaVaga="carregaVaga"
                     />
                 </b-card-text>
             </b-tab>
@@ -179,17 +191,19 @@ export default {
             modalCpf: false,
             modalCodEstudante: false,
             exibeModalSupervisor: false,
-            contadorCadastro: 0
+            contadorCadastro: 0,
+            exibeModalCartaoAcesso: false,
+            exibeModalVaga: false
         }
     },
     beforeMount() {
-        let uriCartoes = 'http://localhost:8000/api/cartao';
-        let uriEstados = 'http://localhost:8000/api/estados';
-        let uriInstituicoes = 'http://localhost:8000/api/instituicao';
-        let uriCursos = 'http://localhost:8000/api/cursos';
-        let uriDepartamentos = 'http://localhost:8000/api/departamentos';
-        let uriSupervisores = 'http://localhost:8000/api/supervisores'; 
-        let uriVagas = 'http://localhost:8000/api/vagas';
+        const uriCartoes = 'http://localhost:8000/api/cartao';
+        const uriEstados = 'http://localhost:8000/api/estados';
+        const uriInstituicoes = 'http://localhost:8000/api/instituicao';
+        const uriCursos = 'http://localhost:8000/api/cursos';
+        const uriDepartamentos = 'http://localhost:8000/api/departamentos';
+        const uriSupervisores = 'http://localhost:8000/api/supervisores'; 
+        const uriVagas = 'http://localhost:8000/api/vagas';
 
         this.requisicaoGet(uriCartoes, 'cartoes');
         this.requisicaoGet(uriEstados, 'estados');
@@ -200,7 +214,28 @@ export default {
         this.requisicaoGet(uriVagas, 'vagas');
     },
     methods: {
-        modalSupervisor() {
+        abreModalVaga() {
+            this.exibeModalVaga = !this.exibeModalVaga;
+        },
+        carregaVaga() {
+            const uriVagas = 'http://localhost:8000/api/vagas';
+
+            this.requisicaoGet(uriVagas, 'vagas');
+        },
+        abreModalCartaoAcesso() {
+            this.exibeModalCartaoAcesso = !this.exibeModalCartaoAcesso;
+        },
+        carregaCartaoAcesso() {
+            const uriCartoes = 'http://localhost:8000/api/cartao';
+
+            this.requisicaoGet(uriCartoes, 'cartoes');
+        },
+        carregaSupervisor() {
+            const uriSupervisores = 'http://localhost:8000/api/supervisores';
+
+            this.requisicaoGet(uriSupervisores, 'supervisores');
+        },
+        abreModalSupervisor() {
             this.exibeModalSupervisor = !this.exibeModalSupervisor;
         },
         converteCep() {
@@ -468,9 +503,6 @@ b-card {
 }
 .card {
   width: 98%;
-}
-aside{
-    height: 100%;
 }
 .white {
     width: 100%;

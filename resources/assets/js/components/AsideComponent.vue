@@ -1,31 +1,13 @@
 <template>    
     <!-- aside -->
-    <aside>
-        <div>
-            <a href="#" class="mt-3 mb-3 mr-2">
-                <div class="d-flex justify-content-end">
-                    <span class="linha"></span>
-                </div>
-
-                <div class="d-flex justify-content-end">
-                    <span class="linha"></span>
-                </div>
-
-                <div class="d-flex justify-content-end">
-                    <span class="linha"></span>
-                </div>
-            </a>
-        </div>
-        
+    <aside class="col-3" id="menu-lateral">        
 
         <div class="d-flex justify-content-center dashboard align-items-center">
             <span>
-                <img src="../../../../public/icones/icons8-velocidade-50.png" alt="Dashboard">
+                <img class="img-dashboard" src="../../../../public/icones/icons8-velocidade-50.png" alt="Dashboard">
             </span>
             <span class="text-white ml-2">Dashboard</span>
         </div>
-
-        
 
         <nav class="row mt-4 ml-4">
             <ul>
@@ -98,18 +80,12 @@ div .col-6 {
   background-color: gray;
 }
 
-aside {
+
+#menu-lateral{
     background-color: #3A4248;
+    position: fixed;
+    height: 100%;
 }
-
-.linha {
-    width: 35px;
-    height: 4px;
-    background-color: #94AFB5;
-    margin-bottom: 3px;
-    border-radius: 2px;
-}
-
 nav ul {
     list-style: none;
     width: 95%;
@@ -120,11 +96,6 @@ nav ul li {
     margin-bottom: 5px;
     cursor: pointer;
 }
-
-/* nav ul li:hover {
-    background-color: #f2f2f2;
-    color: #262626;
-} */
 
 .dashboard {
     background: rgba(255, 255, 255, 0.1);
@@ -141,5 +112,9 @@ nav ul li a:link {
 nav ul li a:hover {
     text-decoration: none;
     color: white;
+}
+
+.img-dashboard {
+    height: 46px;
 }
 </style>

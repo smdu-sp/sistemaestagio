@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label for="inputEstudante">Cód. Estudante</label>
                 <input type="text" 
-                    @blur="validaCodEstudante" 
+                    @blur="validaCodEstudante"
                     maxlength="20" 
                     :class="{'is-invalid': codValido}" 
                     class="form-control" 
@@ -72,15 +72,20 @@
                 <div class="col-md-10">
                     <div class="form-group">
                         <label for="selectCartao">Cartão Acesso</label>
-                        <select class="form-control" id="selectCartao" v-model="post.cartao_acesso">
+                        <select class="form-control" 
+                            @click="carregaCartaoAcesso"
+                            id="selectCartao" 
+                            v-model="post.cartao_acesso">
                             <option></option>
                             <option v-for="cartao of cartoes">{{ cartao.id }}</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <label for="">Ñ</label>
-                    <img src="../../../../../public/icones/icons8-adicionar-usuario-masculino-16.png" alt="Adicionar Cartão de Acesso">
+                <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
+                    <img src="../../../../../public/icones/icons8-adicionar-48.png"
+                        @click="abreModalCartaoAcesso"
+                        alt="Adicionar Cartão de Acesso"
+                        class="cadastraCartaoAcesso">
                 </div>
             </div>
 
@@ -544,9 +549,15 @@ export default {
         'validaEmail','emailValido',
         'validaInstituicao','instituicaoValida',
         'validaCurso','cursoValido',
-        'converteCep', 'valorNacionalidade'
+        'converteCep', 'valorNacionalidade',
+        'abreModalCartaoAcesso', 'carregaCartaoAcesso'
     ]
 }
 </script>
 <style>
+.cadastraCartaoAcesso {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
 </style>

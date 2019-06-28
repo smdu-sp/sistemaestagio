@@ -3,11 +3,11 @@
     <div class="row">
       <div class="col-3">
         <aside-component 
-        :showModal="showModal" 
-        :menuCadastro="menuCadastro" 
-        :mostrarMenuCadastro="mostrarMenuCadastro"
-        :mostrarMenuConsulta="mostrarMenuConsulta"
-        :menuConsulta="menuConsulta"></aside-component>
+          :showModal="showModal" 
+          :menuCadastro="menuCadastro" 
+          :mostrarMenuCadastro="mostrarMenuCadastro"
+          :mostrarMenuConsulta="mostrarMenuConsulta"
+          :menuConsulta="menuConsulta"></aside-component>
       </div>
         <div class="col-9 d-flex flex-column">
           <header-component></header-component>
@@ -58,4 +58,5 @@ body
 .col-6 {
   background-color: gray;
 }
+
 </style>

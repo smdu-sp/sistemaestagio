@@ -36,7 +36,15 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>RF</label>
-                                        <input type="tel" class="form-control" maxlength="12" v-model="supervisor.rf">
+                                        <input type="tel" 
+                                            @blur="validaRf"
+                                            :class="{'is-invalid': rfValido}"
+                                            class="form-control" 
+                                            maxlength="12" 
+                                            v-model="supervisor.rf">
+                                        <div v-if="rfValido" class="invalid-feedback">
+                                            Digite o RF por favor
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -170,7 +178,8 @@ export default {
                 campoInvalido: "Revise os campos em vermelho"
 
             },
-            camposValidacao: []
+            camposValidacao: [],
+            contadorCadastro: 0
         }
     },
     beforeMount() {
@@ -194,6 +203,7 @@ export default {
                 {departamentoValido: this.supervisor.departamento},
                 {emailValido: this.supervisor.e_mail},
                 {situacaoValida: this.supervisor.situacao},
+                {rfValido: this.supervisor.rf}
             ]
             
             let contadorCamposInvalidos = 0
@@ -259,6 +269,7 @@ export default {
                 this.scrollTop();
                 this.msg.error = false;
                 this.msg.success = true;
+                this.contadorCadastro++;
             })
             .catch(error => {
                 this.scrollTop();

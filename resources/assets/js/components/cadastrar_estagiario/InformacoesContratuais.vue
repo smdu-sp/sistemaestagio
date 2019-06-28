@@ -3,24 +3,36 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="form-group">
-                    <label for="selectVaga">Codigo Vaga</label>
-                    <select type="text" 
-                        @change="selectVaga"
-                        @blur="validaVaga"
-                        :class="{'is-invalid': vagaValida}" 
-                        class="form-control" 
-                        id="selectVaga" 
-                        v-model="post.cod_vaga" 
-                        >
-                        <option></option>
-                        <option v-for="vaga of vagas">{{ vaga.id }}</option>
-                    </select>
-                    <div v-if="vagaValida" class="invalid-feedback">
-                        Vaga não pode ser vazia
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="selectVaga">Codigo Vaga</label>
+                            <select type="text" 
+                                @change="selectVaga"
+                                @click="carregaVaga"
+                                @blur="validaVaga"
+                                :class="{'is-invalid': vagaValida}" 
+                                class="form-control" 
+                                id="selectVaga" 
+                                v-model="post.cod_vaga" 
+                                >
+                                <option></option>
+                                <option v-for="vaga of vagas">{{ vaga.id }}</option>
+                            </select>
+                            <div v-if="vagaValida" class="invalid-feedback">
+                                Vaga não pode ser vazia
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
+                        <img class="cadastraVaga" @click="abreModalVaga" src="../../../../../public/icones/icons8-adicionar-regra-48.png" alt="Adicionar Vaga">
+                    </div>
+                    
                 </div>
             </div>
+            
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="selectStatus">Status Vaga</label>
@@ -87,7 +99,7 @@
                 <div class="col-md-10">
                     <div class="form-group">
                         <label for="inputSupervisor">Supervisor</label>
-                        <select class="form-control" @blur="validaSupervisor" :class="{'is-invalid':supervisorValido}" id="inputSupervisor" v-model="post.supervisor" required>
+                        <select class="form-control" @blur="validaSupervisor" @click="carregaSupervisor" :class="{'is-invalid':supervisorValido}" id="inputSupervisor" v-model="post.supervisor" required>
                             <option></option>
                             <option v-for="supervisor of supervisores">{{ supervisor.nome }}</option>
                         </select>
@@ -98,7 +110,7 @@
                 </div>
 
                 <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
-                    <img class="cadastraSupervisor" @click="modalSupervisor" src="../../../../../public/icones/icons8-adicionar-usuario-masculino-16.png" alt="Adicionar Cartão de Acesso">
+                    <img class="cadastraSupervisor" @click="abreModalSupervisor" src="../../../../../public/icones/icons8-adicionar-usuario-masculino-30.png" alt="Adicionar Supervisor">
                 </div>
             </div>
             
@@ -200,12 +212,18 @@ export default {
         'validaHorarioEntrada', 'horarioEntradaValido',
         'validaHorarioSaida', 'horarioSaidaValido',
         'validaSituacao', 'situacaoValida',
-        'modalSupervisor'
+        'abreModalSupervisor', 'carregaSupervisor',
+        'abreModalVaga', 'carregaVaga'
     ]
 }
 </script>
 <style>
 .cadastraSupervisor {
     cursor: pointer;
+}
+.cadastraVaga {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
 }
 </style>

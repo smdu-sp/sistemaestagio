@@ -77,7 +77,7 @@ Vue.component('consulta-estagiario', ConsultaEstagiario);
 Vue.component('dados-bancarios-atualizar', DadosBancariosAtualizar);
 Vue.component('modal-consulta-cpf', ModalConsultaCpf);
 Vue.component('cadastro-supervisor-component', CadastroSupervisor);
-Vue.component('cadastro-cartao-acesso', CadastroCartaoAcesso);
+Vue.component('cadastro-cartao-acesso-component', CadastroCartaoAcesso);
 
 import { routes } from './routes.js';
 

@@ -12,27 +12,27 @@ export const routes = [
         component: Main
     },
     {
-        name: 'cadastroEstagiario',
+        name: 'Cadastro de Estagiários',
         path: '/cadastroestagiario',
         component: NavEstagiario
     },
     {
-        name: 'consulta',
+        name: 'Consulta de Estagiários',
         path: '/consulta',
         component: Consulta
     },
     {
-        name: 'cadastroVaga',
+        name: 'Cadastro de Vagas',
         path: '/cadastrovaga',
         component: CadastroVaga
     },
     {
-        name: 'cadastroSupervisor',
+        name: 'Cadastro de Supervisores',
         path: '/cadastrosupervisor',
         component: CadastroSupervisor
     },
     {
-        name: 'cadastroCartaoAcesso',
+        name: 'Cadastro de Cartão de Acesso',
         path: '/cadastrocartaoacesso',
         component: CadastroCartaoAcesso
     }
