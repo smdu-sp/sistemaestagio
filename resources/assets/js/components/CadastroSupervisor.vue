@@ -179,13 +179,13 @@ export default {
 
             },
             camposValidacao: [],
-            contadorCadastro: 0
+            urlPadrao: 'http://localhost:8000/api/'
         }
     },
     beforeMount() {
-        let uriDepartamentos = 'http://localhost:8000/api/departamentos';
-        let uriCursos = 'http://localhost:8000/api/cursos';
-        let uriCargos = 'http://localhost:8000/api/cargos';
+        let uriDepartamentos = this.urlPadrao+'departamentos';
+        let uriCursos = this.urlPadrao+'cursos';
+        let uriCargos = this.urlPadrao+'cargos';
         this.requisicaoGet(uriDepartamentos, 'departamentos');
         this.requisicaoGet(uriCursos, 'cursos');
         this.requisicaoGet(uriCargos, 'cargos');
@@ -262,14 +262,17 @@ export default {
         },
         inserirSupervisor() {
             
-            const uriSupervisor = 'http://localhost:8000/api/supervisores';
+            const uriSupervisor = this.urlPadrao+'supervisores';
             this.axios
             .post(uriSupervisor, this.supervisor)
             .then(response => {
                 this.scrollTop();
                 this.msg.error = false;
                 this.msg.success = true;
-                this.contadorCadastro++;
+
+                for(let key in this.supervisor) {
+                    this.supervisor[key] = '';
+                }
             })
             .catch(error => {
                 this.scrollTop();

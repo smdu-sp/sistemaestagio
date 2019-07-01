@@ -195,18 +195,19 @@ export default {
       },
       auxiliarCpf: '',
       mostrarConteudoConsulta: false,
-      loading: false
+      loading: false,
+      urlPadrao: 'http://localhost:8000/api/'
     }
   },
 
   beforeMount() {
-    let uriCartoes = 'http://localhost:8000/api/cartao';
-    let uriEstados = 'http://localhost:8000/api/estados';
-    let uriInstituicoes = 'http://localhost:8000/api/instituicao';
-    let uriCursos = 'http://localhost:8000/api/cursos';
-    let uriDepartamentos = 'http://localhost:8000/api/departamentos';
-    let uriSupervisores = 'http://localhost:8000/api/supervisores'; 
-    let uriVagas = 'http://localhost:8000/api/vagas';
+    let uriCartoes = this.urlPadrao+'cartao';
+    let uriEstados = this.urlPadrao+'estados';
+    let uriInstituicoes = this.urlPadrao+'instituicao';
+    let uriCursos = this.urlPadrao+'cursos';
+    let uriDepartamentos = this.urlPadrao+'departamentos';
+    let uriSupervisores = this.urlPadrao+'supervisores'; 
+    let uriVagas = this.urlPadrao+'vagas';
 
     this.requisicaoGet(uriCartoes, 'cartoes');
     this.requisicaoGet(uriEstados, 'estados');
@@ -324,7 +325,7 @@ export default {
     buscaEstagiario() {
       this.loading = true;
       this.auxiliarCpf = this.post.cpf;
-      let uriEstagiario = `http://localhost:8000/api/estagiarios/${this.post.cpf}`;
+      let uriEstagiario = `${this.urlPadrao}estagiarios/${this.post.cpf}`;
       this.axios
       .get(uriEstagiario)
       .then(response => {
@@ -414,7 +415,7 @@ export default {
       }
     },
     alteraStatusVaga() {
-    let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
+    let uriVagas = `${this.urlPadrao}vagas/${this.statusVaga.id}`;
     this.axios.patch(uriVagas, this.statusVaga).then(response => response);
     },
     converteFone() {
@@ -541,7 +542,7 @@ export default {
       this.atualizaBanco();
     },
     atualizaBanco() {
-      let uriEstagiarios = `http://localhost:8000/api/estagiarios/${this.auxiliarCpf}`;
+      let uriEstagiarios = `${this.urlPadrao}estagiarios/${this.auxiliarCpf}`;
       this.auxiliarCpf = this.post.cpf;   
       this.axios
       .patch(uriEstagiarios, this.post)
@@ -626,7 +627,7 @@ export default {
       console.log(this.post)
     },
     selectVaga() {
-      let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
+      let uriStatusVaga = `${this.urlPadrao}vagas/${this.post.cod_vaga}`;
       this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
     }
   }
