@@ -194,6 +194,7 @@ export default {
             contadorCadastro: 0,
             exibeModalCartaoAcesso: false,
             exibeModalVaga: false,
+<<<<<<< HEAD
             apiUrl: 'teste:8000/api/'
         }
     },
@@ -205,6 +206,19 @@ export default {
         const uriDepartamentos = apiUrl+'departamentos';
         const uriSupervisores = apiUrl+'supervisores'; 
         const uriVagas = apiUrl+'vagas';
+=======
+            urlPadrao: 'http://localhost:8000/api/'
+        }
+    },
+    beforeMount() {
+        const uriCartoes = this.urlPadrao+'cartao';
+        const uriEstados = this.urlPadrao+'estados';
+        const uriInstituicoes = this.urlPadrao+'instituicao';
+        const uriCursos = this.urlPadrao+'cursos';
+        const uriDepartamentos = this.urlPadrao+'departamentos';
+        const uriSupervisores = this.urlPadrao+'supervisores'; 
+        const uriVagas = this.urlPadrao+'vagas';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
         this.requisicaoGet(uriCartoes, 'cartoes');
         this.requisicaoGet(uriEstados, 'estados');
@@ -219,7 +233,11 @@ export default {
             this.exibeModalVaga = !this.exibeModalVaga;
         },
         carregaVaga() {
+<<<<<<< HEAD
             const uriVagas = apiUrl+'vagas';
+=======
+            const uriVagas = this.urlPadrao+'vagas';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
             this.requisicaoGet(uriVagas, 'vagas');
         },
@@ -227,12 +245,20 @@ export default {
             this.exibeModalCartaoAcesso = !this.exibeModalCartaoAcesso;
         },
         carregaCartaoAcesso() {
+<<<<<<< HEAD
             const uriCartoes = apiUrl+'cartao';
+=======
+            const uriCartoes = this.urlPadrao+'cartao';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
             this.requisicaoGet(uriCartoes, 'cartoes');
         },
         carregaSupervisor() {
+<<<<<<< HEAD
             const uriSupervisores = apiUrl+'supervisores';
+=======
+            const uriSupervisores = this.urlPadrao+'supervisores';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
             this.requisicaoGet(uriSupervisores, 'supervisores');
         },
@@ -303,7 +329,7 @@ export default {
             }
         },
         alteraStatusVaga() {
-            let uriVagas = `http://localhost:8000/api/vagas/${this.statusVaga.id}`;
+            let uriVagas = `${this.urlPadrao}vagas/${this.statusVaga.id}`;
             this.axios.patch(uriVagas, this.statusVaga).then(response => response);
         },
         converteDatas() {
@@ -324,12 +350,20 @@ export default {
             }
         },
         cadastraBanco() {
+<<<<<<< HEAD
             let uriEstagiarios = apiUrl+'estagiarios';
+=======
+            let uriEstagiarios = this.urlPadrao+'estagiarios';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
             this.axios
             .post(uriEstagiarios, this.post)
             .then(response => {
                 this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
                 this.msg.success = true;
+
+                for(let key in this.post) {
+                    this.post[key] = '';
+                }
             })
             .catch(e => {
                 this.msg.erro = 'Erro ao cadastrar estagiário';
@@ -407,7 +441,7 @@ export default {
             })
         },
         selectVaga() {
-            let uriStatusVaga = `http://localhost:8000/api/vagas/${this.post.cod_vaga}`;
+            let uriStatusVaga = `${this.urlPadrao}vagas/${this.post.cod_vaga}`;
             this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
         },
         validacao(valorCampo, variavelBooleana) {
@@ -419,7 +453,7 @@ export default {
         },
         verificaDuplicidadeCpf() {
             if(this.post.cpf.length == 11) {
-                const uriCpf = `http://localhost:8000/api/estagiarios/${this.post.cpf}`;
+                const uriCpf = `${this.urlPadrao}estagiarios/${this.post.cpf}`;
 
                 this.axios
                 .get(uriCpf)
@@ -435,7 +469,7 @@ export default {
         },
         verificaDuplicidadeCodEstudante() {
             if(this.post.cod_estudante) {
-                const uriCodEstudante = `http://localhost:8000/api/cod/${this.post.cod_estudante}`;
+                const uriCodEstudante = `${this.urlPadrao}cod/${this.post.cod_estudante}`;
 
                 this.axios
                 .get(uriCodEstudante)

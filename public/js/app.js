@@ -93826,12 +93826,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 sucesso: "Vaga cadastrada com sucesso",
                 erro: "Erro ao cadastrar vaga",
                 campoInvalido: "Revise os campos em vermelho"
-            }
+            },
+            urlPadrao: 'http://localhost:8000/api/'
         };
     },
     created: function created() {
-        var uriVagas = 'http://localhost:8000/api/vagas';
-        var uriDepartamentos = 'http://localhost:8000/api/departamentos';
+        var uriVagas = this.urlPadrao + 'vagas';
+        var uriDepartamentos = this.urlPadrao + 'departamentos';
 
         this.requisicaoGet(uriDepartamentos, 'departamentos');
     },
@@ -93843,10 +93844,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         inserirVaga: function inserirVaga() {
             var _this = this;
 
-            var uri = 'http://localhost:8000/api/vagas';
+            var uri = this.urlPadrao + 'vagas';
             this.axios.post(uri, this.vaga).then(function (response) {
                 _this.msg.error = false;
                 _this.msg.success = true;
+
+                for (var key in _this.vaga) {
+                    _this.vaga[key] = '';
+                }
             }).catch(function (error) {
                 _this.msg.success = false;
                 _this.msg.error = true;
@@ -96953,6 +96958,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             contadorCadastro: 0,
             exibeModalCartaoAcesso: false,
             exibeModalVaga: false,
+<<<<<<< HEAD
             apiUrl: 'teste:8000/api/'
         };
     },
@@ -96964,6 +96970,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var uriDepartamentos = apiUrl + 'departamentos';
         var uriSupervisores = apiUrl + 'supervisores';
         var uriVagas = apiUrl + 'vagas';
+=======
+            urlPadrao: 'http://localhost:8000/api/'
+        };
+    },
+    beforeMount: function beforeMount() {
+        var uriCartoes = this.urlPadrao + 'cartao';
+        var uriEstados = this.urlPadrao + 'estados';
+        var uriInstituicoes = this.urlPadrao + 'instituicao';
+        var uriCursos = this.urlPadrao + 'cursos';
+        var uriDepartamentos = this.urlPadrao + 'departamentos';
+        var uriSupervisores = this.urlPadrao + 'supervisores';
+        var uriVagas = this.urlPadrao + 'vagas';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
         this.requisicaoGet(uriCartoes, 'cartoes');
         this.requisicaoGet(uriEstados, 'estados');
@@ -96979,7 +96998,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.exibeModalVaga = !this.exibeModalVaga;
         },
         carregaVaga: function carregaVaga() {
+<<<<<<< HEAD
             var uriVagas = apiUrl + 'vagas';
+=======
+            var uriVagas = this.urlPadrao + 'vagas';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
             this.requisicaoGet(uriVagas, 'vagas');
         },
@@ -96987,12 +97010,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.exibeModalCartaoAcesso = !this.exibeModalCartaoAcesso;
         },
         carregaCartaoAcesso: function carregaCartaoAcesso() {
+<<<<<<< HEAD
             var uriCartoes = apiUrl + 'cartao';
+=======
+            var uriCartoes = this.urlPadrao + 'cartao';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
             this.requisicaoGet(uriCartoes, 'cartoes');
         },
         carregaSupervisor: function carregaSupervisor() {
+<<<<<<< HEAD
             var uriSupervisores = apiUrl + 'supervisores';
+=======
+            var uriSupervisores = this.urlPadrao + 'supervisores';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
             this.requisicaoGet(uriSupervisores, 'supervisores');
         },
@@ -97063,7 +97094,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         alteraStatusVaga: function alteraStatusVaga() {
-            var uriVagas = 'http://localhost:8000/api/vagas/' + this.statusVaga.id;
+            var uriVagas = this.urlPadrao + 'vagas/' + this.statusVaga.id;
             this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
                 return response;
             });
@@ -97088,10 +97119,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         cadastraBanco: function cadastraBanco() {
             var _this = this;
 
+<<<<<<< HEAD
             var uriEstagiarios = apiUrl + 'estagiarios';
+=======
+            var uriEstagiarios = this.urlPadrao + 'estagiarios';
+>>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
             this.axios.post(uriEstagiarios, this.post).then(function (response) {
                 _this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
                 _this.msg.success = true;
+
+                for (var key in _this.post) {
+                    _this.post[key] = '';
+                }
             }).catch(function (e) {
                 _this.msg.erro = 'Erro ao cadastrar estagiário';
                 _this.msg.error = true;
@@ -97145,7 +97184,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         selectVaga: function selectVaga() {
             var _this3 = this;
 
-            var uriStatusVaga = 'http://localhost:8000/api/vagas/' + this.post.cod_vaga;
+            var uriStatusVaga = this.urlPadrao + 'vagas/' + this.post.cod_vaga;
             this.axios.get(uriStatusVaga).then(function (response) {
                 return _this3.statusVaga = response.data;
             });
@@ -97161,7 +97200,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this4 = this;
 
             if (this.post.cpf.length == 11) {
-                var uriCpf = 'http://localhost:8000/api/estagiarios/' + this.post.cpf;
+                var uriCpf = this.urlPadrao + 'estagiarios/' + this.post.cpf;
 
                 this.axios.get(uriCpf).then(function (response) {
                     _this4.modalCpf = !_this4.modalCpf;
@@ -97174,7 +97213,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this5 = this;
 
             if (this.post.cod_estudante) {
-                var uriCodEstudante = 'http://localhost:8000/api/cod/' + this.post.cod_estudante;
+                var uriCodEstudante = this.urlPadrao + 'cod/' + this.post.cod_estudante;
 
                 this.axios.get(uriCodEstudante).then(function (response) {
                     _this5.modalCodEstudante = !_this5.modalCodEstudante;
@@ -105187,17 +105226,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       },
       auxiliarCpf: '',
       mostrarConteudoConsulta: false,
-      loading: false
+      loading: false,
+      urlPadrao: 'http://localhost:8000/api/'
     };
   },
   beforeMount: function beforeMount() {
-    var uriCartoes = 'http://localhost:8000/api/cartao';
-    var uriEstados = 'http://localhost:8000/api/estados';
-    var uriInstituicoes = 'http://localhost:8000/api/instituicao';
-    var uriCursos = 'http://localhost:8000/api/cursos';
-    var uriDepartamentos = 'http://localhost:8000/api/departamentos';
-    var uriSupervisores = 'http://localhost:8000/api/supervisores';
-    var uriVagas = 'http://localhost:8000/api/vagas';
+    var uriCartoes = this.urlPadrao + 'cartao';
+    var uriEstados = this.urlPadrao + 'estados';
+    var uriInstituicoes = this.urlPadrao + 'instituicao';
+    var uriCursos = this.urlPadrao + 'cursos';
+    var uriDepartamentos = this.urlPadrao + 'departamentos';
+    var uriSupervisores = this.urlPadrao + 'supervisores';
+    var uriVagas = this.urlPadrao + 'vagas';
 
     this.requisicaoGet(uriCartoes, 'cartoes');
     this.requisicaoGet(uriEstados, 'estados');
@@ -105417,7 +105457,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.loading = true;
       this.auxiliarCpf = this.post.cpf;
-      var uriEstagiario = 'http://localhost:8000/api/estagiarios/' + this.post.cpf;
+      var uriEstagiario = this.urlPadrao + 'estagiarios/' + this.post.cpf;
       this.axios.get(uriEstagiario).then(function (response) {
         _this2.msg.error = false;
         _this2.loading = false;
@@ -105504,7 +105544,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     alteraStatusVaga: function alteraStatusVaga() {
-      var uriVagas = 'http://localhost:8000/api/vagas/' + this.statusVaga.id;
+      var uriVagas = this.urlPadrao + 'vagas/' + this.statusVaga.id;
       this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
         return response;
       });
@@ -105634,7 +105674,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     atualizaBanco: function atualizaBanco() {
       var _this3 = this;
 
-      var uriEstagiarios = 'http://localhost:8000/api/estagiarios/' + this.auxiliarCpf;
+      var uriEstagiarios = this.urlPadrao + 'estagiarios/' + this.auxiliarCpf;
       this.auxiliarCpf = this.post.cpf;
       this.axios.patch(uriEstagiarios, this.post).then(function (response) {
         _this3.converteNascimento();
@@ -105718,7 +105758,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     selectVaga: function selectVaga() {
       var _this4 = this;
 
-      var uriStatusVaga = 'http://localhost:8000/api/vagas/' + this.post.cod_vaga;
+      var uriStatusVaga = this.urlPadrao + 'vagas/' + this.post.cod_vaga;
       this.axios.get(uriStatusVaga).then(function (response) {
         return _this4.statusVaga = response.data;
       });
@@ -106509,13 +106549,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             },
             camposValidacao: [],
-            contadorCadastro: 0
+            urlPadrao: 'http://localhost:8000/api/'
         };
     },
     beforeMount: function beforeMount() {
-        var uriDepartamentos = 'http://localhost:8000/api/departamentos';
-        var uriCursos = 'http://localhost:8000/api/cursos';
-        var uriCargos = 'http://localhost:8000/api/cargos';
+        var uriDepartamentos = this.urlPadrao + 'departamentos';
+        var uriCursos = this.urlPadrao + 'cursos';
+        var uriCargos = this.urlPadrao + 'cargos';
         this.requisicaoGet(uriDepartamentos, 'departamentos');
         this.requisicaoGet(uriCursos, 'cursos');
         this.requisicaoGet(uriCargos, 'cargos');
@@ -106601,12 +106641,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         inserirSupervisor: function inserirSupervisor() {
             var _this2 = this;
 
-            var uriSupervisor = 'http://localhost:8000/api/supervisores';
+            var uriSupervisor = this.urlPadrao + 'supervisores';
             this.axios.post(uriSupervisor, this.supervisor).then(function (response) {
                 _this2.scrollTop();
                 _this2.msg.error = false;
                 _this2.msg.success = true;
-                _this2.contadorCadastro++;
+
+                for (var key in _this2.supervisor) {
+                    _this2.supervisor[key] = '';
+                }
             }).catch(function (error) {
                 _this2.scrollTop();
                 _this2.msg.success = false;
@@ -107394,7 +107437,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 erro: "Erro ao cadastrar cartão de acesso",
                 sucesso: "Cartão de acesso cadastrado com sucesso",
                 campoInvalido: "Revise os campos em vermelho"
-            }
+            },
+            urlPadrao: 'http://localhost:8000/api/'
         };
     },
 
@@ -107430,11 +107474,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         inserirCartaoAcesso: function inserirCartaoAcesso() {
             var _this = this;
 
-            var uriCartaoAcesso = 'http://localhost:8000/api/cartao';
+            var uriCartaoAcesso = this.urlPadrao + 'cartao';
 
             this.axios.post(uriCartaoAcesso, this.cartaoAcesso).then(function (response) {
                 _this.msg.error = false;
                 _this.msg.success = true;
+
+                for (var key in _this.cartaoAcesso) {
+                    _this.cartaoAcesso[key] = '';
+                }
             }).catch(function (error) {
                 _this.msg.success = false;
                 _this.msg.error = true;
@@ -107532,7 +107580,7 @@ var render = function() {
                                 attrs: {
                                   type: "text",
                                   placeholder: "Ex: A00004404904135",
-                                  maxlength: "16"
+                                  maxlength: "15"
                                 },
                                 domProps: { value: _vm.cartaoAcesso.id },
                                 on: {
