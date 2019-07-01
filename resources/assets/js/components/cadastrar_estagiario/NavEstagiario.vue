@@ -193,17 +193,18 @@ export default {
             exibeModalSupervisor: false,
             contadorCadastro: 0,
             exibeModalCartaoAcesso: false,
-            exibeModalVaga: false
+            exibeModalVaga: false,
+            apiUrl: 'teste:8000/api/'
         }
     },
     beforeMount() {
-        const uriCartoes = 'http://localhost:8000/api/cartao';
-        const uriEstados = 'http://localhost:8000/api/estados';
-        const uriInstituicoes = 'http://localhost:8000/api/instituicao';
-        const uriCursos = 'http://localhost:8000/api/cursos';
-        const uriDepartamentos = 'http://localhost:8000/api/departamentos';
-        const uriSupervisores = 'http://localhost:8000/api/supervisores'; 
-        const uriVagas = 'http://localhost:8000/api/vagas';
+        const uriCartoes = apiUrl+'cartao';
+        const uriEstados = apiUrl+'estados';
+        const uriInstituicoes = apiUrl+'instituicao';
+        const uriCursos = apiUrl+'cursos';
+        const uriDepartamentos = apiUrl+'departamentos';
+        const uriSupervisores = apiUrl+'supervisores'; 
+        const uriVagas = apiUrl+'vagas';
 
         this.requisicaoGet(uriCartoes, 'cartoes');
         this.requisicaoGet(uriEstados, 'estados');
@@ -218,7 +219,7 @@ export default {
             this.exibeModalVaga = !this.exibeModalVaga;
         },
         carregaVaga() {
-            const uriVagas = 'http://localhost:8000/api/vagas';
+            const uriVagas = apiUrl+'vagas';
 
             this.requisicaoGet(uriVagas, 'vagas');
         },
@@ -226,12 +227,12 @@ export default {
             this.exibeModalCartaoAcesso = !this.exibeModalCartaoAcesso;
         },
         carregaCartaoAcesso() {
-            const uriCartoes = 'http://localhost:8000/api/cartao';
+            const uriCartoes = apiUrl+'cartao';
 
             this.requisicaoGet(uriCartoes, 'cartoes');
         },
         carregaSupervisor() {
-            const uriSupervisores = 'http://localhost:8000/api/supervisores';
+            const uriSupervisores = apiUrl+'supervisores';
 
             this.requisicaoGet(uriSupervisores, 'supervisores');
         },
@@ -323,7 +324,7 @@ export default {
             }
         },
         cadastraBanco() {
-            let uriEstagiarios = 'http://localhost:8000/api/estagiarios';
+            let uriEstagiarios = apiUrl+'estagiarios';
             this.axios
             .post(uriEstagiarios, this.post)
             .then(response => {
