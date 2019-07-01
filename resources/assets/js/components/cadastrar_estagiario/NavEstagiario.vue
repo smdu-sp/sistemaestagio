@@ -90,6 +90,8 @@
                     :cursoValido="cursoValido"
                     :abreModalCartaoAcesso="abreModalCartaoAcesso"
                     :carregaCartaoAcesso="carregaCartaoAcesso"
+                    :cartoesOrdenados="cartoesOrdenados"
+                    :cursosOrdenados="cursosOrdenados"
                     />
                 </b-card-text>
             </b-tab>
@@ -121,6 +123,9 @@
                     :carregaSupervisor="carregaSupervisor"
                     :abreModalVaga="abreModalVaga"
                     :carregaVaga="carregaVaga"
+                    :supervisoresOrdenados="supervisoresOrdenados"
+                    :vagasOrdenadas="vagasOrdenadas"
+                    :departamentosOrdenados="departamentosOrdenados"
                     />
                 </b-card-text>
             </b-tab>
@@ -138,6 +143,7 @@
     </div>
 </template>
 <script>
+import _ from 'lodash'
 export default {
     data() {
         return {
@@ -194,20 +200,34 @@ export default {
             contadorCadastro: 0,
             exibeModalCartaoAcesso: false,
             exibeModalVaga: false,
-<<<<<<< HEAD
-            apiUrl: 'teste:8000/api/'
+            urlPadrao: 'http://localhost:8000/api/'
         }
     },
-    beforeMount() {
-        const uriCartoes = apiUrl+'cartao';
-        const uriEstados = apiUrl+'estados';
-        const uriInstituicoes = apiUrl+'instituicao';
-        const uriCursos = apiUrl+'cursos';
-        const uriDepartamentos = apiUrl+'departamentos';
-        const uriSupervisores = apiUrl+'supervisores'; 
-        const uriVagas = apiUrl+'vagas';
-=======
-            urlPadrao: 'http://localhost:8000/api/'
+    computed: {
+        supervisoresOrdenados() {
+            let lowerCaseSupervisores = _.clone(this.supervisores);
+            if(typeof(lowerCaseSupervisores.map) == 'undefined')
+                return;
+            lowerCaseSupervisores = lowerCaseSupervisores.map((supervisor) => {
+                supervisor.nome = supervisor.nome.toLowerCase();
+                return supervisor;
+            });
+
+            const sortedUsers = _.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
+
+            return sortedUsers;
+        },
+        cartoesOrdenados() {
+            return _.orderBy(this.cartoes, 'id');
+        },
+        cursosOrdenados() {
+            return _.orderBy(this.cursos, 'formacao');
+        },
+        vagasOrdenadas() {
+            return _.orderBy(this.vagas, 'id');
+        },
+        departamentosOrdenados() {
+            return _.orderBy(this.departamentos, 'sigla');
         }
     },
     beforeMount() {
@@ -218,7 +238,6 @@ export default {
         const uriDepartamentos = this.urlPadrao+'departamentos';
         const uriSupervisores = this.urlPadrao+'supervisores'; 
         const uriVagas = this.urlPadrao+'vagas';
->>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
         this.requisicaoGet(uriCartoes, 'cartoes');
         this.requisicaoGet(uriEstados, 'estados');
@@ -233,11 +252,7 @@ export default {
             this.exibeModalVaga = !this.exibeModalVaga;
         },
         carregaVaga() {
-<<<<<<< HEAD
-            const uriVagas = apiUrl+'vagas';
-=======
             const uriVagas = this.urlPadrao+'vagas';
->>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
             this.requisicaoGet(uriVagas, 'vagas');
         },
@@ -245,20 +260,12 @@ export default {
             this.exibeModalCartaoAcesso = !this.exibeModalCartaoAcesso;
         },
         carregaCartaoAcesso() {
-<<<<<<< HEAD
-            const uriCartoes = apiUrl+'cartao';
-=======
             const uriCartoes = this.urlPadrao+'cartao';
->>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
             this.requisicaoGet(uriCartoes, 'cartoes');
         },
         carregaSupervisor() {
-<<<<<<< HEAD
-            const uriSupervisores = apiUrl+'supervisores';
-=======
             const uriSupervisores = this.urlPadrao+'supervisores';
->>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
 
             this.requisicaoGet(uriSupervisores, 'supervisores');
         },
@@ -350,11 +357,7 @@ export default {
             }
         },
         cadastraBanco() {
-<<<<<<< HEAD
-            let uriEstagiarios = apiUrl+'estagiarios';
-=======
             let uriEstagiarios = this.urlPadrao+'estagiarios';
->>>>>>> 51f51e346f7b7d6d53e34f8426bab1a3c82215a8
             this.axios
             .post(uriEstagiarios, this.post)
             .then(response => {

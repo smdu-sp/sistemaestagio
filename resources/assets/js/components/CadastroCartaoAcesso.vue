@@ -30,7 +30,7 @@
                                             class="form-control"
                                             placeholder="Ex: A00004404904135"
                                             v-model="cartaoAcesso.id"
-                                            maxlength="15">
+                                            maxlength="16">
                                         <div v-if="idValido" class="invalid-feedback">
                                             Digite o número por favor
                                         </div>
@@ -85,8 +85,7 @@ export default {
                 erro: "Erro ao cadastrar cartão de acesso",
                 sucesso: "Cartão de acesso cadastrado com sucesso",
                 campoInvalido: "Revise os campos em vermelho"
-            },
-            urlPadrao: 'http://localhost:8000/api/'
+            }
         }
     },
     methods: {
@@ -122,17 +121,13 @@ export default {
             }
         },
         inserirCartaoAcesso() {
-            const uriCartaoAcesso = this.urlPadrao+'cartao';
+            const uriCartaoAcesso = 'http://localhost:8000/api/cartao';
 
             this.axios
             .post(uriCartaoAcesso, this.cartaoAcesso)
             .then(response => {
                 this.msg.error = false;
                 this.msg.success = true;
-
-                for(let key in this.cartaoAcesso) {
-                this.cartaoAcesso[key] = '';
-            }
             })
             .catch(error => {
                 this.msg.success = false;

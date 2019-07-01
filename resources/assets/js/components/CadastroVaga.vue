@@ -143,13 +143,12 @@
               sucesso: "Vaga cadastrada com sucesso",
               erro: "Erro ao cadastrar vaga",
               campoInvalido: "Revise os campos em vermelho"
-          },
-          urlPadrao: 'http://localhost:8000/api/'
+          }
         }
     },
     created() {
-        let uriVagas = this.urlPadrao+'vagas';
-        let uriDepartamentos = this.urlPadrao+'departamentos';
+        let uriVagas = 'http://localhost:8000/api/vagas';
+        let uriDepartamentos = 'http://localhost:8000/api/departamentos';
 
         this.requisicaoGet(uriDepartamentos, 'departamentos');
 
@@ -159,15 +158,11 @@
             window.scrollTo(0,0);
         },
         inserirVaga(){
-        let uri = this.urlPadrao+'vagas';
+        let uri = 'http://localhost:8000/api/vagas';
         this.axios.post(uri, this.vaga)
         .then(response => {
             this.msg.error = false;
             this.msg.success = true;
-            
-            for(let key in this.vaga) {
-                this.vaga[key] = '';
-            }
         })
         .catch(error => {
             this.msg.success = false;
