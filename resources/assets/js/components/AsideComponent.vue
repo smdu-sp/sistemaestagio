@@ -9,7 +9,7 @@
             <span class="text-white ml-2">Dashboard</span>
         </div>
 
-        <nav class="row mt-4 ml-4">
+        <nav class="row mt-4 ml-1">
             <ul>
                 <li>
                     <li>
@@ -23,7 +23,7 @@
                         Consulta
                     </li>
                     <transition name="fade">
-                        <ul v-if="menuConsulta" class="ml-4">
+                        <ul v-if="menuConsulta">
                             <li id="show-btn" @click="showModal"> <!-- Ativa modal -->
                                 <router-link to="/consulta">Estagiario</router-link>
                             </li>
@@ -36,7 +36,7 @@
                             Cadastro
                         </li>
                         <transition name="fade">
-                            <ul v-if="menuCadastro" class="ml-4">
+                            <ul v-if="menuCadastro">
                                 <li>
                                     <router-link to="/cadastroestagiario">Estagiario</router-link>
                                 </li>

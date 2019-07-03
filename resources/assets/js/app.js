@@ -26,11 +26,6 @@ Vue.use(PortalVue);
 import vueTheMask from 'vue-the-mask';
 Vue.use(vueTheMask);
 
-
-import Vuesax from 'vuesax';
-import '../../../node_modules/vuesax/dist/vuesax.css';
-Vue.use(Vuesax);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -41,22 +36,22 @@ import HomeComponent from './components/HomeComponent.vue';
 import AsideComponent from './components/AsideComponent.vue';
 import HeaderComponent from './components/HeaderComponent.vue';
 import MainComponent from './components/MainComponent.vue';
-import CadastroVaga from './components/CadastroVaga.vue';
-import DadosPessoais from './components/cadastrar_estagiario/DadosPessoais.vue';
-import NavEstagiario from './components/cadastrar_estagiario/NavEstagiario.vue';
-import InformacoesContratuais from './components/cadastrar_estagiario/InformacoesContratuais.vue';
-import DadosBancarios from './components/cadastrar_estagiario/DadosBancarios.vue';
-import Botoes from './components/cadastrar_estagiario/Botoes.vue';
+import CadastroVaga from './components/vaga/CadastroVaga.vue';
+import DadosPessoais from './components/estagiario/cadastrar_estagiario/DadosPessoais.vue';
+import NavEstagiario from './components/estagiario/cadastrar_estagiario/NavEstagiario.vue';
+import InformacoesContratuais from './components/estagiario/cadastrar_estagiario/InformacoesContratuais.vue';
+import DadosBancarios from './components/estagiario/cadastrar_estagiario/DadosBancarios.vue';
+import Botoes from './components/estagiario/cadastrar_estagiario/Botoes.vue';
 import Modal from './components/ModalConsulta.vue';
-import DadosPessoaisAtualizar from './components/atualizar_estagiario/DadosPessoais.vue';
-import InformacoesContratuaisAtualizar from './components/atualizar_estagiario/InformacoesContratuais.vue';
-import RecessoAtualizar from './components/atualizar_estagiario/Recesso.vue';
-import DadosBancariosAtualizar from './components/atualizar_estagiario/DadosBancarios.vue';
-import FormAtualizacao from './components/atualizar_estagiario/FormAtualizacao.vue';
-import ConsultaEstagiario from './components/atualizar_estagiario/ConsultaEstagiario.vue';
+import DadosPessoaisAtualizar from './components/estagiario/atualizar_estagiario/DadosPessoais.vue';
+import InformacoesContratuaisAtualizar from './components/estagiario/atualizar_estagiario/InformacoesContratuais.vue';
+import RecessoAtualizar from './components/estagiario/atualizar_estagiario/Recesso.vue';
+import DadosBancariosAtualizar from './components/estagiario/atualizar_estagiario/DadosBancarios.vue';
+import FormAtualizacao from './components/estagiario/atualizar_estagiario/FormAtualizacao.vue';
+import ConsultaEstagiario from './components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue';
 import ModalConsultaCpf from './components/ModalConsultaCpf.vue';
-import CadastroSupervisor from './components/CadastroSupervisor.vue';
-import CadastroCartaoAcesso from './components/CadastroCartaoAcesso';
+import CadastroSupervisor from './components/supervisor/CadastroSupervisor.vue';
+import CadastroCartaoAcesso from './components/cartao_acesso/CadastroCartaoAcesso';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);

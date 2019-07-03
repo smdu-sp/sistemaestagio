@@ -9,6 +9,7 @@ class SupervisorController extends Controller
 {
     public function getSupervisores() {
         return Supervisor::all();
+
     }
 
     public function getSupervisorById(Supervisor $rf) {

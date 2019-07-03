@@ -1,9 +1,9 @@
-import NavEstagiario from './components/cadastrar_estagiario/NavEstagiario.vue';
-import Consulta from './components/atualizar_estagiario/ConsultaEstagiario.vue';
+import NavEstagiario from './components/estagiario/cadastrar_estagiario/NavEstagiario.vue';
+import Consulta from './components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue';
 import Main from './components/MainComponent.vue';
-import CadastroVaga from './components/CadastroVaga.vue';
-import CadastroSupervisor from './components/CadastroSupervisor.vue';
-import CadastroCartaoAcesso from './components/CadastroCartaoAcesso.vue';
+import CadastroVaga from './components/vaga/CadastroVaga.vue';
+import CadastroSupervisor from './components/supervisor/CadastroSupervisor.vue';
+import CadastroCartaoAcesso from './components/cartao_acesso/CadastroCartaoAcesso.vue';
 
 export const routes = [
     {
