@@ -145,7 +145,8 @@
                                     <textarea cols="30" rows="10" class="form-control" v-model="supervisor.atividades_estagiario"></textarea>
                                 </div>
                             </div>
-                            <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component>
+                            <botoes-component :titulo="nomeBotao = 'Cadastrar'">
+                            </botoes-component>
                         </form>
                 </b-card-text>
             </b-tab>

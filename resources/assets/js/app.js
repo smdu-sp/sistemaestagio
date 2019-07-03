@@ -52,6 +52,7 @@ import ConsultaEstagiario from './components/estagiario/atualizar_estagiario/Con
 import ModalConsultaCpf from './components/ModalConsultaCpf.vue';
 import CadastroSupervisor from './components/supervisor/CadastroSupervisor.vue';
 import CadastroCartaoAcesso from './components/cartao_acesso/CadastroCartaoAcesso';
+import BotaoEmail from './components/BotaoEmail.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -73,6 +74,7 @@ Vue.component('dados-bancarios-atualizar', DadosBancariosAtualizar);
 Vue.component('modal-consulta-cpf', ModalConsultaCpf);
 Vue.component('cadastro-supervisor-component', CadastroSupervisor);
 Vue.component('cadastro-cartao-acesso-component', CadastroCartaoAcesso);
+Vue.component('botao-email-component', BotaoEmail);
 
 import { routes } from './routes.js';
 

@@ -1975,23 +1975,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoEmail.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/BotaoEmail.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/HeaderComponent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/HeaderComponent.vue?vue&type=script&lang=js& ***!
@@ -4462,7 +4445,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['titulo', 'nomeBotao']
 });
@@ -4478,7 +4460,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -5915,7 +5896,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -70538,40 +70518,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoEmail.vue?vue&type=template&id=f48f7b44&":
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/BotaoEmail.vue?vue&type=template&id=f48f7b44& ***!
-  \********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "a",
-    {
-      staticClass: "btn btn-success",
-      attrs: {
-        href:
-          "mailto:condmart@terra.com.br?cc=vaulicino@prefeitura.sp.gov.br;kesiaavelino@prefeitura.sp.gov.br&subject=Solicita%C3%A7%C3%A3o%20de%20cart%C3%A3o%20de%20acesso&body=Nome%3A%20%0ARg%3A%20%0AData%20de%20In%C3%ADcio%3A%20"
-      }
-    },
-    [_vm._v("Solicitar cartão de acesso")]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/HeaderComponent.vue?vue&type=template&id=2810fc09&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/HeaderComponent.vue?vue&type=template&id=2810fc09& ***!
@@ -76039,8 +75985,19 @@ var render = function() {
       _c(
         "botoes-component",
         { attrs: { titulo: (_vm.nomeBotao = "Cadastrar") } },
-        [_c("botao-email-component")],
-        1
+        [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success",
+              attrs: {
+                href:
+                  "mailto:condmart@terra.com.br?cc=vaulicino@prefeitura.sp.gov.br;kesiaavelino@prefeitura.sp.gov.br&subject=Solicita%C3%A7%C3%A3o%20de%20cart%C3%A3o%20de%20acesso&body=Nome%3A%20%0ARg%3A%20%0AData%20de%20In%C3%ADcio%3A%20"
+              }
+            },
+            [_vm._v("Solicitar cartão de acesso")]
+          )
+        ]
       )
     ],
     1
@@ -77763,8 +77720,19 @@ var render = function() {
       _c(
         "botoes-component",
         { attrs: { titulo: (_vm.nomeBotao = "Cadastrar") } },
-        [_c("botao-email-component")],
-        1
+        [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success",
+              attrs: {
+                href:
+                  "mailto:condmart@terra.com.br?cc=vaulicino@prefeitura.sp.gov.br;kesiaavelino@prefeitura.sp.gov.br&subject=Solicita%C3%A7%C3%A3o%20de%20cart%C3%A3o%20de%20acesso&body=Nome%3A%20%0ARg%3A%20%0AData%20de%20In%C3%ADcio%3A%20"
+              }
+            },
+            [_vm._v("Solicitar cartão de acesso")]
+          )
+        ]
       )
     ],
     1
@@ -78537,8 +78505,19 @@ var render = function() {
       _c(
         "botoes-component",
         { attrs: { titulo: (_vm.nomeBotao = "Cadastrar") } },
-        [_c("botao-email-component")],
-        1
+        [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success",
+              attrs: {
+                href:
+                  "mailto:condmart@terra.com.br?cc=vaulicino@prefeitura.sp.gov.br;kesiaavelino@prefeitura.sp.gov.br&subject=Solicita%C3%A7%C3%A3o%20de%20cart%C3%A3o%20de%20acesso&body=Nome%3A%20%0ARg%3A%20%0AData%20de%20In%C3%ADcio%3A%20"
+              }
+            },
+            [_vm._v("Solicitar cartão de acesso")]
+          )
+        ]
       )
     ],
     1
@@ -94997,8 +94976,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ModalConsultaCpf_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/ModalConsultaCpf.vue */ "./resources/assets/js/components/ModalConsultaCpf.vue");
 /* harmony import */ var _components_supervisor_CadastroSupervisor_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/supervisor/CadastroSupervisor.vue */ "./resources/assets/js/components/supervisor/CadastroSupervisor.vue");
 /* harmony import */ var _components_cartao_acesso_CadastroCartaoAcesso__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/cartao_acesso/CadastroCartaoAcesso */ "./resources/assets/js/components/cartao_acesso/CadastroCartaoAcesso.vue");
-/* harmony import */ var _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/BotaoEmail.vue */ "./resources/assets/js/components/BotaoEmail.vue");
-/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
+/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -95045,7 +95023,6 @@ Vue.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_6___default.a);
 
 
 
-
 Vue.component('aside-component', _components_AsideComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 Vue.component('home-component', _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 Vue.component('header-component', _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
@@ -95066,11 +95043,10 @@ Vue.component('dados-bancarios-atualizar', _components_estagiario_atualizar_esta
 Vue.component('modal-consulta-cpf', _components_ModalConsultaCpf_vue__WEBPACK_IMPORTED_MODULE_24__["default"]);
 Vue.component('cadastro-supervisor-component', _components_supervisor_CadastroSupervisor_vue__WEBPACK_IMPORTED_MODULE_25__["default"]);
 Vue.component('cadastro-cartao-acesso-component', _components_cartao_acesso_CadastroCartaoAcesso__WEBPACK_IMPORTED_MODULE_26__["default"]);
-Vue.component('botao-email-component', _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_27__["default"]);
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
-  routes: _routes_js__WEBPACK_IMPORTED_MODULE_28__["routes"]
+  routes: _routes_js__WEBPACK_IMPORTED_MODULE_27__["routes"]
 });
 var app = new Vue(Vue.util.extend({
   router: router
@@ -95215,75 +95191,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AsideComponent_vue_vue_type_template_id_cae87bc8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AsideComponent_vue_vue_type_template_id_cae87bc8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/BotaoEmail.vue":
-/*!*******************************************************!*\
-  !*** ./resources/assets/js/components/BotaoEmail.vue ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BotaoEmail_vue_vue_type_template_id_f48f7b44___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BotaoEmail.vue?vue&type=template&id=f48f7b44& */ "./resources/assets/js/components/BotaoEmail.vue?vue&type=template&id=f48f7b44&");
-/* harmony import */ var _BotaoEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BotaoEmail.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/BotaoEmail.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _BotaoEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BotaoEmail_vue_vue_type_template_id_f48f7b44___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BotaoEmail_vue_vue_type_template_id_f48f7b44___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/assets/js/components/BotaoEmail.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/BotaoEmail.vue?vue&type=script&lang=js&":
-/*!********************************************************************************!*\
-  !*** ./resources/assets/js/components/BotaoEmail.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BotaoEmail.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoEmail.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/BotaoEmail.vue?vue&type=template&id=f48f7b44&":
-/*!**************************************************************************************!*\
-  !*** ./resources/assets/js/components/BotaoEmail.vue?vue&type=template&id=f48f7b44& ***!
-  \**************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoEmail_vue_vue_type_template_id_f48f7b44___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BotaoEmail.vue?vue&type=template&id=f48f7b44& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoEmail.vue?vue&type=template&id=f48f7b44&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoEmail_vue_vue_type_template_id_f48f7b44___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoEmail_vue_vue_type_template_id_f48f7b44___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
