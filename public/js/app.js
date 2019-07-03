@@ -1988,7 +1988,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['post'],
+  data: function data() {
+    return {
+      nome: ''
+    };
+  }
+});
 
 /***/ }),
 
@@ -70559,7 +70571,12 @@ var render = function() {
       staticClass: "btn btn-success",
       attrs: {
         href:
-          "mailto:condmart@terra.com.br?cc=vaulicino@prefeitura.sp.gov.br;kesiaavelino@prefeitura.sp.gov.br&subject=Solicita%C3%A7%C3%A3o%20de%20cart%C3%A3o%20de%20acesso&body=Nome%3A%20%0ARg%3A%20%0AData%20de%20In%C3%ADcio%3A%20"
+          "mailto:condmart@terra.com.br?cc=vaulicino@prefeitura.sp.gov.br;kesiaavelino@prefeitura.sp.gov.br&subject=Solicita%C3%A7%C3%A3o%20de%20cart%C3%A3o%20de%20acesso&body=Nome%3A%20" +
+          _vm.post.nome +
+          "%0ARg%3A%20" +
+          _vm.post.rg +
+          "%0AData%20de%20In%C3%ADcio%3A%20" +
+          _vm.post.dt_inicio
       }
     },
     [_vm._v("Solicitar cartão de acesso")]
@@ -77763,7 +77780,7 @@ var render = function() {
       _c(
         "botoes-component",
         { attrs: { titulo: (_vm.nomeBotao = "Cadastrar") } },
-        [_c("botao-email-component")],
+        [_c("botao-email-component", { attrs: { post: _vm.post } })],
         1
       )
     ],
