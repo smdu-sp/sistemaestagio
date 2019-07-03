@@ -31,7 +31,6 @@
     "vue-axios": "^2.1.4",
     "vue-lodash": "^2.0.2",
     "vue-router": "^3.0.6",
-    "vue-the-mask": "^0.11.1",
-    "vuesax": "^3.8.75"
+    "vue-the-mask": "^0.11.1"
   }
 }
