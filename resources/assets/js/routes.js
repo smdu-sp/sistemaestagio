@@ -4,6 +4,7 @@ import Main from './components/MainComponent.vue';
 import CadastroVaga from './components/vaga/CadastroVaga.vue';
 import CadastroSupervisor from './components/supervisor/CadastroSupervisor.vue';
 import CadastroCartaoAcesso from './components/cartao_acesso/CadastroCartaoAcesso.vue';
+import ConsultaSupervisor from './components/supervisor/ConsultaSupervisor.vue';
 
 export const routes = [
     {
@@ -35,5 +36,10 @@ export const routes = [
         name: 'Cadastro de Cartão de Acesso',
         path: '/cadastrocartaoacesso',
         component: CadastroCartaoAcesso
+    },
+    {
+        name: 'Consulta de Supervisor',
+        path: '/consultasupervisor',
+        component: ConsultaSupervisor
     }
 ];

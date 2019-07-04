@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-3">
         <aside-component 
-          :showModal="showModal" 
+          :exibeModalEstagiario="exibeModalEstagiario"
           :menuCadastro="menuCadastro" 
           :mostrarMenuCadastro="mostrarMenuCadastro"
           :mostrarMenuConsulta="mostrarMenuConsulta"
@@ -27,11 +27,11 @@ export default {
     }
   },
   methods: {
-    showModal() {
-      this.$children[2].$refs['my-modal'].show(); // TODO: Criar vínculo consistente com o component Consulta
+    exibeModalEstagiario() {
+      this.$children[2].$refs['consulta-estagiario'].show(); // TODO: Criar vínculo consistente com o component Consulta
     },
-    hideModal() {
-      this.$children[2].$refs['my-modal'].hide();
+    escondeModalEstagiario() {
+      this.$children[2].$refs['consulta-estagiario'].hide();
     },
     mostrarMenuCadastro() {
       this.menuConsulta = false;

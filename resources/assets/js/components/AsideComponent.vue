@@ -24,8 +24,11 @@
                     </li>
                     <transition name="fade">
                         <ul v-if="menuConsulta">
-                            <li id="show-btn" @click="showModal"> <!-- Ativa modal -->
+                            <li id="show-btn" @click="exibeModalEstagiario"> <!-- Ativa modal de consulta de Estagiário -->
                                 <router-link to="/consulta">Estagiario</router-link>
+                            </li>
+                            <li>
+                                <router-link to="/consultasupervisor">Supervisor</router-link>
                             </li>
                         </ul>
                     </transition>
@@ -60,7 +63,7 @@
 </template>
 <script>
 export default {
-    props: ['showModal', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta']
+    props: ['exibeModalEstagiario', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta', 'exibeModalSupervisor']
 }
 </script>
 <style>

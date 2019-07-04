@@ -17,10 +17,8 @@ Route::middleware('cors')->name('api.')->group(function() {
     // Rotas Supervisores
     Route::prefix('supervisores')->group(function() {
         Route::get('/', 'SupervisorController@getSupervisores')->name('supervisores'); // Retorna todos os supervisores
-        Route::get('/{rf}', 'SupervisorController@getSupervisorById')->name('supervisores_por_rf'); // Retorna o supervisor por RF
+        Route::get('/{nome}', 'SupervisorController@getSupervisorByName')->name('supervisor_por_nome'); // Retornar o supervisor por nome 
         Route::post('/', 'SupervisorController@setSupervisor')->name('cadastrar_supervisor'); // Cadastrar supervisor
-        Route::patch('/{rf}', 'SupervisorController@update')->name('editar_supervisor'); // Atualizar supervisor
-        Route::delete('/{rf}', 'SupervisorController@delete')->name('deletar_supervisor'); // Deletar supervisor
     });
 
     // Rotas vagas

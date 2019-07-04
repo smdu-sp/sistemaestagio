@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Supervisor extends Model
 {
     protected $table = 'tab_supervisores';
-    protected $primaryKey = 'rf';
+    protected $primaryKey = 'nome';
+    public $incrementing = false;
     public $timestamps = false;
     protected $fillable = [
         'nome',

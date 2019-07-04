@@ -1,7 +1,7 @@
 <template>
 <div>
   <!--Modal ativado pelo botão do componente Aside -->
-    <b-modal ref="my-modal" hide-footer title="Consulta de Estagiários">
+    <b-modal ref="consulta-estagiario" hide-footer title="Consulta de Estagiários">
 
       <div v-if="msg.error" class="alert alert-danger">{{ msg.erro }}</div>
 
@@ -22,7 +22,7 @@
         </b-form>
         <div class="text-right">
           <b-button type="submit" class="mt-3" variant="outline-primary" @click="buscaEstagiario">Ok</b-button>
-          <b-button class="mt-3" variant="outline-danger" @click="hideModal">Cancelar</b-button>
+          <b-button class="mt-3" variant="outline-danger" @click="escondeModalEstagiario">Cancelar</b-button>
         </div>
 
         <div v-if="loading" class="text-center">
@@ -93,7 +93,7 @@
                   :departamentos="departamentos"
                   :supervisores="supervisores"
                   :vagas="vagas"
-                  :showModal="showModal"
+                  :exibeModalEstagiario="exibeModalEstagiario"
                   />
               </b-card-text>
           </b-tab>
@@ -127,14 +127,6 @@
           <b-tab title="Recesso">
               <b-card-text>
                   <recesso-atualizar
-                  :post="post"
-                  :inserirEstagiario="inserirEstagiario"
-                  />
-              </b-card-text>
-          </b-tab>
-          <b-tab title="Dados Bancários">
-              <b-card-text>
-                  <dados-bancarios-atualizar
                   :post="post"
                   :inserirEstagiario="inserirEstagiario"
                   />
@@ -217,14 +209,14 @@ export default {
     this.requisicaoGet(uriVagas, 'vagas');
   },
   mounted() {
-    this.showModal()
+    this.exibeModalEstagiario()
   },
   methods: {
-    showModal() {
-      this.$refs['my-modal'].show()
+    exibeModalEstagiario() {
+      this.$refs['consulta-estagiario'].show()
     },
-    hideModal() {
-      this.$refs['my-modal'].hide()
+    escondeModalEstagiario() {
+      this.$refs['consulta-estagiario'].hide()
     },
     validacaoCpf() { // Valida o CPF do Modal
       let cpf = this.post.cpf
@@ -330,7 +322,7 @@ export default {
       .then(response => {
         this.msg.error = false;
         this.loading = false;
-        this.hideModal();
+        this.escondeModalEstagiario();
         this.mostrarConteudoConsulta = true;
         this.estagiario = response.data;
         this.post = this.estagiario;

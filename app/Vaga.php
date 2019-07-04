@@ -8,6 +8,7 @@ class Vaga extends Model
 {
     protected $table = 'tab_vagas_smdu';
     public $timestamps = false;
+    public $incrementing = false;
     protected $fillable = [
         'id',
         'situacao',

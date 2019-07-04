@@ -129,14 +129,6 @@
                     />
                 </b-card-text>
             </b-tab>
-            <b-tab title="Dados Bancários">
-                <b-card-text>
-                    <dados-bancarios 
-                    :post="post"
-                    :inserirEstagiario="inserirEstagiario"
-                    />
-                </b-card-text>
-            </b-tab>
         </b-tabs>
     </b-card>
     <!-- /Formulários -->

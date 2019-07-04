@@ -12,8 +12,8 @@ class SupervisorController extends Controller
 
     }
 
-    public function getSupervisorById(Supervisor $rf) {
-        return $rf;
+    public function getSupervisorByName(Supervisor $nome) {
+        return $nome;
     }
 
     public function setSupervisor(Request $request) {

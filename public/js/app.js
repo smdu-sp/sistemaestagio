@@ -1969,8 +1969,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['showModal', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta']
+  props: ['exibeModalEstagiario', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta', 'exibeModalSupervisor']
 });
 
 /***/ }),
@@ -2101,11 +2104,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    showModal: function showModal() {
-      this.$children[2].$refs['my-modal'].show(); // TODO: Criar vínculo consistente com o component Consulta
+    exibeModalEstagiario: function exibeModalEstagiario() {
+      this.$children[2].$refs['consulta-estagiario'].show(); // TODO: Criar vínculo consistente com o component Consulta
     },
-    hideModal: function hideModal() {
-      this.$children[2].$refs['my-modal'].hide();
+    escondeModalEstagiario: function escondeModalEstagiario() {
+      this.$children[2].$refs['consulta-estagiario'].hide();
     },
     mostrarMenuCadastro: function mostrarMenuCadastro() {
       this.menuConsulta = false;
@@ -2627,14 +2630,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2702,14 +2697,14 @@ __webpack_require__.r(__webpack_exports__);
     this.requisicaoGet(uriVagas, 'vagas');
   },
   mounted: function mounted() {
-    this.showModal();
+    this.exibeModalEstagiario();
   },
   methods: {
-    showModal: function showModal() {
-      this.$refs['my-modal'].show();
+    exibeModalEstagiario: function exibeModalEstagiario() {
+      this.$refs['consulta-estagiario'].show();
     },
-    hideModal: function hideModal() {
-      this.$refs['my-modal'].hide();
+    escondeModalEstagiario: function escondeModalEstagiario() {
+      this.$refs['consulta-estagiario'].hide();
     },
     validacaoCpf: function validacaoCpf() {
       // Valida o CPF do Modal
@@ -2933,7 +2928,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.msg.error = false;
         _this2.loading = false;
 
-        _this2.hideModal();
+        _this2.escondeModalEstagiario();
 
         _this2.mostrarConteudoConsulta = true;
         _this2.estagiario = response.data;
@@ -5463,14 +5458,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6222,6 +6209,136 @@ __webpack_require__.r(__webpack_exports__);
         _this2.msg.success = false;
         _this2.msg.error = true;
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      nomeBuscado: '',
+      supervisores: {},
+      estagiarios: {}
+    };
+  },
+  beforeMount: function beforeMount() {
+    this.retornaSupervisores();
+  },
+  computed: {
+    supervisoresOrdenados: function supervisoresOrdenados() {
+      var lowerCaseSupervisores = _.clone(this.supervisores);
+
+      if (typeof lowerCaseSupervisores.map == 'undefined') return;
+      lowerCaseSupervisores = lowerCaseSupervisores.map(function (supervisor) {
+        supervisor.nome = supervisor.nome.toLowerCase();
+        return supervisor;
+      });
+
+      var sortedSupervisores = _.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
+
+      return sortedSupervisores;
+    }
+  },
+  methods: {
+    retornaSupervisores: function retornaSupervisores() {
+      var _this = this;
+
+      var uriSupervisor = '/api/supervisores';
+      this.axios.get(uriSupervisor).then(function (response) {
+        _this.supervisores = response.data;
+
+        _this.retornaEstagiarios();
+      })["catch"](function (error) {
+        console.log("Erro: " + error);
+      });
+    },
+    retornaEstagiarios: function retornaEstagiarios() {
+      var _this2 = this;
+
+      var uriEstagiario = '/api/estagiarios';
+      this.axios.get(uriEstagiario).then(function (response) {
+        _this2.estagiarios = response.data;
+        console.log(_this2.estagiarios);
+      })["catch"](function (error) {
+        console.log("Erro: " + error);
+      });
+    },
+    buscaSupervisor: function buscaSupervisor() {// for(let i = 0; i <= this.supervisores.length; i++) {
+      //     if(this.nomeBuscado === this.supervisores[i].nome) {
+      //         console.log(this.supervisores[i]);
+      //     }
+      // }
+      // for(let i = 0; i <= this.supervisores.length; i++) {
+      // }
     }
   }
 });
@@ -37883,6 +38000,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, "\n.card {\r\n  width: 98%;\n}\n.card-body {\r\n    height: auto;\n}\nb-card {\r\n    max-width: 100%;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.tabela {\r\n    overflow: scroll;\n}\r\n", ""]);
 
 // exports
 
@@ -69715,6 +69851,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaSupervisor.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/vaga/CadastroVaga.vue?vue&type=style&index=0&id=1995b4c1&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/vaga/CadastroVaga.vue?vue&type=style&index=0&id=1995b4c1&scoped=true&lang=css& ***!
@@ -70441,11 +70607,26 @@ var render = function() {
               ? _c("ul", [
                   _c(
                     "li",
-                    { attrs: { id: "show-btn" }, on: { click: _vm.showModal } },
+                    {
+                      attrs: { id: "show-btn" },
+                      on: { click: _vm.exibeModalEstagiario }
+                    },
                     [
                       _c("router-link", { attrs: { to: "/consulta" } }, [
                         _vm._v("Estagiario")
                       ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: "/consultasupervisor" } },
+                        [_vm._v("Supervisor")]
+                      )
                     ],
                     1
                   )
@@ -70698,7 +70879,7 @@ var render = function() {
         [
           _c("aside-component", {
             attrs: {
-              showModal: _vm.showModal,
+              exibeModalEstagiario: _vm.exibeModalEstagiario,
               menuCadastro: _vm.menuCadastro,
               mostrarMenuCadastro: _vm.mostrarMenuCadastro,
               mostrarMenuConsulta: _vm.mostrarMenuConsulta,
@@ -71485,7 +71666,7 @@ var render = function() {
       _c(
         "b-modal",
         {
-          ref: "my-modal",
+          ref: "consulta-estagiario",
           attrs: { "hide-footer": "", title: "Consulta de Estagiários" }
         },
         [
@@ -71573,7 +71754,7 @@ var render = function() {
                 {
                   staticClass: "mt-3",
                   attrs: { variant: "outline-danger" },
-                  on: { click: _vm.hideModal }
+                  on: { click: _vm.escondeModalEstagiario }
                 },
                 [_vm._v("Cancelar")]
               )
@@ -71681,7 +71862,7 @@ var render = function() {
                                 departamentos: _vm.departamentos,
                                 supervisores: _vm.supervisores,
                                 vagas: _vm.vagas,
-                                showModal: _vm.showModal
+                                exibeModalEstagiario: _vm.exibeModalEstagiario
                               }
                             })
                           ],
@@ -71738,26 +71919,6 @@ var render = function() {
                           "b-card-text",
                           [
                             _c("recesso-atualizar", {
-                              attrs: {
-                                post: _vm.post,
-                                inserirEstagiario: _vm.inserirEstagiario
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-tab",
-                      { attrs: { title: "Dados Bancários" } },
-                      [
-                        _c(
-                          "b-card-text",
-                          [
-                            _c("dados-bancarios-atualizar", {
                               attrs: {
                                 post: _vm.post,
                                 inserirEstagiario: _vm.inserirEstagiario
@@ -78828,26 +78989,6 @@ var render = function() {
                   )
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-tab",
-                { attrs: { title: "Dados Bancários" } },
-                [
-                  _c(
-                    "b-card-text",
-                    [
-                      _c("dados-bancarios", {
-                        attrs: {
-                          post: _vm.post,
-                          inserirEstagiario: _vm.inserirEstagiario
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
               )
             ],
             1
@@ -79463,6 +79604,155 @@ var render = function() {
                       ],
                       1
                     )
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=template&id=73e5d8dd&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=template&id=73e5d8dd& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("Consulta Supervisor")]),
+      _vm._v(" "),
+      _c(
+        "b-card",
+        { attrs: { "no-body": "" } },
+        [
+          _c(
+            "b-tabs",
+            { attrs: { card: "" } },
+            [
+              _c(
+                "b-tab",
+                { attrs: { title: "Supervisores", active: "" } },
+                [
+                  _c("b-card-text", [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("label", { attrs: { for: "" } }, [
+                          _vm._v("Filtro:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Digite o nome do Supervisor"
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row mt-2 tabela" }, [
+                      _c("table", { staticClass: "table table-striped" }, [
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Nome")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("RF")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Departamento")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Cargo")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Formação")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Situação")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("CPF")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Estagiários")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.supervisores, function(supervisor) {
+                            return _c("tr", { key: supervisor.nome }, [
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(_vm._s(supervisor.nome))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(_vm._s(supervisor.rf))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(_vm._s(supervisor.departamento))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(_vm._s(supervisor.cargo_funcao))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(_vm._s(supervisor.formacao))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(_vm._s(supervisor.situacao))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(_vm._s(supervisor.cpf))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(_vm._s(supervisor.estagiarios))
+                              ])
+                            ])
+                          }),
+                          0
+                        )
+                      ])
+                    ])
                   ])
                 ],
                 1
@@ -96728,6 +97018,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/supervisor/ConsultaSupervisor.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/assets/js/components/supervisor/ConsultaSupervisor.vue ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ConsultaSupervisor_vue_vue_type_template_id_73e5d8dd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConsultaSupervisor.vue?vue&type=template&id=73e5d8dd& */ "./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=template&id=73e5d8dd&");
+/* harmony import */ var _ConsultaSupervisor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConsultaSupervisor.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ConsultaSupervisor_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ConsultaSupervisor.vue?vue&type=style&index=0&lang=css& */ "./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ConsultaSupervisor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ConsultaSupervisor_vue_vue_type_template_id_73e5d8dd___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ConsultaSupervisor_vue_vue_type_template_id_73e5d8dd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/supervisor/ConsultaSupervisor.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaSupervisor.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaSupervisor.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=template&id=73e5d8dd&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=template&id=73e5d8dd& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_template_id_73e5d8dd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaSupervisor.vue?vue&type=template&id=73e5d8dd& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/ConsultaSupervisor.vue?vue&type=template&id=73e5d8dd&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_template_id_73e5d8dd___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaSupervisor_vue_vue_type_template_id_73e5d8dd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/vaga/CadastroVaga.vue":
 /*!**************************************************************!*\
   !*** ./resources/assets/js/components/vaga/CadastroVaga.vue ***!
@@ -96831,6 +97208,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_vaga_CadastroVaga_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/vaga/CadastroVaga.vue */ "./resources/assets/js/components/vaga/CadastroVaga.vue");
 /* harmony import */ var _components_supervisor_CadastroSupervisor_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/supervisor/CadastroSupervisor.vue */ "./resources/assets/js/components/supervisor/CadastroSupervisor.vue");
 /* harmony import */ var _components_cartao_acesso_CadastroCartaoAcesso_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/cartao_acesso/CadastroCartaoAcesso.vue */ "./resources/assets/js/components/cartao_acesso/CadastroCartaoAcesso.vue");
+/* harmony import */ var _components_supervisor_ConsultaSupervisor_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/supervisor/ConsultaSupervisor.vue */ "./resources/assets/js/components/supervisor/ConsultaSupervisor.vue");
+
 
 
 
@@ -96861,6 +97240,10 @@ var routes = [{
   name: 'Cadastro de Cartão de Acesso',
   path: '/cadastrocartaoacesso',
   component: _components_cartao_acesso_CadastroCartaoAcesso_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+}, {
+  name: 'Consulta de Supervisor',
+  path: '/consultasupervisor',
+  component: _components_supervisor_ConsultaSupervisor_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
 }];
 
 /***/ }),
