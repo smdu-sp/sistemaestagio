@@ -5528,9 +5528,9 @@ __webpack_require__.r(__webpack_exports__);
         return supervisor;
       });
 
-      var sortedUsers = lodash__WEBPACK_IMPORTED_MODULE_0___default.a.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
+      var sortedSupervisor = lodash__WEBPACK_IMPORTED_MODULE_0___default.a.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
 
-      return sortedUsers;
+      return sortedSupervisor;
     },
     cartoesOrdenados: function cartoesOrdenados() {
       return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.orderBy(this.cartoes, 'id');
@@ -6281,17 +6281,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       nomeBuscado: '',
       supervisores: {},
-      estagiarios: {}
+      estagiarios: {},
+      departamentos: {},
+      auxiliarCpf: '',
+      // usada para recuperar o cpf do estagiario clicado
+      estagiarioClicado: {},
+      cargos: {}
     };
   },
   beforeMount: function beforeMount() {
     this.retornaSupervisores();
+    this.retornaEstagiarios();
+    this.retornaDepartamentos();
+    this.retornaCargos();
+    this.exibeCargo();
   },
   computed: {
     supervisoresOrdenados: function supervisoresOrdenados() {
@@ -6309,14 +6340,18 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    exibeModalEstagiario: function exibeModalEstagiario() {
+      this.$refs['consulta-estagiario'].show();
+    },
+    escondeModalEstagiario: function escondeModalEstagiario() {
+      this.$refs['consulta-estagiario'].hide();
+    },
     retornaSupervisores: function retornaSupervisores() {
       var _this = this;
 
       var uriSupervisor = '/api/supervisores';
       this.axios.get(uriSupervisor).then(function (response) {
         _this.supervisores = response.data;
-
-        _this.retornaEstagiarios();
       })["catch"](function (error) {
         console.log("Erro: " + error);
       });
@@ -6327,10 +6362,84 @@ __webpack_require__.r(__webpack_exports__);
       var uriEstagiario = '/api/estagiarios';
       this.axios.get(uriEstagiario).then(function (response) {
         _this2.estagiarios = response.data;
-        console.log(_this2.estagiarios);
       })["catch"](function (error) {
         console.log("Erro: " + error);
       });
+    },
+    exibeDepartamento: function exibeDepartamento() {
+      // Substitui o código do departamento pela sigla do mesmo
+      for (var i in this.supervisores) {
+        for (var k in this.departamentos) {
+          if (this.supervisores[i].departamento == this.departamentos[k].eh) {
+            this.supervisores[i].departamento = this.departamentos[k].sigla;
+          }
+        }
+      }
+    },
+    arrayEstagiarios: function arrayEstagiarios() {
+      // Cria um array de estagiarios dentro de cada supervisor
+      for (var i in this.supervisores) {
+        this.supervisores[i].estagiarios = new Array();
+      }
+    },
+    relacionaEstagiarioAoSupervisor: function relacionaEstagiarioAoSupervisor() {
+      // Verifica se o estagiário pertence ao supervisor
+      for (var i in this.estagiarios) {
+        for (var k in this.supervisores) {
+          if (this.supervisores[k].nome.toUpperCase() == this.estagiarios[i].supervisor.toUpperCase()) {
+            this.supervisores[k].estagiarios.push(this.estagiarios[i].nome);
+          }
+        }
+      }
+    },
+    retornaDepartamentos: function retornaDepartamentos() {
+      var _this3 = this;
+
+      var uriDepartamentos = '/api/departamentos';
+      this.axios.get(uriDepartamentos).then(function (response) {
+        _this3.departamentos = response.data;
+
+        _this3.exibeDepartamento();
+
+        _this3.arrayEstagiarios();
+
+        _this3.relacionaEstagiarioAoSupervisor();
+      })["catch"](function (error) {
+        console.log("Erro: " + error);
+      });
+    },
+    exibeCargo: function exibeCargo() {
+      // substitui o numero do cargo pelo nome do mesmo
+      for (var i in this.supervisores) {
+        for (var k in this.cargos) {
+          if (this.supervisores[i].cargo_funcao == this.cargos[k].id) {
+            this.supervisores[i].cargo_funcao = this.cargos[k].id;
+          }
+        }
+      }
+    },
+    retornaCargos: function retornaCargos() {
+      var _this4 = this;
+
+      var uriCargos = '/api/cargos';
+      this.axios.get(uriCargos).then(function (response) {
+        _this4.cargos = response.data;
+      })["catch"](function (error) {
+        console.log("Error: " + error);
+      });
+    },
+    consultaEstagiario: function consultaEstagiario(e) {
+      var textoTd = e.target.innerText.toUpperCase();
+
+      for (var i in this.estagiarios) {
+        var estagiario = this.estagiarios[i];
+        var estagiarioUpperCase = this.estagiarios[i].nome.toUpperCase();
+
+        if (textoTd == estagiarioUpperCase) {
+          this.estagiarioClicado = estagiario;
+          this.exibeModalEstagiario();
+        }
+      }
     },
     buscaSupervisor: function buscaSupervisor() {// for(let i = 0; i <= this.supervisores.length; i++) {
       //     if(this.nomeBuscado === this.supervisores[i].nome) {
@@ -38018,7 +38127,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.tabela {\r\n    overflow: scroll;\n}\r\n", ""]);
+exports.push([module.i, "\n.tabela {\r\n    overflow: scroll;\r\n    height: 500px;\n}\n.estagiario {\r\n    text-transform: capitalize;\r\n    margin-bottom: 4px;\n}\n.td-estagiario {\r\n    background-color: transparent!important;\n}\n.linha {\r\n    display: -webkit-box;\r\n    display: flex;\r\n    border: 1px solid #ccc;\n}\r\n", ""]);
 
 // exports
 
@@ -78715,7 +78824,7 @@ var render = function() {
       _c(
         "botoes-component",
         { attrs: { titulo: (_vm.nomeBotao = "Cadastrar") } },
-        [_c("botao-email-component")],
+        [_c("botao-email-component", { attrs: { post: _vm.post } })],
         1
       )
     ],
@@ -79646,6 +79755,58 @@ var render = function() {
       _c("h1", [_vm._v("Consulta Supervisor")]),
       _vm._v(" "),
       _c(
+        "b-modal",
+        {
+          ref: "consulta-estagiario",
+          attrs: {
+            size: "lg",
+            "hide-footer": "",
+            title: "Consulta de Estagiário"
+          }
+        },
+        [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("b", [_vm._v("Nome:")]),
+            _vm._v(
+              " " +
+                _vm._s(
+                  _vm.estagiarioClicado.nome
+                    ? _vm.estagiarioClicado.nome.toUpperCase()
+                    : ""
+                ) +
+                "\n      "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "text-right" },
+            [
+              _c(
+                "b-button",
+                {
+                  staticClass: "mt-3",
+                  attrs: { type: "submit", variant: "outline-primary" }
+                },
+                [_vm._v("Editar dados")]
+              ),
+              _vm._v(" "),
+              _c(
+                "b-button",
+                {
+                  staticClass: "mt-3",
+                  attrs: { variant: "outline-danger" },
+                  on: { click: _vm.escondeModalEstagiario }
+                },
+                [_vm._v("Cancelar")]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
         "b-card",
         { attrs: { "no-body": "" } },
         [
@@ -79714,39 +79875,63 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(_vm.supervisores, function(supervisor) {
+                          _vm._l(_vm.supervisoresOrdenados, function(
+                            supervisor
+                          ) {
                             return _c("tr", { key: supervisor.nome }, [
                               _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(_vm._s(supervisor.nome))
+                                _vm._v(_vm._s(supervisor.nome.toUpperCase()))
                               ]),
                               _vm._v(" "),
-                              _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(_vm._s(supervisor.rf))
-                              ]),
+                              _c("td", [_vm._v(_vm._s(supervisor.rf))]),
                               _vm._v(" "),
-                              _c("th", { attrs: { scope: "row" } }, [
+                              _c("td", [
                                 _vm._v(_vm._s(supervisor.departamento))
                               ]),
                               _vm._v(" "),
-                              _c("th", { attrs: { scope: "row" } }, [
+                              _c("td", [
                                 _vm._v(_vm._s(supervisor.cargo_funcao))
                               ]),
                               _vm._v(" "),
-                              _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(_vm._s(supervisor.formacao))
-                              ]),
+                              _c("td", [_vm._v(_vm._s(supervisor.formacao))]),
                               _vm._v(" "),
-                              _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(_vm._s(supervisor.situacao))
-                              ]),
+                              _c("td", [_vm._v(_vm._s(supervisor.situacao))]),
                               _vm._v(" "),
-                              _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(_vm._s(supervisor.cpf))
-                              ]),
+                              _c("td", [_vm._v(_vm._s(supervisor.cpf))]),
                               _vm._v(" "),
-                              _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(_vm._s(supervisor.estagiarios))
-                              ])
+                              _c(
+                                "td",
+                                { staticClass: "td-estagiario" },
+                                _vm._l(supervisor.estagiarios, function(
+                                  estagiario
+                                ) {
+                                  return _c(
+                                    "a",
+                                    {
+                                      key: estagiario,
+                                      staticClass: "estagiario",
+                                      attrs: { href: "" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.consultaEstagiario($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("tr", [
+                                        _vm._v(
+                                          "\n                                                  " +
+                                            _vm._s(estagiario) +
+                                            "\n                                                  "
+                                        ),
+                                        _c("span", { staticClass: "linha" })
+                                      ])
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
                             ])
                           }),
                           0

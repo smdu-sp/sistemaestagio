@@ -185,7 +185,7 @@
         </div>
     </div>
     <botoes-component :titulo="nomeBotao = 'Cadastrar'">
-        <botao-email-component></botao-email-component>
+        <botao-email-component :post="post"></botao-email-component>
     </botoes-component>
 </form>
 

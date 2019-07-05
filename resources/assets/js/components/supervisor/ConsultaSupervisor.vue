@@ -2,6 +2,21 @@
     <div>
         <h1>Consulta Supervisor</h1>
 
+
+          <!--Modal ativado quando o usuário clica no nome de algum estagiário -->
+    <b-modal ref="consulta-estagiario" size="lg" hide-footer title="Consulta de Estagiário">
+        <div class="col-md-6">
+            <b>Nome:</b> {{ estagiarioClicado.nome ? estagiarioClicado.nome.toUpperCase() : '' }}
+        </div>
+
+      
+        <div class="text-right">
+          <b-button type="submit" class="mt-3" variant="outline-primary">Editar dados</b-button>
+          <b-button class="mt-3" variant="outline-danger" @click="escondeModalEstagiario">Cancelar</b-button>
+        </div>
+    </b-modal>
+  <!--Modal-->
+
         <b-card no-body>
             <b-tabs card>
                 <b-tab title="Supervisores" active>
@@ -31,17 +46,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="supervisor of supervisores" :key="supervisor.nome">
-                                        <th scope="row">{{ supervisor.nome }}</th>
-                                        <th scope="row">{{ supervisor.rf }}</th>
-                                        <th scope="row">{{ supervisor.departamento }}</th>
-                                        <th scope="row">{{ supervisor.cargo_funcao }}</th>
-                                        <th scope="row">{{ supervisor.formacao }}</th>
+                                    <tr v-for="supervisor of supervisoresOrdenados" :key="supervisor.nome">
+                                        <th scope="row">{{ supervisor.nome.toUpperCase() }}</th>
+                                        <td>{{ supervisor.rf }}</td>
+                                        <td>{{ supervisor.departamento }}</td>
+                                        <td>{{ supervisor.cargo_funcao }}</td>
+                                        <td>{{ supervisor.formacao }}</td>
                                         <!-- <th scope="row">{{ supervisor.conselho_profissional }}</th> -->
                                         <!-- <th scope="row">{{ supervisor.atividades_estagiario }}</th> -->
-                                        <th scope="row">{{ supervisor.situacao }}</th>
-                                        <th scope="row">{{ supervisor.cpf }}</th>
-                                        <th scope="row">{{ supervisor.estagiarios }}</th>
+                                        <td>{{ supervisor.situacao }}</td>
+                                        <td>{{ supervisor.cpf }}</td>
+                                        <td class="td-estagiario">
+                                            <a href="" @click.prevent="consultaEstagiario" v-for="estagiario of supervisor.estagiarios" :key="estagiario" class="estagiario">
+                                                <tr>
+                                                    {{ estagiario }}
+                                                    <span class="linha"></span>
+                                                </tr>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -60,11 +82,19 @@ export default {
         return {
             nomeBuscado: '',
             supervisores: {},
-            estagiarios: {}
+            estagiarios: {},
+            departamentos: {},
+            auxiliarCpf: '', // usada para recuperar o cpf do estagiario clicado
+            estagiarioClicado: {},
+            cargos: {}
         }
     },
     beforeMount() {
         this.retornaSupervisores();
+        this.retornaEstagiarios();
+        this.retornaDepartamentos();
+        this.retornaCargos();
+        this.exibeCargo();
     },
     computed: {
         supervisoresOrdenados() {
@@ -82,6 +112,12 @@ export default {
         }
     },
     methods: {
+        exibeModalEstagiario() {
+            this.$refs['consulta-estagiario'].show()
+        },
+        escondeModalEstagiario() {
+            this.$refs['consulta-estagiario'].hide()
+        },
         retornaSupervisores() {
             const uriSupervisor = '/api/supervisores';
 
@@ -89,7 +125,6 @@ export default {
             .get(uriSupervisor)
             .then(response => {
                 this.supervisores = response.data;
-                this.retornaEstagiarios();
             })
             .catch(error => {
                 console.log("Erro: "+error);
@@ -102,11 +137,83 @@ export default {
             .get(uriEstagiario)
             .then(response => {
                 this.estagiarios = response.data;
-                console.log(this.estagiarios);
-                })
+            })
             .catch(error => {
                 console.log("Erro: "+error);
             })
+        },
+        exibeDepartamento() { // Substitui o código do departamento pela sigla do mesmo
+            for(let i in this.supervisores) { 
+                    for(let k in this.departamentos) {
+                        if(this.supervisores[i].departamento == this.departamentos[k].eh){
+                            this.supervisores[i].departamento = this.departamentos[k].sigla
+                        }
+                    }
+                }
+        },
+        arrayEstagiarios() { // Cria um array de estagiarios dentro de cada supervisor
+            for(let i in this.supervisores) { 
+                    this.supervisores[i].estagiarios = new Array();
+                }
+        },
+        relacionaEstagiarioAoSupervisor() { // Verifica se o estagiário pertence ao supervisor
+            for(let i in this.estagiarios) { 
+                for(let k in this.supervisores) {
+                    if(this.supervisores[k].nome.toUpperCase() == this.estagiarios[i].supervisor.toUpperCase()) {
+                        this.supervisores[k].estagiarios.push(this.estagiarios[i].nome);
+                    }
+                }
+            }
+        },
+        retornaDepartamentos() {
+            const uriDepartamentos = '/api/departamentos';
+
+            this.axios
+            .get(uriDepartamentos)
+            .then(response => {
+                this.departamentos = response.data;
+                this.exibeDepartamento();
+                this.arrayEstagiarios();
+                this.relacionaEstagiarioAoSupervisor();                
+            })
+            .catch(error => {
+                console.log("Erro: "+error);
+            })
+
+            
+
+        },
+        exibeCargo() { // substitui o numero do cargo pelo nome do mesmo
+            for(let i in this.supervisores){
+                for(let k in this.cargos) {
+                    if(this.supervisores[i].cargo_funcao == this.cargos[k].id) {
+                        this.supervisores[i].cargo_funcao = this.cargos[k].id;
+                    }
+                }
+            }
+        },
+        retornaCargos() {
+            const uriCargos = '/api/cargos';
+
+            this.axios
+            .get(uriCargos)
+            .then(response => {
+                this.cargos = response.data;
+            })
+            .catch(error => {
+                console.log("Error: "+error)
+            })
+        },
+        consultaEstagiario(e) {
+            let textoTd = e.target.innerText.toUpperCase();
+            for(let i in this.estagiarios) {
+                let estagiario = this.estagiarios[i];
+                let estagiarioUpperCase = this.estagiarios[i].nome.toUpperCase();
+                if(textoTd == estagiarioUpperCase){
+                    this.estagiarioClicado = estagiario;
+                    this.exibeModalEstagiario();
+                }
+            }
         },
         buscaSupervisor() {
 
@@ -127,5 +234,17 @@ export default {
 <style>
 .tabela {
     overflow: scroll;
+    height: 500px;
+}
+.estagiario {
+    text-transform: capitalize;
+    margin-bottom: 4px;
+}
+.td-estagiario {
+    background-color: transparent!important;
+}
+.linha {
+    display: flex;
+    border: 1px solid #ccc;
 }
 </style>

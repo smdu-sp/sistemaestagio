@@ -205,9 +205,9 @@ export default {
                 return supervisor;
             });
 
-            const sortedUsers = _.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
+            const sortedSupervisor = _.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
 
-            return sortedUsers;
+            return sortedSupervisor;
         },
         cartoesOrdenados() {
             return _.orderBy(this.cartoes, 'id');
