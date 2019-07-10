@@ -18,7 +18,7 @@ export const routes = [
         component: NavEstagiario
     },
     {
-        name: 'Consulta de Estagiários',
+        name: 'consulta',
         path: '/consulta',
         component: Consulta
     },

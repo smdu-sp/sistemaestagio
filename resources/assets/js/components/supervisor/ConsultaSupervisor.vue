@@ -5,14 +5,16 @@
 
           <!--Modal ativado quando o usuário clica no nome de algum estagiário -->
     <b-modal ref="consulta-estagiario" size="lg" hide-footer title="Consulta de Estagiário">
-        <div class="col-md-6">
-            <b>Nome:</b> {{ estagiarioClicado.nome ? estagiarioClicado.nome.toUpperCase() : '' }}
+        <div class="row">
+            <div class="col-md-6">
+                <b>Nome:</b> {{ estagiarioClicado.nome ? estagiarioClicado.nome.toUpperCase() : '' }}
+            </div>
         </div>
 
       
         <div class="text-right">
-          <b-button type="submit" class="mt-3" variant="outline-primary">Editar dados</b-button>
-          <b-button class="mt-3" variant="outline-danger" @click="escondeModalEstagiario">Cancelar</b-button>
+            <router-link to="/consulta" class="btn btn-outline-primary mt-3">Editar dados</router-link>
+            <b-button class="mt-3" variant="outline-danger" @click="escondeModalEstagiario">Cancelar</b-button>
         </div>
     </b-modal>
   <!--Modal-->
@@ -24,7 +26,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="">Filtro:</label>
-                                <input type="text" class="form-control" placeholder="Digite o nome do Supervisor">
+                                <input type="search" @input="filtro = $event.target.value" class="form-control" placeholder="Digite parte do nome do Supervisor">
                             </div>
                         </div>
 
@@ -46,7 +48,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="supervisor of supervisoresOrdenados" :key="supervisor.nome">
+                                    <tr v-for="supervisor of supervisoresComFiltro" :key="supervisor.nome">
                                         <th scope="row">{{ supervisor.nome.toUpperCase() }}</th>
                                         <td>{{ supervisor.rf }}</td>
                                         <td>{{ supervisor.departamento }}</td>
@@ -82,22 +84,33 @@ export default {
         return {
             nomeBuscado: '',
             supervisores: {},
+            supervisorFiltrado: {},
             estagiarios: {},
             departamentos: {},
             auxiliarCpf: '', // usada para recuperar o cpf do estagiario clicado
             estagiarioClicado: {},
-            cargos: {}
+            cargos: {},
+            filtro: ''
         }
     },
     beforeMount() {
         this.retornaSupervisores();
         this.retornaEstagiarios();
         this.retornaDepartamentos();
-        this.retornaCargos();
-        this.exibeCargo();
-    },
+        this.retornaCargos();       
+        this.exibeCargo(); 
+    }, 
     computed: {
-        supervisoresOrdenados() {
+        supervisoresComFiltro() {
+            this.supervisorFiltrado = this.supervisores
+            if(this.filtro){
+                let exp = new RegExp(this.filtro.trim(), 'i');
+                return this.supervisorFiltrado.filter(supervisor => exp.test(supervisor.nome));
+            } else {
+                return this.supervisores;
+            }
+        },
+        supervisoresOrdenados() { // Todo: Ordenar supervisores em ordem alfabética utilizando esta função
             let lowerCaseSupervisores = _.clone(this.supervisores);
             if(typeof(lowerCaseSupervisores.map) == 'undefined')
                 return;
@@ -183,15 +196,6 @@ export default {
             
 
         },
-        exibeCargo() { // substitui o numero do cargo pelo nome do mesmo
-            for(let i in this.supervisores){
-                for(let k in this.cargos) {
-                    if(this.supervisores[i].cargo_funcao == this.cargos[k].id) {
-                        this.supervisores[i].cargo_funcao = this.cargos[k].id;
-                    }
-                }
-            }
-        },
         retornaCargos() {
             const uriCargos = '/api/cargos';
 
@@ -202,7 +206,15 @@ export default {
             })
             .catch(error => {
                 console.log("Error: "+error)
-            })
+            });
+        },
+        exibeCargo() { // substitui o numero do cargo pelo nome do mesmo
+            for(let i in this.supervisores){
+                for(let k in this.cargos) {
+                    console.log("idCargo: "+this.cargos[k].id);
+                    console.log("idSupervisor: "+this.supervisores[k].cargo_funcao);
+                }
+            }
         },
         consultaEstagiario(e) {
             let textoTd = e.target.innerText.toUpperCase();
@@ -214,18 +226,6 @@ export default {
                     this.exibeModalEstagiario();
                 }
             }
-        },
-        buscaSupervisor() {
-
-            // for(let i = 0; i <= this.supervisores.length; i++) {
-            //     if(this.nomeBuscado === this.supervisores[i].nome) {
-            //         console.log(this.supervisores[i]);
-            //     }
-            // }
-
-            // for(let i = 0; i <= this.supervisores.length; i++) {
-                
-            // }
         }
     }    
 }

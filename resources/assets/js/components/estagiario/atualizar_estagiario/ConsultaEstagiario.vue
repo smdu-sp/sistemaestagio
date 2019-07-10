@@ -140,6 +140,7 @@
 </template>
 
 <script>
+import EventBus from '../../eventBus';
 export default {
   data() {
     return {
@@ -190,7 +191,6 @@ export default {
       loading: false
     }
   },
-
   beforeMount() {
     let uriCartoes = '/api/cartao';
     let uriEstados = '/api/estados';

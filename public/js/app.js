@@ -2489,6 +2489,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _eventBus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../eventBus */ "./resources/assets/js/components/eventBus.js");
 //
 //
 //
@@ -2630,6 +2631,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6303,18 +6305,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       nomeBuscado: '',
       supervisores: {},
+      supervisorFiltrado: {},
       estagiarios: {},
       departamentos: {},
       auxiliarCpf: '',
       // usada para recuperar o cpf do estagiario clicado
       estagiarioClicado: {},
-      cargos: {}
+      cargos: {},
+      filtro: ''
     };
   },
   beforeMount: function beforeMount() {
@@ -6325,7 +6331,20 @@ __webpack_require__.r(__webpack_exports__);
     this.exibeCargo();
   },
   computed: {
+    supervisoresComFiltro: function supervisoresComFiltro() {
+      this.supervisorFiltrado = this.supervisores;
+
+      if (this.filtro) {
+        var exp = new RegExp(this.filtro.trim(), 'i');
+        return this.supervisorFiltrado.filter(function (supervisor) {
+          return exp.test(supervisor.nome);
+        });
+      } else {
+        return this.supervisores;
+      }
+    },
     supervisoresOrdenados: function supervisoresOrdenados() {
+      // Todo: Ordenar supervisores em ordem alfabética utilizando esta função
       var lowerCaseSupervisores = _.clone(this.supervisores);
 
       if (typeof lowerCaseSupervisores.map == 'undefined') return;
@@ -6408,16 +6427,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Erro: " + error);
       });
     },
-    exibeCargo: function exibeCargo() {
-      // substitui o numero do cargo pelo nome do mesmo
-      for (var i in this.supervisores) {
-        for (var k in this.cargos) {
-          if (this.supervisores[i].cargo_funcao == this.cargos[k].id) {
-            this.supervisores[i].cargo_funcao = this.cargos[k].id;
-          }
-        }
-      }
-    },
     retornaCargos: function retornaCargos() {
       var _this4 = this;
 
@@ -6427,6 +6436,15 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log("Error: " + error);
       });
+    },
+    exibeCargo: function exibeCargo() {
+      // substitui o numero do cargo pelo nome do mesmo
+      for (var i in this.supervisores) {
+        for (var k in this.cargos) {
+          console.log("idCargo: " + this.cargos[k].id);
+          console.log("idSupervisor: " + this.supervisores[k].cargo_funcao);
+        }
+      }
     },
     consultaEstagiario: function consultaEstagiario(e) {
       var textoTd = e.target.innerText.toUpperCase();
@@ -6440,14 +6458,6 @@ __webpack_require__.r(__webpack_exports__);
           this.exibeModalEstagiario();
         }
       }
-    },
-    buscaSupervisor: function buscaSupervisor() {// for(let i = 0; i <= this.supervisores.length; i++) {
-      //     if(this.nomeBuscado === this.supervisores[i].nome) {
-      //         console.log(this.supervisores[i]);
-      //     }
-      // }
-      // for(let i = 0; i <= this.supervisores.length; i++) {
-      // }
     }
   }
 });
@@ -79765,17 +79775,19 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("b", [_vm._v("Nome:")]),
-            _vm._v(
-              " " +
-                _vm._s(
-                  _vm.estagiarioClicado.nome
-                    ? _vm.estagiarioClicado.nome.toUpperCase()
-                    : ""
-                ) +
-                "\n      "
-            )
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("b", [_vm._v("Nome:")]),
+              _vm._v(
+                " " +
+                  _vm._s(
+                    _vm.estagiarioClicado.nome
+                      ? _vm.estagiarioClicado.nome.toUpperCase()
+                      : ""
+                  ) +
+                  "\n          "
+              )
+            ])
           ]),
           _vm._v(" "),
           _c(
@@ -79783,10 +79795,10 @@ var render = function() {
             { staticClass: "text-right" },
             [
               _c(
-                "b-button",
+                "router-link",
                 {
-                  staticClass: "mt-3",
-                  attrs: { type: "submit", variant: "outline-primary" }
+                  staticClass: "btn btn-outline-primary mt-3",
+                  attrs: { to: "/consulta" }
                 },
                 [_vm._v("Editar dados")]
               ),
@@ -79828,8 +79840,13 @@ var render = function() {
                         _c("input", {
                           staticClass: "form-control",
                           attrs: {
-                            type: "text",
-                            placeholder: "Digite o nome do Supervisor"
+                            type: "search",
+                            placeholder: "Digite parte do nome do Supervisor"
+                          },
+                          on: {
+                            input: function($event) {
+                              _vm.filtro = $event.target.value
+                            }
                           }
                         })
                       ])
@@ -79875,7 +79892,7 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(_vm.supervisoresOrdenados, function(
+                          _vm._l(_vm.supervisoresComFiltro, function(
                             supervisor
                           ) {
                             return _c("tr", { key: supervisor.nome }, [
@@ -95488,9 +95505,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_estagiario_atualizar_estagiario_ConsultaEstagiario_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue */ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue");
 /* harmony import */ var _components_ModalConsultaCpf_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/ModalConsultaCpf.vue */ "./resources/assets/js/components/ModalConsultaCpf.vue");
 /* harmony import */ var _components_supervisor_CadastroSupervisor_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/supervisor/CadastroSupervisor.vue */ "./resources/assets/js/components/supervisor/CadastroSupervisor.vue");
-/* harmony import */ var _components_cartao_acesso_CadastroCartaoAcesso__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/cartao_acesso/CadastroCartaoAcesso */ "./resources/assets/js/components/cartao_acesso/CadastroCartaoAcesso.vue");
-/* harmony import */ var _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/BotaoEmail.vue */ "./resources/assets/js/components/BotaoEmail.vue");
-/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
+/* harmony import */ var _components_supervisor_ConsultaSupervisor_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/supervisor/ConsultaSupervisor.vue */ "./resources/assets/js/components/supervisor/ConsultaSupervisor.vue");
+/* harmony import */ var _components_cartao_acesso_CadastroCartaoAcesso__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/cartao_acesso/CadastroCartaoAcesso */ "./resources/assets/js/components/cartao_acesso/CadastroCartaoAcesso.vue");
+/* harmony import */ var _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/BotaoEmail.vue */ "./resources/assets/js/components/BotaoEmail.vue");
+/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -95538,6 +95556,7 @@ Vue.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_6___default.a);
 
 
 
+
 Vue.component('aside-component', _components_AsideComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 Vue.component('home-component', _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 Vue.component('header-component', _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
@@ -95557,12 +95576,13 @@ Vue.component('consulta-estagiario', _components_estagiario_atualizar_estagiario
 Vue.component('dados-bancarios-atualizar', _components_estagiario_atualizar_estagiario_DadosBancarios_vue__WEBPACK_IMPORTED_MODULE_21__["default"]);
 Vue.component('modal-consulta-cpf', _components_ModalConsultaCpf_vue__WEBPACK_IMPORTED_MODULE_24__["default"]);
 Vue.component('cadastro-supervisor-component', _components_supervisor_CadastroSupervisor_vue__WEBPACK_IMPORTED_MODULE_25__["default"]);
-Vue.component('cadastro-cartao-acesso-component', _components_cartao_acesso_CadastroCartaoAcesso__WEBPACK_IMPORTED_MODULE_26__["default"]);
-Vue.component('botao-email-component', _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_27__["default"]);
+Vue.component('cadastro-cartao-acesso-component', _components_cartao_acesso_CadastroCartaoAcesso__WEBPACK_IMPORTED_MODULE_27__["default"]);
+Vue.component('botao-email-component', _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_28__["default"]);
+Vue.component('consulta-supervisor-component', _components_supervisor_ConsultaSupervisor_vue__WEBPACK_IMPORTED_MODULE_26__["default"]);
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
-  routes: _routes_js__WEBPACK_IMPORTED_MODULE_28__["routes"]
+  routes: _routes_js__WEBPACK_IMPORTED_MODULE_29__["routes"]
 });
 var app = new Vue(Vue.util.extend({
   router: router
@@ -97116,6 +97136,24 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/eventBus.js":
+/*!****************************************************!*\
+  !*** ./resources/assets/js/components/eventBus.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+// event-bus.js
+
+var EventBus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+/* harmony default export */ __webpack_exports__["default"] = (EventBus);
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/supervisor/CadastroSupervisor.vue":
 /*!**************************************************************************!*\
   !*** ./resources/assets/js/components/supervisor/CadastroSupervisor.vue ***!
@@ -97410,7 +97448,7 @@ var routes = [{
   path: '/cadastroestagiario',
   component: _components_estagiario_cadastrar_estagiario_NavEstagiario_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
-  name: 'Consulta de Estagiários',
+  name: 'consulta',
   path: '/consulta',
   component: _components_estagiario_atualizar_estagiario_ConsultaEstagiario_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
