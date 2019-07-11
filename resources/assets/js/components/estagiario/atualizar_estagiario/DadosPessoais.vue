@@ -409,7 +409,7 @@
                     :class="{'is-invalid':cursoValido}"
                     id="selectCurso" 
                     v-model="post.curso_formacao" >
-                    <option v-for="curso of cursos" :value="curso.id">{{ curso.formacao }}</option>
+                    <option v-for="curso of cursos" :value="curso.id" :key="curso.id">{{ curso.formacao }}</option>
                 </select>
                 <div v-if="cursoValido" class="invalid-feedback">
                     Curso não pode ser vazio

@@ -9,23 +9,29 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+/* Vue Router */
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
+/* Vue-axios */
 import VueAxios from 'vue-axios';
 import axios from 'axios';
-
 import App from './App.vue';
 Vue.use(VueAxios, axios);
 
+/* Bootstrap-vue */
 import PortalVue from 'portal-vue';
 import BootstrapVue from 'bootstrap-vue';
 Vue.use(BootstrapVue);
 Vue.use(PortalVue);
 
+/* Vue the-mask */
 import vueTheMask from 'vue-the-mask';
 Vue.use(vueTheMask);
 
+import store from './vuex/store';
+// import Vuex from 'vuex';
+// Vue.use(Vuex);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -85,4 +91,15 @@ const router = new VueRouter({
     routes: routes
 });
 
-const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+new Vue({
+    el: '#app',
+    store,
+    router: router
+});
+
+// const app = new Vue({
+//     store,
+//     el: '#app'
+// })
+
+// const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');

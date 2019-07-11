@@ -6,8 +6,43 @@
           <!--Modal ativado quando o usuário clica no nome de algum estagiário -->
     <b-modal ref="consulta-estagiario" size="lg" hide-footer title="Consulta de Estagiário">
         <div class="row">
-            <div class="col-md-6">
-                <b>Nome:</b> {{ estagiarioClicado.nome ? estagiarioClicado.nome.toUpperCase() : '' }}
+            <div class="col-md-12">
+                <span class="dado">Nome:</span> <span class="valor">{{ estagiarioClicado.nome ? estagiarioClicado.nome.toUpperCase() : '' }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="dado">Fone Celular:</span> <span class="valor">{{ estagiarioClicado.fone_celular }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="dado">RG:</span> <span class="valor">{{ estagiarioClicado.rg }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="dado">CPF:</span> <span class="valor">{{ estagiarioClicado.cpf }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="dado">E-mail:</span> <span class="valor">{{ estagiarioClicado.email_pessoal }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="dado">Curso:</span> <span class="valor">{{ estagiarioClicado.curso_formacao }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="dado">Setor:</span> <span class="valor">{{ estagiarioClicado.setor_estagiado }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="dado">Supervisor:</span> <span class="valor">{{ estagiarioClicado.supervisor }}</span>
             </div>
         </div>
 
@@ -25,7 +60,7 @@
                     <b-card-text>
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="">Filtro:</label>
+                                <label for="">Nome:</label>
                                 <input type="search" @input="filtro = $event.target.value" class="form-control" placeholder="Digite parte do nome do Supervisor">
                             </div>
                         </div>
@@ -79,6 +114,7 @@
 
 <script>
 import { setTimeout } from 'timers';
+import _ from 'lodash';
 export default {
     data() {
         return {
@@ -90,16 +126,32 @@ export default {
             auxiliarCpf: '', // usada para recuperar o cpf do estagiario clicado
             estagiarioClicado: {},
             cargos: {},
-            filtro: ''
+            filtro: '',
+            cursos: {},
+            idCurso: ''
         }
     },
     beforeMount() {
         this.retornaSupervisores();
         this.retornaEstagiarios();
         this.retornaDepartamentos();
-        this.retornaCargos();       
-        this.exibeCargo(); 
+        this.retornaCargos();
+        this.retornaCursos();
     }, 
+    filters: {
+        exibeCargo() { // substitui o numero do cargo pelo nome do mesmo
+            for(let i in this.supervisores){
+                for(let k in this.cargos) {
+                    if(typeof(this.cargos[k]) == 'undefined' || typeof(this.supervisores[i]) == 'undefined'){
+                        return;
+                    } else {
+                        console.log("idCargo: "+this.cargos[k].id);
+                        console.log("idSupervisor: "+this.supervisores[k].cargo_funcao);
+                    }
+                }
+            }
+        }
+    },
     computed: {
         supervisoresComFiltro() {
             this.supervisorFiltrado = this.supervisores
@@ -125,8 +177,12 @@ export default {
         }
     },
     methods: {
+        armazenaEstagiario() {
+            this.$store.commit('armazenaEstagiarioSelecionado', this.estagiarioClicado);
+        },
         exibeModalEstagiario() {
             this.$refs['consulta-estagiario'].show()
+            this.armazenaEstagiario();
         },
         escondeModalEstagiario() {
             this.$refs['consulta-estagiario'].hide()
@@ -157,12 +213,12 @@ export default {
         },
         exibeDepartamento() { // Substitui o código do departamento pela sigla do mesmo
             for(let i in this.supervisores) { 
-                    for(let k in this.departamentos) {
-                        if(this.supervisores[i].departamento == this.departamentos[k].eh){
-                            this.supervisores[i].departamento = this.departamentos[k].sigla
-                        }
+                for(let k in this.departamentos) {
+                    if(this.supervisores[i].departamento == this.departamentos[k].eh){
+                        this.supervisores[i].departamento = this.departamentos[k].sigla
                     }
                 }
+            }
         },
         arrayEstagiarios() { // Cria um array de estagiarios dentro de cada supervisor
             for(let i in this.supervisores) { 
@@ -192,9 +248,6 @@ export default {
             .catch(error => {
                 console.log("Erro: "+error);
             })
-
-            
-
         },
         retornaCargos() {
             const uriCargos = '/api/cargos';
@@ -208,11 +261,22 @@ export default {
                 console.log("Error: "+error)
             });
         },
-        exibeCargo() { // substitui o numero do cargo pelo nome do mesmo
-            for(let i in this.supervisores){
-                for(let k in this.cargos) {
-                    console.log("idCargo: "+this.cargos[k].id);
-                    console.log("idSupervisor: "+this.supervisores[k].cargo_funcao);
+        retornaCursos() {
+            const uriCursos = '/api/cursos';
+
+            this.axios.get(uriCursos)
+            .then(response => {
+                this.cursos = response.data;
+            })
+            .catch(error => {
+                console.log("Erro: "+error);
+            })
+        },
+        exibeCurso() {
+            for(let k in this.cursos) {
+                if(this.estagiarioClicado.curso_formacao == this.cursos[k].id) {
+                    this.estagiarioClicado.curso_formacao = this.cursos[k].formacao
+                    this.$store.commit('armazenaIdCurso', this.cursos[k].id)
                 }
             }
         },
@@ -223,6 +287,7 @@ export default {
                 let estagiarioUpperCase = this.estagiarios[i].nome.toUpperCase();
                 if(textoTd == estagiarioUpperCase){
                     this.estagiarioClicado = estagiario;
+                    this.exibeCurso();
                     this.exibeModalEstagiario();
                 }
             }
@@ -246,5 +311,14 @@ export default {
 .linha {
     display: flex;
     border: 1px solid #ccc;
+}
+
+.dado {
+    font-weight: bold;
+    margin-left: 2%;
+}
+
+.valor {
+    margin-left: 2%;
 }
 </style>

@@ -209,7 +209,24 @@ export default {
     this.requisicaoGet(uriVagas, 'vagas');
   },
   mounted() {
-    this.exibeModalEstagiario()
+    if(this.$store.state.estagiarioSelecionado) {
+      this.mostrarConteudoConsulta = true;
+      this.post = this.$store.getters.getEstagiarioSelecionado;
+      this.post.curso_formacao = this.$store.state.idCursoEstagiarioSelecionado;
+      this.converteNascimento();
+      this.converteHorarioEntrada();
+      this.converteHorarioSaida();
+      this.converteDataInicio();
+      this.converteDataTermino();
+      this.converteTermosAditivos();
+      this.converteDataInicialLauda();
+      this.converteDataDesligamento();
+      this.converteSemestreDesligamento();
+      this.converteRecessos();
+      this.selectVaga();
+    } else {
+      this.exibeModalEstagiario();
+    }
   },
   methods: {
     exibeModalEstagiario() {
@@ -406,8 +423,8 @@ export default {
       }
     },
     alteraStatusVaga() {
-    let uriVagas = `/api/vagas/${this.statusVaga.id}`;
-    this.axios.patch(uriVagas, this.statusVaga).then(response => response);
+      let uriVagas = `/api/vagas/${this.statusVaga.id}`;
+      this.axios.patch(uriVagas, this.statusVaga).then(response => response);
     },
     converteFone() {
     let fone = this.post.fone_residencial;

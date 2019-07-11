@@ -58,7 +58,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="selectDepartamento">Dep. Hierárquico</label>
-                <select class="form-control" @blur="validaDepartamento" :class="{'is-invalid':departamentoValido}" id="selectDepartamento" v-model="post.dep_hierarquico" required>
+                <select class="form-control" @blur="validaDepartamento" :class="{'is-invalid':departamentoValido}" id="selectDepartamento" v-model="post.dep_hierarquico">
                     <option>{{ post.dep_hierarquico }}</option>
                     <option v-for="departamento of departamentos" v-if="departamento.tipo == 'PAI'">{{ departamento.sigla }}</option>
                 </select>
@@ -70,7 +70,7 @@
         <div class="col-md-3">
             <div class="setor-estag">
                 <label for="selectSetor">Setor Estagiado</label>
-                <select class="form-control" @blur="validaSetor" :class="{'is-invalid':setorValido}" id="selectSetor" v-model="post.setor_estagiado" required>
+                <select class="form-control" @blur="validaSetor" :class="{'is-invalid':setorValido}" id="selectSetor" v-model="post.setor_estagiado">
                     <option></option>
                     <option v-for="departamento of departamentos" v-if="departamento.tipo == 'FILHO'">{{ departamento.sigla }}</option>
                 </select>
@@ -82,7 +82,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="inputSupervisor">Supervisor</label>
-                <select class="form-control" @blur="validaSupervisor" :class="{'is-invalid':supervisorValido}" id="inputSupervisor" v-model="post.supervisor" required>
+                <select class="form-control" @blur="validaSupervisor" :class="{'is-invalid':supervisorValido}" id="inputSupervisor" v-model="post.supervisor">
                     <option></option>
                     <option v-for="supervisor of supervisores">{{ supervisor.nome }}</option>
                 </select>
@@ -97,13 +97,13 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputInicio">Data Início</label>
-                    <input type="date" class="form-control" id="inputInicio" v-model="post.dt_inicio" required>
+                    <input type="date" class="form-control" id="inputInicio" v-model="post.dt_inicio">
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputTermino">Data Término</label>
-                    <input type="date" class="form-control" id="inputTermino" v-model="post.dt_termino" required>
+                    <input type="date" class="form-control" id="inputTermino" v-model="post.dt_termino">
             </div>
         </div>
         <div class="col-md-3">
@@ -200,7 +200,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputSituacao">Situação</label>
-                <select id="inputSituacao" @blur="validaSituacao" :class="{'is-invalid':situacaoValida}" class="form-control" v-model="post.situacao" required>
+                <select id="inputSituacao" @blur="validaSituacao" :class="{'is-invalid':situacaoValida}" class="form-control" v-model="post.situacao">
                     <option value="1">CONTRATADO</option>
                     <option value="5">DESLIGADO</option>
                     <option value="2">EM CONTRATAÇÃO</option>
