@@ -10,6 +10,12 @@
         <div v-if="msg.error" class="alert alert-danger">
             {{ msg.erro }}
         </div>
+        <div> <!-- Exibe este modal caso o cpf já exista na base de dados -->
+            <b-modal v-model="modalCodvaga" ok-only>
+                <p>O código de vaga já existe na base de dados</p>
+                <p>Digite outro por favor</p>
+            </b-modal>
+        </div>
         <b-card no-body>
         <b-tabs card>
             <b-tab title="Dados da Vaga" active>
@@ -22,6 +28,7 @@
                                         <label>Código da vaga</label>
                                         <input 
                                             @blur="validaCodigo"
+                                            @input="verificaDuplicidadeCodigo"
                                             :class="{'is-invalid': codigoValido}" 
                                             type="text" 
                                             class="form-control"
@@ -128,6 +135,7 @@
         data(){
         return {
           vaga: {},
+          modalCodvaga: false,
           departamentos: {},
           codigoValido: false,
           situacaoValida: false,
@@ -210,6 +218,18 @@
                 this[variavelBooleana] = true
             } else {
                 this[variavelBooleana] = false
+            }
+        },
+        verificaDuplicidadeCodigo() {
+            const uriVagas = `/api/vagas/${this.vaga.id}`;
+            if(this.vaga.id.length == 5) {
+                this.axios.get(uriVagas)
+                .then(response => {
+                    this.modalCodvaga = !this.modalCodvaga;
+                    this.vaga.id = ''
+                }).catch(error => {
+                    console.log("Erro: "+error);
+                })
             }
         },
         validaCodigo(codigo) { this.validacao(codigo, 'codigoValido') }, 

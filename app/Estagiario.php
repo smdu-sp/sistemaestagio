@@ -8,8 +8,8 @@ class Estagiario extends Model
 {
     protected $table = 'tab_cad_estagiarios';
     public $timestamps = false;
-    public $incrementing = false;
     protected $primaryKey = 'cpf';
+    public $incrementing = false;
     protected $fillable = [
         'cod_estudante',
         'contrato',

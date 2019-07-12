@@ -2489,7 +2489,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _eventBus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../eventBus */ "./resources/assets/js/components/eventBus.js");
 //
 //
 //
@@ -2631,7 +2630,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2679,7 +2682,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       auxiliarCpf: '',
       mostrarConteudoConsulta: false,
-      loading: false
+      loading: false,
+      filtro: ''
     };
   },
   beforeMount: function beforeMount() {
@@ -2699,10 +2703,11 @@ __webpack_require__.r(__webpack_exports__);
     this.requisicaoGet(uriVagas, 'vagas');
   },
   mounted: function mounted() {
-    if (this.$store.state.estagiarioSelecionado) {
+    if (this.$store.state.estagiario.estagiarioSelecionado) {
       this.mostrarConteudoConsulta = true;
-      this.post = this.$store.getters.getEstagiarioSelecionado;
-      this.post.curso_formacao = this.$store.state.idCursoEstagiarioSelecionado;
+      this.post = this.$store.state.estagiario.estagiarioSelecionado;
+      this.post.curso_formacao = this.$store.state.estagiario.idCursoEstagiarioSelecionado;
+      this.auxiliarCpf = this.post.cpf;
       this.converteNascimento();
       this.converteHorarioEntrada();
       this.converteHorarioSaida();
@@ -5117,8 +5122,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'validaNome', 'nomeValido', 'validaCodEstudante', 'codValido', 'validaContratante', 'contratanteValido', 'validaEndereco', 'enderecoValido', 'validaEstado', 'estadoValido', 'validaCep', 'cepValido', 'validaBairro', 'bairroValido', 'validaComplemento', 'complementoValido', 'validaCelular', 'celularValido', 'validaNacionalidade', 'nacionalidadeValida', 'validaNaturalidade', 'naturalidadeValida', 'validaRaca', 'racaValida', 'validaCpf', 'cpfValido', 'validaRg', 'rgValido', 'validaEmail', 'emailValido', 'validaInstituicao', 'instituicaoValida', 'validaCurso', 'cursoValido', 'converteCep', 'valorNacionalidade', 'abreModalCartaoAcesso', 'carregaCartaoAcesso', 'cartoesOrdenados', 'cursosOrdenados']
+  props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'validaNome', 'nomeValido', 'validaCodEstudante', 'codValido', 'validaContratante', 'contratanteValido', 'validaEndereco', 'enderecoValido', 'validaEstado', 'estadoValido', 'validaCep', 'cepValido', 'validaBairro', 'bairroValido', 'validaComplemento', 'complementoValido', 'validaCelular', 'celularValido', 'validaNacionalidade', 'nacionalidadeValida', 'validaNaturalidade', 'naturalidadeValida', 'validaRaca', 'racaValida', 'validaCpf', 'cpfValido', 'validaRg', 'rgValido', 'validaEmail', 'emailValido', 'validaInstituicao', 'instituicaoValida', 'validaCurso', 'cursoValido', 'converteCep', 'valorNacionalidade', 'abreModalCartaoAcesso', 'carregaCartaoAcesso', 'cartoesOrdenados', 'cursosOrdenados', 'verificaDuplicidadeCpf', 'verificaDuplicidadeCodEstudante']
 });
 
 /***/ }),
@@ -5341,6 +5348,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -5850,7 +5859,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     validaCodEstudante: function validaCodEstudante(cod) {
       this.validacao(cod, 'codValido');
-      this.verificaDuplicidadeCodEstudante();
     },
     validaContratante: function validaContratante(contratante) {
       this.validacao(contratante, 'contratanteValido');
@@ -5887,7 +5895,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     validaCpf: function validaCpf(cpf) {
       this.validacao(cpf, 'cpfValido');
-      this.verificaDuplicidadeCpf();
     },
     validaRg: function validaRg(rg) {
       this.validacao(rg, 'rgValido');
@@ -6684,10 +6691,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       vaga: {},
+      modalCodvaga: false,
       departamentos: {},
       codigoValido: false,
       situacaoValida: false,
@@ -6774,6 +6789,20 @@ __webpack_require__.r(__webpack_exports__);
         this[variavelBooleana] = true;
       } else {
         this[variavelBooleana] = false;
+      }
+    },
+    verificaDuplicidadeCodigo: function verificaDuplicidadeCodigo() {
+      var _this3 = this;
+
+      var uriVagas = "/api/vagas/".concat(this.vaga.id);
+
+      if (this.vaga.id.length == 5) {
+        this.axios.get(uriVagas).then(function (response) {
+          _this3.modalCodvaga = !_this3.modalCodvaga;
+          _this3.vaga.id = '';
+        })["catch"](function (error) {
+          console.log("Erro: " + error);
+        });
       }
     },
     validaCodigo: function validaCodigo(codigo) {
@@ -71903,7 +71932,7 @@ var render = function() {
             },
             [
               _c("label", { attrs: { for: "inputCpf" } }, [
-                _vm._v("Digite o CPF do Estagiário")
+                _vm._v("Digite o CPF do Estagiário:")
               ]),
               _vm._v(" "),
               _c("the-mask", {
@@ -76595,12 +76624,15 @@ var render = function() {
               domProps: { value: _vm.post.cod_estudante },
               on: {
                 blur: _vm.validaCodEstudante,
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "cod_estudante", $event.target.value)
-                }
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.post, "cod_estudante", $event.target.value)
+                  },
+                  _vm.verificaDuplicidadeCodEstudante
+                ]
               }
             }),
             _vm._v(" "),
@@ -77369,12 +77401,15 @@ var render = function() {
               domProps: { value: _vm.post.cpf },
               on: {
                 blur: _vm.validaCpf,
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "cpf", $event.target.value)
-                }
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.post, "cpf", $event.target.value)
+                  },
+                  _vm.verificaDuplicidadeCpf
+                ]
               }
             }),
             _vm._v(" "),
@@ -79142,7 +79177,10 @@ var render = function() {
                           abreModalCartaoAcesso: _vm.abreModalCartaoAcesso,
                           carregaCartaoAcesso: _vm.carregaCartaoAcesso,
                           cartoesOrdenados: _vm.cartoesOrdenados,
-                          cursosOrdenados: _vm.cursosOrdenados
+                          cursosOrdenados: _vm.cursosOrdenados,
+                          verificaDuplicidadeCpf: _vm.verificaDuplicidadeCpf,
+                          verificaDuplicidadeCodEstudante:
+                            _vm.verificaDuplicidadeCodEstudante
                         }
                       })
                     ],
@@ -80172,6 +80210,31 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c(
+        "div",
+        [
+          _c(
+            "b-modal",
+            {
+              attrs: { "ok-only": "" },
+              model: {
+                value: _vm.modalCodvaga,
+                callback: function($$v) {
+                  _vm.modalCodvaga = $$v
+                },
+                expression: "modalCodvaga"
+              }
+            },
+            [
+              _c("p", [_vm._v("O código de vaga já existe na base de dados")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Digite outro por favor")])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "b-card",
         { attrs: { "no-body": "" } },
         [
@@ -80215,16 +80278,19 @@ var render = function() {
                                 domProps: { value: _vm.vaga.id },
                                 on: {
                                   blur: _vm.validaCodigo,
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.vaga,
-                                      "id",
-                                      $event.target.value
-                                    )
-                                  }
+                                  input: [
+                                    function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.vaga,
+                                        "id",
+                                        $event.target.value
+                                      )
+                                    },
+                                    _vm.verificaDuplicidadeCodigo
+                                  ]
                                 }
                               }),
                               _vm._v(" "),
@@ -98342,24 +98408,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/eventBus.js":
-/*!****************************************************!*\
-  !*** ./resources/assets/js/components/eventBus.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-// event-bus.js
-
-var EventBus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
-/* harmony default export */ __webpack_exports__["default"] = (EventBus);
-
-/***/ }),
-
 /***/ "./resources/assets/js/components/supervisor/CadastroSupervisor.vue":
 /*!**************************************************************************!*\
   !*** ./resources/assets/js/components/supervisor/CadastroSupervisor.vue ***!
@@ -98677,6 +98725,115 @@ var routes = [{
 
 /***/ }),
 
+/***/ "./resources/assets/js/vuex/modules/departamento.js":
+/*!**********************************************************!*\
+  !*** ./resources/assets/js/vuex/modules/departamento.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var uridepartamentos = '/api/departamentos';
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    departamentos: {}
+  },
+  mutations: {
+    armazenaDepartamentos: function armazenaDepartamentos(state, departamentos) {
+      state.departamentos = departamentos;
+    }
+  },
+  actions: {
+    requisicaoDepartamentos: function requisicaoDepartamentos(_ref) {
+      var commit = _ref.commit;
+      axios.get(uridepartamentos).then(function (response) {
+        commit('armazenaDepartamentos', response.data);
+      })["catch"](function (error) {
+        console.log("Erro: " + error);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/vuex/modules/estagiario.js":
+/*!********************************************************!*\
+  !*** ./resources/assets/js/vuex/modules/estagiario.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    estagiarioSelecionado: {},
+    idCursoEstagiarioSelecionado: '',
+    estagiarios: {}
+  },
+  getters: {
+    getEstagiarioSelecionado: function getEstagiarioSelecionado(state) {
+      return state.estagiarioSelecionado;
+    },
+    getEstagiarios: function getEstagiarios(state) {
+      return state.estagiarios;
+    }
+  },
+  mutations: {
+    armazenaEstagiarioSelecionado: function armazenaEstagiarioSelecionado(state, estagiario) {
+      state.estagiarioSelecionado = estagiario;
+    },
+    armazenaEstagiarios: function armazenaEstagiarios(state, estagiarios) {
+      state.estagiarios = estagiarios;
+    },
+    armazenaIdCurso: function armazenaIdCurso(state, idCurso) {
+      state.idCursoEstagiarioSelecionado = idCurso;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/vuex/modules/supervisor.js":
+/*!********************************************************!*\
+  !*** ./resources/assets/js/vuex/modules/supervisor.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var uriSupervisor = '/api/supervisores';
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    supervisores: {}
+  },
+  getters: {
+    getSupervisores: function getSupervisores(state) {
+      return state.supervisores;
+    }
+  },
+  mutations: {
+    armazenaSupervisores: function armazenaSupervisores(state, supervisores) {
+      state.supervisores = supervisores;
+    }
+  },
+  actions: {
+    requisicaoSupervisores: function requisicaoSupervisores(_ref) {
+      var commit = _ref.commit;
+      axios.get(uriSupervisor).then(function (response) {
+        commit('armazenaSupervisores', response.data);
+      })["catch"](function (error) {
+        console.log("Erro: " + error);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/vuex/store.js":
 /*!*******************************************!*\
   !*** ./resources/assets/js/vuex/store.js ***!
@@ -98689,43 +98846,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _modules_departamento__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/departamento */ "./resources/assets/js/vuex/modules/departamento.js");
+/* harmony import */ var _modules_estagiario__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/estagiario */ "./resources/assets/js/vuex/modules/estagiario.js");
+/* harmony import */ var _modules_supervisor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/supervisor */ "./resources/assets/js/vuex/modules/supervisor.js");
 /* Vuex */
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  state: {
-    estagiarioSelecionado: {},
-    idCursoEstagiarioSelecionado: '',
-    estagiarios: {},
-    supervisores: {}
-  },
-  getters: {
-    getEstagiarioSelecionado: function getEstagiarioSelecionado(state) {
-      return state.estagiarioSelecionado;
-    },
-    getSupervisores: function getSupervisores(state) {
-      return state.supervisores;
-    },
-    getEstagiarios: function getEstagiarios() {
-      return state.estagiarios;
-    }
-  },
-  mutations: {
-    armazenaEstagiarioSelecionado: function armazenaEstagiarioSelecionado(state, estagiario) {
-      state.estagiarioSelecionado = estagiario;
-    },
-    armazenaEstagiarios: function armazenaEstagiarios(state, estagiarios) {
-      state.estagiarios = estagiarios;
-    },
-    armazenaSupervisores: function armazenaSupervisores(state, supervisores) {
-      state.supervisores = supervisores;
-    },
-    armazenaIdCurso: function armazenaIdCurso(state, idCurso) {
-      state.idCursoEstagiarioSelecionado = idCurso;
-    }
+  modules: {
+    estagiario: _modules_estagiario__WEBPACK_IMPORTED_MODULE_3__["default"],
+    departamento: _modules_departamento__WEBPACK_IMPORTED_MODULE_2__["default"],
+    supervisor: _modules_supervisor__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
-}));
+})); // state: {
+//     estagiarioSelecionado: {},
+//     idCursoEstagiarioSelecionado: '',
+//     estagiarios: {},
+//     supervisores: {}
+// },
+// getters: {
+//     getEstagiarioSelecionado(state) {
+//         return state.estagiarioSelecionado;
+//     },
+//     getSupervisores(state) {
+//         return state.supervisores;
+//     },
+//     getEstagiarios() {
+//         return state.estagiarios;
+//     }
+// },
+// mutations: {
+//     armazenaEstagiarioSelecionado(state, estagiario) {
+//         state.estagiarioSelecionado = estagiario;
+//     },
+//     armazenaEstagiarios(state, estagiarios) {
+//         state.estagiarios = estagiarios
+//     },
+//     armazenaSupervisores(state, supervisores) {
+//         state.supervisores = supervisores
+//     },
+//     armazenaIdCurso(state, idCurso) {
+//         state.idCursoEstagiarioSelecionado = idCurso;
+//     }
+// }
 
 /***/ }),
 

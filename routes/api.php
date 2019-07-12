@@ -13,7 +13,7 @@ Route::middleware('cors')->name('api.')->group(function() {
         Route::patch('/{cpf}', 'EstagiariosController@update')->name('editar_estagiario'); // Atualizar estagiario
         Route::delete('/{cpf}', 'EstagiariosController@delete')->name('deletar_estagiario'); // Deletar estagiario
     });
-
+    
     // Rotas Supervisores
     Route::prefix('supervisores')->group(function() {
         Route::get('/', 'SupervisorController@getSupervisores')->name('supervisores'); // Retorna todos os supervisores

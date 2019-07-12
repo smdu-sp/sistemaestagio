@@ -31,6 +31,7 @@
                 <label for="inputEstudante">Cód. Estudante</label>
                 <input type="text" 
                     @blur="validaCodEstudante"
+                    @input="verificaDuplicidadeCodEstudante"
                     maxlength="20" 
                     :class="{'is-invalid': codValido}" 
                     class="form-control" 
@@ -290,6 +291,7 @@
                 <label for="inputCpf">CPF</label>
                 <input type="tel" 
                     @blur="validaCpf"
+                    @input="verificaDuplicidadeCpf"
                     maxlength="11" 
                     :class="{'is-invalid': cpfValido}"
                     class="form-control" 
@@ -551,7 +553,8 @@ export default {
         'validaCurso','cursoValido',
         'converteCep', 'valorNacionalidade',
         'abreModalCartaoAcesso', 'carregaCartaoAcesso',
-        'cartoesOrdenados', 'cursosOrdenados'
+        'cartoesOrdenados', 'cursosOrdenados',
+        'verificaDuplicidadeCpf','verificaDuplicidadeCodEstudante'
     ]
 }
 </script>

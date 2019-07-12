@@ -92,6 +92,8 @@
                     :carregaCartaoAcesso="carregaCartaoAcesso"
                     :cartoesOrdenados="cartoesOrdenados"
                     :cursosOrdenados="cursosOrdenados"
+                    :verificaDuplicidadeCpf="verificaDuplicidadeCpf"
+                    :verificaDuplicidadeCodEstudante="verificaDuplicidadeCodEstudante"
                     />
                 </b-card-text>
             </b-tab>
@@ -481,7 +483,6 @@ export default {
         validaNome(nome) { this.validacao(nome, 'nomeValido') },
         validaCodEstudante(cod) { 
             this.validacao(cod, 'codValido');
-            this.verificaDuplicidadeCodEstudante();
         },
         validaContratante(contratante) { this.validacao(contratante, 'contratanteValido') },
         validaVaga(vaga) { this.validacao(vaga, 'vagaValida'); },
@@ -495,8 +496,7 @@ export default {
         validaNaturalidade(naturalidade) { this.validacao(naturalidade, 'naturalidadeValida') },
         validaRaca(raca) { this.validacao(raca, 'racaValida') },
         validaCpf(cpf) { 
-            this.validacao(cpf, 'cpfValido');
-            this.verificaDuplicidadeCpf();            
+            this.validacao(cpf, 'cpfValido');         
         },
         validaRg(rg) { this.validacao(rg, 'rgValido') },
         validaEmail(email) { this.validacao(email, 'emailValido') },

@@ -6,7 +6,7 @@
       <div v-if="msg.error" class="alert alert-danger">{{ msg.erro }}</div>
 
       <b-form ref="form" @submit.prevent="validaCpf" @keyup.enter="buscaEstagiario">
-          <label for="inputCpf">Digite o CPF do Estagiário</label>
+          <label for="inputCpf">Digite o CPF do Estagiário:</label>
             <the-mask type="text"
               @input="validacaoCpf"
               class="form-control mt-2" 
@@ -19,6 +19,11 @@
               <div v-if="cpfInvalido" class="invalid-feedback">
                 O CPF deve ter 11 números
               </div>
+
+            <!-- <p class="text-center mt-3"><b>OU</b></p>
+            
+            <label>Nome do Estagiário:</label>
+            <input type="text" class="form-control" v-model="filtro"> -->
         </b-form>
         <div class="text-right">
           <b-button type="submit" class="mt-3" variant="outline-primary" @click="buscaEstagiario">Ok</b-button>
@@ -140,7 +145,6 @@
 </template>
 
 <script>
-import EventBus from '../../eventBus';
 export default {
   data() {
     return {
@@ -188,7 +192,8 @@ export default {
       },
       auxiliarCpf: '',
       mostrarConteudoConsulta: false,
-      loading: false
+      loading: false,
+      filtro: ''
     }
   },
   beforeMount() {
@@ -209,10 +214,11 @@ export default {
     this.requisicaoGet(uriVagas, 'vagas');
   },
   mounted() {
-    if(this.$store.state.estagiarioSelecionado) {
+    if(this.$store.state.estagiario.estagiarioSelecionado) {
       this.mostrarConteudoConsulta = true;
-      this.post = this.$store.getters.getEstagiarioSelecionado;
-      this.post.curso_formacao = this.$store.state.idCursoEstagiarioSelecionado;
+      this.post = this.$store.state.estagiario.estagiarioSelecionado;
+      this.post.curso_formacao = this.$store.state.estagiario.idCursoEstagiarioSelecionado;
+      this.auxiliarCpf = this.post.cpf;
       this.converteNascimento();
       this.converteHorarioEntrada();
       this.converteHorarioSaida();

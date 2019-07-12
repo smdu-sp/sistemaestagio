@@ -1,0 +1,21 @@
+const uridepartamentos = '/api/departamentos';
+export default {
+    state: {
+        departamentos: {}
+    },
+    mutations: {
+        armazenaDepartamentos(state, departamentos) {
+            state.departamentos = departamentos
+        }
+    },
+    actions: {
+        requisicaoDepartamentos({commit}) {
+            axios.get(uridepartamentos).then(response => {
+                commit('armazenaDepartamentos', response.data);
+            })
+            .catch(error => {
+                console.log("Erro: "+error);
+            })
+        }
+    }
+}
