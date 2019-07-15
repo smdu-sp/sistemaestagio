@@ -2132,6 +2132,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _mixins_conversoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/conversoes */ "./resources/assets/js/mixins/conversoes.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2240,7 +2248,89 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      estagiarios: {},
+      contratosAVencer: []
+    };
+  },
+  computed: {
+    estagiariosOrdenados: function estagiariosOrdenados() {
+      // Todo: Ordenar supervisores em ordem alfabética utilizando esta função
+      var lowerCaseEstagiarios = lodash__WEBPACK_IMPORTED_MODULE_2___default.a.clone(this.contratosAVencer);
+
+      if (typeof lowerCaseEstagiarios.map == 'undefined') return;
+      lowerCaseEstagiarios = lowerCaseEstagiarios.map(function (estagiario) {
+        estagiario.nome = estagiario.nome.toLowerCase();
+        return estagiario;
+      });
+
+      var sortedEstagiarios = lodash__WEBPACK_IMPORTED_MODULE_2___default.a.orderBy(lowerCaseEstagiarios, ['nome'], ['asc']);
+
+      return sortedEstagiarios;
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.retornaEstagiarios();
+  },
+  mixins: [_mixins_conversoes__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['armazenaEstagiarios']), {
+    exibeModalContratosVencidos: function exibeModalContratosVencidos() {
+      this.$refs['modalContratosVencidos'].show();
+    },
+    escondeModalContratosVencidos: function escondeModalContratosVencidos() {
+      this.$refs['modalContratosVencidos'].hide();
+    },
+    exibeContratos: function exibeContratos() {
+      this.exibeModalContratosVencidos();
+    },
+    retornaEstagiarios: function retornaEstagiarios() {
+      var _this = this;
+
+      var uriEstagiarios = '/api/estagiarios';
+
+      if (this.$store.state.estagiario.estagiarios.length >= 0) {
+        return;
+      } else {
+        this.axios.get(uriEstagiarios).then(function (response) {
+          _this.armazenaEstagiarios(response.data);
+
+          _this.estagiarios = _this.$store.state.estagiario.estagiarios;
+
+          for (var i in _this.estagiarios) {
+            if (_this.estagiarios[i].dt_termino_3_aditivo) {
+              _this.converteData(_this.estagiarios[i].dt_inicio_1_aditivo, _this.estagiarios[i], _this.contratosAVencer);
+            } else if (_this.estagiarios[i].dt_termino_2_aditivo) {
+              _this.converteData(_this.estagiarios[i].dt_inicio_2_aditivo, _this.estagiarios[i], _this.contratosAVencer);
+            } else if (_this.estagiarios[i].dt_termino_1_aditivo) {
+              _this.converteData(_this.estagiarios[i].dt_inicio_1_aditivo, _this.estagiarios[i], _this.contratosAVencer);
+            } else {
+              _this.converteData(_this.estagiarios[i].dt_termino, _this.estagiarios[i], _this.contratosAVencer);
+            }
+          }
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    }
+  })
+});
 
 /***/ }),
 
@@ -2635,6 +2725,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2683,10 +2784,28 @@ __webpack_require__.r(__webpack_exports__);
       auxiliarCpf: '',
       mostrarConteudoConsulta: false,
       loading: false,
-      filtro: ''
+      filtro: '',
+      estagiarios: {},
+      estagiarioFiltrado: {}
     };
   },
+  computed: {
+    EstagiariosComFiltro: function EstagiariosComFiltro() {
+      this.estagiarioFiltrado = this.estagiarios;
+
+      if (this.filtro) {
+        var exp = new RegExp(this.filtro.trim(), 'i');
+        this.estagiarioFiltrado = this.estagiarioFiltrado.filter(function (estagiario) {
+          return exp.test(estagiario.nome);
+        });
+        return this.estagiarioFiltrado;
+      } else {
+        return;
+      }
+    }
+  },
   beforeMount: function beforeMount() {
+    var uriEstagiario = '/api/estagiarios';
     var uriCartoes = '/api/cartao';
     var uriEstados = '/api/estados';
     var uriInstituicoes = '/api/instituicao';
@@ -2701,6 +2820,7 @@ __webpack_require__.r(__webpack_exports__);
     this.requisicaoGet(uriDepartamentos, 'departamentos');
     this.requisicaoGet(uriSupervisores, 'supervisores');
     this.requisicaoGet(uriVagas, 'vagas');
+    this.requisicaoGet(uriEstagiario, 'estagiarios');
   },
   mounted: function mounted() {
     if (this.$store.state.estagiario.estagiarioSelecionado) {
@@ -2724,6 +2844,28 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    selecionaPrimeiroDaLista: function selecionaPrimeiroDaLista() {
+      if (this.filtro) {
+        this.post = this.estagiarioFiltrado[0];
+        this.escondeModalEstagiario();
+      }
+    },
+    selecionaEstagiario: function selecionaEstagiario(indice) {
+      this.post = this.estagiarioFiltrado[indice];
+      this.escondeModalEstagiario();
+      this.auxiliarCpf = this.post.cpf;
+      this.converteNascimento();
+      this.converteHorarioEntrada();
+      this.converteHorarioSaida();
+      this.converteDataInicio();
+      this.converteDataTermino();
+      this.converteTermosAditivos();
+      this.converteDataInicialLauda();
+      this.converteDataDesligamento();
+      this.converteSemestreDesligamento();
+      this.converteRecessos();
+      this.selectVaga();
+    },
     exibeModalEstagiario: function exibeModalEstagiario() {
       this.$refs['consulta-estagiario'].show();
     },
@@ -6373,25 +6515,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      nomeBuscado: '',
       supervisores: {},
       supervisorFiltrado: {},
       estagiarios: {},
       departamentos: {},
-      auxiliarCpf: '',
-      // usada para recuperar o cpf do estagiario clicado
       estagiarioClicado: {},
       cargos: {},
-      filtro: '',
       cursos: {},
+      nomeBuscado: '',
+      auxiliarCpf: '',
+      // usada para recuperar o cpf do estagiario clicado
+      filtro: '',
       idCurso: ''
     };
   },
   beforeMount: function beforeMount() {
+    this.retornaCargos();
     this.retornaSupervisores();
     this.retornaEstagiarios();
-    this.retornaDepartamentos();
-    this.retornaCargos();
     this.retornaCursos();
   },
   filters: {
@@ -6454,6 +6595,16 @@ __webpack_require__.r(__webpack_exports__);
       var uriSupervisor = '/api/supervisores';
       this.axios.get(uriSupervisor).then(function (response) {
         _this.supervisores = response.data;
+
+        for (var i in _this.supervisores) {
+          for (var k in _this.cargos) {
+            if (_this.cargos[k].codigo == _this.supervisores[i].cargo_funcao) {
+              _this.supervisores[i].cargo_funcao = _this.cargos[k].cargo;
+            }
+          }
+        }
+
+        _this.retornaDepartamentos();
       })["catch"](function (error) {
         console.log("Erro: " + error);
       });
@@ -6526,17 +6677,17 @@ __webpack_require__.r(__webpack_exports__);
       var uriCursos = '/api/cursos';
       this.axios.get(uriCursos).then(function (response) {
         _this5.cursos = response.data;
+
+        for (var k in _this5.supervisores) {
+          for (var i in _this5.cursos) {
+            if (_this5.supervisores[i].formacao == _this5.cursos[k].id) {
+              _this5.supervisores[i].formacao = _this5.cursos[k].formacao;
+            }
+          }
+        }
       })["catch"](function (error) {
         console.log("Erro: " + error);
       });
-    },
-    exibeCurso: function exibeCurso() {
-      for (var k in this.cursos) {
-        if (this.estagiarioClicado.curso_formacao == this.cursos[k].id) {
-          this.estagiarioClicado.curso_formacao = this.cursos[k].formacao;
-          this.$store.commit('armazenaIdCurso', this.cursos[k].id);
-        }
-      }
     },
     consultaEstagiario: function consultaEstagiario(e) {
       var textoTd = e.target.innerText.toUpperCase();
@@ -6549,6 +6700,14 @@ __webpack_require__.r(__webpack_exports__);
           this.estagiarioClicado = estagiario;
           this.exibeCurso();
           this.exibeModalEstagiario();
+        }
+      }
+    },
+    exibeCurso: function exibeCurso() {
+      for (var k in this.cursos) {
+        if (this.estagiarioClicado.curso_formacao == this.cursos[k].id) {
+          this.estagiarioClicado.curso_formacao = this.cursos[k].formacao;
+          this.$store.commit('armazenaIdCurso', this.cursos[k].id);
         }
       }
     }
@@ -38100,7 +38259,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card-body {\r\n    height: 134px;\n}\n.card-body .card-subtitle {\r\n    font-family: 'Roboto', sans-serif;\r\n    font-size: 14px;\n}\n.card-body a:hover {\r\n    text-decoration: none;\n}\n.acesso-rapido {\r\n    font-family: 'Roboto', sans-serif;\r\n    font-style: normal;\r\n    font-weight: normal;\r\n    font-size: 18px;\r\n    line-height: 21px;\r\n    text-align: center;\r\n    letter-spacing: 0.42em;\r\n    color: #828282;\n}\n.linha-horizontal {\r\n    border-bottom: 1px solid #D8D8D8;\n}\n.card-acesso-rapido {\r\n    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);\r\n    background-color: #F2F2F2;\n}\n.img-acesso-rapido {\r\n    width: 50px;\r\n    height: 50px;\r\n    margin: 0;\r\n    padding: 0;\n}\n.titulo-card {\r\n    font-family: 'Roboto', sans-serif;\r\n    font-size: 14px;\r\n    line-height: 19px;\r\n    letter-spacing: 0.3em;\r\n    text-decoration: underline;\r\n    text-transform: uppercase;\r\n    color: #000000;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.card-body {\r\n    height: 134px;\n}\n.card-body .card-subtitle {\r\n    font-family: 'Roboto', sans-serif;\r\n    font-size: 14px;\n}\n.card-body a:hover {\r\n    text-decoration: none;\n}\n.acesso-rapido {\r\n    font-family: 'Roboto', sans-serif;\r\n    font-style: normal;\r\n    font-weight: normal;\r\n    font-size: 18px;\r\n    line-height: 21px;\r\n    text-align: center;\r\n    letter-spacing: 0.42em;\r\n    color: #828282;\n}\n.linha-horizontal {\r\n    border-bottom: 1px solid #D8D8D8;\n}\n.card-acesso-rapido {\r\n    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);\r\n    background-color: #F2F2F2;\n}\n.img-acesso-rapido {\r\n    width: 50px;\r\n    height: 50px;\r\n    margin: 0;\r\n    padding: 0;\n}\n.titulo-card {\r\n    font-family: 'Roboto', sans-serif;\r\n    font-size: 14px;\r\n    line-height: 19px;\r\n    letter-spacing: 0.3em;\r\n    text-decoration: underline;\r\n    text-transform: uppercase;\r\n    color: #000000;\n}\n.item-estagiario {\r\n    list-style: none;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -38126,10 +38285,10 @@ exports.push([module.i, "\n.card {\r\n  width: 98%;\n}\n.card-body {\r\n    heig
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38138,7 +38297,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.card {\r\n  width: 98%;\n}\n.card-body {\r\n  height: 100%;\n}\r\n", ""]);
+exports.push([module.i, "\n.ul-estagiario[data-v-85b6c4a0] {\r\n  margin: 0;\r\n  padding: 0;\r\n  border: 1px solid #ccc;\r\n  border-radius: 0px 0px 20px 20px;\n}\n.ul-estagiario .item-estagiario[data-v-85b6c4a0] {\r\n  list-style: none;\r\n  margin-left: 10px;\r\n  cursor:pointer;\n}\n.fim-lista[data-v-85b6c4a0] {\r\n  margin-top: 20px;\r\n  list-style: none;\n}\n.card[data-v-85b6c4a0] {\r\n  width: 98%;\n}\n.card-body[data-v-85b6c4a0] {\r\n  height: 100%;\n}\r\n", ""]);
 
 // exports
 
@@ -69905,15 +70064,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaEstagiario.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -71155,40 +71314,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "row mt-5 branco" }, [
-        _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
+  return _c(
+    "div",
+    [
+      _c(
+        "b-modal",
+        {
+          ref: "modalContratosVencidos",
+          attrs: {
+            size: "lg",
+            title: "Contratos a Vencer nos Próximos 90 dias",
+            "ok-only": ""
+          }
+        },
+        [
           _c(
-            "div",
-            { staticClass: "card bg-success", staticStyle: { width: "10rem" } },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c(
-                    "h1",
-                    { staticClass: "card-title text-center text-white" },
-                    [_vm._v("80")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h6",
-                    {
-                      staticClass: "card-subtitle mb-2 text-center text-white"
-                    },
-                    [_vm._v("Estagiários Ativos")]
+            "ul",
+            _vm._l(_vm.estagiariosOrdenados, function(estagiario) {
+              return _c(
+                "li",
+                { key: estagiario.nome, staticClass: "item-estagiario" },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(estagiario.nome.toUpperCase()) +
+                      "\n            "
                   )
-                ])
-              ])
-            ]
+                ]
+              )
+            }),
+            0
           )
-        ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mt-5 branco" }, [
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
           _c(
@@ -71199,14 +71360,18 @@ var staticRenderFns = [
                 _c("a", { attrs: { href: "#" } }, [
                   _c(
                     "h1",
-                    { staticClass: "card-title text-center text-white" },
-                    [_vm._v("10")]
+                    {
+                      staticClass: "card-title text-center text-white",
+                      on: { click: _vm.exibeContratos }
+                    },
+                    [_vm._v(_vm._s(_vm.contratosAVencer.length))]
                   ),
                   _vm._v(" "),
                   _c(
                     "h6",
                     {
-                      staticClass: "card-subtitle mb-2 text-center text-white"
+                      staticClass: "card-subtitle mb-2 text-center text-white",
+                      on: { click: _vm.exibeContratos }
                     },
                     [_vm._v("Contratos a Vencer em 90 dias")]
                   )
@@ -71216,226 +71381,271 @@ var staticRenderFns = [
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
-          _c(
-            "div",
-            { staticClass: "card bg-warning", staticStyle: { width: "10rem" } },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c(
-                    "h1",
-                    { staticClass: "card-title text-center text-white" },
-                    [_vm._v("2")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h6",
-                    {
-                      staticClass: "card-subtitle mb-2 text-center text-white"
-                    },
-                    [_vm._v("Vagas em seleção")]
-                  )
-                ])
-              ])
-            ]
-          )
-        ]),
+        _vm._m(1),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
-          _c(
-            "div",
-            { staticClass: "card bg-danger", staticStyle: { width: "10rem" } },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c(
-                    "h1",
-                    { staticClass: "card-title text-center text-white" },
-                    [_vm._v("1")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h6",
-                    {
-                      staticClass: "card-subtitle mb-2 text-center text-white"
-                    },
-                    [_vm._v("Contratos Vencidos")]
-                  )
-                ])
-              ])
-            ]
-          )
-        ])
+        _vm._m(2)
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "container mt-5" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 linha-horizontal" }, [
-            _c(
-              "span",
-              { staticClass: "acesso-rapido d-flex justify-content-center" },
-              [_vm._v("MAIS ACESSADOS")]
-            )
+      _vm._m(3),
+      _vm._v(" "),
+      _vm._m(4)
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
+      _c(
+        "div",
+        { staticClass: "card bg-success", staticStyle: { width: "10rem" } },
+        [
+          _c("div", { staticClass: "card-body" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("h1", { staticClass: "card-title text-center text-white" }, [
+                _vm._v("80")
+              ]),
+              _vm._v(" "),
+              _c(
+                "h6",
+                { staticClass: "card-subtitle mb-2 text-center text-white" },
+                [_vm._v("Estagiários Ativos")]
+              )
+            ])
           ])
-        ])
-      ]),
-      _vm._v(" "),
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
+      _c(
+        "div",
+        { staticClass: "card bg-warning", staticStyle: { width: "10rem" } },
+        [
+          _c("div", { staticClass: "card-body" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("h1", { staticClass: "card-title text-center text-white" }, [
+                _vm._v("2")
+              ]),
+              _vm._v(" "),
+              _c(
+                "h6",
+                { staticClass: "card-subtitle mb-2 text-center text-white" },
+                [_vm._v("Vagas em seleção")]
+              )
+            ])
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
+      _c(
+        "div",
+        { staticClass: "card bg-danger", staticStyle: { width: "10rem" } },
+        [
+          _c("div", { staticClass: "card-body" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("h1", { staticClass: "card-title text-center text-white" }, [
+                _vm._v("1")
+              ]),
+              _vm._v(" "),
+              _c(
+                "h6",
+                { staticClass: "card-subtitle mb-2 text-center text-white" },
+                [_vm._v("Contratos Vencidos")]
+              )
+            ])
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container mt-5" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
-          _c("div", [
-            _c(
-              "div",
-              {
-                staticClass: "card-acesso-rapido",
-                staticStyle: { width: "10rem" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "card-body d-flex justify-content-center align-items-center"
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "img-acesso-rapido",
-                      attrs: {
-                        src: __webpack_require__(/*! ../../../../public/icones/icons8-curriculo-50.png */ "./public/icones/icons8-curriculo-50.png"),
-                        alt: "Estagiários Ativos"
-                      }
-                    })
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass:
-                  "titulo-card d-flex justify-content-center text-center mt-1"
-              },
-              [_vm._v("Estagiários Ativos")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
-          _c("div", [
-            _c(
-              "div",
-              {
-                staticClass: "card-acesso-rapido",
-                staticStyle: { width: "10rem" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "card-body d-flex justify-content-center align-items-center"
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "img-acesso-rapido",
-                      attrs: {
-                        src: __webpack_require__(/*! ../../../../public/icones/icons8-ativos-da-empresa-50.png */ "./public/icones/icons8-ativos-da-empresa-50.png"),
-                        alt: "Estagiários Ativos"
-                      }
-                    })
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass:
-                  "titulo-card d-flex justify-content-center text-center mt-1"
-              },
-              [_vm._v("Orçamento")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
-          _c("div", [
-            _c(
-              "div",
-              {
-                staticClass: "card-acesso-rapido",
-                staticStyle: { width: "10rem" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "card-body d-flex justify-content-center align-items-center"
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "img-acesso-rapido",
-                      attrs: {
-                        src: __webpack_require__(/*! ../../../../public/icones/icons8-boletim-50.png */ "./public/icones/icons8-boletim-50.png"),
-                        alt: "Estagiários Ativos"
-                      }
-                    })
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass:
-                  "titulo-card d-flex justify-content-center text-center mt-1"
-              },
-              [_vm._v("Vagas em Seleção")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
-          _c("div", [
-            _c(
-              "div",
-              {
-                staticClass: "card-acesso-rapido",
-                staticStyle: { width: "10rem" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "card-body d-flex justify-content-center align-items-center"
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "img-acesso-rapido",
-                      attrs: {
-                        src: __webpack_require__(/*! ../../../../public/icones/icons8-ms-excel-50.png */ "./public/icones/icons8-ms-excel-50.png"),
-                        alt: "Estagiários Ativos"
-                      }
-                    })
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass:
-                  "titulo-card d-flex justify-content-center text-center mt-1"
-              },
-              [_vm._v("Exportar Dados de Estagiários")]
-            )
-          ])
+        _c("div", { staticClass: "col-12 linha-horizontal" }, [
+          _c(
+            "span",
+            { staticClass: "acesso-rapido d-flex justify-content-center" },
+            [_vm._v("MAIS ACESSADOS")]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
+        _c("div", [
+          _c(
+            "div",
+            {
+              staticClass: "card-acesso-rapido",
+              staticStyle: { width: "10rem" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "card-body d-flex justify-content-center align-items-center"
+                },
+                [
+                  _c("img", {
+                    staticClass: "img-acesso-rapido",
+                    attrs: {
+                      src: __webpack_require__(/*! ../../../../public/icones/icons8-curriculo-50.png */ "./public/icones/icons8-curriculo-50.png"),
+                      alt: "Estagiários Ativos"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass:
+                "titulo-card d-flex justify-content-center text-center mt-1"
+            },
+            [_vm._v("Estagiários Ativos")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
+        _c("div", [
+          _c(
+            "div",
+            {
+              staticClass: "card-acesso-rapido",
+              staticStyle: { width: "10rem" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "card-body d-flex justify-content-center align-items-center"
+                },
+                [
+                  _c("img", {
+                    staticClass: "img-acesso-rapido",
+                    attrs: {
+                      src: __webpack_require__(/*! ../../../../public/icones/icons8-ativos-da-empresa-50.png */ "./public/icones/icons8-ativos-da-empresa-50.png"),
+                      alt: "Estagiários Ativos"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass:
+                "titulo-card d-flex justify-content-center text-center mt-1"
+            },
+            [_vm._v("Orçamento")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
+        _c("div", [
+          _c(
+            "div",
+            {
+              staticClass: "card-acesso-rapido",
+              staticStyle: { width: "10rem" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "card-body d-flex justify-content-center align-items-center"
+                },
+                [
+                  _c("img", {
+                    staticClass: "img-acesso-rapido",
+                    attrs: {
+                      src: __webpack_require__(/*! ../../../../public/icones/icons8-boletim-50.png */ "./public/icones/icons8-boletim-50.png"),
+                      alt: "Estagiários Ativos"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass:
+                "titulo-card d-flex justify-content-center text-center mt-1"
+            },
+            [_vm._v("Vagas em Seleção")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
+        _c("div", [
+          _c(
+            "div",
+            {
+              staticClass: "card-acesso-rapido",
+              staticStyle: { width: "10rem" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "card-body d-flex justify-content-center align-items-center"
+                },
+                [
+                  _c("img", {
+                    staticClass: "img-acesso-rapido",
+                    attrs: {
+                      src: __webpack_require__(/*! ../../../../public/icones/icons8-ms-excel-50.png */ "./public/icones/icons8-ms-excel-50.png"),
+                      alt: "Estagiários Ativos"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass:
+                "titulo-card d-flex justify-content-center text-center mt-1"
+            },
+            [_vm._v("Exportar Dados de Estagiários")]
+          )
         ])
       ])
     ])
@@ -71879,10 +72089,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&":
-/*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0& ***!
-  \************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -71964,7 +72174,80 @@ var render = function() {
                       "\r\n                O CPF deve ter 11 números\r\n              "
                     )
                   ])
-                : _vm._e()
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-center mt-3" }, [
+                _c("b", [_vm._v("OU")])
+              ]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Nome do Estagiário:")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                on: {
+                  input: function($event) {
+                    _vm.filtro = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.filtro,
+                      expression: "filtro"
+                    }
+                  ]
+                },
+                [
+                  _c(
+                    "ul",
+                    { staticClass: "ul-estagiario" },
+                    [
+                      _vm._l(_vm.EstagiariosComFiltro, function(
+                        estagiario,
+                        indice
+                      ) {
+                        return _c(
+                          "li",
+                          {
+                            key: estagiario.nome,
+                            staticClass: "item-estagiario",
+                            on: {
+                              click: function($event) {
+                                return _vm.selecionaEstagiario(indice)
+                              }
+                            }
+                          },
+                          [
+                            _c("b", [
+                              _vm._v(_vm._s(estagiario.nome.toLowerCase()))
+                            ])
+                          ]
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("li", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.filtro,
+                            expression: "filtro"
+                          }
+                        ],
+                        staticClass: "fim-lista"
+                      })
+                    ],
+                    2
+                  )
+                ]
+              )
             ],
             1
           ),
@@ -80109,7 +80392,15 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(supervisor.situacao))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(supervisor.cpf))]),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(
+                                    supervisor.cpf
+                                      ? supervisor.cpf
+                                      : "NÃO CADASTRADO"
+                                  )
+                                )
+                              ]),
                               _vm._v(" "),
                               _c(
                                 "td",
@@ -97568,9 +97859,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0& */ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&");
+/* harmony import */ var _ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&scoped=true& */ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&scoped=true&");
 /* harmony import */ var _ConsultaEstagiario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConsultaEstagiario.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ConsultaEstagiario_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ConsultaEstagiario.vue?vue&type=style&index=0&lang=css& */ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ConsultaEstagiario_vue_vue_type_style_index_0_id_85b6c4a0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css& */ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -97582,11 +97873,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ConsultaEstagiario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "85b6c4a0",
   null
   
 )
@@ -97612,35 +97903,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&lang=css&":
-/*!********************************************************************************************************************************!*\
-  !*** ./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************/
+/***/ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaEstagiario.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_id_85b6c4a0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=style&index=0&id=85b6c4a0&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_id_85b6c4a0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_id_85b6c4a0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_id_85b6c4a0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_id_85b6c4a0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_style_index_0_id_85b6c4a0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&":
-/*!******************************************************************************************************************************!*\
-  !*** ./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0& ***!
-  \******************************************************************************************************************************/
+/***/ "./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&scoped=true&":
+/*!******************************************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&scoped=true& ***!
+  \******************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/estagiario/atualizar_estagiario/ConsultaEstagiario.vue?vue&type=template&id=85b6c4a0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsultaEstagiario_vue_vue_type_template_id_85b6c4a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -98666,6 +98957,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CadastroVaga_vue_vue_type_template_id_1995b4c1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/assets/js/mixins/conversoes.js":
+/*!**************************************************!*\
+  !*** ./resources/assets/js/mixins/conversoes.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    converteData: function converteData(data, estagiario, array) {
+      var dataAtual = new Date();
+      var anoAtual = dataAtual.getFullYear();
+      var mesAtual = dataAtual.getMonth();
+      var diaAtual = dataAtual.getDate();
+      var dataEstagiario = data;
+      var anoEstagiario = dataEstagiario.substring(0, 4);
+      var mesEstagiario = dataEstagiario.substring(5, 7);
+      var diaEstagiario = dataEstagiario.substring(8, 11);
+      dataAtual.setDate(dataAtual.getDate() - 90);
+
+      if (anoAtual == anoEstagiario && mesEstagiario >= dataAtual.getMonth()) {
+        array.push(estagiario);
+      }
+    }
+  }
+});
 
 /***/ }),
 

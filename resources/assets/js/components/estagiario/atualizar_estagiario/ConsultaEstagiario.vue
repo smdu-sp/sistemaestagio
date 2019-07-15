@@ -20,10 +20,21 @@
                 O CPF deve ter 11 números
               </div>
 
-            <!-- <p class="text-center mt-3"><b>OU</b></p>
+            <p class="text-center mt-3"><b>OU</b></p>
             
             <label>Nome do Estagiário:</label>
-            <input type="text" class="form-control" v-model="filtro"> -->
+            <input type="text" class="form-control" @input="filtro = $event.target.value">
+            <div v-show="filtro">
+              <ul class="ul-estagiario">
+                <li class="item-estagiario" 
+                  v-for="(estagiario, indice) of EstagiariosComFiltro" 
+                  :key="estagiario.nome" 
+                  @click="selecionaEstagiario(indice)">
+                  <b>{{ estagiario.nome.toLowerCase() }}</b>
+                </li>
+                <li v-show="filtro" class="fim-lista"></li>
+              </ul>
+            </div>
         </b-form>
         <div class="text-right">
           <b-button type="submit" class="mt-3" variant="outline-primary" @click="buscaEstagiario">Ok</b-button>
@@ -193,10 +204,25 @@ export default {
       auxiliarCpf: '',
       mostrarConteudoConsulta: false,
       loading: false,
-      filtro: ''
+      filtro: '',
+      estagiarios: {},
+      estagiarioFiltrado: {}
+    }
+  },
+  computed: {
+    EstagiariosComFiltro() {
+        this.estagiarioFiltrado = this.estagiarios
+        if(this.filtro){
+            let exp = new RegExp(this.filtro.trim(), 'i');
+            this.estagiarioFiltrado = this.estagiarioFiltrado.filter(estagiario => exp.test(estagiario.nome));
+            return this.estagiarioFiltrado;
+        } else {
+            return;
+        }
     }
   },
   beforeMount() {
+    let uriEstagiario = '/api/estagiarios';
     let uriCartoes = '/api/cartao';
     let uriEstados = '/api/estados';
     let uriInstituicoes = '/api/instituicao';
@@ -212,6 +238,7 @@ export default {
     this.requisicaoGet(uriDepartamentos, 'departamentos');
     this.requisicaoGet(uriSupervisores, 'supervisores');
     this.requisicaoGet(uriVagas, 'vagas');
+    this.requisicaoGet(uriEstagiario, 'estagiarios');
   },
   mounted() {
     if(this.$store.state.estagiario.estagiarioSelecionado) {
@@ -235,6 +262,28 @@ export default {
     }
   },
   methods: {
+    selecionaPrimeiroDaLista() {
+        if(this.filtro) {
+          this.post = this.estagiarioFiltrado[0];
+          this.escondeModalEstagiario();
+        }
+    },
+    selecionaEstagiario(indice) {
+      this.post = this.estagiarioFiltrado[indice];
+      this.escondeModalEstagiario();
+      this.auxiliarCpf = this.post.cpf;
+      this.converteNascimento();
+      this.converteHorarioEntrada();
+      this.converteHorarioSaida();
+      this.converteDataInicio();
+      this.converteDataTermino();
+      this.converteTermosAditivos();
+      this.converteDataInicialLauda();
+      this.converteDataDesligamento();
+      this.converteSemestreDesligamento();
+      this.converteRecessos();
+      this.selectVaga();
+    },
     exibeModalEstagiario() {
       this.$refs['consulta-estagiario'].show()
     },
@@ -648,7 +697,22 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.ul-estagiario {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 0px 0px 20px 20px;
+}
+.ul-estagiario .item-estagiario {
+  list-style: none;
+  margin-left: 10px;
+  cursor:pointer;
+}
+.fim-lista {
+  margin-top: 20px;
+  list-style: none;
+}
 .card {
   width: 98%;
 }

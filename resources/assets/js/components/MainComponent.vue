@@ -1,5 +1,17 @@
 <template>    
     <div>
+
+        <b-modal ref="modalContratosVencidos" size="lg" title="Contratos a Vencer nos Próximos 90 dias" ok-only>
+            <ul>
+                <li 
+                    class="item-estagiario"
+                    v-for="estagiario of estagiariosOrdenados" 
+                    :key="estagiario.nome">
+                    {{ estagiario.nome.toUpperCase() }}
+                </li>
+            </ul>
+        </b-modal>
+
         <!--Painel Resumo-->
         <div class="row mt-5 branco">
             <div class="col-6 col-sm-4 col-md-3 mb-3">
@@ -17,8 +29,8 @@
                 <div class="card bg-primary" style="width: 10rem;">
                     <div class="card-body">
                         <a href="#">
-                            <h1 class="card-title text-center text-white">10</h1>
-                            <h6 class="card-subtitle mb-2 text-center text-white">Contratos a Vencer em 90 dias</h6>
+                            <h1 class="card-title text-center text-white" @click="exibeContratos">{{ contratosAVencer.length }}</h1>
+                            <h6 class="card-subtitle mb-2 text-center text-white" @click="exibeContratos">Contratos a Vencer em 90 dias</h6>
                         </a>
                     </div>
                 </div>
@@ -107,8 +119,75 @@
     </div>
 </template>
 <script>
+import { mapMutations } from 'vuex';
+import conversoes from '../mixins/conversoes';
+import _ from 'lodash';
 export default {
-    
+    data() {
+        return {
+            estagiarios: {},
+            contratosAVencer: []
+        }
+    },
+    computed: {
+        estagiariosOrdenados() { // Todo: Ordenar supervisores em ordem alfabética utilizando esta função
+            let lowerCaseEstagiarios = _.clone(this.contratosAVencer);
+            if(typeof(lowerCaseEstagiarios.map) == 'undefined')
+                return;
+            lowerCaseEstagiarios = lowerCaseEstagiarios.map((estagiario) => {
+                estagiario.nome = estagiario.nome.toLowerCase();
+                return estagiario;
+            });
+
+            const sortedEstagiarios = _.orderBy(lowerCaseEstagiarios, ['nome'], ['asc']);
+
+            return sortedEstagiarios;
+        }
+    },
+    beforeMount() {
+        this.retornaEstagiarios();
+    },
+    mixins: [conversoes],
+    methods: {
+        ...mapMutations(['armazenaEstagiarios']),
+        exibeModalContratosVencidos() {
+            this.$refs['modalContratosVencidos'].show()
+        },
+        escondeModalContratosVencidos() {
+            this.$refs['modalContratosVencidos'].hide()
+        },
+        exibeContratos() {
+            this.exibeModalContratosVencidos();
+        },
+        retornaEstagiarios() {
+            const uriEstagiarios = '/api/estagiarios';
+
+            if(this.$store.state.estagiario.estagiarios.length >= 0) {
+                return;
+            } else {
+                this.axios
+                .get(uriEstagiarios)
+                .then(response => {
+                    this.armazenaEstagiarios(response.data)
+                    this.estagiarios = this.$store.state.estagiario.estagiarios;
+                    for(let i in this.estagiarios) {
+                        if(this.estagiarios[i].dt_termino_3_aditivo) {
+                            this.converteData(this.estagiarios[i].dt_inicio_1_aditivo, this.estagiarios[i], this.contratosAVencer);
+                        } else if(this.estagiarios[i].dt_termino_2_aditivo) {
+                            this.converteData(this.estagiarios[i].dt_inicio_2_aditivo, this.estagiarios[i], this.contratosAVencer);
+                        } else if(this.estagiarios[i].dt_termino_1_aditivo) {
+                            this.converteData(this.estagiarios[i].dt_inicio_1_aditivo, this.estagiarios[i], this.contratosAVencer);
+                        } else {
+                            this.converteData(this.estagiarios[i].dt_termino, this.estagiarios[i], this.contratosAVencer);
+                        }
+                    }
+                })
+                .catch(error => {
+                console.log(error);
+                })
+            }
+        }
+    }
 }
 </script>
 <style>
@@ -160,6 +239,10 @@ export default {
     text-decoration: underline;
     text-transform: uppercase;
     color: #000000;
+}
+
+.item-estagiario {
+    list-style: none;
 }
 
 </style>

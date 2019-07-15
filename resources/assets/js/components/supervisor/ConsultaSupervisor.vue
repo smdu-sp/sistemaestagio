@@ -92,7 +92,7 @@
                                         <!-- <th scope="row">{{ supervisor.conselho_profissional }}</th> -->
                                         <!-- <th scope="row">{{ supervisor.atividades_estagiario }}</th> -->
                                         <td>{{ supervisor.situacao }}</td>
-                                        <td>{{ supervisor.cpf }}</td>
+                                        <td>{{ supervisor.cpf ? supervisor.cpf : 'NÃO CADASTRADO' }}</td>
                                         <td class="td-estagiario">
                                             <a href="" @click.prevent="consultaEstagiario" v-for="estagiario of supervisor.estagiarios" :key="estagiario" class="estagiario">
                                                 <tr>
@@ -118,24 +118,23 @@ import _ from 'lodash';
 export default {
     data() {
         return {
-            nomeBuscado: '',
             supervisores: {},
             supervisorFiltrado: {},
             estagiarios: {},
             departamentos: {},
-            auxiliarCpf: '', // usada para recuperar o cpf do estagiario clicado
             estagiarioClicado: {},
             cargos: {},
-            filtro: '',
             cursos: {},
+            nomeBuscado: '',
+            auxiliarCpf: '', // usada para recuperar o cpf do estagiario clicado
+            filtro: '',
             idCurso: ''
         }
     },
     beforeMount() {
+        this.retornaCargos();
         this.retornaSupervisores();
         this.retornaEstagiarios();
-        this.retornaDepartamentos();
-        this.retornaCargos();
         this.retornaCursos();
     }, 
     filters: {
@@ -194,6 +193,14 @@ export default {
             .get(uriSupervisor)
             .then(response => {
                 this.supervisores = response.data;
+                for(let i in this.supervisores){
+                    for(let k in this.cargos) {
+                        if(this.cargos[k].codigo == this.supervisores[i].cargo_funcao) {
+                            this.supervisores[i].cargo_funcao = this.cargos[k].cargo
+                        }
+                    }
+                }
+                this.retornaDepartamentos();
             })
             .catch(error => {
                 console.log("Erro: "+error);
@@ -267,18 +274,17 @@ export default {
             this.axios.get(uriCursos)
             .then(response => {
                 this.cursos = response.data;
+                for(let k in this.supervisores){
+                    for(let i in this.cursos) {
+                        if(this.supervisores[i].formacao == this.cursos[k].id) {
+                            this.supervisores[i].formacao = this.cursos[k].formacao;
+                        }
+                    }
+                }
             })
             .catch(error => {
                 console.log("Erro: "+error);
             })
-        },
-        exibeCurso() {
-            for(let k in this.cursos) {
-                if(this.estagiarioClicado.curso_formacao == this.cursos[k].id) {
-                    this.estagiarioClicado.curso_formacao = this.cursos[k].formacao
-                    this.$store.commit('armazenaIdCurso', this.cursos[k].id)
-                }
-            }
         },
         consultaEstagiario(e) {
             let textoTd = e.target.innerText.toUpperCase();
@@ -291,7 +297,15 @@ export default {
                     this.exibeModalEstagiario();
                 }
             }
-        }
+        },
+        exibeCurso() {
+              for (var k in this.cursos) {
+                if (this.estagiarioClicado.curso_formacao == this.cursos[k].id) {
+                  this.estagiarioClicado.curso_formacao = this.cursos[k].formacao;
+                  this.$store.commit('armazenaIdCurso', this.cursos[k].id);
+                }
+            }
+        },
     }    
 }
 </script>
