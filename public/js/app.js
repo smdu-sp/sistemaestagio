@@ -2133,7 +2133,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _mixins_conversoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/conversoes */ "./resources/assets/js/mixins/conversoes.js");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -2260,15 +2261,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      estagiarios: {},
       contratosAVencer: []
     };
+  },
+  filters: {
+    dataFormatada: function dataFormatada(data) {
+      var ano = data.substring(0, 4);
+      var mes = data.substring(5, 7);
+      var dia = data.substring(8, 10);
+      data = "".concat(dia, "/").concat(mes, "/").concat(ano);
+      return data;
+    }
   },
   computed: {
     estagiariosOrdenados: function estagiariosOrdenados() {
@@ -2287,10 +2317,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   beforeMount: function beforeMount() {
-    this.retornaEstagiarios();
+    if (!this.$store.state.estagiario.contratosAVencer.length) {
+      this.retornaEstagiarios();
+    } else {
+      this.contratosAVencer = this.$store.state.estagiario.contratosAVencer;
+    }
   },
-  mixins: [_mixins_conversoes__WEBPACK_IMPORTED_MODULE_1__["default"]],
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['armazenaEstagiarios']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['salvaContratosAVencer']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['armazenaEstagiarios']), {
+    consultaEstagiario: function consultaEstagiario(indice) {
+      this.$store.state.estagiario.estagiarioSelecionado = this.contratosAVencer[indice];
+      this.$store.state.estagiario.idCursoEstagiarioSelecionado = this.contratosAVencer[indice].curso_formacao;
+    },
     exibeModalContratosVencidos: function exibeModalContratosVencidos() {
       this.$refs['modalContratosVencidos'].show();
     },
@@ -2311,19 +2348,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.axios.get(uriEstagiarios).then(function (response) {
           _this.armazenaEstagiarios(response.data);
 
-          _this.estagiarios = _this.$store.state.estagiario.estagiarios;
+          _this.salvaContratosAVencer();
 
-          for (var i in _this.estagiarios) {
-            if (_this.estagiarios[i].dt_termino_3_aditivo) {
-              _this.converteData(_this.estagiarios[i].dt_inicio_1_aditivo, _this.estagiarios[i], _this.contratosAVencer);
-            } else if (_this.estagiarios[i].dt_termino_2_aditivo) {
-              _this.converteData(_this.estagiarios[i].dt_inicio_2_aditivo, _this.estagiarios[i], _this.contratosAVencer);
-            } else if (_this.estagiarios[i].dt_termino_1_aditivo) {
-              _this.converteData(_this.estagiarios[i].dt_inicio_1_aditivo, _this.estagiarios[i], _this.contratosAVencer);
-            } else {
-              _this.converteData(_this.estagiarios[i].dt_termino, _this.estagiarios[i], _this.contratosAVencer);
-            }
-          }
+          _this.contratosAVencer = _this.$store.state.estagiario.contratosAVencer;
         })["catch"](function (error) {
           console.log(error);
         });
@@ -71328,23 +71355,79 @@ var render = function() {
           }
         },
         [
-          _c(
-            "ul",
-            _vm._l(_vm.estagiariosOrdenados, function(estagiario) {
-              return _c(
-                "li",
-                { key: estagiario.nome, staticClass: "item-estagiario" },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(estagiario.nome.toUpperCase()) +
-                      "\n            "
-                  )
-                ]
-              )
-            }),
-            0
-          )
+          _c("table", { staticClass: "table table-bordered table-hover" }, [
+            _c("thead", { staticClass: "thead-dark" }, [
+              _c("tr", [
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("Departamento")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("Supervisor")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("Vencimento")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.contratosAVencer, function(estagiario, indice) {
+                return _c("tr", { key: estagiario.nome }, [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(indice + 1))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c("router-link", { attrs: { to: "/consulta" } }, [
+                        _c(
+                          "a",
+                          {
+                            on: {
+                              click: function($event) {
+                                return _vm.consultaEstagiario(indice)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(estagiario.nome.toUpperCase()) +
+                                "\n                                    "
+                            )
+                          ]
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        estagiario.dep_hierarquico
+                          ? estagiario.dep_hierarquico
+                          : "NÃO CADASTRADO"
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(estagiario.supervisor.toUpperCase()))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(_vm._f("dataFormatada")(estagiario.dt_termino))
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
         ]
       ),
       _vm._v(" "),
@@ -98960,37 +99043,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/mixins/conversoes.js":
-/*!**************************************************!*\
-  !*** ./resources/assets/js/mixins/conversoes.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    converteData: function converteData(data, estagiario, array) {
-      var dataAtual = new Date();
-      var anoAtual = dataAtual.getFullYear();
-      var mesAtual = dataAtual.getMonth();
-      var diaAtual = dataAtual.getDate();
-      var dataEstagiario = data;
-      var anoEstagiario = dataEstagiario.substring(0, 4);
-      var mesEstagiario = dataEstagiario.substring(5, 7);
-      var diaEstagiario = dataEstagiario.substring(8, 11);
-      dataAtual.setDate(dataAtual.getDate() - 90);
-
-      if (anoAtual == anoEstagiario && mesEstagiario >= dataAtual.getMonth()) {
-        array.push(estagiario);
-      }
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/assets/js/routes.js":
 /*!***************************************!*\
   !*** ./resources/assets/js/routes.js ***!
@@ -99093,7 +99145,8 @@ __webpack_require__.r(__webpack_exports__);
   state: {
     estagiarioSelecionado: {},
     idCursoEstagiarioSelecionado: '',
-    estagiarios: {}
+    estagiarios: {},
+    contratosAVencer: []
   },
   getters: {
     getEstagiarioSelecionado: function getEstagiarioSelecionado(state) {
@@ -99112,6 +99165,27 @@ __webpack_require__.r(__webpack_exports__);
     },
     armazenaIdCurso: function armazenaIdCurso(state, idCurso) {
       state.idCursoEstagiarioSelecionado = idCurso;
+    },
+    armazenaContratosVencer: function armazenaContratosVencer(state, estagiario) {
+      state.contratosAVencer.push(estagiario);
+    }
+  },
+  actions: {
+    salvaContratosAVencer: function salvaContratosAVencer(context) {
+      var estagiarios = context.state.estagiarios;
+      var dataAtual = new Date();
+      var dataAtualFormatada = dataAtual.setDate(dataAtual.getDate());
+      var dataAtualMais90Dias = dataAtual.setDate(dataAtual.getDate() + 90);
+
+      for (var i in estagiarios) {
+        var dataEstagiario = estagiarios[i].dt_termino;
+        var novaData = new Date(dataEstagiario);
+        var novaDataFormatada = novaData.setDate(novaData.getDate());
+
+        if (novaDataFormatada >= dataAtualFormatada && novaDataFormatada <= dataAtualMais90Dias) {
+          context.commit('armazenaContratosVencer', estagiarios[i]);
+        }
+      }
     }
   }
 });

@@ -2,14 +2,35 @@
     <div>
 
         <b-modal ref="modalContratosVencidos" size="lg" title="Contratos a Vencer nos Próximos 90 dias" ok-only>
-            <ul>
-                <li 
-                    class="item-estagiario"
-                    v-for="estagiario of estagiariosOrdenados" 
-                    :key="estagiario.nome">
-                    {{ estagiario.nome.toUpperCase() }}
-                </li>
-            </ul>
+
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Departamento</th>
+                        <th scope="col">Supervisor</th>
+                        <th scope="col">Vencimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                        v-for="(estagiario, indice) of contratosAVencer" 
+                        :key="estagiario.nome">
+                            <th scope="row">{{ indice + 1 }}</th>
+                                <td>
+                                    <router-link to="/consulta">
+                                        <a @click="consultaEstagiario(indice)">
+                                            {{ estagiario.nome.toUpperCase() }}
+                                        </a>
+                                    </router-link>
+                                </td>
+                            <td>{{ estagiario.dep_hierarquico ? estagiario.dep_hierarquico : 'NÃO CADASTRADO' }}</td>
+                            <td>{{ estagiario.supervisor.toUpperCase() }}</td>
+                            <td>{{ estagiario.dt_termino | dataFormatada }}</td>                        
+                        </tr>
+                    </tbody>
+                </table>
         </b-modal>
 
         <!--Painel Resumo-->
@@ -119,15 +140,25 @@
     </div>
 </template>
 <script>
-import { mapMutations } from 'vuex';
-import conversoes from '../mixins/conversoes';
+import { mapMutations, mapActions } from 'vuex';
+import { setTimeout } from 'timers';
 import _ from 'lodash';
 export default {
     data() {
         return {
-            estagiarios: {},
             contratosAVencer: []
         }
+    },
+    filters: {
+        dataFormatada(data) {
+            const ano = data.substring(0,4);
+            const mes = data.substring(5,7);
+            const dia = data.substring(8,10);
+
+            data = `${dia}/${mes}/${ano}`;
+
+            return data;
+        },
     },
     computed: {
         estagiariosOrdenados() { // Todo: Ordenar supervisores em ordem alfabética utilizando esta função
@@ -145,11 +176,19 @@ export default {
         }
     },
     beforeMount() {
-        this.retornaEstagiarios();
+        if(!this.$store.state.estagiario.contratosAVencer.length) {
+            this.retornaEstagiarios();
+        } else {
+            this.contratosAVencer = this.$store.state.estagiario.contratosAVencer;
+        }
     },
-    mixins: [conversoes],
     methods: {
+        ...mapActions(['salvaContratosAVencer']),
         ...mapMutations(['armazenaEstagiarios']),
+        consultaEstagiario(indice) {
+            this.$store.state.estagiario.estagiarioSelecionado = this.contratosAVencer[indice];
+            this.$store.state.estagiario.idCursoEstagiarioSelecionado = this.contratosAVencer[indice].curso_formacao;
+        },
         exibeModalContratosVencidos() {
             this.$refs['modalContratosVencidos'].show()
         },
@@ -169,18 +208,8 @@ export default {
                 .get(uriEstagiarios)
                 .then(response => {
                     this.armazenaEstagiarios(response.data)
-                    this.estagiarios = this.$store.state.estagiario.estagiarios;
-                    for(let i in this.estagiarios) {
-                        if(this.estagiarios[i].dt_termino_3_aditivo) {
-                            this.converteData(this.estagiarios[i].dt_inicio_1_aditivo, this.estagiarios[i], this.contratosAVencer);
-                        } else if(this.estagiarios[i].dt_termino_2_aditivo) {
-                            this.converteData(this.estagiarios[i].dt_inicio_2_aditivo, this.estagiarios[i], this.contratosAVencer);
-                        } else if(this.estagiarios[i].dt_termino_1_aditivo) {
-                            this.converteData(this.estagiarios[i].dt_inicio_1_aditivo, this.estagiarios[i], this.contratosAVencer);
-                        } else {
-                            this.converteData(this.estagiarios[i].dt_termino, this.estagiarios[i], this.contratosAVencer);
-                        }
-                    }
+                    this.salvaContratosAVencer();
+                    this.contratosAVencer = this.$store.state.estagiario.contratosAVencer;
                 })
                 .catch(error => {
                 console.log(error);
