@@ -56,6 +56,19 @@
                         </transition>
                     </li>
                 </li>
+                <li>
+                    <li @click="mostrarMenuRelatorios">
+                        <i class="fas fa-chevron-down mr-2"></i>
+                        Relatórios
+                    </li>
+                    <transition name="fade">
+                        <ul v-if="menuRelatorios">
+                            <li id="show-btn">
+                                <router-link to="/entradasaidaRenovacao">Entrada, Saída e Renovação - 30 dias</router-link>
+                            </li>
+                        </ul>
+                    </transition>
+                </li>
             </ul>                    
         </nav><!--/nav-->
     </aside>
@@ -63,7 +76,7 @@
 </template>
 <script>
 export default {
-    props: ['exibeModalEstagiario', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta', 'exibeModalSupervisor']
+    props: ['exibeModalEstagiario', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta', 'exibeModalSupervisor', 'menuRelatorios','mostrarMenuRelatorios']
 }
 </script>
 <style>

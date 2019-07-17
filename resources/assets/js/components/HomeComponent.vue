@@ -6,8 +6,10 @@
           :exibeModalEstagiario="exibeModalEstagiario"
           :menuCadastro="menuCadastro" 
           :mostrarMenuCadastro="mostrarMenuCadastro"
+          :menuConsulta="menuConsulta"
           :mostrarMenuConsulta="mostrarMenuConsulta"
-          :menuConsulta="menuConsulta"></aside-component>
+          :menuRelatorios="menuRelatorios"
+          :mostrarMenuRelatorios="mostrarMenuRelatorios"></aside-component>
       </div>
         <div class="col-9 d-flex flex-column">
           <header-component></header-component>
@@ -23,7 +25,8 @@ export default {
   data() {
     return {
       menuCadastro: false,
-      menuConsulta: false
+      menuConsulta: false,
+      menuRelatorios: false
     }
   },
   methods: {
@@ -35,11 +38,18 @@ export default {
     },
     mostrarMenuCadastro() {
       this.menuConsulta = false;
+      this.menuRelatorios = false;
       this.menuCadastro = !this.menuCadastro;
     },
     mostrarMenuConsulta() {
       this.menuCadastro = false;
+      this.menuRelatorios = false;
       this.menuConsulta = !this.menuConsulta;
+    },
+    mostrarMenuRelatorios() {
+      this.menuCadastro = false;
+      this.menuConsulta = false;
+      this.menuRelatorios = !this.menuRelatorios;
     }
   }
 }

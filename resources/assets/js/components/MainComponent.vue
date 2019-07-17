@@ -33,6 +33,49 @@
                 </table>
         </b-modal>
 
+        <b-modal ref="modalVagasEmSelecao" size="xl" title="Vagas Em Seleção" ok-only>
+
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Departamento</th>
+                        <th scope="col">Supervisor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                        v-for="(estagiario, indice) of estagiariosEmContratacao" 
+                        :key="estagiario.id">
+                            <th scope="row">{{ indice + 1 }}</th>
+                                <td>
+                                    <router-link to="/consulta">
+                                        <a @click="selecionaEstagiarioEmContratacao(indice)">
+                                            {{ estagiario.nome.toUpperCase() }}
+                                        </a>
+                                    </router-link>
+                                </td>
+                                <td>{{ estagiario.cpf | cpfFormatado }}</td>          
+                                <td>{{ estagiario.fone_celular }}</td>           
+                                <td>{{ estagiario.email_pessoal.toLowerCase() }}</td>           
+                                <td>{{ estagiario.dep_hierarquico }}</td>      
+                                <td>{{ estagiario.supervisor.toUpperCase() }}</td>      
+                        </tr>
+                        <template v-if="!estagiariosEmContratacao.length">
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    <h1>Não há nenhum estagiário em contratação</h1>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+        </b-modal>
+
         <!--Painel Resumo-->
         <div class="row mt-5 branco">
             <div class="col-6 col-sm-4 col-md-3 mb-3">
@@ -61,8 +104,8 @@
                 <div class="card bg-warning" style="width: 10rem;">
                     <div class="card-body">
                         <a href="#">
-                            <h1 class="card-title text-center text-white">2</h1>
-                            <h6 class="card-subtitle mb-2 text-center text-white">Vagas em seleção</h6>
+                            <h1 class="card-title text-center text-white" @click="exibeVagasEmSelecao">{{ estagiariosEmContratacao.length ? estagiariosEmContratacao.length : '0' }}</h1>
+                            <h6 class="card-subtitle mb-2 text-center text-white">Estagiários em Seleção</h6>
                         </a>
                     </div>
                 </div>
@@ -146,7 +189,8 @@ import _ from 'lodash';
 export default {
     data() {
         return {
-            contratosAVencer: []
+            contratosAVencer: [],
+            estagiariosEmContratacao: {}
         }
     },
     filters: {
@@ -159,6 +203,9 @@ export default {
 
             return data;
         },
+        cpfFormatado(cpf) {
+            return `${cpf.substring(0,3)}.${cpf.substring(3,6)}.${cpf.substring(6,9)}-${cpf.substring(9,11)}`;
+        }
     },
     computed: {
         estagiariosOrdenados() { // Todo: Ordenar supervisores em ordem alfabética utilizando esta função
@@ -173,18 +220,25 @@ export default {
             const sortedEstagiarios = _.orderBy(lowerCaseEstagiarios, ['nome'], ['asc']);
 
             return sortedEstagiarios;
-        }
+        },
     },
     beforeMount() {
         if(!this.$store.state.estagiario.contratosAVencer.length) {
             this.retornaEstagiarios();
         } else {
             this.contratosAVencer = this.$store.state.estagiario.contratosAVencer;
+            this.estagiariosEmContratacao = this.$store.state.estagiario.estagiariosEmContratacao;
         }
     },
+    beforeUpdate() {
+        
+    },
     methods: {
-        ...mapActions(['salvaContratosAVencer']),
-        ...mapMutations(['armazenaEstagiarios']),
+        ...mapActions(['salvaContratosAVencer', 'salvaVagasEmSelecao', 'salvaEstagiariosEmContratacao']),
+        ...mapMutations(['armazenaEstagiarios', 'armazenaEstagiariosEmContratacao', 'armazenaEstagiarioSelecionado']),
+        selecionaEstagiarioEmContratacao(indice) {
+            this.armazenaEstagiarioSelecionado(this.estagiariosEmContratacao[indice]);
+        },
         consultaEstagiario(indice) {
             this.$store.state.estagiario.estagiarioSelecionado = this.contratosAVencer[indice];
             this.$store.state.estagiario.idCursoEstagiarioSelecionado = this.contratosAVencer[indice].curso_formacao;
@@ -195,8 +249,17 @@ export default {
         escondeModalContratosVencidos() {
             this.$refs['modalContratosVencidos'].hide()
         },
+        exibeModalVagasEmSelecao() {
+            this.$refs['modalVagasEmSelecao'].show()
+        },
+        escondeModalVagasEmSelecao() {
+            this.$refs['modalVagasEmSelecao'].hide()
+        },
         exibeContratos() {
             this.exibeModalContratosVencidos();
+        },
+        exibeVagasEmSelecao() {
+            this.exibeModalVagasEmSelecao();
         },
         retornaEstagiarios() {
             const uriEstagiarios = '/api/estagiarios';
@@ -210,11 +273,16 @@ export default {
                     this.armazenaEstagiarios(response.data)
                     this.salvaContratosAVencer();
                     this.contratosAVencer = this.$store.state.estagiario.contratosAVencer;
+                    this.retornaEstagiariosEmContratacao();
                 })
                 .catch(error => {
                 console.log(error);
                 })
             }
+        },
+        retornaEstagiariosEmContratacao() {
+            this.salvaEstagiariosEmContratacao();
+            this.estagiariosEmContratacao = this.$store.state.estagiario.estagiariosEmContratacao;
         }
     }
 }
