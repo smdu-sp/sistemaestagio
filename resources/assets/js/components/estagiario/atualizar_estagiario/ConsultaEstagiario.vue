@@ -337,19 +337,29 @@ export default {
     validaHorarioSaida(horaSaida) { this.validacao(horaSaida, 'horarioSaidaValido') },
     validaSituacao(situacao) { this.validacao(situacao, 'situacaoValida') },
     converteNascimento() {
-      this.post.data_nascimento = this.post.data_nascimento.substr(0,10);
+      if(this.post.data_nascimento) {
+        this.post.data_nascimento = this.post.data_nascimento.substr(0,10);
+      }
     },
     converteHorarioEntrada() {
-      this.post.horario_entrada = this.post.horario_entrada.substr(11,19);
+      if(this.post.horario_entrada) {
+        this.post.horario_entrada = this.post.horario_entrada.substr(11,19);
+      }
     },
     converteHorarioSaida() {
-      this.post.horario_saida = this.post.horario_saida.substr(11,19);
+      if(this.post.horario_saida) {
+        this.post.horario_saida = this.post.horario_saida.substr(11,19);
+      }
     },
     converteDataInicio() {
-      this.post.dt_inicio = this.post.dt_inicio.substr(0,10);
+      if(this.post.dt_inicio) {
+        this.post.dt_inicio = this.post.dt_inicio.substr(0,10);
+      }
     },
     converteDataTermino() {
-      this.post.dt_termino = this.post.dt_termino.substr(0,10);
+      if(this.post.dt_termino) {
+        this.post.dt_termino = this.post.dt_termino.substr(0,10);
+      }
     },
     converteTermosAditivos() {
       if(this.post.dt_inicio_1_aditivo) { this.post.dt_inicio_1_aditivo = this.post.dt_inicio_1_aditivo.substr(0,10); }
@@ -687,11 +697,12 @@ export default {
         this.msg.erro = 'Erro ao atualizar dados';
         this.scrollTop();
       })
-      console.log(this.post)
     },
     selectVaga() {
-      let uriStatusVaga = `/api/vagas/${this.post.cod_vaga}`;
-      this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
+      if(this.post.cod_vaga) {
+        let uriStatusVaga = `/api/vagas/${this.post.cod_vaga}`;
+        this.axios.get(uriStatusVaga).then(response => this.statusVaga = response.data);
+      }
     }
   }
 }

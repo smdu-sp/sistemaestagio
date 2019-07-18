@@ -1,8 +1,6 @@
 <template>
     <div>
         <h1>Consulta Supervisor</h1>
-
-
           <!--Modal ativado quando o usuário clica no nome de algum estagiário -->
     <b-modal ref="consulta-estagiario" size="lg" hide-footer title="Consulta de Estagiário">
         <div class="row">
@@ -278,6 +276,8 @@ export default {
                     for(let i in this.cursos) {
                         if(this.supervisores[i].formacao == this.cursos[k].id) {
                             this.supervisores[i].formacao = this.cursos[k].formacao;
+                        } else {
+                            return;
                         }
                     }
                 }

@@ -3090,19 +3090,29 @@ __webpack_require__.r(__webpack_exports__);
       this.validacao(situacao, 'situacaoValida');
     },
     converteNascimento: function converteNascimento() {
-      this.post.data_nascimento = this.post.data_nascimento.substr(0, 10);
+      if (this.post.data_nascimento) {
+        this.post.data_nascimento = this.post.data_nascimento.substr(0, 10);
+      }
     },
     converteHorarioEntrada: function converteHorarioEntrada() {
-      this.post.horario_entrada = this.post.horario_entrada.substr(11, 19);
+      if (this.post.horario_entrada) {
+        this.post.horario_entrada = this.post.horario_entrada.substr(11, 19);
+      }
     },
     converteHorarioSaida: function converteHorarioSaida() {
-      this.post.horario_saida = this.post.horario_saida.substr(11, 19);
+      if (this.post.horario_saida) {
+        this.post.horario_saida = this.post.horario_saida.substr(11, 19);
+      }
     },
     converteDataInicio: function converteDataInicio() {
-      this.post.dt_inicio = this.post.dt_inicio.substr(0, 10);
+      if (this.post.dt_inicio) {
+        this.post.dt_inicio = this.post.dt_inicio.substr(0, 10);
+      }
     },
     converteDataTermino: function converteDataTermino() {
-      this.post.dt_termino = this.post.dt_termino.substr(0, 10);
+      if (this.post.dt_termino) {
+        this.post.dt_termino = this.post.dt_termino.substr(0, 10);
+      }
     },
     converteTermosAditivos: function converteTermosAditivos() {
       if (this.post.dt_inicio_1_aditivo) {
@@ -3553,15 +3563,16 @@ __webpack_require__.r(__webpack_exports__);
 
         _this3.scrollTop();
       });
-      console.log(this.post);
     },
     selectVaga: function selectVaga() {
       var _this4 = this;
 
-      var uriStatusVaga = "/api/vagas/".concat(this.post.cod_vaga);
-      this.axios.get(uriStatusVaga).then(function (response) {
-        return _this4.statusVaga = response.data;
-      });
+      if (this.post.cod_vaga) {
+        var uriStatusVaga = "/api/vagas/".concat(this.post.cod_vaga);
+        this.axios.get(uriStatusVaga).then(function (response) {
+          return _this4.statusVaga = response.data;
+        });
+      }
     }
   }
 });
@@ -6208,20 +6219,145 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      estagiariosContratados30Dias: {}
+      estagiariosContratados30Dias: {},
+      estagiariosDesligados30Dias: {},
+      estagiariosRenovados30Dias: {},
+      selecao: 'Entradas'
     };
   },
-  beforeMount: function beforeMount() {
-    this.salvaEstagiarios();
-    this.salvaEstagiariosContratados();
-    this.estagiariosContratados30Dias = this.getEstagiariosContratados30Dias();
-    console.log(this.estagiariosContratados30Dias);
+  filters: {
+    dataFormatada: function dataFormatada(data) {
+      var ano = data.substring(0, 4);
+      var mes = data.substring(5, 7);
+      var dia = data.substring(8, 10);
+      data = "".concat(dia, "/").concat(mes, "/").concat(ano);
+      return data;
+    }
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['salvaEstagiarios', 'salvaEstagiariosContratados']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['getEstagiarios', 'getEstagiariosContratados30Dias']))
+  mounted: function mounted() {
+    if (this.getEstagiarios().length > 0) {
+      this.salvaEstagiariosContratados30dias();
+      this.salvaEstagiariosDesligados30dias();
+      this.salvaEstagiariosRenovados30dias();
+      this.estagiariosContratados30Dias = this.getEstagiariosContratados30Dias();
+      this.estagiariosDesligados30Dias = this.getEstagiariosDesligados30Dias();
+      this.estagiariosRenovados30Dias = this.getEstagiariosRenovados30Dias();
+      console.log(this.estagiariosRenovados30Dias);
+    } else {
+      return this.salvaEstagiarios();
+      this.salvaEstagiariosContratados30dias();
+      this.salvaEstagiariosDesligados30dias();
+      this.salvaEstagiariosRenovados30dias();
+      this.estagiariosContratados30Dias = this.getEstagiariosContratados30Dias();
+      this.estagiariosDesligados30Dias = this.getEstagiariosDesligados30Dias();
+      this.estagiariosRenovados30Dias = this.getEstagiariosRenovados30Dias();
+      console.log(this.estagiariosRenovados30Dias);
+    }
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['salvaEstagiarios', 'salvaEstagiariosContratados30dias', 'salvaEstagiariosDesligados30dias', 'salvaEstagiariosRenovados30dias']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['getEstagiarios', 'getEstagiariosContratados30Dias', 'getEstagiariosDesligados30Dias', 'getEstagiariosRenovados30Dias']))
 });
 
 /***/ }),
@@ -6661,8 +6797,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6835,6 +6969,8 @@ __webpack_require__.r(__webpack_exports__);
           for (var i in _this5.cursos) {
             if (_this5.supervisores[i].formacao == _this5.cursos[k].id) {
               _this5.supervisores[i].formacao = _this5.cursos[k].formacao;
+            } else {
+              return;
             }
           }
         }
@@ -79904,9 +80040,313 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Entradas, Saídas e Renovação")])
+  return _c("div", [
+    _c("h1", [_vm._v("Entradas, Saídas e Renovação")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "selecao" } }, [
+          _vm._v("Selecione o tipo de relatório desejado")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.selecao,
+                expression: "selecao"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { id: "selecao" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.selecao = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { default: "", value: "Entradas" } }, [
+              _vm._v("Entradas")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "Saídas" } }, [_vm._v("Saídas")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "Renovação" } }, [
+              _vm._v("Renovação")
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm.selecao === "Entradas"
+        ? _c("div", [
+            _c("table", { staticClass: "table table-bordered table-hover" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.estagiariosContratados30Dias, function(
+                  estagiarioContratado,
+                  indice
+                ) {
+                  return _c("tr", { key: estagiarioContratado.nome }, [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v(_vm._s(indice + 1))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(estagiarioContratado.nome.toUpperCase()) +
+                          "\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          estagiarioContratado.dep_hierarquico
+                            ? estagiarioContratado.dep_hierarquico
+                            : "NÃO CADASTRADO"
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(estagiarioContratado.supervisor.toUpperCase())
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("dataFormatada")(
+                            estagiarioContratado.dt_inicio
+                          )
+                        )
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.selecao === "Saídas"
+        ? _c("div", [
+            _c("table", { staticClass: "table table-bordered table-hover" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.estagiariosDesligados30Dias, function(
+                  estagiarioDesligado,
+                  indice
+                ) {
+                  return _c("tr", { key: estagiarioDesligado.nome }, [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v(_vm._s(indice + 1))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(estagiarioDesligado.nome.toUpperCase()) +
+                          "\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          estagiarioDesligado.dep_hierarquico
+                            ? estagiarioDesligado.dep_hierarquico
+                            : "NÃO CADASTRADO"
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(estagiarioDesligado.supervisor.toUpperCase())
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("dataFormatada")(
+                            estagiarioDesligado.dt_termino
+                          )
+                        )
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.selecao === "Renovação"
+        ? _c("div", [
+            _c("table", { staticClass: "table table-bordered table-hover" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.estagiariosRenovados30Dias, function(
+                  estagiarioRenovado,
+                  indice
+                ) {
+                  return _c("tr", { key: estagiarioRenovado.nome }, [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v(_vm._s(indice + 1))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(estagiarioRenovado.nome.toUpperCase()) +
+                          "\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          estagiarioRenovado.dep_hierarquico
+                            ? estagiarioRenovado.dep_hierarquico
+                            : "NÃO CADASTRADO"
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(estagiarioRenovado.supervisor.toUpperCase())
+                      )
+                    ]),
+                    _vm._v(" "),
+                    estagiarioRenovado.dt_inicio_3_aditivo
+                      ? _c("td", [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(
+                                _vm._f("dataFormatada")(
+                                  estagiarioRenovado.dt_inicio_3_aditivo
+                                )
+                              ) +
+                              "\n                        "
+                          )
+                        ])
+                      : estagiarioRenovado.dt_inicio_2_aditivo
+                      ? _c("td", [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(
+                                _vm._f("dataFormatada")(
+                                  estagiarioRenovado.dt_inicio_2_aditivo
+                                )
+                              ) +
+                              "\n                        "
+                          )
+                        ])
+                      : _c("td", [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(
+                                _vm._f("dataFormatada")(
+                                  estagiarioRenovado.dt_inicio_1_aditivo
+                                )
+                              ) +
+                              "\n                        "
+                          )
+                        ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
+        : _vm._e()
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Departamento")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Supervisor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Início")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Departamento")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Supervisor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Vencimento")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Departamento")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Supervisor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Renovado em")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -99511,13 +99951,10 @@ var uridepartamentos = '/api/departamentos';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1___default.a);
+// import Vue from 'vue';
+// import VueAxios from 'vue-axios';
+// import axios from 'axios';
+// Vue.use(VueAxios, axios);
 var uriEstagiarios = '/api/estagiarios';
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
@@ -99528,7 +99965,9 @@ var uriEstagiarios = '/api/estagiarios';
     vagas: [],
     vagasEmSelecao: [],
     estagiariosEmContratacao: [],
-    estagiariosContratados30dias: []
+    estagiariosContratados30dias: [],
+    estagiariosDesligados30dias: [],
+    estagiariosRenovados30dias: []
   },
   getters: {
     getEstagiarioSelecionado: function getEstagiarioSelecionado(state) {
@@ -99539,6 +99978,12 @@ var uriEstagiarios = '/api/estagiarios';
     },
     getEstagiariosContratados30Dias: function getEstagiariosContratados30Dias(state) {
       return state.estagiariosContratados30dias;
+    },
+    getEstagiariosDesligados30Dias: function getEstagiariosDesligados30Dias(state) {
+      return state.estagiariosDesligados30dias;
+    },
+    getEstagiariosRenovados30Dias: function getEstagiariosRenovados30Dias(state) {
+      return state.estagiariosRenovados30dias;
     }
   },
   mutations: {
@@ -99563,8 +100008,14 @@ var uriEstagiarios = '/api/estagiarios';
     armazenaEstagiariosEmContratacao: function armazenaEstagiariosEmContratacao(state, estagiario) {
       state.estagiariosEmContratacao.push(estagiario);
     },
-    armazenaEstagiariosContratados: function armazenaEstagiariosContratados(state, estagiario) {
+    armazenaEstagiariosContratados30dias: function armazenaEstagiariosContratados30dias(state, estagiario) {
       state.estagiariosContratados30dias.push(estagiario);
+    },
+    armazenaEstagiariosDesligados30dias: function armazenaEstagiariosDesligados30dias(state, estagiario) {
+      state.estagiariosDesligados30dias.push(estagiario);
+    },
+    armazenaEstagiariosRenovados30dias: function armazenaEstagiariosRenovados30dias(state, estagiario) {
+      state.estagiariosRenovados30dias.push(estagiario);
     }
   },
   actions: {
@@ -99604,24 +100055,78 @@ var uriEstagiarios = '/api/estagiarios';
     },
     salvaEstagiarios: function salvaEstagiarios(_ref) {
       var commit = _ref.commit;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(uriEstagiarios).then(function (response) {
+      axios.get(uriEstagiarios).then(function (response) {
         commit('armazenaEstagiarios', response.data);
       })["catch"](function (error) {
-        console.log(error);
+        console.log("Erro: " + error);
       });
     },
-    salvaEstagiariosContratados: function salvaEstagiariosContratados(context, estagiarios) {
+    salvaEstagiariosContratados30dias: function salvaEstagiariosContratados30dias(context, estagiarios) {
       estagiarios = context.state.estagiarios;
       var dataAtual = new Date();
-      var dataAtualMenos60Dias = dataAtual.setDate(dataAtual.getDate() - 60);
+      var dataAtualMenos30Dias = dataAtual.setDate(dataAtual.getDate() - 30);
 
       for (var i in estagiarios) {
         var dataEstagiario = estagiarios[i].dt_inicio;
         var novaData = new Date(dataEstagiario);
         var novaDataFormatada = novaData.setDate(novaData.getDate());
 
-        if (novaDataFormatada >= dataAtualMenos60Dias) {
-          context.commit('armazenaEstagiariosContratados', estagiarios[i]);
+        if (novaDataFormatada >= dataAtualMenos30Dias) {
+          context.commit('armazenaEstagiariosContratados30dias', estagiarios[i]);
+        }
+      }
+    },
+    salvaEstagiariosDesligados30dias: function salvaEstagiariosDesligados30dias(context, estagiarios) {
+      estagiarios = context.state.estagiarios;
+      var dataAtual = new Date();
+      var dataAtualTime = dataAtual.setDate(dataAtual.getDate());
+      var dataAtualMenos30Dias = dataAtual.setDate(dataAtual.getDate() - 30);
+
+      for (var i in estagiarios) {
+        var dataEstagiario = estagiarios[i].dt_termino;
+        var novaData = new Date(dataEstagiario);
+        var novaDataFormatada = novaData.setDate(novaData.getDate());
+
+        if (novaDataFormatada >= dataAtualMenos30Dias && novaDataFormatada <= dataAtualTime) {
+          context.commit('armazenaEstagiariosDesligados30dias', estagiarios[i]);
+        }
+      }
+    },
+    salvaEstagiariosRenovados30dias: function salvaEstagiariosRenovados30dias(context, estagiarios) {
+      estagiarios = context.state.estagiarios;
+      var dataAtual = new Date();
+      var dataAtualMenos30Dias = dataAtual.setDate(dataAtual.getDate() - 30);
+
+      for (var i in estagiarios) {
+        var dataEstagiario1Aditivo = estagiarios[i].dt_inicio_1_aditivo;
+        var dataEstagiario2Aditivo = estagiarios[i].dt_inicio_2_aditivo;
+        var dataEstagiario3Aditivo = estagiarios[i].dt_inicio_3_aditivo;
+
+        if (typeof dataEstagiario1Aditivo == 'null') {
+          return;
+        } else {
+          var novaData1Aditivo = new Date(dataEstagiario1Aditivo);
+          var novaData1Formatada = novaData1Aditivo.setDate(novaData1Aditivo.getDate());
+        }
+
+        if (typeof dataEstagiario2Aditivo == 'null') {
+          var novaData2Aditivo = new Date(dataEstagiario2Aditivo);
+          var novaData2Formatada = novaData2Aditivo.setDate(novaData2Aditivo.getDate());
+        }
+
+        if (typeof dataEstagiario3Aditivo == 'null') {
+          return;
+        } else {
+          var novaData3Aditivo = new Date(dataEstagiario3Aditivo);
+          var novaData3Formatada = novaData3Aditivo.setDate(novaData3Aditivo.getDate());
+        }
+
+        if (novaData1Formatada >= dataAtualMenos30Dias) {
+          context.commit('armazenaEstagiariosRenovados30dias', estagiarios[i]);
+        } else if (novaData2Formatada >= dataAtualMenos30Dias) {
+          context.commit('armazenaEstagiariosRenovados30dias', estagiarios[i]);
+        } else if (novaData3Formatada >= dataAtualMenos30Dias) {
+          context.commit('armazenaEstagiariosRenovados30dias', estagiarios[i]);
         }
       }
     }
