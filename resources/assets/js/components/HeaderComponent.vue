@@ -32,7 +32,7 @@
             <div class="col-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
+                        <li class="breadcrumb-item"><router-link :to="{name: 'home'}">Home</router-link></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ this.$route.name == 'home' ? '' : this.$route.name }}</li>
                     </ol>
                 </nav>

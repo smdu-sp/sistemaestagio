@@ -46,7 +46,7 @@
 
       
         <div class="text-right">
-            <router-link to="/consulta" class="btn btn-outline-primary mt-3">Editar dados</router-link>
+            <router-link :to="{name: 'consulta'}" class="btn btn-outline-primary mt-3">Editar dados</router-link>
             <b-button class="mt-3" variant="outline-danger" @click="escondeModalEstagiario">Cancelar</b-button>
         </div>
     </b-modal>

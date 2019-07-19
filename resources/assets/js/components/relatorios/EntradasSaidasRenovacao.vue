@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>Entradas, Saídas e Renovação</h1>
+    <div id="printable">
+        <h1>Entradas, Saídas e Renovações nos últimos 30 dias</h1>
         <div class="col-md-12">
             <div class="form-group">
                 <label for="selecao">Selecione o tipo de relatório desejado</label>
@@ -71,7 +71,7 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Departamento</th>
                             <th scope="col">Supervisor</th>
-                            <th scope="col">Renovado em</th>
+                            <th scope="col">Renovado para</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,6 +103,7 @@
 
 <script>
 import { mapMutations, mapActions, mapGetters } from 'vuex';
+import filtros from '../../mixins/filtros';
 export default {
     data() {
         return {
@@ -112,37 +113,14 @@ export default {
             selecao: 'Entradas'
         }
     },
-    filters: {
-        dataFormatada(data) {
-            const ano = data.substring(0,4);
-            const mes = data.substring(5,7);
-            const dia = data.substring(8,10);
-
-            data = `${dia}/${mes}/${ano}`;
-
-            return data;
-        }
-    },
-    mounted() {
-        if(this.getEstagiarios().length > 0) {
-            this.salvaEstagiariosContratados30dias();
-            this.salvaEstagiariosDesligados30dias();
-            this.salvaEstagiariosRenovados30dias();
-            this.estagiariosContratados30Dias = this.getEstagiariosContratados30Dias();
-            this.estagiariosDesligados30Dias = this.getEstagiariosDesligados30Dias();
-            this.estagiariosRenovados30Dias = this.getEstagiariosRenovados30Dias();
-            console.log(this.estagiariosRenovados30Dias)
-        } else {
-            return this.salvaEstagiarios()
-            this.salvaEstagiariosContratados30dias()
-            this.salvaEstagiariosDesligados30dias()
-            this.salvaEstagiariosRenovados30dias()
-            this.estagiariosContratados30Dias = this.getEstagiariosContratados30Dias()
-            this.estagiariosDesligados30Dias = this.getEstagiariosDesligados30Dias()
-            this.estagiariosRenovados30Dias = this.getEstagiariosRenovados30Dias()
-            console.log(this.estagiariosRenovados30Dias)
-
-        }
+    mixins: [filtros],
+    beforeMount() { // TODO: Fazer o carregamento dos estagiarios caso o usuário aperte f5
+        this.salvaEstagiariosContratados30dias();
+        this.salvaEstagiariosDesligados30dias();
+        this.salvaEstagiariosRenovados30dias();
+        this.estagiariosContratados30Dias = this.getEstagiariosContratados30Dias();
+        this.estagiariosDesligados30Dias = this.getEstagiariosDesligados30Dias();
+        this.estagiariosRenovados30Dias = this.getEstagiariosRenovados30Dias();
     },
     methods: {
         ...mapActions(['salvaEstagiarios', 'salvaEstagiariosContratados30dias', 'salvaEstagiariosDesligados30dias', 'salvaEstagiariosRenovados30dias']),
@@ -152,5 +130,17 @@ export default {
 </script>
 
 <style>
-
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable, #printable * {
+    visibility: visible;
+  }
+  #printable {
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+}
 </style>

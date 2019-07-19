@@ -1,16 +1,20 @@
 <template>    
     <div>
 
-        <b-modal ref="modalContratosVencidos" size="lg" title="Contratos a Vencer nos Próximos 90 dias" ok-only>
-
+        <b-modal ref="modalContratosVencidos" size="xl" title="Contratos a Vencer nos Próximos 90 dias" ok-only>
+            <div id="printable">
+                <h1 class="titulo-relatorio">Contratos a vencer nos próximos 90 dias</h1>
                 <table class="table table-bordered table-hover">
                     <thead class="thead-dark">
                         <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Departamento</th>
-                        <th scope="col">Supervisor</th>
-                        <th scope="col">Vencimento</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">CPF</th>
+                            <th scope="col">Celular</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Departamento</th>
+                            <th scope="col">Supervisor</th>
+                            <th scope="col">Vencimento</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,22 +23,34 @@
                         :key="estagiario.nome">
                             <th scope="row">{{ indice + 1 }}</th>
                                 <td>
-                                    <router-link to="/consulta">
+                                    <router-link :to="{name: 'consulta'}">
                                         <a @click="consultaEstagiario(indice)">
                                             {{ estagiario.nome.toUpperCase() }}
                                         </a>
                                     </router-link>
                                 </td>
+                            <td>{{ estagiario.cpf | cpfFormatado }}</td>
+                            <td>{{ estagiario.fone_celular }}</td>
+                            <td>{{ estagiario.email_pessoal }}</td>
                             <td>{{ estagiario.dep_hierarquico ? estagiario.dep_hierarquico : 'NÃO CADASTRADO' }}</td>
                             <td>{{ estagiario.supervisor.toUpperCase() }}</td>
                             <td>{{ estagiario.dt_termino | dataFormatada }}</td>                        
                         </tr>
+                        <template v-if="!contratosAVencer.length">
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <h1>Não há nenhum contrato a vencer em 90 dias</h1>
+                                </td>
+                            </tr>
+                        </template>
                     </tbody>
                 </table>
+            </div>
         </b-modal>
 
-        <b-modal ref="modalVagasEmSelecao" size="xl" title="Vagas Em Seleção" ok-only>
-
+        <b-modal ref="modalVagasEmSelecao" size="xl" title="Estagiarios Em Seleção" ok-only>
+            <div id="printable">
+                <h1 class="titulo-relatorio">Estagiários em Seleção</h1>
                 <table class="table table-bordered table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -53,7 +69,7 @@
                         :key="estagiario.id">
                             <th scope="row">{{ indice + 1 }}</th>
                                 <td>
-                                    <router-link to="/consulta">
+                                    <router-link :to="{name: 'consulta'}">
                                         <a @click="selecionaEstagiarioEmContratacao(indice)">
                                             {{ estagiario.nome.toUpperCase() }}
                                         </a>
@@ -74,6 +90,7 @@
                         </template>
                     </tbody>
                 </table>
+            </div>
         </b-modal>
 
         <!--Painel Resumo-->
@@ -185,6 +202,7 @@
 <script>
 import { mapMutations, mapActions } from 'vuex';
 import { setTimeout } from 'timers';
+import filtros from '../mixins/filtros';
 import _ from 'lodash';
 export default {
     data() {
@@ -193,20 +211,7 @@ export default {
             estagiariosEmContratacao: {}
         }
     },
-    filters: {
-        dataFormatada(data) {
-            const ano = data.substring(0,4);
-            const mes = data.substring(5,7);
-            const dia = data.substring(8,10);
-
-            data = `${dia}/${mes}/${ano}`;
-
-            return data;
-        },
-        cpfFormatado(cpf) {
-            return `${cpf.substring(0,3)}.${cpf.substring(3,6)}.${cpf.substring(6,9)}-${cpf.substring(9,11)}`;
-        }
-    },
+    mixins: [filtros],
     computed: {
         estagiariosOrdenados() { // Todo: Ordenar supervisores em ordem alfabética utilizando esta função
             let lowerCaseEstagiarios = _.clone(this.contratosAVencer);
@@ -229,9 +234,6 @@ export default {
             this.contratosAVencer = this.$store.state.estagiario.contratosAVencer;
             this.estagiariosEmContratacao = this.$store.state.estagiario.estagiariosEmContratacao;
         }
-    },
-    beforeUpdate() {
-        
     },
     methods: {
         ...mapActions(['salvaContratosAVencer', 'salvaVagasEmSelecao', 'salvaEstagiariosEmContratacao']),
@@ -342,4 +344,24 @@ export default {
     list-style: none;
 }
 
+.titulo-relatorio {
+    display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable, #printable * {
+    visibility: visible;
+  }
+  #printable {
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+  .titulo-relatorio {
+      display: block;
+  }
+}
 </style>
