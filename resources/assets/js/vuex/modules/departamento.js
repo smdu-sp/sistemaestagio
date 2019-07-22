@@ -3,6 +3,11 @@ export default {
     state: {
         departamentos: {}
     },
+    getters: {
+        getDepartamentos(state) {
+            return state.departamentos;
+        }
+    },
     mutations: {
         armazenaDepartamentos(state, departamentos) {
             state.departamentos = departamentos

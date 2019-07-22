@@ -69,6 +69,9 @@
                             <li>
                                 <router-link :to="{name: 'Relatório de Vagas'}">Vagas</router-link>
                             </li>
+                            <li>
+                                <router-link :to="{name: 'Relatório de Cotas'}">Cotas</router-link>
+                            </li>
                         </ul>
                     </transition>
                 </li>

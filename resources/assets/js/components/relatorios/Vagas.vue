@@ -1,17 +1,42 @@
 <template>
-    <div>
+    <div id="printable">
         <h1>Relatório de vagas</h1>
-        <div class="form-group">
-            <label for="">Selecione a situação da vaga</label>
-            <select class="form-control" v-model="status">
-                <option value="Livres">Livres</option>
-                <option value="Ocupadas">Ocupadas</option>
-                <option value="Em seleção">Em seleção</option>
-                <option value="Canceladas">Canceladas</option>
-                <option value="TRANSFERIDA.SMG">TRANSFERIDA.SMG</option>
-            </select>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="selectStatus">Selecione a situação da vaga</label>
+                    <select class="form-control" id="selectStatus" v-model="status">
+                        <option value="Todas">Todas</option>
+                        <option value="Livres">Livres</option>
+                        <option value="Ocupadas">Ocupadas</option>
+                        <option value="Em seleção">Em seleção</option>
+                        <option value="Canceladas">Canceladas</option>
+                        <option value="TRANSFERIDA.SMG">TRANSFERIDA.SMG</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="selectSetor">Departamento</label>
+                    <select id="selectSetor" class="form-control" v-model="departamentoFiltrado">
+                        <option value="">Todos</option>
+                        <option  v-for="departamento of departamentosFiltrados" :key="departamento.sigla">{{ departamento.sigla }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="selectSupervisor">Supervisor</label>
+                    <select id="selectSupervisor" class="form-control" v-model="supervisorFiltrado">
+                        <option value="">Todos</option>
+                        <option  v-for="supervisor of supervisoresOrdenados" :key="supervisor.nome">{{ supervisor.nome.toUpperCase() }}</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div v-if="status === 'Livres'">
+
+        <div v-if="status === 'Todas'">
+            <h5 class="total-vagas alert alert-info">Total de vagas: {{ vagasPorDepartamento.length }}</h5>
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -19,15 +44,43 @@
                         <th scope="row">Vaga</th>
                         <th scope="row">Situação</th>
                         <th scope="row">Departamento</th>
+                        <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(vagaLivre, indice) of vagasLivres" :key="vagaLivre.id">
+                    <tr v-for="(vaga, indice) of vagasPorDepartamento" :key="vaga.id">
+                        <td>{{ indice + 1 }}</td>
+                        <td>{{ vaga.id }}</td>
+                        <td>{{ vaga.situacao }}</td>
+                        <td>{{ vaga.dep_hierarquico }}</td>
+                        <td>{{ vaga.supervisor }}</td>
+                        <td>{{ vaga.historico }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div v-if="status === 'Livres'">
+            <h5 class="total-vagas alert alert-info">Total de vagas: {{ vagasPorDepartamento.length }}</h5>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="row">#</th>
+                        <th scope="row">Vaga</th>
+                        <th scope="row">Situação</th>
+                        <th scope="row">Departamento</th>
+                        <th scope="row">Supervisor</th>
+                        <th scope="row">Histórico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(vagaLivre, indice) of vagasPorDepartamento" :key="vagaLivre.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vagaLivre.id }}</td>
                         <td>{{ vagaLivre.situacao }}</td>
                         <td>{{ vagaLivre.dep_hierarquico }}</td>
+                        <td>{{ vagaLivre.supervisor }}</td>
                         <td>{{ vagaLivre.historico }}</td>
                     </tr>
                 </tbody>
@@ -35,6 +88,7 @@
         </div>
 
         <div v-if="status === 'Ocupadas'">
+            <h5 class="total-vagas alert alert-info">Total de vagas: {{ vagasPorDepartamento.length }}</h5>
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -42,15 +96,17 @@
                         <th scope="row">Vaga</th>
                         <th scope="row">Situação</th>
                         <th scope="row">Departamento</th>
+                        <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(vaga, indice) of vagasOcupadas" :key="vaga.id">
+                    <tr v-for="(vaga, indice) of vagasPorDepartamento" :key="vaga.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vaga.id }}</td>
                         <td>{{ vaga.situacao }}</td>
                         <td>{{ vaga.dep_hierarquico }}</td>
+                        <td>{{ vaga.supervisor }}</td>
                         <td>{{ vaga.historico }}</td>
                     </tr>
                 </tbody>
@@ -59,6 +115,7 @@
 
 
         <div v-if="status === 'Em seleção'">
+            <h5 class="total-vagas alert alert-info">Total de vagas: {{ vagasPorDepartamento.length }}</h5>
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -66,15 +123,17 @@
                         <th scope="row">Vaga</th>
                         <th scope="row">Situação</th>
                         <th scope="row">Departamento</th>
+                        <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(vagaEmSelecao, indice) of vagasEmSelecao" :key="vagaEmSelecao.id">
+                    <tr v-for="(vagaEmSelecao, indice) of vagasPorDepartamento" :key="vagaEmSelecao.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vagaEmSelecao.id }}</td>
                         <td>{{ vagaEmSelecao.situacao }}</td>
                         <td>{{ vagaEmSelecao.dep_hierarquico }}</td>
+                        <td>{{ vagaEmSelecao.supervisor }}</td>
                         <td>{{ vagaEmSelecao.historico }}</td>
                     </tr>
                 </tbody>
@@ -82,6 +141,7 @@
         </div>
 
         <div v-if="status === 'Canceladas'">
+            <h5 class="total-vagas alert alert-info">Total de vagas: {{ vagasPorDepartamento.length }}</h5>
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -89,15 +149,17 @@
                         <th scope="row">Vaga</th>
                         <th scope="row">Situação</th>
                         <th scope="row">Departamento</th>
+                        <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(vagaCancelada, indice) of vagasCanceladas" :key="vagaCancelada.id">
+                    <tr v-for="(vagaCancelada, indice) of vagasPorDepartamento" :key="vagaCancelada.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vagaCancelada.id }}</td>
                         <td>{{ vagaCancelada.situacao }}</td>
                         <td>{{ vagaCancelada.dep_hierarquico }}</td>
+                        <td>{{ vagaCancelada.supervisor }}</td>
                         <td>{{ vagaCancelada.historico }}</td>
                     </tr>
                 </tbody>
@@ -105,6 +167,7 @@
         </div>
 
         <div v-if="status === 'TRANSFERIDA.SMG'">
+            <h5 class="total-vagas alert alert-info">Total de vagas: {{ vagasPorDepartamento.length }}</h5>
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -112,15 +175,17 @@
                         <th scope="row">Vaga</th>
                         <th scope="row">Situação</th>
                         <th scope="row">Departamento</th>
+                        <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(vagaTransferida, indice) of vagasTransferidas" :key="vagaTransferida.id">
+                    <tr v-for="(vagaTransferida, indice) of vagasPorDepartamento" :key="vagaTransferida.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vagaTransferida.id }}</td>
                         <td>{{ vagaTransferida.situacao }}</td>
                         <td>{{ vagaTransferida.dep_hierarquico }}</td>
+                        <td>{{ vagaTransferida.supervisor }}</td>
                         <td>{{ vagaTransferida.historico }}</td>
                     </tr>
                 </tbody>
@@ -132,13 +197,18 @@
 </template>
 
 <script>
-import { mapMutations, mapActions, mapGetters } from 'vuex';
 import { setTimeout } from 'timers';
+import computeds from '../../mixins/computeds';
 export default {
     data() {
         return  {
-            status: 'Livres',
-            vagas: {},
+            status: 'Todas',
+            departamentoFiltrado: '',
+            supervisorFiltrado: '',
+            estagiarios: {},
+            supervisores: {},
+            vagas: [],
+            departamentos: [],
             vagasOcupadas: [],
             vagasEmSelecao: [],
             vagasLivres: [],
@@ -147,18 +217,174 @@ export default {
         }
     },
     beforeMount(){
-        this.retornaVagas()
+        this.retornaSupervisores();
+        this.retornaEstagiarios();
+        this.retornaVagas();
+        this.retornaDepartamentos();
+    },
+    mixins: [computeds],
+    computed: {
+        departamentosFiltrados() {
+            let departamentosPai = this.departamentos.filter((departamento) => {
+                return departamento.tipo === "PAI"
+            })
+            return departamentosPai
+        },
+        vagasPorDepartamento() {
+            // filtro somente por status
+            if(this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Todas') { 
+                return this.vagas
+            } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Livres') {
+                return this.vagasLivres;
+            } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Ocupadas') {
+                return this.vagasOcupadas;
+            } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Em seleção') {
+                return this.vagasEmSelecao;
+            } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'TRANSFERIDA.SMG') {
+                return this.vagasTransferidas;
+            } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Canceladas') {
+                return this.vagasCanceladas;
+            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Todas') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado
+                })
+                return vagas;
+            } 
+
+            // filtro somente por departamento e status
+            else if(this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Livres') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'LIVRE';
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Ocupadas') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'OCUPADA';
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Em seleção') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'EM SELEÇÃO';
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Canceladas') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'CANCELADA';
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'TRANSFERIDA.SMG') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'TRANSFERIDA.SMG';
+                })
+                return vagas;
+            } 
+            
+            // filtro por departamento, supervisor e status
+            else if(this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'Livres') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'LIVRE' && vaga.supervisor === this.supervisorFiltrado;
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'Ocupadas') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'OCUPADA' && vaga.supervisor === this.supervisorFiltrado;
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'Em seleção') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'EM SELEÇÃO' && vaga.supervisor === this.supervisorFiltrado;
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'Canceladas') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'CANCELADA' && vaga.supervisor === this.supervisorFiltrado;
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'TRANSFERIDA.SMG') {
+                let vagas = this.vagas.filter((vaga) => {
+                    return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'TRANSFERIDA.SMG' && vaga.supervisor === this.supervisorFiltrado;
+                })
+                return vagas;
+            }
+        },
+        // vagasLivresPorDepartamento() {
+        //     if(this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.supervisor === '') { 
+        //         return this.vagasLivres
+        //     } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado != '') {
+        //         let vagas = this.vagasLivres.filter((vaga) => {
+        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
+        //         })
+        //         return vagas;
+        //     }
+        // },
+        // vagasOcupadasPorDepartamento() {
+        //     if(this.departamentoFiltrado === '') {
+        //         return this.vagasOcupadas;
+        //     } else {
+        //         let vagas = this.vagasOcupadas.filter((vaga) => {
+        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
+        //         })
+        //         return vagas;
+        //     }
+        // },
+        // vagasEmSelecaoPorDepartamento() {
+        //     if(this.departamentoFiltrado === '') {
+        //         return this.vagasEmSelecao;
+        //     } else {
+        //         let vagas = this.vagasEmSelecao.filter((vaga) => {
+        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
+        //         })
+        //         return vagas;
+        //     }
+        // },
+        // vagasCanceladasPorDepartamento() {
+        //     if(this.departamentoFiltrado === '') {
+        //         return this.vagasCanceladas;
+        //     } else {
+        //         let vagas = this.vagasCanceladas.filter((vaga) => {
+        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
+        //         })
+        //         return vagas;
+        //     }
+        // },
+        // vagasTransferidasPorDepartamento() {
+        //     if(this.departamentoFiltrado === '') {
+        //         return this.vagasTransferidas;
+        //     } else {
+        //         let vagas = this.vagasTransferidas.filter((vaga) => {
+        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
+        //         })
+        //         return vagas;
+        //     }
+        // }
     },
     methods: {
-        ...mapActions(['salvaVagas']),
-        ...mapGetters(['getVagas']),
-        retornaVagas() {
-            const uriVagas = '/api/vagas'
+        retornaSupervisores() {
+            const uriSupervisores = '/api/supervisores';
 
-            this.axios
-            .get(uriVagas)
+            this.axios.get(uriSupervisores)
             .then(response => {
-                this.vagasDistribuidas(response.data)
+                this.supervisores = response.data;
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+        acrescentaSupervisorVaga() {
+            for(let i in this.estagiarios) {
+                for(let k in this.vagas) {
+                    if(this.estagiarios[i].cod_vaga === this.vagas[k].id) {
+                        this.vagas[k].supervisor = this.estagiarios[i].supervisor.toUpperCase();
+                    }
+                }
+            }
+        },
+        retornaEstagiarios() {
+            const uriEstagiarios = '/api/estagiarios';
+
+            this.axios.get(uriEstagiarios)
+            .then(response => {
+                this.estagiarios = response.data;
             })
             .catch(error => {
                 console.log(error);
@@ -178,11 +404,52 @@ export default {
                     this.vagasTransferidas.push(vagas[i])
                 }
             }
+        },
+        retornaVagas() {
+            const uriVagas = '/api/vagas'
+
+            this.axios
+            .get(uriVagas)
+            .then(response => {
+                this.vagas = response.data
+                this.vagasDistribuidas(response.data)
+                this.acrescentaSupervisorVaga();
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+        retornaDepartamentos() {
+            const uriVagas = '/api/departamentos';
+
+            this.axios
+            .get(uriVagas)
+            .then(response => {
+                this.departamentos = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            })
         }
     }
 }
 </script>
 
 <style>
-
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable, #printable * {
+    visibility: visible;
+  }
+  #printable {
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+}
+.total-vagas {
+    font-weight: bold;
+}
 </style>
