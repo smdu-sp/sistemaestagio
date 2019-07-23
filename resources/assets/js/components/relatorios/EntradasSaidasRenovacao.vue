@@ -2,42 +2,59 @@
     <div id="printable">
         <h1>Entradas, Saídas e Renovações nos últimos 30 dias</h1>
         <div class="col-md-12">
-            <div class="form-group">
-                <label for="selecao">Selecione o tipo de relatório desejado</label>
-                <select id="selecao" class="form-control" v-model="selecao">
-                    <option default value="Entradas">Entradas</option>
-                    <option value="Saídas">Saídas</option>
-                    <option value="Renovação">Renovação</option>
-                </select>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="selecao">Selecione o tipo de relatório desejado</label>
+                        <select id="selecao" class="form-control" v-model="selecao">
+                            <option default value="Entradas">Entradas</option>
+                            <option value="Saídas">Saídas</option>
+                            <option value="Renovação">Renovação</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex flex-column justify-content-end">
+                    <div class="form-group">
+                        <botao-imprimir-component></botao-imprimir-component>
+                    </div>
+                </div>
             </div>
             <div v-if="selecao === 'Entradas'">
-                <table class="table table-bordered table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Departamento</th>
-                        <th scope="col">Supervisor</th>
-                        <th scope="col">Início</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                        v-for="(estagiarioContratado, indice) of estagiariosContratados30Dias" 
-                        :key="estagiarioContratado.nome">
-                            <th scope="row">{{ indice + 1 }}</th>
-                                <td>
-                                    {{ estagiarioContratado.nome.toUpperCase() }}
-                                </td>
-                            <td>{{ estagiarioContratado.dep_hierarquico ? estagiarioContratado.dep_hierarquico : 'NÃO CADASTRADO' }}</td>
-                            <td>{{ estagiarioContratado.supervisor.toUpperCase() }}</td>
-                            <td>{{ estagiarioContratado.dt_inicio | dataFormatada }}</td>                        
-                        </tr>
-                    </tbody>
-                </table>
-
+                    <h5 class="total-vagas alert alert-info">Total: {{ estagiariosContratados30Dias.length }}</h5>
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Departamento</th>
+                            <th scope="col">Supervisor</th>
+                            <th scope="col">Início</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                            v-for="(estagiarioContratado, indice) of estagiariosContratados30Dias" 
+                            :key="estagiarioContratado.nome">
+                                <th scope="row">{{ indice + 1 }}</th>
+                                    <td>
+                                        {{ estagiarioContratado.nome.toUpperCase() }}
+                                    </td>
+                                <td>{{ estagiarioContratado.dep_hierarquico ? estagiarioContratado.dep_hierarquico : 'NÃO CADASTRADO' }}</td>
+                                <td>{{ estagiarioContratado.supervisor.toUpperCase() }}</td>
+                                <td>{{ estagiarioContratado.dt_inicio | dataFormatada }}</td>                        
+                            </tr>
+                            <template v-if="!estagiariosContratados30Dias.length">
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <h1>Não há estagiários contratados nos últimos 30 dias</h1>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
             </div>
             <div v-if="selecao === 'Saídas'">
+                <h5 class="total-vagas alert alert-info">Total: {{ estagiariosDesligados30Dias.length }}</h5>
                 <table class="table table-bordered table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -60,10 +77,18 @@
                             <td>{{ estagiarioDesligado.supervisor.toUpperCase() }}</td>
                             <td>{{ estagiarioDesligado.dt_termino | dataFormatada }}</td>                        
                         </tr>
+                        <template v-if="!estagiariosDesligados30Dias.length">
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <h1>Não há estagiários desligados nos últimos 30 dias</h1>
+                                </td>
+                            </tr>
+                        </template>
                     </tbody>
                 </table>
             </div>
             <div v-if="selecao === 'Renovação'">
+                <h5 class="total-vagas alert alert-info">Total: {{ estagiariosRenovados30Dias .length }}</h5>
                 <table class="table table-bordered table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -94,6 +119,13 @@
                                 {{ estagiarioRenovado.dt_inicio_1_aditivo | dataFormatada }}
                             </td>
                         </tr>
+                        <template v-if="!estagiariosRenovados30Dias.length">
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <h1>Não há contratos renovados nos últimos 30 dias</h1>
+                                </td>
+                            </tr>
+                        </template>
                     </tbody>
                 </table>
             </div>
@@ -198,7 +230,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @media print {
   body * {
     visibility: hidden;

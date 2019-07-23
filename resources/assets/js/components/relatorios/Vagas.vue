@@ -1,10 +1,10 @@
 <template>
-    <div id="printable">
+    <div>
         <h1>Relatório de vagas</h1>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="selectStatus">Selecione a situação da vaga</label>
+                    <label for="selectStatus">Situação</label>
                     <select class="form-control" id="selectStatus" v-model="status">
                         <option value="Todas">Todas</option>
                         <option value="Livres">Livres</option>
@@ -31,6 +31,12 @@
                         <option value="">Todos</option>
                         <option  v-for="supervisor of supervisoresOrdenados" :key="supervisor.nome">{{ supervisor.nome.toUpperCase() }}</option>
                     </select>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex flex-column justify-content-end">
+                <div class="form-group">
+                    <button class="btn btn-warning" @click="limparFiltro">Limpar Filtros</button>
+                    <botao-imprimir-component></botao-imprimir-component>
                 </div>
             </div>
         </div>
@@ -244,14 +250,61 @@ export default {
                 return this.vagasTransferidas;
             } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Canceladas') {
                 return this.vagasCanceladas;
-            } else if(this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Todas') {
-                let vagas = this.vagas.filter((vaga) => {
+            } 
+            
+            // filtro somente por departamento
+            else if(this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Todas') {
+                let vagas = this.vagas.filter(vaga => {
                     return vaga.dep_hierarquico === this.departamentoFiltrado
                 })
                 return vagas;
             } 
 
-            // filtro somente por departamento e status
+            // filtro somente por supervisor
+            else if(this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Todas') {
+                let vagas = this.vagas.filter(vaga => {
+                    return vaga.supervisor === this.supervisorFiltrado;
+                })
+                return vagas;
+            }
+
+            // filtro somente por supervisor e status
+            else if(this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Ocupadas') {
+                let vagas = this.vagas.filter(vaga => {
+                    return vaga.supervisor === this.supervisorFiltrado && vaga.status === 'OCUPADA';
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Livres') {
+                let vagas = this.vagas.filter(vaga => {
+                    return vaga.supervisor === this.supervisorFiltrado && vaga.status === 'LIVRE';
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Em seleção') {
+                let vagas = this.vagas.filter(vaga => {
+                    return vaga.supervisor === this.supervisorFiltrado && vaga.status === 'EM SELEÇÃO';
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Canceladas') {
+                let vagas = this.vagas.filter(vaga => {
+                    return vaga.supervisor === this.supervisorFiltrado && vaga.status === 'CANCELADA';
+                })
+                return vagas;
+            } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'TRANSFERIDA.SMG') {
+                let vagas = this.vagas.filter(vaga => {
+                    return vaga.supervisor === this.supervisorFiltrado && vaga.status === 'TRANSFERIDA.SMG';
+                })
+                return vagas;
+            }
+
+            // filtro somente por supervisor e departamento
+            else if(this.departamentoFiltrado != '' && this.supervisorFiltrado != '' && this.status === 'Todas') {
+                let vagas = this.vagas.filter(vaga => {
+                    return vaga.supervisor === this.supervisorFiltrado && vaga.dep_hierarquico === this.departamentoFiltrado;
+                })
+                return vagas;
+            }
+
+            // filtro somente por status e departamento
             else if(this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Livres') {
                 let vagas = this.vagas.filter((vaga) => {
                     return vaga.dep_hierarquico === this.departamentoFiltrado && vaga.status === 'LIVRE';
@@ -307,58 +360,13 @@ export default {
                 return vagas;
             }
         },
-        // vagasLivresPorDepartamento() {
-        //     if(this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.supervisor === '') { 
-        //         return this.vagasLivres
-        //     } else if(this.departamentoFiltrado === '' && this.supervisorFiltrado != '') {
-        //         let vagas = this.vagasLivres.filter((vaga) => {
-        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
-        //         })
-        //         return vagas;
-        //     }
-        // },
-        // vagasOcupadasPorDepartamento() {
-        //     if(this.departamentoFiltrado === '') {
-        //         return this.vagasOcupadas;
-        //     } else {
-        //         let vagas = this.vagasOcupadas.filter((vaga) => {
-        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
-        //         })
-        //         return vagas;
-        //     }
-        // },
-        // vagasEmSelecaoPorDepartamento() {
-        //     if(this.departamentoFiltrado === '') {
-        //         return this.vagasEmSelecao;
-        //     } else {
-        //         let vagas = this.vagasEmSelecao.filter((vaga) => {
-        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
-        //         })
-        //         return vagas;
-        //     }
-        // },
-        // vagasCanceladasPorDepartamento() {
-        //     if(this.departamentoFiltrado === '') {
-        //         return this.vagasCanceladas;
-        //     } else {
-        //         let vagas = this.vagasCanceladas.filter((vaga) => {
-        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
-        //         })
-        //         return vagas;
-        //     }
-        // },
-        // vagasTransferidasPorDepartamento() {
-        //     if(this.departamentoFiltrado === '') {
-        //         return this.vagasTransferidas;
-        //     } else {
-        //         let vagas = this.vagasTransferidas.filter((vaga) => {
-        //             return vaga.dep_hierarquico === this.departamentoFiltrado;
-        //         })
-        //         return vagas;
-        //     }
-        // }
     },
     methods: {
+        limparFiltro() {
+            this.status = 'Todas';
+            this.departamentoFiltrado = '';
+            this.supervisorFiltrado = '';
+        },
         retornaSupervisores() {
             const uriSupervisores = '/api/supervisores';
 
@@ -436,20 +444,7 @@ export default {
 </script>
 
 <style>
-@media print {
-  body * {
-    visibility: hidden;
-  }
-  #printable, #printable * {
-    visibility: visible;
-  }
-  #printable {
-    position: fixed;
-    left: 0;
-    top: 0;
-  }
-}
-.total-vagas {
-    font-weight: bold;
+.img-imprimir {
+    cursor: pointer;
 }
 </style>

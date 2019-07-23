@@ -289,7 +289,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 .card-body {
     height: 134px;
 }

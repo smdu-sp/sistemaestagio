@@ -68,5 +68,4 @@ body
 .col-6 {
   background-color: gray;
 }
-
 </style>

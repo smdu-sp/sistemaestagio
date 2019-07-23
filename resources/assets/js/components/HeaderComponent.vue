@@ -4,7 +4,7 @@
         <!--row-->
         <div class="row">
             <div class="col-12">
-                <header class="d-flex justify-content-between align-items-center flex-row">
+                <header class="d-flex justify-content-between align-items-center flex-row" id="header">
                     <img src="../../../../public/logo/licenciamento.png" alt="Prefeitura de São Paulo" class="img-licenciamento"/>
                     <span class="titulo">Sistema de Controle de Estagiários</span>
                     <div class="d-flex flex-row mr-4">
