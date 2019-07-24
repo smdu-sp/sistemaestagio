@@ -6256,6 +6256,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mixins_filtros__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/filtros */ "./resources/assets/js/mixins/filtros.js");
 //
 //
 //
@@ -6294,11 +6295,91 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      filtro: ''
+      filtro: 'Todas',
+      estagiarios: [],
+      estagiariosContratados: [],
+      estagiariosOrdem: []
     };
+  },
+  mixins: [_mixins_filtros__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  beforeMount: function beforeMount() {
+    this.retornaEstagiarios();
+  },
+  filters: {
+    cor: function cor(_cor) {
+      if (_cor === 0) {
+        return 'Não Cadastrado';
+      } else if (_cor === 1) {
+        return 'Branco';
+      } else if (_cor === 2) {
+        return 'Pardo';
+      } else if (_cor === 3) {
+        return 'Amarelo';
+      } else if (_cor === 4) {
+        return 'Preto';
+      } else if (_cor === 5) {
+        return 'Indígena';
+      }
+    }
+  },
+  computed: {
+    filtrarCota: function filtrarCota() {
+      var _this = this;
+
+      if (this.filtro == 'Todas') {
+        return this.estagiariosOrdem;
+      } else {
+        var estagiario = this.estagiariosOrdem.filter(function (estagiario) {
+          return estagiario.raca_cor == _this.filtro;
+        });
+        return estagiario;
+      }
+    }
+  },
+  methods: {
+    salvaEstagiariosContratados: function salvaEstagiariosContratados() {
+      for (var i in this.estagiarios) {
+        if (this.estagiarios[i].situacao === 1) {
+          this.estagiariosContratados.push(this.estagiarios[i]);
+        }
+      }
+    },
+    estagiariosOrdenados: function estagiariosOrdenados() {
+      var lowerCaseEstagiarios = _.clone(this.estagiariosContratados);
+
+      if (typeof lowerCaseEstagiarios.map == 'undefined') return;
+      lowerCaseEstagiarios = lowerCaseEstagiarios.map(function (estagiario) {
+        estagiario.nome = estagiario.nome.toUpperCase();
+        return estagiario;
+      });
+
+      var sortedEstagiarios = _.orderBy(lowerCaseEstagiarios, ['nome'], ['asc']);
+
+      this.estagiariosOrdem = sortedEstagiarios;
+    },
+    retornaEstagiarios: function retornaEstagiarios() {
+      var _this2 = this;
+
+      var uriEstagiarios = '/api/estagiarios';
+      this.axios.get(uriEstagiarios).then(function (response) {
+        _this2.estagiarios = response.data;
+
+        _this2.salvaEstagiariosContratados();
+
+        _this2.estagiariosOrdenados();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   }
 });
 
@@ -39320,25 +39401,6 @@ exports.push([module.i, "\n.col-3 {\r\n    margin: 0;\r\n    padding: 0;\n}\n.co
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n@media print {\nbody *[data-v-69299420] {\r\n    visibility: hidden;\n}\n#printable[data-v-69299420], #printable *[data-v-69299420] {\r\n    visibility: visible;\n}\n#printable[data-v-69299420] {\r\n    position: fixed;\r\n    left: 0;\r\n    top: 0;\n}\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/EntradasSaidasRenovacao.vue?vue&type=style&index=0&id=690676c1&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/EntradasSaidasRenovacao.vue?vue&type=style&index=0&id=690676c1&scoped=true&lang=css& ***!
@@ -71211,36 +71273,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/EntradasSaidasRenovacao.vue?vue&type=style&index=0&id=690676c1&scoped=true&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/EntradasSaidasRenovacao.vue?vue&type=style&index=0&id=690676c1&scoped=true&lang=css& ***!
@@ -80983,7 +81015,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "printable" } }, [
+  return _c("div", [
     _c("h1", [_vm._v("Relatório de Cotas")]),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-12" }, [
@@ -81022,18 +81054,56 @@ var render = function() {
             }
           },
           [
-            _c("option", { attrs: { value: "" } }, [_vm._v("Todas")]),
+            _c("option", { attrs: { value: "Todas" } }, [_vm._v("Todas")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "Saídas" } }, [_vm._v("Livres")]),
+            _c("option", { attrs: { value: "1" } }, [_vm._v("Branco(a)")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "Renovação" } }, [
-              _vm._v("Em Seleção")
-            ])
+            _c("option", { attrs: { value: "2" } }, [_vm._v("Pardo(a)")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "3" } }, [_vm._v("Amarelo(a)")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "4" } }, [_vm._v("Preto(a)")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "5" } }, [_vm._v("Indígena")])
           ]
         )
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", [
+        _c("table", { staticClass: "table table-bordered table-hover" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.filtrarCota, function(estagiario, indice) {
+              return _c("tr", { key: estagiario.nome }, [
+                _c("td", [_vm._v(_vm._s(indice + 1))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(estagiario.nome))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm._f("cor")(estagiario.raca_cor)))]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    _vm._s(
+                      estagiario.dep_hierarquico
+                        ? estagiario.dep_hierarquico
+                        : "NÃO CADASTRADO"
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(estagiario.supervisor.toUpperCase()))]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(_vm._s(_vm._f("dataFormatada")(estagiario.dt_inicio)))
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ])
     ])
   ])
 }
@@ -81042,35 +81112,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("table", { staticClass: "table table-bordered table-hover" }, [
-        _c("thead", { staticClass: "thead-dark" }, [
-          _c("tr", [
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Departamento")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Supervisor")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Início")])
-          ])
-        ]),
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
-            _vm._v(" "),
-            _c("td"),
-            _vm._v(" "),
-            _c("td"),
-            _vm._v(" "),
-            _c("td"),
-            _vm._v(" "),
-            _c("td")
-          ])
-        ])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Raça")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Departamento")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Supervisor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Início")])
       ])
     ])
   }
@@ -81707,7 +81761,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vaga.id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.situacao))]),
+                  _c("td", [_vm._v(_vm._s(vaga.status))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vaga.dep_hierarquico))]),
                   _vm._v(" "),
@@ -81739,7 +81793,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaLivre.id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vagaLivre.situacao))]),
+                  _c("td", [_vm._v(_vm._s(vagaLivre.status))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaLivre.dep_hierarquico))]),
                   _vm._v(" "),
@@ -81771,7 +81825,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vaga.id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.situacao))]),
+                  _c("td", [_vm._v(_vm._s(vaga.status))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vaga.dep_hierarquico))]),
                   _vm._v(" "),
@@ -81803,7 +81857,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaEmSelecao.id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vagaEmSelecao.situacao))]),
+                  _c("td", [_vm._v(_vm._s(vagaEmSelecao.status))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaEmSelecao.dep_hierarquico))]),
                   _vm._v(" "),
@@ -81835,7 +81889,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaCancelada.id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vagaCancelada.situacao))]),
+                  _c("td", [_vm._v(_vm._s(vagaCancelada.status))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaCancelada.dep_hierarquico))]),
                   _vm._v(" "),
@@ -81870,7 +81924,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaTransferida.id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vagaTransferida.situacao))]),
+                  _c("td", [_vm._v(_vm._s(vagaTransferida.status))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaTransferida.dep_hierarquico))]),
                   _vm._v(" "),
@@ -81897,7 +81951,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Situação")]),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
         _vm._v(" "),
@@ -81917,7 +81971,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Situação")]),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
         _vm._v(" "),
@@ -81937,7 +81991,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Situação")]),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
         _vm._v(" "),
@@ -81957,7 +82011,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Situação")]),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
         _vm._v(" "),
@@ -81977,7 +82031,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Situação")]),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
         _vm._v(" "),
@@ -81997,7 +82051,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Situação")]),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
         _vm._v(" "),
@@ -101272,9 +101326,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Cotas_vue_vue_type_template_id_69299420_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Cotas.vue?vue&type=template&id=69299420&scoped=true& */ "./resources/assets/js/components/relatorios/Cotas.vue?vue&type=template&id=69299420&scoped=true&");
 /* harmony import */ var _Cotas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cotas.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/relatorios/Cotas.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& */ "./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -101282,7 +101334,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Cotas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Cotas_vue_vue_type_template_id_69299420_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Cotas_vue_vue_type_template_id_69299420_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -101311,22 +101363,6 @@ component.options.__file = "resources/assets/js/components/relatorios/Cotas.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Cotas.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&":
-/*!**********************************************************************************************************************!*\
-  !*** ./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

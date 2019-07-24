@@ -48,7 +48,7 @@
                     <tr>
                         <th scope="row">#</th>
                         <th scope="row">Vaga</th>
-                        <th scope="row">Situação</th>
+                        <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
@@ -58,7 +58,7 @@
                     <tr v-for="(vaga, indice) of vagasPorDepartamento" :key="vaga.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vaga.id }}</td>
-                        <td>{{ vaga.situacao }}</td>
+                        <td>{{ vaga.status }}</td>
                         <td>{{ vaga.dep_hierarquico }}</td>
                         <td>{{ vaga.supervisor }}</td>
                         <td>{{ vaga.historico }}</td>
@@ -74,7 +74,7 @@
                     <tr>
                         <th scope="row">#</th>
                         <th scope="row">Vaga</th>
-                        <th scope="row">Situação</th>
+                        <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
@@ -84,7 +84,7 @@
                     <tr v-for="(vagaLivre, indice) of vagasPorDepartamento" :key="vagaLivre.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vagaLivre.id }}</td>
-                        <td>{{ vagaLivre.situacao }}</td>
+                        <td>{{ vagaLivre.status }}</td>
                         <td>{{ vagaLivre.dep_hierarquico }}</td>
                         <td>{{ vagaLivre.supervisor }}</td>
                         <td>{{ vagaLivre.historico }}</td>
@@ -100,7 +100,7 @@
                     <tr>
                         <th scope="row">#</th>
                         <th scope="row">Vaga</th>
-                        <th scope="row">Situação</th>
+                        <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
@@ -110,7 +110,7 @@
                     <tr v-for="(vaga, indice) of vagasPorDepartamento" :key="vaga.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vaga.id }}</td>
-                        <td>{{ vaga.situacao }}</td>
+                        <td>{{ vaga.status }}</td>
                         <td>{{ vaga.dep_hierarquico }}</td>
                         <td>{{ vaga.supervisor }}</td>
                         <td>{{ vaga.historico }}</td>
@@ -127,7 +127,7 @@
                     <tr>
                         <th scope="row">#</th>
                         <th scope="row">Vaga</th>
-                        <th scope="row">Situação</th>
+                        <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
@@ -137,7 +137,7 @@
                     <tr v-for="(vagaEmSelecao, indice) of vagasPorDepartamento" :key="vagaEmSelecao.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vagaEmSelecao.id }}</td>
-                        <td>{{ vagaEmSelecao.situacao }}</td>
+                        <td>{{ vagaEmSelecao.status }}</td>
                         <td>{{ vagaEmSelecao.dep_hierarquico }}</td>
                         <td>{{ vagaEmSelecao.supervisor }}</td>
                         <td>{{ vagaEmSelecao.historico }}</td>
@@ -153,7 +153,7 @@
                     <tr>
                         <th scope="row">#</th>
                         <th scope="row">Vaga</th>
-                        <th scope="row">Situação</th>
+                        <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
@@ -163,7 +163,7 @@
                     <tr v-for="(vagaCancelada, indice) of vagasPorDepartamento" :key="vagaCancelada.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vagaCancelada.id }}</td>
-                        <td>{{ vagaCancelada.situacao }}</td>
+                        <td>{{ vagaCancelada.status }}</td>
                         <td>{{ vagaCancelada.dep_hierarquico }}</td>
                         <td>{{ vagaCancelada.supervisor }}</td>
                         <td>{{ vagaCancelada.historico }}</td>
@@ -179,7 +179,7 @@
                     <tr>
                         <th scope="row">#</th>
                         <th scope="row">Vaga</th>
-                        <th scope="row">Situação</th>
+                        <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Histórico</th>
@@ -189,7 +189,7 @@
                     <tr v-for="(vagaTransferida, indice) of vagasPorDepartamento" :key="vagaTransferida.id">
                         <td>{{ indice + 1 }}</td>
                         <td>{{ vagaTransferida.id }}</td>
-                        <td>{{ vagaTransferida.situacao }}</td>
+                        <td>{{ vagaTransferida.status }}</td>
                         <td>{{ vagaTransferida.dep_hierarquico }}</td>
                         <td>{{ vagaTransferida.supervisor }}</td>
                         <td>{{ vagaTransferida.historico }}</td>
