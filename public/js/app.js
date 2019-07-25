@@ -2899,6 +2899,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2942,7 +2951,9 @@ __webpack_require__.r(__webpack_exports__);
       vagas: {},
       msg: {
         error: false,
-        success: false
+        success: false,
+        vagaAlterada: false,
+        vagaNaoAlterada: false
       },
       auxiliarCpf: '',
       mostrarConteudoConsulta: false,
@@ -3007,6 +3018,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    alteraVagaParaLivre: function alteraVagaParaLivre(situacao) {
+      if (situacao.target.value == 5) {
+        this.statusVaga.status = 'LIVRE';
+        document.getElementById('selectStatus').disabled = true;
+      }
+    },
     selecionaPrimeiroDaLista: function selecionaPrimeiroDaLista() {
       if (this.filtro) {
         this.post = this.estagiarioFiltrado[0];
@@ -3364,9 +3381,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     alteraStatusVaga: function alteraStatusVaga() {
+      var _this3 = this;
+
       var uriVagas = "/api/vagas/".concat(this.statusVaga.id);
       this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
-        return response;
+        _this3.msg.vagaAlterada = true;
+        _this3.msg.vagaSuccess = "O status da vaga ".concat(_this3.statusVaga.id, " foi alterado para LIVRE");
+      })["catch"](function (error) {
+        _this3.msg.vagaNaoAlterada = true;
+        _this3.msg.vagaError = "Erro ao alterar o status da vaga ".concat(_this3.statusVaga.id, " para LIVRE");
       });
     },
     converteFone: function converteFone() {
@@ -3498,125 +3521,125 @@ __webpack_require__.r(__webpack_exports__);
       this.atualizaBanco();
     },
     atualizaBanco: function atualizaBanco() {
-      var _this3 = this;
+      var _this4 = this;
 
       var uriEstagiarios = "/api/estagiarios/".concat(this.auxiliarCpf);
       this.auxiliarCpf = this.post.cpf;
       this.axios.patch(uriEstagiarios, this.post).then(function (response) {
-        _this3.converteNascimento();
+        _this4.converteNascimento();
 
-        _this3.converteRecessos();
+        _this4.converteRecessos();
 
-        if (_this3.post.dt_inicio) {
-          _this3.post.dt_inicio = _this3.post.dt_inicio.substr(0, 10);
+        if (_this4.post.dt_inicio) {
+          _this4.post.dt_inicio = _this4.post.dt_inicio.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino) {
-          _this3.post.dt_termino = _this3.post.dt_termino.substr(0, 10);
+        if (_this4.post.dt_termino) {
+          _this4.post.dt_termino = _this4.post.dt_termino.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino_inicial_lauda) {
-          _this3.post.dt_termino_inicial_lauda = _this3.post.dt_termino_inicial_lauda.substr(0, 10);
+        if (_this4.post.dt_termino_inicial_lauda) {
+          _this4.post.dt_termino_inicial_lauda = _this4.post.dt_termino_inicial_lauda.substr(0, 10);
         }
 
-        if (_this3.post.dt_inicio_1_aditivo) {
-          _this3.post.dt_inicio_1_aditivo = _this3.post.dt_inicio_1_aditivo.substr(0, 10);
+        if (_this4.post.dt_inicio_1_aditivo) {
+          _this4.post.dt_inicio_1_aditivo = _this4.post.dt_inicio_1_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino_1_aditivo) {
-          _this3.post.dt_termino_1_aditivo = _this3.post.dt_termino_1_aditivo.substr(0, 10);
+        if (_this4.post.dt_termino_1_aditivo) {
+          _this4.post.dt_termino_1_aditivo = _this4.post.dt_termino_1_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_inicio_2_aditivo) {
-          _this3.post.dt_inicio_2_aditivo = _this3.post.dt_inicio_2_aditivo.substr(0, 10);
+        if (_this4.post.dt_inicio_2_aditivo) {
+          _this4.post.dt_inicio_2_aditivo = _this4.post.dt_inicio_2_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino_2_aditivo) {
-          _this3.post.dt_termino_2_aditivo = _this3.post.dt_termino_2_aditivo.substr(0, 10);
+        if (_this4.post.dt_termino_2_aditivo) {
+          _this4.post.dt_termino_2_aditivo = _this4.post.dt_termino_2_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_inicio_3_aditivo) {
-          _this3.post.dt_inicio_3_aditivo = _this3.post.dt_inicio_3_aditivo.substr(0, 10);
+        if (_this4.post.dt_inicio_3_aditivo) {
+          _this4.post.dt_inicio_3_aditivo = _this4.post.dt_inicio_3_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino_3_aditivo) {
-          _this3.post.dt_termino_3_aditivo = _this3.post.dt_termino_3_aditivo.substr(0, 10);
+        if (_this4.post.dt_termino_3_aditivo) {
+          _this4.post.dt_termino_3_aditivo = _this4.post.dt_termino_3_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.desligado) {
-          _this3.post.desligado = _this3.post.desligado.substr(0, 10);
+        if (_this4.post.desligado) {
+          _this4.post.desligado = _this4.post.desligado.substr(0, 10);
         }
 
-        _this3.converteHorarioEntrada();
+        _this4.converteHorarioEntrada();
 
-        _this3.converteHorarioSaida();
+        _this4.converteHorarioSaida();
 
-        _this3.msg.success = true;
-        _this3.msg.sucesso = 'Dados atualizados com sucesso!';
+        _this4.msg.success = true;
+        _this4.msg.sucesso = 'Dados atualizados com sucesso!';
 
-        _this3.scrollTop();
+        _this4.scrollTop();
       })["catch"](function (e) {
-        _this3.converteNascimento();
+        _this4.converteNascimento();
 
-        _this3.converteRecessos();
+        _this4.converteRecessos();
 
-        if (_this3.post.dt_inicio) {
-          _this3.post.dt_inicio = _this3.post.dt_inicio.substr(0, 10);
+        if (_this4.post.dt_inicio) {
+          _this4.post.dt_inicio = _this4.post.dt_inicio.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino) {
-          _this3.post.dt_termino = _this3.post.dt_termino.substr(0, 10);
+        if (_this4.post.dt_termino) {
+          _this4.post.dt_termino = _this4.post.dt_termino.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino_inicial_lauda) {
-          _this3.post.dt_termino_inicial_lauda = _this3.post.dt_termino_inicial_lauda.substr(0, 10);
+        if (_this4.post.dt_termino_inicial_lauda) {
+          _this4.post.dt_termino_inicial_lauda = _this4.post.dt_termino_inicial_lauda.substr(0, 10);
         }
 
-        if (_this3.post.dt_inicio_1_aditivo) {
-          _this3.post.dt_inicio_1_aditivo = _this3.post.dt_inicio_1_aditivo.substr(0, 10);
+        if (_this4.post.dt_inicio_1_aditivo) {
+          _this4.post.dt_inicio_1_aditivo = _this4.post.dt_inicio_1_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino_1_aditivo) {
-          _this3.post.dt_termino_1_aditivo = _this3.post.dt_termino_1_aditivo.substr(0, 10);
+        if (_this4.post.dt_termino_1_aditivo) {
+          _this4.post.dt_termino_1_aditivo = _this4.post.dt_termino_1_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_inicio_2_aditivo) {
-          _this3.post.dt_inicio_2_aditivo = _this3.post.dt_inicio_2_aditivo.substr(0, 10);
+        if (_this4.post.dt_inicio_2_aditivo) {
+          _this4.post.dt_inicio_2_aditivo = _this4.post.dt_inicio_2_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino_2_aditivo) {
-          _this3.post.dt_termino_2_aditivo = _this3.post.dt_termino_2_aditivo.substr(0, 10);
+        if (_this4.post.dt_termino_2_aditivo) {
+          _this4.post.dt_termino_2_aditivo = _this4.post.dt_termino_2_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_inicio_3_aditivo) {
-          _this3.post.dt_inicio_3_aditivo = _this3.post.dt_inicio_3_aditivo.substr(0, 10);
+        if (_this4.post.dt_inicio_3_aditivo) {
+          _this4.post.dt_inicio_3_aditivo = _this4.post.dt_inicio_3_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.dt_termino_3_aditivo) {
-          _this3.post.dt_termino_3_aditivo = _this3.post.dt_termino_3_aditivo.substr(0, 10);
+        if (_this4.post.dt_termino_3_aditivo) {
+          _this4.post.dt_termino_3_aditivo = _this4.post.dt_termino_3_aditivo.substr(0, 10);
         }
 
-        if (_this3.post.desligado) {
-          _this3.post.desligado = _this3.post.desligado.substr(0, 10);
+        if (_this4.post.desligado) {
+          _this4.post.desligado = _this4.post.desligado.substr(0, 10);
         }
 
-        _this3.converteHorarioEntrada();
+        _this4.converteHorarioEntrada();
 
-        _this3.converteHorarioSaida();
+        _this4.converteHorarioSaida();
 
-        _this3.msg.error = true;
-        _this3.msg.erro = 'Erro ao atualizar dados';
+        _this4.msg.error = true;
+        _this4.msg.erro = 'Erro ao atualizar dados';
 
-        _this3.scrollTop();
+        _this4.scrollTop();
       });
     },
     selectVaga: function selectVaga() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.post.cod_vaga) {
         var uriStatusVaga = "/api/vagas/".concat(this.post.cod_vaga);
         this.axios.get(uriStatusVaga).then(function (response) {
-          return _this4.statusVaga = response.data;
+          return _this5.statusVaga = response.data;
         });
       }
     }
@@ -4590,7 +4613,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida']
+  props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'alteraVagaParaLivre']
 });
 
 /***/ }),
@@ -6300,6 +6323,67 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6307,7 +6391,17 @@ __webpack_require__.r(__webpack_exports__);
       filtro: 'Todas',
       estagiarios: [],
       estagiariosContratados: [],
-      estagiariosOrdem: []
+      estagiariosOrdem: [],
+      estagiariosBrancos: [],
+      estagiariosPardos: [],
+      estagiariosAmarelos: [],
+      estagiariosPretos: [],
+      estagiariosIndígenas: [],
+      estagiariosDeficientes: [],
+      msg: {
+        error: false,
+        success: false
+      }
     };
   },
   mixins: [_mixins_filtros__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -6315,35 +6409,35 @@ __webpack_require__.r(__webpack_exports__);
     this.retornaEstagiarios();
   },
   filters: {
-    cor: function cor(_cor) {
-      if (_cor === 0) {
-        return 'Não Cadastrado';
-      } else if (_cor === 1) {
-        return 'Branco';
-      } else if (_cor === 2) {
-        return 'Pardo';
-      } else if (_cor === 3) {
-        return 'Amarelo';
-      } else if (_cor === 4) {
-        return 'Preto';
-      } else if (_cor === 5) {
-        return 'Indígena';
-      }
-    }
-  },
-  computed: {
-    filtrarCota: function filtrarCota() {
-      var _this = this;
+    duasCasasDecimais: function duasCasasDecimais(numero) {
+      return numero.toFixed(2);
+    } // cor(cor) {
+    //     if(cor === 0) {
+    //         return 'Não Cadastrado'
+    //     } else if(cor === 1) {
+    //         return 'Branco'
+    //     } else if(cor === 2) {
+    //         return 'Pardo'
+    //     } else if(cor === 3) {
+    //         return 'Amarelo';
+    //     } else if(cor === 4) {
+    //         return 'Preto';
+    //     } else if(cor === 5) {
+    //         return 'Indígena';
+    //     }
+    // }
 
-      if (this.filtro == 'Todas') {
-        return this.estagiariosOrdem;
-      } else {
-        var estagiario = this.estagiariosOrdem.filter(function (estagiario) {
-          return estagiario.raca_cor == _this.filtro;
-        });
-        return estagiario;
-      }
-    }
+  },
+  computed: {// filtrarCota() {
+    //     if(this.filtro == 'Todas') {
+    //         return this.estagiariosOrdem;
+    //     } else {
+    //         let estagiario = this.estagiariosOrdem.filter(estagiario => {
+    //             return estagiario.raca_cor == this.filtro;
+    //         })
+    //         return estagiario;
+    //     }
+    // }
   },
   methods: {
     salvaEstagiariosContratados: function salvaEstagiariosContratados() {
@@ -6352,32 +6446,50 @@ __webpack_require__.r(__webpack_exports__);
           this.estagiariosContratados.push(this.estagiarios[i]);
         }
       }
+
+      this.classificaEstagiarios();
     },
-    estagiariosOrdenados: function estagiariosOrdenados() {
-      var lowerCaseEstagiarios = _.clone(this.estagiariosContratados);
-
-      if (typeof lowerCaseEstagiarios.map == 'undefined') return;
-      lowerCaseEstagiarios = lowerCaseEstagiarios.map(function (estagiario) {
-        estagiario.nome = estagiario.nome.toUpperCase();
-        return estagiario;
-      });
-
-      var sortedEstagiarios = _.orderBy(lowerCaseEstagiarios, ['nome'], ['asc']);
-
-      this.estagiariosOrdem = sortedEstagiarios;
+    classificaEstagiarios: function classificaEstagiarios() {
+      for (var i in this.estagiariosContratados) {
+        if (this.estagiariosContratados[i].deficiencia) {
+          this.estagiariosDeficientes.push(this.estagiariosContratados[i]);
+        } else if (this.estagiariosContratados[i].raca_cor === 1) {
+          this.estagiariosBrancos.push(this.estagiarios[i]);
+        } else if (this.estagiariosContratados[i].raca_cor === 2) {
+          this.estagiariosPardos.push(this.estagiarios[i]);
+        } else if (this.estagiariosContratados[i].raca_cor === 3) {
+          this.estagiariosAmarelos.push(this.estagiarios[i]);
+        } else if (this.estagiariosContratados[i].raca_cor === 4) {
+          this.estagiariosPretos.push(this.estagiarios[i]);
+        } else if (this.estagiariosContratados[i].raca_cor === 5) {
+          this.estagiariosIndígenas.push(this.estagiarios[i]);
+        }
+      }
     },
+    // estagiariosOrdenados() { 
+    //     let lowerCaseEstagiarios = _.clone(this.estagiariosContratados);
+    //     if(typeof(lowerCaseEstagiarios.map) == 'undefined')
+    //         return;
+    //     lowerCaseEstagiarios = lowerCaseEstagiarios.map((estagiario) => {
+    //         estagiario.nome = estagiario.nome.toUpperCase();
+    //         return estagiario;
+    //     });
+    //     const sortedEstagiarios = _.orderBy(lowerCaseEstagiarios, ['nome'], ['asc']);
+    //     this.estagiariosOrdem = sortedEstagiarios;
+    // },
     retornaEstagiarios: function retornaEstagiarios() {
-      var _this2 = this;
+      var _this = this;
 
       var uriEstagiarios = '/api/estagiarios';
       this.axios.get(uriEstagiarios).then(function (response) {
-        _this2.estagiarios = response.data;
+        _this.estagiarios = response.data;
+        _this.msg.error = false;
+        _this.msg.success = true;
 
-        _this2.salvaEstagiariosContratados();
-
-        _this2.estagiariosOrdenados();
+        _this.salvaEstagiariosContratados();
       })["catch"](function (error) {
-        console.log(error);
+        _this.msg.success = false;
+        _this.msg.error = true;
       });
     }
   }
@@ -7415,8 +7527,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
 /* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mixins_filtros__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/filtros */ "./resources/assets/js/mixins/filtros.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -7529,6 +7642,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7550,25 +7665,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeMount: function beforeMount() {
     this.retornaCargos();
-    this.retornaSupervisores();
     this.retornaEstagiarios();
+    this.retornaSupervisores();
     this.retornaCursos();
   },
-  filters: {
-    exibeCargo: function exibeCargo() {
-      // substitui o numero do cargo pelo nome do mesmo
-      for (var i in this.supervisores) {
-        for (var k in this.cargos) {
-          if (typeof this.cargos[k] == 'undefined' || typeof this.supervisores[i] == 'undefined') {
-            return;
-          } else {
-            console.log("idCargo: " + this.cargos[k].id);
-            console.log("idSupervisor: " + this.supervisores[k].cargo_funcao);
-          }
-        }
-      }
-    }
-  },
+  mixins: [_mixins_filtros__WEBPACK_IMPORTED_MODULE_1__["default"]],
   computed: {
     supervisoresComFiltro: function supervisoresComFiltro() {
       this.supervisorFiltrado = this.supervisores;
@@ -7584,7 +7685,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     supervisoresOrdenados: function supervisoresOrdenados() {
       // Todo: Ordenar supervisores em ordem alfabética utilizando esta função
-      var lowerCaseSupervisores = lodash__WEBPACK_IMPORTED_MODULE_1___default.a.clone(this.supervisores);
+      var lowerCaseSupervisores = lodash__WEBPACK_IMPORTED_MODULE_2___default.a.clone(this.supervisores);
 
       if (typeof lowerCaseSupervisores.map == 'undefined') return;
       lowerCaseSupervisores = lowerCaseSupervisores.map(function (supervisor) {
@@ -7592,7 +7693,7 @@ __webpack_require__.r(__webpack_exports__);
         return supervisor;
       });
 
-      var sortedSupervisores = lodash__WEBPACK_IMPORTED_MODULE_1___default.a.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
+      var sortedSupervisores = lodash__WEBPACK_IMPORTED_MODULE_2___default.a.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
 
       return sortedSupervisores;
     }
@@ -7607,36 +7708,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     escondeModalEstagiario: function escondeModalEstagiario() {
       this.$refs['consulta-estagiario'].hide();
-    },
-    retornaSupervisores: function retornaSupervisores() {
-      var _this = this;
-
-      var uriSupervisor = '/api/supervisores';
-      this.axios.get(uriSupervisor).then(function (response) {
-        _this.supervisores = response.data;
-
-        for (var i in _this.supervisores) {
-          for (var k in _this.cargos) {
-            if (_this.cargos[k].codigo == _this.supervisores[i].cargo_funcao) {
-              _this.supervisores[i].cargo_funcao = _this.cargos[k].cargo;
-            }
-          }
-        }
-
-        _this.retornaDepartamentos();
-      })["catch"](function (error) {
-        console.log("Erro: " + error);
-      });
-    },
-    retornaEstagiarios: function retornaEstagiarios() {
-      var _this2 = this;
-
-      var uriEstagiario = '/api/estagiarios';
-      this.axios.get(uriEstagiario).then(function (response) {
-        _this2.estagiarios = response.data;
-      })["catch"](function (error) {
-        console.log("Erro: " + error);
-      });
     },
     exibeDepartamento: function exibeDepartamento() {
       // Substitui o código do departamento pela sigla do mesmo
@@ -7658,24 +7729,54 @@ __webpack_require__.r(__webpack_exports__);
       // Verifica se o estagiário pertence ao supervisor
       for (var i in this.estagiarios) {
         for (var k in this.supervisores) {
-          if (this.supervisores[k].nome.toUpperCase() == this.estagiarios[i].supervisor.toUpperCase()) {
+          if (this.estagiarios[i].situacao == 1 && this.supervisores[k].nome.toUpperCase() == this.estagiarios[i].supervisor.toUpperCase()) {
             this.supervisores[k].estagiarios.push(this.estagiarios[i].nome);
           }
         }
       }
     },
     retornaDepartamentos: function retornaDepartamentos() {
-      var _this3 = this;
+      var _this = this;
 
       var uriDepartamentos = '/api/departamentos';
       this.axios.get(uriDepartamentos).then(function (response) {
-        _this3.departamentos = response.data;
+        _this.departamentos = response.data;
 
-        _this3.exibeDepartamento();
+        _this.exibeDepartamento();
 
-        _this3.arrayEstagiarios();
+        _this.arrayEstagiarios();
 
-        _this3.relacionaEstagiarioAoSupervisor();
+        _this.relacionaEstagiarioAoSupervisor();
+      })["catch"](function (error) {
+        console.log("Erro: " + error);
+      });
+    },
+    retornaSupervisores: function retornaSupervisores() {
+      var _this2 = this;
+
+      var uriSupervisor = '/api/supervisores';
+      this.axios.get(uriSupervisor).then(function (response) {
+        _this2.supervisores = response.data;
+
+        for (var i in _this2.supervisores) {
+          for (var k in _this2.cargos) {
+            if (_this2.supervisores[i].cargo_funcao == _this2.cargos[k].codigo) {
+              _this2.supervisores[i].cargo_funcao = _this2.cargos[k].cargo;
+            }
+          }
+        }
+
+        _this2.retornaDepartamentos();
+      })["catch"](function (error) {
+        console.log("Erro: " + error);
+      });
+    },
+    retornaEstagiarios: function retornaEstagiarios() {
+      var _this3 = this;
+
+      var uriEstagiario = '/api/estagiarios';
+      this.axios.get(uriEstagiario).then(function (response) {
+        _this3.estagiarios = response.data;
       })["catch"](function (error) {
         console.log("Erro: " + error);
       });
@@ -7699,10 +7800,8 @@ __webpack_require__.r(__webpack_exports__);
 
         for (var k in _this5.supervisores) {
           for (var i in _this5.cursos) {
-            if (_this5.supervisores[i].formacao == _this5.cursos[k].id) {
-              _this5.supervisores[i].formacao = _this5.cursos[k].formacao;
-            } else {
-              return;
+            if (_this5.supervisores[k].formacao == _this5.cursos[i].id) {
+              _this5.supervisores[k].formacao = _this5.cursos[i].formacao;
             }
           }
         }
@@ -72361,16 +72460,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("img", {
-    directives: [
-      {
-        name: "b-tooltip",
-        rawName: "v-b-tooltip.hover",
-        modifiers: { hover: true }
-      }
-    ],
     staticClass: "img-imprimir",
     attrs: {
-      title: "Imprimir Relatório",
       src: __webpack_require__(/*! ../../../../public/images/icons8-enviar-para-a-impressora-30.png */ "./public/images/icons8-enviar-para-a-impressora-30.png"),
       alt: "Imprimir Relatório"
     },
@@ -73784,6 +73875,20 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
+            _vm.msg.vagaAlterada
+              ? _c("div", { staticClass: "alert alert-success" }, [
+                  _vm._v(
+                    "\r\n      " + _vm._s(_vm.msg.vagaSuccess) + "\r\n    "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.msg.vagaNaoAlterada
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v("\r\n      " + _vm._s(_vm.msg.vagaError) + "\r\n    ")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
             _c("h1", { staticClass: "text-center" }, [_vm._v("Consulta")]),
             _vm._v(" "),
             _c(
@@ -73883,7 +73988,8 @@ var render = function() {
                                 validaHorarioSaida: _vm.validaHorarioSaida,
                                 horarioSaidaValido: _vm.horarioSaidaValido,
                                 validaSituacao: _vm.validaSituacao,
-                                situacaoValida: _vm.situacaoValida
+                                situacaoValida: _vm.situacaoValida,
+                                alteraVagaParaLivre: _vm.alteraVagaParaLivre
                               }
                             })
                           ],
@@ -77042,22 +77148,27 @@ var render = function() {
                 class: { "is-invalid": _vm.situacaoValida },
                 attrs: { id: "inputSituacao" },
                 on: {
-                  blur: _vm.validaSituacao,
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "situacao",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.post,
+                        "situacao",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    _vm.alteraVagaParaLivre
+                  ],
+                  blur: _vm.validaSituacao
                 }
               },
               [
@@ -81019,89 +81130,144 @@ var render = function() {
     _c("h1", [_vm._v("Relatório de Cotas")]),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "selecao" } }, [
-          _vm._v("Selecione o tipo de relatório desejado")
-        ]),
+      _c(
+        "div",
+        { staticClass: "d-flex mb-2" },
+        [
+          _c("h4", { staticClass: "mr-2" }, [_vm._v("Cotas Raciais")]),
+          _vm._v(" "),
+          _c("botao-imprimir-component")
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-bordered table-hover" }, [
+        _vm._m(0),
         _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.filtro,
-                expression: "filtro"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { id: "selecao" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.filtro = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          [
-            _c("option", { attrs: { value: "Todas" } }, [_vm._v("Todas")]),
+        _c("tbody", [
+          _c("tr", [
+            _c("td", [_vm._v("Brancos")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "1" } }, [_vm._v("Branco(a)")]),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosBrancos.length))]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "2" } }, [_vm._v("Pardo(a)")]),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosBrancos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Pardos")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "3" } }, [_vm._v("Amarelo(a)")]),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosPardos.length))]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "4" } }, [_vm._v("Preto(a)")]),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosPardos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Amarelos")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "5" } }, [_vm._v("Indígena")])
-          ]
-        )
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosAmarelos.length))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosAmarelos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Negros")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosPretos.length))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosPretos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Indígenas")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosIndígenas.length))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosIndígenas.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Total")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosContratados.length))]),
+            _vm._v(" "),
+            _c("td", [_vm._v("100")])
+          ])
+        ])
       ]),
       _vm._v(" "),
-      _c("div", [
-        _c("table", { staticClass: "table table-bordered table-hover" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.filtrarCota, function(estagiario, indice) {
-              return _c("tr", { key: estagiario.nome }, [
-                _c("td", [_vm._v(_vm._s(indice + 1))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(estagiario.nome))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm._f("cor")(estagiario.raca_cor)))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    _vm._s(
-                      estagiario.dep_hierarquico
-                        ? estagiario.dep_hierarquico
-                        : "NÃO CADASTRADO"
-                    )
+      _c("h4", [_vm._v("Cotas BCP (Portadores de deficiência)")]),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-bordered" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("tbody", [
+          _c("tr", [
+            _c("td", [_vm._v("Deficientes")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosDeficientes.length))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosDeficientes.length /
+                      _vm.estagiariosContratados.length) *
+                      100
                   )
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(estagiario.supervisor.toUpperCase()))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(_vm._s(_vm._f("dataFormatada")(estagiario.dt_inicio)))
-                ])
-              ])
-            }),
-            0
-          )
+                )
+              )
+            ])
+          ])
         ])
       ])
     ])
@@ -81113,19 +81279,23 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-dark" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Raça")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Departamento")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Supervisor")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Início")])
-      ])
+      _c("th", { staticClass: "text-center" }, [_vm._v("Tipo")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Quantidade")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("%")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("th", { staticClass: "text-center" }, [_vm._v("Tipo")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Quantidade")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("%")])
     ])
   }
 ]
@@ -82925,15 +83095,15 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(supervisor.situacao))]),
                               _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  _vm._s(
-                                    supervisor.cpf
-                                      ? supervisor.cpf
-                                      : "NÃO CADASTRADO"
-                                  )
-                                )
-                              ]),
+                              supervisor.cpf
+                                ? _c("td", [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm._f("cpfFormatado")(supervisor.cpf)
+                                      )
+                                    )
+                                  ])
+                                : _c("td", [_vm._v("NÃO CADASTRADO")]),
                               _vm._v(" "),
                               _c(
                                 "td",

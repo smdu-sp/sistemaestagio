@@ -61,6 +61,14 @@
       {{ msg.erro }}
     </div>
 
+    <div v-if="msg.vagaAlterada" class="alert alert-success">
+      {{ msg.vagaSuccess }}
+    </div>
+
+    <div v-if="msg.vagaNaoAlterada" class="alert alert-danger">
+      {{ msg.vagaError }}
+    </div>
+
   <h1 class="text-center">Consulta</h1>
   <!-- Formulários -->
   <b-card no-body>
@@ -137,6 +145,7 @@
                   :horarioSaidaValido="horarioSaidaValido"
                   :validaSituacao="validaSituacao"
                   :situacaoValida="situacaoValida"
+                  :alteraVagaParaLivre="alteraVagaParaLivre"
                   />
               </b-card-text>
           </b-tab>
@@ -199,7 +208,9 @@ export default {
       vagas: {},
       msg: {
         error: false,
-        success: false
+        success: false,
+        vagaAlterada: false,
+        vagaNaoAlterada: false
       },
       auxiliarCpf: '',
       mostrarConteudoConsulta: false,
@@ -262,6 +273,12 @@ export default {
     }
   },
   methods: {
+    alteraVagaParaLivre(situacao) {
+      if(situacao.target.value == 5) {
+        this.statusVaga.status = 'LIVRE'
+        document.getElementById('selectStatus').disabled = true
+      }
+    },
     selecionaPrimeiroDaLista() {
         if(this.filtro) {
           this.post = this.estagiarioFiltrado[0];
@@ -489,17 +506,24 @@ export default {
     },
     alteraStatusVaga() {
       let uriVagas = `/api/vagas/${this.statusVaga.id}`;
-      this.axios.patch(uriVagas, this.statusVaga).then(response => response);
+      this.axios.patch(uriVagas, this.statusVaga).then(response => {
+        this.msg.vagaAlterada = true
+        this.msg.vagaSuccess = `O status da vaga ${this.statusVaga.id} foi alterado para LIVRE`;
+      })
+      .catch(error => {
+        this.msg.vagaNaoAlterada = true
+        this.msg.vagaError = `Erro ao alterar o status da vaga ${this.statusVaga.id} para LIVRE`;
+      })
     },
     converteFone() {
     let fone = this.post.fone_residencial;
       if(fone) {
         if(fone.substr(0,1) != '(') {
-            let codArea = fone.substr(0,2);
-            let telParte1 = fone.substr(2,4);
-            let telParte2 = fone.substr(6, fone.length);
-            let foneFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
-            this.post.fone_residencial = foneFormatado;                    
+          let codArea = fone.substr(0,2);
+          let telParte1 = fone.substr(2,4);
+          let telParte2 = fone.substr(6, fone.length);
+          let foneFormatado = `(${codArea}) ${telParte1}-${telParte2}`;
+          this.post.fone_residencial = foneFormatado;                    
         }
       }
     },

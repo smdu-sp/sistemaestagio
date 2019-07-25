@@ -90,7 +90,8 @@
                                         <!-- <th scope="row">{{ supervisor.conselho_profissional }}</th> -->
                                         <!-- <th scope="row">{{ supervisor.atividades_estagiario }}</th> -->
                                         <td>{{ supervisor.situacao }}</td>
-                                        <td>{{ supervisor.cpf ? supervisor.cpf : 'NÃO CADASTRADO' }}</td>
+                                        <td v-if="supervisor.cpf">{{ supervisor.cpf | cpfFormatado }}</td>
+                                        <td v-else>NÃO CADASTRADO</td>
                                         <td class="td-estagiario">
                                             <a href="" @click.prevent="consultaEstagiario" v-for="estagiario of supervisor.estagiarios" :key="estagiario" class="estagiario">
                                                 <tr>
@@ -112,6 +113,7 @@
 
 <script>
 import { setTimeout } from 'timers';
+import filtros from '../../mixins/filtros';
 import _ from 'lodash';
 export default {
     data() {
@@ -131,24 +133,11 @@ export default {
     },
     beforeMount() {
         this.retornaCargos();
-        this.retornaSupervisores();
         this.retornaEstagiarios();
+        this.retornaSupervisores();
         this.retornaCursos();
-    }, 
-    filters: {
-        exibeCargo() { // substitui o numero do cargo pelo nome do mesmo
-            for(let i in this.supervisores){
-                for(let k in this.cargos) {
-                    if(typeof(this.cargos[k]) == 'undefined' || typeof(this.supervisores[i]) == 'undefined'){
-                        return;
-                    } else {
-                        console.log("idCargo: "+this.cargos[k].id);
-                        console.log("idSupervisor: "+this.supervisores[k].cargo_funcao);
-                    }
-                }
-            }
-        }
     },
+    mixins: [filtros],
     computed: {
         supervisoresComFiltro() {
             this.supervisorFiltrado = this.supervisores
@@ -184,38 +173,6 @@ export default {
         escondeModalEstagiario() {
             this.$refs['consulta-estagiario'].hide()
         },
-        retornaSupervisores() {
-            const uriSupervisor = '/api/supervisores';
-
-            this.axios
-            .get(uriSupervisor)
-            .then(response => {
-                this.supervisores = response.data;
-                for(let i in this.supervisores){
-                    for(let k in this.cargos) {
-                        if(this.cargos[k].codigo == this.supervisores[i].cargo_funcao) {
-                            this.supervisores[i].cargo_funcao = this.cargos[k].cargo
-                        }
-                    }
-                }
-                this.retornaDepartamentos();
-            })
-            .catch(error => {
-                console.log("Erro: "+error);
-            })
-        },
-        retornaEstagiarios() {
-            const uriEstagiario = '/api/estagiarios';
-
-            this.axios
-            .get(uriEstagiario)
-            .then(response => {
-                this.estagiarios = response.data;
-            })
-            .catch(error => {
-                console.log("Erro: "+error);
-            })
-        },
         exibeDepartamento() { // Substitui o código do departamento pela sigla do mesmo
             for(let i in this.supervisores) { 
                 for(let k in this.departamentos) {
@@ -233,7 +190,7 @@ export default {
         relacionaEstagiarioAoSupervisor() { // Verifica se o estagiário pertence ao supervisor
             for(let i in this.estagiarios) { 
                 for(let k in this.supervisores) {
-                    if(this.supervisores[k].nome.toUpperCase() == this.estagiarios[i].supervisor.toUpperCase()) {
+                    if(this.estagiarios[i].situacao == 1 && this.supervisores[k].nome.toUpperCase() == this.estagiarios[i].supervisor.toUpperCase()) {
                         this.supervisores[k].estagiarios.push(this.estagiarios[i].nome);
                     }
                 }
@@ -249,6 +206,38 @@ export default {
                 this.exibeDepartamento();
                 this.arrayEstagiarios();
                 this.relacionaEstagiarioAoSupervisor();                
+            })
+            .catch(error => {
+                console.log("Erro: "+error);
+            })
+        },
+        retornaSupervisores() {
+            const uriSupervisor = '/api/supervisores';
+
+            this.axios
+            .get(uriSupervisor)
+            .then(response => {
+                this.supervisores = response.data;
+                for(let i in this.supervisores){
+                    for(let k in this.cargos) {
+                        if(this.supervisores[i].cargo_funcao == this.cargos[k].codigo) {
+                            this.supervisores[i].cargo_funcao = this.cargos[k].cargo
+                        }
+                    }
+                }
+                this.retornaDepartamentos();
+            })
+            .catch(error => {
+                console.log("Erro: "+error);
+            })
+        },
+        retornaEstagiarios() {
+            const uriEstagiario = '/api/estagiarios';
+
+            this.axios
+            .get(uriEstagiario)
+            .then(response => {
+                this.estagiarios = response.data;
             })
             .catch(error => {
                 console.log("Erro: "+error);
@@ -274,10 +263,8 @@ export default {
                 this.cursos = response.data;
                 for(let k in this.supervisores){
                     for(let i in this.cursos) {
-                        if(this.supervisores[i].formacao == this.cursos[k].id) {
-                            this.supervisores[i].formacao = this.cursos[k].formacao;
-                        } else {
-                            return;
+                        if(this.supervisores[k].formacao == this.cursos[i].id) {
+                            this.supervisores[k].formacao = this.cursos[i].formacao
                         }
                     }
                 }

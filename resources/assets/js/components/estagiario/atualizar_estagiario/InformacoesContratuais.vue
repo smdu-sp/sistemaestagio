@@ -200,7 +200,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="inputSituacao">Situação</label>
-                <select id="inputSituacao" @blur="validaSituacao" :class="{'is-invalid':situacaoValida}" class="form-control" v-model="post.situacao">
+                <select id="inputSituacao" @change="alteraVagaParaLivre" @blur="validaSituacao" :class="{'is-invalid':situacaoValida}" class="form-control" v-model="post.situacao">
                     <option value="1">CONTRATADO</option>
                     <option value="5">DESLIGADO</option>
                     <option value="2">EM CONTRATAÇÃO</option>
@@ -249,7 +249,7 @@ export default {
         'validaSupervisor', 'supervisorValido',
         'validaHorarioEntrada', 'horarioEntradaValido',
         'validaHorarioSaida', 'horarioSaidaValido',
-        'validaSituacao', 'situacaoValida'
+        'validaSituacao', 'situacaoValida', 'alteraVagaParaLivre'
     ]
 
 }
