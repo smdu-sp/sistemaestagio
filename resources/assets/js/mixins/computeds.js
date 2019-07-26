@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export default {
     computed: {
         supervisoresOrdenados() {
@@ -12,6 +13,18 @@ export default {
             const sortedSupervisor = _.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
 
             return sortedSupervisor;
+        },
+        cartoesOrdenados() {
+            return _.orderBy(this.cartoes, 'id');
+        },
+        cursosOrdenados() {
+            return _.orderBy(this.cursos, 'formacao');
+        },
+        vagasOrdenadas() {
+            return _.orderBy(this.vagas, 'id');
+        },
+        departamentosOrdenados() {
+            return _.orderBy(this.departamentos, 'sigla');
         }
     }
 }

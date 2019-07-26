@@ -1,5 +1,5 @@
 <template>
-    <img @click="imprimir" class="img-imprimir" src="../../../../public/images/icons8-enviar-para-a-impressora-30.png" alt="Imprimir Relatório">
+    <img @click="imprimir" class="img-imprimir" src="../../../../public/icones/icons8-impressora-30.png" alt="Imprimir Relatório">
 </template>
 
 <script>
@@ -23,5 +23,7 @@ export default {
 </script>
 
 <style>
-
+.img-imprimir {
+    cursor: pointer;
+}
 </style>

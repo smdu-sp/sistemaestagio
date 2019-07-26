@@ -2,7 +2,7 @@
     <form @submit.prevent="inserirEstagiario" method="post">
     <!--row-->
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="form-group">
                 <label for="inputNome">Nome</label>
                 <input type="text" 
@@ -18,10 +18,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label>Nome Social</label>
                 <input type="text" class="form-control" maxlength="170" v-model="post.nome_social">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Portador de deficiência?</label>
+                <select type="text" class="form-control" v-model="post.deficiencia">
+                    <option value="0">NÃO</option>
+                    <option value="1">SIM</option>
+                </select>
             </div>
         </div>
     </div>

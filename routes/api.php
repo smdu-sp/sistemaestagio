@@ -21,6 +21,11 @@ Route::middleware('cors')->name('api.')->group(function() {
         Route::post('/', 'SupervisorController@setSupervisor')->name('cadastrar_supervisor'); // Cadastrar supervisor
     });
 
+    // Rotas Supervisor Alteração
+    Route::prefix('supervisor_alteracao')->group(function() {
+        Route::post('/', 'SupervisorAlteracaoController@setSupervisor')->name('supervisor_alteracao'); // Retorna todos os supervisores
+    });
+
     // Rotas vagas
     Route::prefix('vagas')->group(function() {
         Route::get('/', 'VagaController@getVagas')->name('vagas'); // Retornar todas as vagas

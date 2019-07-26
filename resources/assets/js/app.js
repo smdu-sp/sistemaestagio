@@ -61,6 +61,7 @@ import ConsultaSupervisor from './components/supervisor/ConsultaSupervisor.vue';
 import CadastroCartaoAcesso from './components/cartao_acesso/CadastroCartaoAcesso';
 import BotaoEmail from './components/BotaoEmail.vue';
 import BotaoImprimir from './components/BotaoImprimir.vue';
+import SupervisorAlteracao from './components/supervisor/AlteracaoSupervisor.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -85,6 +86,7 @@ Vue.component('cadastro-cartao-acesso-component', CadastroCartaoAcesso);
 Vue.component('botao-email-component', BotaoEmail);
 Vue.component('consulta-supervisor-component', ConsultaSupervisor);
 Vue.component('botao-imprimir-component', BotaoImprimir);
+Vue.component('alteracao-supervisor-component', SupervisorAlteracao);
 
 import { routes } from './routes.js';
 

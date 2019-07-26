@@ -49,6 +49,18 @@
     </b-modal>
   <!--Modal-->
 
+  <b-modal v-model="exibeModalCartaoAcesso" size="lg" ok-only>
+      <cadastro-cartao-acesso-component></cadastro-cartao-acesso-component>
+  </b-modal>
+
+  <b-modal v-model="exibeModalVaga" size="lg" ok-only>
+      <cadastro-vaga-component></cadastro-vaga-component>
+  </b-modal>
+
+  <b-modal v-model="exibeModalSupervisor" size="lg" ok-only>
+      <alteracao-supervisor-component :post="post"></alteracao-supervisor-component>
+  </b-modal>
+
   <modal-component></modal-component><!--Modal acionado pelo componente Botoes.vue-->
 
   <template v-if="mostrarConteudoConsulta">
@@ -118,6 +130,10 @@
                   :supervisores="supervisores"
                   :vagas="vagas"
                   :exibeModalEstagiario="exibeModalEstagiario"
+                  :carregaCartaoAcesso="carregaCartaoAcesso"
+                  :cartoesOrdenados="cartoesOrdenados"
+                  :cursosOrdenados="cursosOrdenados"
+                  :abreModalCartaoAcesso="abreModalCartaoAcesso"
                   />
               </b-card-text>
           </b-tab>
@@ -146,6 +162,13 @@
                   :validaSituacao="validaSituacao"
                   :situacaoValida="situacaoValida"
                   :alteraVagaParaLivre="alteraVagaParaLivre"
+                  :supervisoresOrdenados="supervisoresOrdenados"
+                  :vagasOrdenadas="vagasOrdenadas"
+                  :departamentosOrdenados="departamentosOrdenados"
+                  :carregaVaga="carregaVaga"
+                  :abreModalVaga="abreModalVaga"
+                  :abreModalSupervisor="abreModalSupervisor"
+                  :carregaSupervisor="carregaSupervisor"
                   />
               </b-card-text>
           </b-tab>
@@ -165,6 +188,7 @@
 </template>
 
 <script>
+import computeds from '../../../mixins/computeds';
 export default {
   data() {
     return {
@@ -217,9 +241,13 @@ export default {
       loading: false,
       filtro: '',
       estagiarios: {},
-      estagiarioFiltrado: {}
+      estagiarioFiltrado: {},
+      exibeModalCartaoAcesso: false,
+      exibeModalVaga: false,
+      exibeModalSupervisor: false
     }
   },
+  mixins: [computeds],
   computed: {
     EstagiariosComFiltro() {
         this.estagiarioFiltrado = this.estagiarios
@@ -273,6 +301,30 @@ export default {
     }
   },
   methods: {
+    carregaSupervisor() {
+        const uriSupervisores = '/api/supervisores';
+
+        this.requisicaoGet(uriSupervisores, 'supervisores');
+    },
+    abreModalSupervisor() {
+        this.exibeModalSupervisor = !this.exibeModalSupervisor;
+    },
+    abreModalVaga() {
+        this.exibeModalVaga = !this.exibeModalVaga;
+    },
+    carregaVaga() {
+        const uriVagas = '/api/vagas';
+
+        this.requisicaoGet(uriVagas, 'vagas');
+    },
+    abreModalCartaoAcesso() {
+        this.exibeModalCartaoAcesso = !this.exibeModalCartaoAcesso;
+    },
+    carregaCartaoAcesso() {
+        const uriCartoes = '/api/cartao';
+
+        this.requisicaoGet(uriCartoes, 'cartoes');
+    },
     alteraVagaParaLivre(situacao) {
       if(situacao.target.value == 5) {
         this.statusVaga.status = 'LIVRE'

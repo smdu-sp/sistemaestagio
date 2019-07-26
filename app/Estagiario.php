@@ -107,6 +107,7 @@ class Estagiario extends Model
         'operacao',
         'data_modificacao',
         'hora_modificacao',
-        'houve_alteracao_supervisor'
+        'houve_alteracao_supervisor',
+        'deficiencia'
     ];
 }

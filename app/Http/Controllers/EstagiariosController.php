@@ -106,7 +106,8 @@ class EstagiariosController extends Controller
             'operacao'=>$request->input('operacao'),
             'data_modificacao'=>$request->input('data_modificacao'),
             'hora_modificacao'=>$request->input('hora_modificacao'),
-            'houve_alteracao_supervisor'=>$request->input('houve_alteracao_supervisor')
+            'houve_alteracao_supervisor'=>$request->input('houve_alteracao_supervisor'),
+            'deficiencia'=>$request->input('deficiencia')
         ]);
 
         return $estagiario;

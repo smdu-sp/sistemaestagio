@@ -3,21 +3,29 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="form-group">
-                    <label for="selectVaga">Codigo Vaga</label>
-                    <select type="text" 
-                        @change="selectVaga"
-                        @blur="validaVaga"
-                        :class="{'is-invalid': vagaValida}" 
-                        class="form-control" 
-                        id="selectVaga" 
-                        v-model="post.cod_vaga" 
-                        >
-                        <option></option>
-                        <option v-for="vaga of vagas">{{ vaga.id }}</option>
-                    </select>
-                    <div v-if="vagaValida" class="invalid-feedback">
-                        Vaga não pode ser vazia
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="selectVaga">Codigo Vaga</label>
+                            <select type="text" 
+                                @click="carregaVaga"
+                                @change="selectVaga"
+                                @blur="validaVaga"
+                                :class="{'is-invalid': vagaValida}" 
+                                class="form-control" 
+                                id="selectVaga" 
+                                v-model="post.cod_vaga" 
+                                >
+                                <option></option>
+                                <option v-for="vaga of vagasOrdenadas">{{ vaga.id }}</option>
+                            </select>
+                            <div v-if="vagaValida" class="invalid-feedback">
+                                Vaga não pode ser vazia
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
+                        <img class="cadastraVaga" @click="abreModalVaga" src="../../../../../../public/icones/icons8-adicionar-regra-48.png" alt="Adicionar Vaga">
                     </div>
                 </div>
             </div>
@@ -80,14 +88,29 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="inputSupervisor">Supervisor</label>
-                <select class="form-control" @blur="validaSupervisor" :class="{'is-invalid':supervisorValido}" id="inputSupervisor" v-model="post.supervisor">
-                    <option></option>
-                    <option v-for="supervisor of supervisores">{{ supervisor.nome }}</option>
-                </select>
-                <div class="invalid-feedback">
-                    Supervisor não pode ser vazio
+            
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="inputSupervisor">Supervisor</label>
+                        <select 
+                            class="form-control" 
+                            @click="carregaSupervisor" 
+                            @blur="validaSupervisor" 
+                            :class="{'is-invalid':supervisorValido}" 
+                            id="inputSupervisor" 
+                            v-model="post.supervisor"
+                            disabled="disabled">
+                            <option></option>
+                            <option v-for="supervisor of supervisoresOrdenados">{{ supervisor.nome.toUpperCase() }}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Supervisor não pode ser vazio
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
+                    <img class="cadastraSupervisor" @click="abreModalSupervisor" src="../../../../../../public/icones/icons8-adicionar-usuario-masculino-30.png" alt="Adicionar Supervisor">
                 </div>
             </div>
         </div>
@@ -249,7 +272,9 @@ export default {
         'validaSupervisor', 'supervisorValido',
         'validaHorarioEntrada', 'horarioEntradaValido',
         'validaHorarioSaida', 'horarioSaidaValido',
-        'validaSituacao', 'situacaoValida', 'alteraVagaParaLivre'
+        'validaSituacao', 'situacaoValida', 'alteraVagaParaLivre',
+        'supervisoresOrdenados', 'vagasOrdenadas', 'carregaVaga',
+        'abreModalVaga', 'abreModalSupervisor', 'carregaSupervisor'
     ]
 
 }

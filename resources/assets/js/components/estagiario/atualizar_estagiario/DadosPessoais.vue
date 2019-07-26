@@ -77,13 +77,27 @@
                 <input type="text" class="form-control" maxlength="7" id="inputLogin" v-model="post.login" placeholder="Ex: x455214">
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="selectCartao">Cartão Acesso</label>
-                <select class="form-control" id="selectCartao" v-model="post.cartao_acesso">
-                    <option></option>
-                    <option v-for="cartao of cartoes">{{ cartao.id }}</option>
-                </select>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="selectCartao">Cartão Acesso</label>
+                        <select 
+                            @click="carregaCartaoAcesso"
+                            class="form-control" 
+                            id="selectCartao" 
+                            v-model="post.cartao_acesso">
+                            <option></option>
+                            <option v-for="cartao of cartoesOrdenados">{{ cartao.id }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
+                    <img src="../../../../../../public/icones/icons8-adicionar-48.png"
+                        @click="abreModalCartaoAcesso"
+                        alt="Adicionar Cartão de Acesso"
+                        class="cadastraCartaoAcesso">
+                </div>
             </div>
         </div>
     </div><!--/row-->
@@ -409,7 +423,7 @@
                     :class="{'is-invalid':cursoValido}"
                     id="selectCurso" 
                     v-model="post.curso_formacao" >
-                    <option v-for="curso of cursos" :value="curso.id" :key="curso.id">{{ curso.formacao }}</option>
+                    <option v-for="curso of cursosOrdenados" :value="curso.id" :key="curso.id">{{ curso.formacao }}</option>
                 </select>
                 <div v-if="cursoValido" class="invalid-feedback">
                     Curso não pode ser vazio
@@ -535,7 +549,8 @@ export default {
         'validaEmail','emailValido',
         'validaInstituicao','instituicaoValida',
         'validaCurso','cursoValido',
-        'converteCep', 'showModal'
+        'converteCep', 'showModal', 'carregaCartaoAcesso',
+        'cartoesOrdenados', 'cursosOrdenados', 'abreModalCartaoAcesso'
     ]
 }
 </script>

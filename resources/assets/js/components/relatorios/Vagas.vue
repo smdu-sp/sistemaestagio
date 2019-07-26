@@ -444,7 +444,4 @@ export default {
 </script>
 
 <style>
-.img-imprimir {
-    cursor: pointer;
-}
 </style>

@@ -30,7 +30,7 @@
                                             class="form-control"
                                             placeholder="Ex: A00004404904135"
                                             v-model="cartaoAcesso.id"
-                                            maxlength="16">
+                                            maxlength="15">
                                         <div v-if="idValido" class="invalid-feedback">
                                             Digite o número por favor
                                         </div>

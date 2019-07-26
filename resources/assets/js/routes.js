@@ -8,6 +8,7 @@ import ConsultaSupervisor from './components/supervisor/ConsultaSupervisor.vue';
 import EntradasSaidasRenovacao from './components/relatorios/EntradasSaidasRenovacao.vue';
 import RelatorioVagas from './components/relatorios/Vagas.vue';
 import RelatorioCotas from './components/relatorios/Cotas.vue';
+import AlteracaoSupervisor from './components/supervisor/AlteracaoSupervisor.vue';
 
 export const routes = [
     {
@@ -59,5 +60,10 @@ export const routes = [
         name: 'Relatório de Cotas',
         path: '/cotas',
         component: RelatorioCotas
+    },
+    {
+        name: 'Alteração Supervisor',
+        path: '/alteracaoSupervisor',
+        component: AlteracaoSupervisor
     }
 ];

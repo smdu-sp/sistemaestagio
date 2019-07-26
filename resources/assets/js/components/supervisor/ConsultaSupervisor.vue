@@ -114,6 +114,7 @@
 <script>
 import { setTimeout } from 'timers';
 import filtros from '../../mixins/filtros';
+import computeds from '../../mixins/computeds';
 import _ from 'lodash';
 export default {
     data() {
@@ -137,7 +138,7 @@ export default {
         this.retornaSupervisores();
         this.retornaCursos();
     },
-    mixins: [filtros],
+    mixins: [filtros, computeds],
     computed: {
         supervisoresComFiltro() {
             this.supervisorFiltrado = this.supervisores
@@ -147,19 +148,6 @@ export default {
             } else {
                 return this.supervisores;
             }
-        },
-        supervisoresOrdenados() { // Todo: Ordenar supervisores em ordem alfabética utilizando esta função
-            let lowerCaseSupervisores = _.clone(this.supervisores);
-            if(typeof(lowerCaseSupervisores.map) == 'undefined')
-                return;
-            lowerCaseSupervisores = lowerCaseSupervisores.map((supervisor) => {
-                supervisor.nome = supervisor.nome.toLowerCase();
-                return supervisor;
-            });
-
-            const sortedSupervisores = _.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
-
-            return sortedSupervisores;
         }
     },
     methods: {
