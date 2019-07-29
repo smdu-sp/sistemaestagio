@@ -95,7 +95,7 @@
 
         <!--Painel Resumo-->
         <div class="row mt-5 branco">
-            <div class="col-6 col-sm-4 col-md-3 mb-3">
+            <!-- <div class="col-6 col-sm-4 col-md-3 mb-3">
                 <div class="card bg-success" style="width: 10rem;">
                     <div class="card-body">
                         <a href="#">
@@ -104,7 +104,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="col-6 col-sm-4 col-md-3 mb-3">
                 <div class="card bg-primary" style="width: 10rem;">
@@ -128,7 +128,7 @@
                 </div>
             </div>
 
-            <div class="col-6 col-sm-4 col-md-3 mb-3">
+            <!-- <div class="col-6 col-sm-4 col-md-3 mb-3">
                 <div class="card bg-danger" style="width: 10rem;">
                     <div class="card-body">
                         <a href="#">
@@ -137,11 +137,11 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div> <!--/Painel Resumo -->
 
         <!-- Acesso Rápido -->
-        <div class="container mt-5">
+        <!-- <div class="container mt-5">
             <div class="row">
                 <div class="col-12 linha-horizontal">
                     <span class="acesso-rapido d-flex justify-content-center">MAIS ACESSADOS</span>
@@ -192,7 +192,7 @@
                     </div>
                     <span class="titulo-card d-flex justify-content-center text-center mt-1">Exportar Dados de Estagiários</span>
                 </div>
-            </div>
+            </div> -->
             
         </div>
         <!-- /Acesso Rápido -->

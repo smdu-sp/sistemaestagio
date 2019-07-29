@@ -146,7 +146,7 @@ export default {
         }
     },
     mixins: [filtros],
-    beforeMount() { // TODO: Fazer o carregamento dos estagiarios caso o usuário aperte f5
+    beforeMount() {
         this.salvaEstagiarios();
     },
     methods: {        salvaEstagiarios(){

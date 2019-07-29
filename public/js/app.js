@@ -1991,9 +1991,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exibeModalEstagiario', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta', 'exibeModalSupervisor', 'menuRelatorios', 'mostrarMenuRelatorios']
 });
@@ -2013,17 +2010,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['post'],
-  data: function data() {
-    return {
-      nome: ''
-    };
+  computed: {
+    nome: function nome() {
+      if (!this.post.nome) {
+        return '';
+      } else {
+        return this.post.nome;
+      }
+    },
+    rg: function rg() {
+      if (!this.post.rg) {
+        return '';
+      } else {
+        return this.post.rg;
+      }
+    },
+    data_inicio: function data_inicio() {
+      if (!this.post.dt_inicio) {
+        return '';
+      } else {
+        return this.post.dt_inicio.substring(8, 10) + '/' + this.post.dt_inicio.substring(5, 7) + '/' + this.post.dt_inicio.substring(0, 4);
+      }
+    }
   }
 });
 
@@ -3439,7 +3449,12 @@ __webpack_require__.r(__webpack_exports__);
       var uriVagas = "/api/vagas/".concat(this.statusVaga.id);
       this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
         _this3.msg.vagaAlterada = true;
-        _this3.msg.vagaSuccess = "O status da vaga ".concat(_this3.statusVaga.id, " foi alterado para LIVRE");
+
+        if (_this3.post.situacao == 5) {
+          _this3.msg.vagaSuccess = "O status da vaga ".concat(_this3.statusVaga.id, " foi alterado para LIVRE");
+        } else {
+          _this3.msg.vagaSuccess = "O status da vaga ".concat(_this3.statusVaga.id, " foi atualizado");
+        }
       })["catch"](function (error) {
         _this3.msg.vagaNaoAlterada = true;
         _this3.msg.vagaError = "Erro ao alterar o status da vaga ".concat(_this3.statusVaga.id, " para LIVRE");
@@ -3799,6 +3814,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6727,7 +6748,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mixins: [_mixins_filtros__WEBPACK_IMPORTED_MODULE_0__["default"]],
   beforeMount: function beforeMount() {
-    // TODO: Fazer o carregamento dos estagiarios caso o usuário aperte f5
     this.salvaEstagiarios();
   },
   methods: {
@@ -7338,16 +7358,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       supervisores: {},
-      supervisorAlteracao: {},
+      supervisorAlteracao: {
+        estagiario: this.post.cod_estudante
+      },
       msg: {
         error: false,
-        success: false
-      }
+        success: false,
+        successEstagiario: false,
+        errorEstagiario: false
+      },
+      auxiliarSupervisorAntigo: this.post.supervisor,
+      auxiliarSupervisorNovo: ''
     };
   },
   mixins: [_mixins_computeds__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -7368,25 +7396,171 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    salvarAlteracao: function salvarAlteracao() {
+    rfSupervisorAntigo: function rfSupervisorAntigo() {
+      for (var i in this.supervisores) {
+        if (this.supervisores[i].nome.toUpperCase() == this.auxiliarSupervisorAntigo.toUpperCase()) {
+          this.supervisorAlteracao.supervisor_antigo = this.supervisores[i].rf;
+        }
+      }
+    },
+    rfSupervisorNovo: function rfSupervisorNovo() {
+      for (var i in this.supervisores) {
+        if (this.supervisores[i].nome.toUpperCase() == this.auxiliarSupervisorNovo.toUpperCase()) {
+          this.supervisorAlteracao.supervisor_novo = this.supervisores[i].rf;
+        }
+      }
+    },
+    atualizaSupervisorEstagiario: function atualizaSupervisorEstagiario() {
       var _this = this;
 
+      // Atualiza o supervisor na tabela de estagiarios
+      var uriEstagiarios = "/api/estagiarios/".concat(this.post.cpf);
+      this.post.supervisor = this.auxiliarSupervisorNovo;
+      this.post.houve_alteracao_supervisor = 1;
+      this.axios.patch(uriEstagiarios, this.post).then(function (response) {
+        _this.msg.errorEstagiario = false;
+        _this.msg.successEstagiario = true;
+        _this.msg.sucessoEstagiario = 'Supervisor alterado no cadastro do estagiário';
+        _this.supervisorAlteracao = {};
+        _this.auxiliarSupervisorAntigo = '';
+        _this.auxiliarSupervisorNovo = '';
+      })["catch"](function (error) {
+        _this.msg.successEstagiario = false;
+        _this.msg.errorEstagiario = true;
+        _this.msg.erroEstagiario = 'Erro ao alterar supervisor no cadastro do estagiário';
+      });
+    },
+    converteDatas: function converteDatas() {
+      if (this.post.horario_entrada) {
+        this.post.horario_entrada = this.post.horario_entrada.length == 8 ? "1899-12-30 ".concat(this.post.horario_entrada) : this.post.horario_entrada;
+      }
+
+      if (this.post.horario_saida) {
+        this.post.horario_saida = this.post.horario_saida.length == 8 ? "1899-12-30 ".concat(this.post.horario_saida) : this.post.horario_saida;
+      }
+
+      if (this.post.dt_inicio) {
+        this.post.dt_inicio == "".concat(this.post.dt_inicio.substr(0, 10), " 00:00:00") ? this.post.dt_inicio : this.post.dt_inicio += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino) {
+        this.post.dt_termino == "".concat(this.post.dt_termino.substr(0, 10), " 00:00:00") ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino) {
+        this.post.dt_termino_inicial_lauda = this.post.dt_termino;
+      }
+
+      if (this.post.dt_inicial_1) {
+        this.post.dt_inicial_1 == "".concat(this.post.dt_inicial_1.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_1 : this.post.dt_inicial_1 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_2) {
+        this.post.dt_inicial_2 == "".concat(this.post.dt_inicial_2.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_2 : this.post.dt_inicial_2 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_3) {
+        this.post.dt_inicial_3 == "".concat(this.post.dt_inicial_3.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_3 : this.post.dt_inicial_3 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_4) {
+        this.post.dt_inicial_4 == "".concat(this.post.dt_inicial_4.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_4 : this.post.dt_inicial_4 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_5) {
+        this.post.dt_inicial_5 == "".concat(this.post.dt_inicial_5.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_5 : this.post.dt_inicial_5 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_6) {
+        this.post.dt_inicial_6 == "".concat(this.post.dt_inicial_6.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_6 : this.post.dt_inicial_6 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicial_7) {
+        this.post.dt_inicial_7 == "".concat(this.post.dt_inicial_7.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_7 : this.post.dt_inicial_7 += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicio_1_aditivo) {
+        this.post.dt_inicio_1_aditivo == "".concat(this.post.dt_inicio_1_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_inicio_1_aditivo : this.post.dt_inicio_1_aditivo += ' 00:00:00';
+      }
+
+      if (this.post.dt_inicio_2_aditivo) {
+        this.post.dt_inicio_2_aditivo == "".concat(this.post.dt_inicio_2_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_inicio_2_aditivo : this.post.dt_inicio_2_aditivo += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_1_aditivo) {
+        this.post.dt_termino_1_aditivo == "".concat(this.post.dt_termino_1_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_termino_1_aditivo : this.post.dt_termino_1_aditivo += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_2_aditivo) {
+        this.post.dt_termino_2_aditivo == "".concat(this.post.dt_termino_2_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_termino_2_aditivo : this.post.dt_termino_2_aditivo += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_1) {
+        this.post.dt_termino_1 == "".concat(this.post.dt_termino_1.substr(0, 10), " 00:00:00") ? this.post.dt_termino_1 : this.post.dt_termino_1 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_2) {
+        this.post.dt_termino_2 == "".concat(this.post.dt_termino_2.substr(0, 10), " 00:00:00") ? this.post.dt_termino_2 : this.post.dt_termino_2 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_3) {
+        this.post.dt_termino_3 == "".concat(this.post.dt_termino_3.substr(0, 10), " 00:00:00") ? this.post.dt_termino_3 : this.post.dt_termino_3 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_4) {
+        this.post.dt_termino_4 == "".concat(this.post.dt_termino_4.substr(0, 10), " 00:00:00") ? this.post.dt_termino_4 : this.post.dt_termino_4 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_5) {
+        this.post.dt_termino_5 == "".concat(this.post.dt_termino_5.substr(0, 10), " 00:00:00") ? this.post.dt_termino_5 : this.post.dt_termino_5 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_6) {
+        this.post.dt_termino_6 == "".concat(this.post.dt_termino_6.substr(0, 10), " 00:00:00") ? this.post.dt_termino_6 : this.post.dt_termino_6 += ' 00:00:00';
+      }
+
+      if (this.post.dt_termino_7) {
+        this.post.dt_termino_7 == "".concat(this.post.dt_termino_7.substr(0, 10), " 00:00:00") ? this.post.dt_termino_7 : this.post.dt_termino_7 += ' 00:00:00';
+      }
+
+      if (this.post.data_nascimento) {
+        this.post.data_nascimento == "".concat(this.post.data_nascimento.substr(0, 10), " 00:00:00") ? this.post.data_nascimento : this.post.data_nascimento += ' 00:00:00';
+      }
+
+      if (this.post.desligado) {
+        this.post.desligado == "".concat(this.post.desligado.substr(0, 10), " 00:00:00") ? this.post.desligado : this.post.desligado += ' 00:00:00';
+      }
+
+      this.atualizaSupervisorEstagiario();
+    },
+    salvarAlteracaoSupervisor: function salvarAlteracaoSupervisor() {
+      var _this2 = this;
+
+      // Registra a alteração na tabela de supervisor_alteracao
+      this.rfSupervisorAntigo();
+      this.rfSupervisorNovo();
       var uriSupervisorAlteracao = '/api/supervisor_alteracao';
-      this.axios.post(this.supervisorAlteracao).then(function (response) {
-        _this.msg.sucesso = 'Alteração cadastrada com sucesso';
-        _this.msg.success = true;
+      this.axios.post(uriSupervisorAlteracao, this.supervisorAlteracao).then(function (response) {
+        _this2.converteDatas();
+
+        _this2.msg.sucesso = 'Supervisor cadastrado no histórico de alterações';
+        _this2.msg.success = true;
+      })["catch"](function (error) {
+        _this2.msg.success = false;
+        _this2.msg.error = true;
+        _this2.msg.erro = 'Erro ao cadastrar supervisor no histórico de alterações';
       });
     },
     retornaSupervisores: function retornaSupervisores() {
-      var _this2 = this;
+      var _this3 = this;
 
       var uriSupervisores = '/api/supervisores';
       this.axios.get(uriSupervisores).then(function (response) {
-        _this2.msg.error = false;
-        _this2.supervisores = response.data;
+        _this3.msg.error = false;
+        _this3.supervisores = response.data;
       })["catch"](function (error) {
-        _this2.msg.error = true;
-        _this2.msg.erro = 'Erro ao retornar supervisores';
+        _this3.msg.error = true;
+        _this3.msg.erro = 'Erro ao retornar supervisores';
       });
     }
   },
@@ -72479,18 +72653,6 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "Alteração Supervisor" } } },
-                        [_vm._v("Alteração Supervisor")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
                         { attrs: { to: { name: "Cadastro de Vagas" } } },
                         [_vm._v("Vaga")]
                       )
@@ -72616,11 +72778,11 @@ var render = function() {
       attrs: {
         href:
           "mailto:condmart@terra.com.br?cc=vaulicino@prefeitura.sp.gov.br;kesiaavelino@prefeitura.sp.gov.br&subject=Solicita%C3%A7%C3%A3o%20de%20cart%C3%A3o%20de%20acesso&body=Nome%3A%20" +
-          _vm.post.nome +
+          _vm.nome +
           "%0ARg%3A%20" +
-          _vm.post.rg +
+          _vm.rg +
           "%0AData%20de%20In%C3%ADcio%3A%20" +
-          _vm.post.dt_inicio
+          _vm.data_inicio
       }
     },
     [_vm._v("Solicitar cartão de acesso")]
@@ -73085,8 +73247,6 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "row mt-5 branco" }, [
-        _vm._m(0),
-        _vm._v(" "),
         _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
           _c(
             "div",
@@ -73152,250 +73312,13 @@ var render = function() {
               ])
             ]
           )
-        ]),
-        _vm._v(" "),
-        _vm._m(1)
-      ]),
-      _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3)
+        ])
+      ])
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
-      _c(
-        "div",
-        { staticClass: "card bg-success", staticStyle: { width: "10rem" } },
-        [
-          _c("div", { staticClass: "card-body" }, [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("h1", { staticClass: "card-title text-center text-white" }, [
-                _vm._v("80")
-              ]),
-              _vm._v(" "),
-              _c(
-                "h6",
-                { staticClass: "card-subtitle mb-2 text-center text-white" },
-                [_vm._v("Estagiários Ativos")]
-              )
-            ])
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mb-3" }, [
-      _c(
-        "div",
-        { staticClass: "card bg-danger", staticStyle: { width: "10rem" } },
-        [
-          _c("div", { staticClass: "card-body" }, [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("h1", { staticClass: "card-title text-center text-white" }, [
-                _vm._v("1")
-              ]),
-              _vm._v(" "),
-              _c(
-                "h6",
-                { staticClass: "card-subtitle mb-2 text-center text-white" },
-                [_vm._v("Contratos Vencidos")]
-              )
-            ])
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container mt-5" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12 linha-horizontal" }, [
-          _c(
-            "span",
-            { staticClass: "acesso-rapido d-flex justify-content-center" },
-            [_vm._v("MAIS ACESSADOS")]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
-        _c("div", [
-          _c(
-            "div",
-            {
-              staticClass: "card-acesso-rapido",
-              staticStyle: { width: "10rem" }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-body d-flex justify-content-center align-items-center"
-                },
-                [
-                  _c("img", {
-                    staticClass: "img-acesso-rapido",
-                    attrs: {
-                      src: __webpack_require__(/*! ../../../../public/icones/icons8-curriculo-50.png */ "./public/icones/icons8-curriculo-50.png"),
-                      alt: "Estagiários Ativos"
-                    }
-                  })
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass:
-                "titulo-card d-flex justify-content-center text-center mt-1"
-            },
-            [_vm._v("Estagiários Ativos")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
-        _c("div", [
-          _c(
-            "div",
-            {
-              staticClass: "card-acesso-rapido",
-              staticStyle: { width: "10rem" }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-body d-flex justify-content-center align-items-center"
-                },
-                [
-                  _c("img", {
-                    staticClass: "img-acesso-rapido",
-                    attrs: {
-                      src: __webpack_require__(/*! ../../../../public/icones/icons8-ativos-da-empresa-50.png */ "./public/icones/icons8-ativos-da-empresa-50.png"),
-                      alt: "Estagiários Ativos"
-                    }
-                  })
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass:
-                "titulo-card d-flex justify-content-center text-center mt-1"
-            },
-            [_vm._v("Orçamento")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
-        _c("div", [
-          _c(
-            "div",
-            {
-              staticClass: "card-acesso-rapido",
-              staticStyle: { width: "10rem" }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-body d-flex justify-content-center align-items-center"
-                },
-                [
-                  _c("img", {
-                    staticClass: "img-acesso-rapido",
-                    attrs: {
-                      src: __webpack_require__(/*! ../../../../public/icones/icons8-boletim-50.png */ "./public/icones/icons8-boletim-50.png"),
-                      alt: "Estagiários Ativos"
-                    }
-                  })
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass:
-                "titulo-card d-flex justify-content-center text-center mt-1"
-            },
-            [_vm._v("Vagas em Seleção")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6 col-sm-4 col-md-3 mt-3" }, [
-        _c("div", [
-          _c(
-            "div",
-            {
-              staticClass: "card-acesso-rapido",
-              staticStyle: { width: "10rem" }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-body d-flex justify-content-center align-items-center"
-                },
-                [
-                  _c("img", {
-                    staticClass: "img-acesso-rapido",
-                    attrs: {
-                      src: __webpack_require__(/*! ../../../../public/icones/icons8-ms-excel-50.png */ "./public/icones/icons8-ms-excel-50.png"),
-                      alt: "Estagiários Ativos"
-                    }
-                  })
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass:
-                "titulo-card d-flex justify-content-center text-center mt-1"
-            },
-            [_vm._v("Exportar Dados de Estagiários")]
-          )
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -74695,7 +74618,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-5" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputNome" } }, [_vm._v("Nome")]),
             _vm._v(" "),
@@ -74738,7 +74661,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-4" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", [_vm._v("Nome Social")]),
             _vm._v(" "),
@@ -74762,6 +74685,18 @@ var render = function() {
                   _vm.$set(_vm.post, "nome_social", $event.target.value)
                 }
               }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Portador de deficiência?")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", disabled: "disabled" },
+              domProps: { value: _vm.post.deficiencia ? "SIM" : "NÃO" }
             })
           ])
         ])
@@ -82623,9 +82558,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.msg.error ? _c("div", [_vm._v(_vm._s(_vm.msg.erro))]) : _vm._e(),
+    _vm.msg.error
+      ? _c("div", { staticClass: "alert alert-danger" }, [
+          _vm._v(_vm._s(_vm.msg.erro))
+        ])
+      : _vm._e(),
     _vm._v(" "),
-    _vm.msg.success ? _c("div", [_vm._v(_vm._s(_vm.msg.sucesso))]) : _vm._e(),
+    _vm.msg.success
+      ? _c("div", { staticClass: "alert alert-success" }, [
+          _vm._v(_vm._s(_vm.msg.sucesso))
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.msg.successEstagiario
+      ? _c("div", { staticClass: "alert alert-success" }, [
+          _vm._v(_vm._s(_vm.msg.sucessoEstagiario))
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.msg.errorEstagiario
+      ? _c("div", { staticClass: "alert alert-danger" }, [
+          _vm._v(_vm._s(_vm.msg.erroEstagiario))
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("h1", [_vm._v("Alteração Supervisor")]),
     _vm._v(" "),
@@ -82641,10 +82596,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: (_vm.supervisorAlteracao.supervisor_antigo =
-                    _vm.post.supervisor),
-                  expression:
-                    "supervisorAlteracao.supervisor_antigo = post.supervisor"
+                  value: _vm.auxiliarSupervisorAntigo,
+                  expression: "auxiliarSupervisorAntigo"
                 }
               ],
               staticClass: "form-control",
@@ -82659,11 +82612,9 @@ var render = function() {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.$set(
-                    (_vm.supervisorAlteracao.supervisor_antigo = _vm.post),
-                    "supervisor",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+                  _vm.auxiliarSupervisorAntigo = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
                 }
               }
             },
@@ -82683,8 +82634,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.supervisorAlteracao.supervisor_novo,
-                  expression: "supervisorAlteracao.supervisor_novo"
+                  value: _vm.auxiliarSupervisorNovo,
+                  expression: "auxiliarSupervisorNovo"
                 }
               ],
               staticClass: "form-control",
@@ -82698,11 +82649,9 @@ var render = function() {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.$set(
-                    _vm.supervisorAlteracao,
-                    "supervisor_novo",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+                  _vm.auxiliarSupervisorNovo = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
                 }
               }
             },
@@ -82812,24 +82761,21 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: (_vm.supervisorAlteracao.estagiario =
-                _vm.post.cod_estudante),
-              expression: "supervisorAlteracao.estagiario = post.cod_estudante"
+              value: _vm.supervisorAlteracao.estagiario,
+              expression: "supervisorAlteracao.estagiario"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "text", disabled: "disabled" },
-          domProps: {
-            value: (_vm.supervisorAlteracao.estagiario = _vm.post.cod_estudante)
-          },
+          domProps: { value: _vm.supervisorAlteracao.estagiario },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
               _vm.$set(
-                (_vm.supervisorAlteracao.estagiario = _vm.post),
-                "cod_estudante",
+                _vm.supervisorAlteracao,
+                "estagiario",
                 $event.target.value
               )
             }
@@ -82843,9 +82789,9 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn btn-primary mr-3 mt-2",
             attrs: { type: "submit" },
-            on: { click: _vm.salvarAlteracao }
+            on: { click: _vm.salvarAlteracaoSupervisor }
           },
           [_vm._v("Salvar")]
         )
@@ -100182,39 +100128,6 @@ module.exports = "/images/icons8-adicionar-usuario-masculino-30.png?90f1318835be
 
 /***/ }),
 
-/***/ "./public/icones/icons8-ativos-da-empresa-50.png":
-/*!*******************************************************!*\
-  !*** ./public/icones/icons8-ativos-da-empresa-50.png ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/icons8-ativos-da-empresa-50.png?86229696ddde97fa4c573f551945efee";
-
-/***/ }),
-
-/***/ "./public/icones/icons8-boletim-50.png":
-/*!*********************************************!*\
-  !*** ./public/icones/icons8-boletim-50.png ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/icons8-boletim-50.png?b787ef221927b7fa397782b2d07ca52d";
-
-/***/ }),
-
-/***/ "./public/icones/icons8-curriculo-50.png":
-/*!***********************************************!*\
-  !*** ./public/icones/icons8-curriculo-50.png ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/icons8-curriculo-50.png?ffa13a52d8104ee34178c9085299900b";
-
-/***/ }),
-
 /***/ "./public/icones/icons8-impressora-30.png":
 /*!************************************************!*\
   !*** ./public/icones/icons8-impressora-30.png ***!
@@ -100223,17 +100136,6 @@ module.exports = "/images/icons8-curriculo-50.png?ffa13a52d8104ee34178c908529990
 /***/ (function(module, exports) {
 
 module.exports = "/images/icons8-impressora-30.png?885984ecb2851ecd0ec49ecf203a4c58";
-
-/***/ }),
-
-/***/ "./public/icones/icons8-ms-excel-50.png":
-/*!**********************************************!*\
-  !*** ./public/icones/icons8-ms-excel-50.png ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/icons8-ms-excel-50.png?047ac8a5fe54c9c3e1405b13a73e023f";
 
 /***/ }),
 

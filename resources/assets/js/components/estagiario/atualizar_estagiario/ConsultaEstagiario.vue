@@ -560,7 +560,11 @@ export default {
       let uriVagas = `/api/vagas/${this.statusVaga.id}`;
       this.axios.patch(uriVagas, this.statusVaga).then(response => {
         this.msg.vagaAlterada = true
-        this.msg.vagaSuccess = `O status da vaga ${this.statusVaga.id} foi alterado para LIVRE`;
+        if(this.post.situacao == 5) {
+          this.msg.vagaSuccess = `O status da vaga ${this.statusVaga.id} foi alterado para LIVRE`;
+        } else {
+          this.msg.vagaSuccess = `O status da vaga ${this.statusVaga.id} foi atualizado`;
+        }
       })
       .catch(error => {
         this.msg.vagaNaoAlterada = true
