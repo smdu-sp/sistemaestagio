@@ -81,7 +81,7 @@
       {{ msg.vagaError }}
     </div>
 
-  <h1 class="text-center">Consulta</h1>
+  <h1 class="text-center">Consulta de Estagiário</h1>
   <!-- Formulários -->
   <b-card no-body>
       <b-tabs card>

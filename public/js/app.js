@@ -72577,7 +72577,7 @@ var render = function() {
                       _c(
                         "router-link",
                         { attrs: { to: { name: "consulta" } } },
-                        [_vm._v("Estagiario")]
+                        [_vm._v("Estagiário")]
                       )
                     ],
                     1
@@ -72614,7 +72614,7 @@ var render = function() {
                       _c(
                         "router-link",
                         { attrs: { to: { name: "Cadastro de Estagiários" } } },
-                        [_vm._v("Estagiario")]
+                        [_vm._v("Estagiário")]
                       )
                     ],
                     1
@@ -74049,7 +74049,9 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c("h1", { staticClass: "text-center" }, [_vm._v("Consulta")]),
+            _c("h1", { staticClass: "text-center" }, [
+              _vm._v("Consulta de Estagiário")
+            ]),
             _vm._v(" "),
             _c(
               "b-card",
@@ -81431,7 +81433,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Relatório de Cotas")]),
+    _c("h1", { staticClass: "text-center" }, [_vm._v("Relatório de Cotas")]),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-12" }, [
       _c(
@@ -82034,7 +82036,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Relatório de vagas")]),
+    _c("h1", { staticClass: "text-center" }, [_vm._v("Relatório de vagas")]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-3" }, [
@@ -83442,7 +83444,9 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h1", [_vm._v("Consulta Supervisor")]),
+      _c("h1", { staticClass: "text-center" }, [
+        _vm._v("Consulta de Supervisor")
+      ]),
       _vm._v(" "),
       _c(
         "b-modal",
@@ -103095,8 +103099,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\xampp\htdocs\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! c:\xampp\htdocs\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! c:\Development\api\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! c:\Development\api\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Relatório de vagas</h1>
+        <h1 class="text-center">Relatório de vagas</h1>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">

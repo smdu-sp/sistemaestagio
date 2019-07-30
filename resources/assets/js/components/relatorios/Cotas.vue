@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Relatório de Cotas</h1>
+        <h1 class="text-center">Relatório de Cotas</h1>
         <div class="col-md-12">
             <div class="d-flex mb-2">
                 <h4 class="mr-2">Cotas Raciais</h4> 

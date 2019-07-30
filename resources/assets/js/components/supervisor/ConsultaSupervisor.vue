@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Consulta Supervisor</h1>
+        <h1 class="text-center">Consulta de Supervisor</h1>
           <!--Modal ativado quando o usuário clica no nome de algum estagiário -->
     <b-modal ref="consulta-estagiario" size="lg" hide-footer title="Consulta de Estagiário">
         <div class="row">

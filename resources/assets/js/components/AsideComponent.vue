@@ -25,7 +25,7 @@
                     <transition name="fade">
                         <ul v-if="menuConsulta">
                             <li id="show-btn" @click="exibeModalEstagiario"> <!-- Ativa modal de consulta de Estagiário -->
-                                <router-link :to="{name: 'consulta'}">Estagiario</router-link>
+                                <router-link :to="{name: 'consulta'}">Estagiário</router-link>
                             </li>
                             <li>
                                 <router-link :to="{name: 'Consulta de Supervisor'}">Supervisor</router-link>
@@ -41,7 +41,7 @@
                         <transition name="fade">
                             <ul v-if="menuCadastro">
                                 <li>
-                                    <router-link :to="{name: 'Cadastro de Estagiários'}">Estagiario</router-link>
+                                    <router-link :to="{name: 'Cadastro de Estagiários'}">Estagiário</router-link>
                                 </li>
                                 <li>
                                     <router-link :to="{name: 'Cadastro de Cartão de Acesso'}">Cartão de Acesso</router-link>
