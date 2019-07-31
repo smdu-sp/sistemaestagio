@@ -28,7 +28,7 @@
               <ul class="ul-estagiario">
                 <li class="item-estagiario" 
                   v-for="(estagiario, indice) of EstagiariosComFiltro" 
-                  :key="estagiario.nome" 
+                  :key="estagiario.cpf" 
                   @click="selecionaEstagiario(indice)">
                   <b>{{ estagiario.nome.toLowerCase() }}</b>
                 </li>

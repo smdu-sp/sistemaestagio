@@ -73884,7 +73884,7 @@ var render = function() {
                         return _c(
                           "li",
                           {
-                            key: estagiario.nome,
+                            key: estagiario.cpf,
                             staticClass: "item-estagiario",
                             on: {
                               click: function($event) {
@@ -83648,7 +83648,7 @@ var render = function() {
                           _vm._l(_vm.supervisoresComFiltro, function(
                             supervisor
                           ) {
-                            return _c("tr", { key: supervisor.nome }, [
+                            return _c("tr", { key: supervisor.rf }, [
                               _c("th", { attrs: { scope: "row" } }, [
                                 _vm._v(_vm._s(supervisor.nome.toUpperCase()))
                               ]),
@@ -83656,7 +83656,13 @@ var render = function() {
                               _c("td", [_vm._v(_vm._s(supervisor.rf))]),
                               _vm._v(" "),
                               _c("td", [
-                                _vm._v(_vm._s(supervisor.departamento))
+                                _vm._v(
+                                  _vm._s(
+                                    supervisor.departamento
+                                      ? supervisor.departamento
+                                      : "NÃO CADASTRADO"
+                                  )
+                                )
                               ]),
                               _vm._v(" "),
                               _c("td", [
@@ -83668,13 +83674,7 @@ var render = function() {
                               _c("td", [_vm._v(_vm._s(supervisor.situacao))]),
                               _vm._v(" "),
                               supervisor.cpf
-                                ? _c("td", [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm._f("cpfFormatado")(supervisor.cpf)
-                                      )
-                                    )
-                                  ])
+                                ? _c("td", [_vm._v(_vm._s(supervisor.cpf))])
                                 : _c("td", [_vm._v("NÃO CADASTRADO")]),
                               _vm._v(" "),
                               _c(
