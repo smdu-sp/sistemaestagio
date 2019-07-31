@@ -82185,7 +82185,7 @@ var render = function() {
               _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
               _vm._v(" "),
               _vm._l(_vm.supervisoresOrdenados, function(supervisor) {
-                return _c("option", { key: supervisor.nome }, [
+                return _c("option", { key: supervisor.rf }, [
                   _vm._v(_vm._s(supervisor.nome.toUpperCase()))
                 ])
               })
@@ -100298,7 +100298,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/BotaoEmail.vue */ "./resources/assets/js/components/BotaoEmail.vue");
 /* harmony import */ var _components_BotaoImprimir_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/BotaoImprimir.vue */ "./resources/assets/js/components/BotaoImprimir.vue");
 /* harmony import */ var _components_supervisor_AlteracaoSupervisor_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/supervisor/AlteracaoSupervisor.vue */ "./resources/assets/js/components/supervisor/AlteracaoSupervisor.vue");
-/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
+/* harmony import */ var _components_relatorios_Vagas_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/relatorios/Vagas.vue */ "./resources/assets/js/components/relatorios/Vagas.vue");
+/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -100360,6 +100361,7 @@ Vue.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_6___default.a);
 
 
 
+
 Vue.component('aside-component', _components_AsideComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
 Vue.component('home-component', _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 Vue.component('header-component', _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
@@ -100387,7 +100389,7 @@ Vue.component('alteracao-supervisor-component', _components_supervisor_Alteracao
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
-  routes: _routes_js__WEBPACK_IMPORTED_MODULE_32__["routes"]
+  routes: _routes_js__WEBPACK_IMPORTED_MODULE_33__["routes"]
 });
 new Vue({
   el: '#app',
@@ -102628,7 +102630,18 @@ __webpack_require__.r(__webpack_exports__);
     departamentosOrdenados: function departamentosOrdenados() {
       return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.orderBy(this.departamentos, 'sigla');
     }
-  }
+  } // supervisoresOrdenados() {
+  //     let lowerCaseSupervisores = _.clone(this.supervisores);
+  //     if(typeof(lowerCaseSupervisores.map) == 'undefined')
+  //         return;
+  //     lowerCaseSupervisores = lowerCaseSupervisores.map((supervisor) => {
+  //         supervisor.nome = supervisor.nome.toLowerCase();
+  //         return supervisor;
+  //     });
+  //     const sortedSupervisor = _.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
+  //     return sortedSupervisor;
+  // },
+
 });
 
 /***/ }),
@@ -103099,8 +103112,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! c:\Development\api\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! c:\Development\api\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })

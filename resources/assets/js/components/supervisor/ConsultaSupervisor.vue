@@ -81,16 +81,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="supervisor of supervisoresComFiltro" :key="supervisor.nome">
+                                    <tr v-for="supervisor of supervisoresComFiltro" :key="supervisor.rf">
                                         <th scope="row">{{ supervisor.nome.toUpperCase() }}</th>
                                         <td>{{ supervisor.rf }}</td>
-                                        <td>{{ supervisor.departamento }}</td>
+                                        <td>{{ supervisor.departamento ? supervisor.departamento : 'NÃO CADASTRADO' }}</td>
                                         <td>{{ supervisor.cargo_funcao }}</td>
                                         <td>{{ supervisor.formacao }}</td>
                                         <!-- <th scope="row">{{ supervisor.conselho_profissional }}</th> -->
                                         <!-- <th scope="row">{{ supervisor.atividades_estagiario }}</th> -->
                                         <td>{{ supervisor.situacao }}</td>
-                                        <td v-if="supervisor.cpf">{{ supervisor.cpf | cpfFormatado }}</td>
+                                        <td v-if="supervisor.cpf">{{ supervisor.cpf }}</td>
                                         <td v-else>NÃO CADASTRADO</td>
                                         <td class="td-estagiario">
                                             <a href="" @click.prevent="consultaEstagiario" v-for="estagiario of supervisor.estagiarios" :key="estagiario" class="estagiario">

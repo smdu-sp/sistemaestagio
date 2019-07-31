@@ -62,6 +62,7 @@ import CadastroCartaoAcesso from './components/cartao_acesso/CadastroCartaoAcess
 import BotaoEmail from './components/BotaoEmail.vue';
 import BotaoImprimir from './components/BotaoImprimir.vue';
 import SupervisorAlteracao from './components/supervisor/AlteracaoSupervisor.vue';
+import RelatorioVagas from './components/relatorios/Vagas.vue'
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);

@@ -29,7 +29,7 @@
                     <label for="selectSupervisor">Supervisor</label>
                     <select id="selectSupervisor" class="form-control" v-model="supervisorFiltrado">
                         <option value="">Todos</option>
-                        <option  v-for="supervisor of supervisoresOrdenados" :key="supervisor.nome">{{ supervisor.nome.toUpperCase() }}</option>
+                        <option v-for="supervisor of supervisoresOrdenados" :key="supervisor.rf">{{ supervisor.nome.toUpperCase()  }}</option>
                     </select>
                 </div>
             </div>
