@@ -51,6 +51,7 @@
                         <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
+                        <th scope="row">Estagiário</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
@@ -60,7 +61,8 @@
                         <td>{{ vaga.id }}</td>
                         <td>{{ vaga.status }}</td>
                         <td>{{ vaga.dep_hierarquico }}</td>
-                        <td>{{ vaga.supervisor }}</td>
+                        <td>{{ vaga.supervisor ? vaga.supervisor.toUpperCase() : '' }}</td>
+                        <td>{{ vaga.estagiario ? vaga.estagiario.toUpperCase() : '' }}</td>
                         <td>{{ vaga.historico }}</td>
                     </tr>
                 </tbody>
@@ -77,6 +79,7 @@
                         <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
+                        <th scope="row">Estagiário</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
@@ -86,7 +89,9 @@
                         <td>{{ vagaLivre.id }}</td>
                         <td>{{ vagaLivre.status }}</td>
                         <td>{{ vagaLivre.dep_hierarquico }}</td>
-                        <td>{{ vagaLivre.supervisor }}</td>
+                        <td>{{ vagaLivre.supervisor ? vagaLivre.supervisor.toUpperCase() : '' }}</td>
+                        <td>{{ vaga.estagiario }}</td>
+                        <td>{{ vaga.estagiario ? vaga.estagiario.toUpperCase() : '' }}</td>
                         <td>{{ vagaLivre.historico }}</td>
                     </tr>
                 </tbody>
@@ -103,6 +108,7 @@
                         <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
+                        <th scope="row">Estagiário</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
@@ -112,7 +118,8 @@
                         <td>{{ vaga.id }}</td>
                         <td>{{ vaga.status }}</td>
                         <td>{{ vaga.dep_hierarquico }}</td>
-                        <td>{{ vaga.supervisor }}</td>
+                        <td>{{ vaga.supervisor ? vaga.supervisor.toUpperCase() : '' }}</td>
+                        <td>{{ vaga.estagiario ? vaga.estagiario.toUpperCase() : '' }}</td>
                         <td>{{ vaga.historico }}</td>
                     </tr>
                 </tbody>
@@ -130,6 +137,7 @@
                         <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
+                        <th scope="row">Estagiário</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
@@ -139,7 +147,8 @@
                         <td>{{ vagaEmSelecao.id }}</td>
                         <td>{{ vagaEmSelecao.status }}</td>
                         <td>{{ vagaEmSelecao.dep_hierarquico }}</td>
-                        <td>{{ vagaEmSelecao.supervisor }}</td>
+                        <td>{{ vagaEmSelecao.supervisor ? vagaEmSelecao.supervisor.toUpperCase() : '' }}</td>
+                        <td>{{ vagaEmSelecao.estagiario ? vagaEmSelecao.estagiario.toUpperCase() : '' }}</td>
                         <td>{{ vagaEmSelecao.historico }}</td>
                     </tr>
                 </tbody>
@@ -156,6 +165,7 @@
                         <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
+                        <th scope="row">Estagiário</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
@@ -165,7 +175,8 @@
                         <td>{{ vagaCancelada.id }}</td>
                         <td>{{ vagaCancelada.status }}</td>
                         <td>{{ vagaCancelada.dep_hierarquico }}</td>
-                        <td>{{ vagaCancelada.supervisor }}</td>
+                        <td>{{ vagaCancelada.supervisor ? vagaCancelada.supervisor.toUpperCase() : '' }}</td>
+                        <td>{{ vagaCancelada.estagiario ? vagaCancelada.estagiario.toUpperCase() : '' }}</td>
                         <td>{{ vagaCancelada.historico }}</td>
                     </tr>
                 </tbody>
@@ -182,6 +193,7 @@
                         <th scope="row">Status</th>
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
+                        <th scope="row">Estagiário</th>
                         <th scope="row">Histórico</th>
                     </tr>
                 </thead>
@@ -191,7 +203,8 @@
                         <td>{{ vagaTransferida.id }}</td>
                         <td>{{ vagaTransferida.status }}</td>
                         <td>{{ vagaTransferida.dep_hierarquico }}</td>
-                        <td>{{ vagaTransferida.supervisor }}</td>
+                        <td>{{ vagaTransferida.supervisor ? vagaTransferida.supervisor.toUpperCase() : '' }}</td>
+                        <td>{{ vagaTransferida.estagiario ? vagaTransferida.estagiario.toUpperCase() : '' }}</td>
                         <td>{{ vagaTransferida.historico }}</td>
                     </tr>
                 </tbody>
@@ -378,11 +391,12 @@ export default {
                 console.log(error)
             })
         },
-        acrescentaSupervisorVaga() {
+        acrescentaSupervisorEEstagiarioVaga() {
             for(let i in this.estagiarios) {
                 for(let k in this.vagas) {
                     if(this.estagiarios[i].cod_vaga === this.vagas[k].id) {
-                        this.vagas[k].supervisor = this.estagiarios[i].supervisor.toUpperCase();
+                        this.vagas[k].supervisor = this.estagiarios[i].supervisor;
+                        this.vagas[k].estagiario = this.estagiarios[i].nome;
                     }
                 }
             }
@@ -408,7 +422,7 @@ export default {
                     this.vagasLivres.push(vagas[i])
                 } else if(vagas[i].status == "CANCELADA") {
                     this.vagasCanceladas.push(vagas[i])
-                } else {
+                } else if(vagas[i].status == "TRANSFERIDA.SMG"){
                     this.vagasTransferidas.push(vagas[i])
                 }
             }
@@ -421,7 +435,7 @@ export default {
             .then(response => {
                 this.vagas = response.data
                 this.vagasDistribuidas(response.data)
-                this.acrescentaSupervisorVaga();
+                this.acrescentaSupervisorEEstagiarioVaga();
             })
             .catch(error => {
                 console.log(error);

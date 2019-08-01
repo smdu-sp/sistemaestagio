@@ -416,7 +416,7 @@
                     id="selectInstituicao" 
                     v-model="post.instituicao_ensino" >
                     <option default></option>
-                    <option v-for="instituicao of instituicoes">{{ instituicao.razao_social }}</option>
+                    <option v-for="instituicao of instituicoes" :key="instituicao.id">{{ instituicao.razao_social }}</option>
                 </select>
                 <div v-if="instituicaoValida" class="invalid-feedback">
                     Instituição não pode ser vazia

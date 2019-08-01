@@ -137,6 +137,7 @@
     </div>
 </template>
 <script>
+import _ from 'lodash';
 import computeds from '../../../mixins/computeds';
 export default {
     data() {
@@ -146,7 +147,7 @@ export default {
             statusVaga: {},
             cartoes: {},
             estados: {},
-            instituicoes: {},
+            instituicoes: [],
             cursos: {},
             departamentos: {},
             supervisores: {},
@@ -214,6 +215,8 @@ export default {
         this.requisicaoGet(uriDepartamentos, 'departamentos');
         this.requisicaoGet(uriSupervisores, 'supervisores');
         this.requisicaoGet(uriVagas, 'vagas');
+
+        
     },
     methods: {
         abreModalVaga() {
@@ -408,7 +411,7 @@ export default {
         },
         requisicaoGet(uri, variavel) {
             this.axios.get(uri).then(response => {
-                this[variavel] = response.data
+                this[variavel] = response.data;
             })
         },
         selectVaga() {

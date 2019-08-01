@@ -5805,7 +5805,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mixins_computeds__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../mixins/computeds */ "./resources/assets/js/mixins/computeds.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_computeds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../mixins/computeds */ "./resources/assets/js/mixins/computeds.js");
 //
 //
 //
@@ -5945,6 +5947,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5953,7 +5956,7 @@ __webpack_require__.r(__webpack_exports__);
       statusVaga: {},
       cartoes: {},
       estados: {},
-      instituicoes: {},
+      instituicoes: [],
       cursos: {},
       departamentos: {},
       supervisores: {},
@@ -6004,7 +6007,7 @@ __webpack_require__.r(__webpack_exports__);
       urlPadrao: '/api/'
     };
   },
-  mixins: [_mixins_computeds__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  mixins: [_mixins_computeds__WEBPACK_IMPORTED_MODULE_1__["default"]],
   beforeMount: function beforeMount() {
     var uriCartoes = this.urlPadrao + 'cartao';
     var uriEstados = this.urlPadrao + 'estados';
@@ -7054,6 +7057,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7235,11 +7251,12 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    acrescentaSupervisorVaga: function acrescentaSupervisorVaga() {
+    acrescentaSupervisorEEstagiarioVaga: function acrescentaSupervisorEEstagiarioVaga() {
       for (var i in this.estagiarios) {
         for (var k in this.vagas) {
           if (this.estagiarios[i].cod_vaga === this.vagas[k].id) {
-            this.vagas[k].supervisor = this.estagiarios[i].supervisor.toUpperCase();
+            this.vagas[k].supervisor = this.estagiarios[i].supervisor;
+            this.vagas[k].estagiario = this.estagiarios[i].nome;
           }
         }
       }
@@ -7264,7 +7281,7 @@ __webpack_require__.r(__webpack_exports__);
           this.vagasLivres.push(vagas[i]);
         } else if (vagas[i].status == "CANCELADA") {
           this.vagasCanceladas.push(vagas[i]);
-        } else {
+        } else if (vagas[i].status == "TRANSFERIDA.SMG") {
           this.vagasTransferidas.push(vagas[i]);
         }
       }
@@ -7278,7 +7295,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this4.vagasDistribuidas(response.data);
 
-        _this4.acrescentaSupervisorVaga();
+        _this4.acrescentaSupervisorEEstagiarioVaga();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -8025,7 +8042,8 @@ __webpack_require__.r(__webpack_exports__);
       auxiliarCpf: '',
       // usada para recuperar o cpf do estagiario clicado
       filtro: '',
-      idCurso: ''
+      idCurso: '',
+      teste: []
     };
   },
   beforeMount: function beforeMount() {
@@ -8037,6 +8055,7 @@ __webpack_require__.r(__webpack_exports__);
   mixins: [_mixins_filtros__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_computeds__WEBPACK_IMPORTED_MODULE_2__["default"]],
   computed: {
     supervisoresComFiltro: function supervisoresComFiltro() {
+      this.supervisores = this.supervisoresOrdem();
       this.supervisorFiltrado = this.supervisores;
 
       if (this.filtro) {
@@ -8050,6 +8069,19 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    supervisoresOrdem: function supervisoresOrdem() {
+      var lowerCaseSupervisores = lodash__WEBPACK_IMPORTED_MODULE_3___default.a.clone(this.supervisores);
+
+      if (typeof lowerCaseSupervisores.map == 'undefined') return;
+      lowerCaseSupervisores = lowerCaseSupervisores.map(function (supervisor) {
+        supervisor.nome = supervisor.nome.toLowerCase();
+        return supervisor;
+      });
+
+      var sortedSupervisor = lodash__WEBPACK_IMPORTED_MODULE_3___default.a.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
+
+      return sortedSupervisor;
+    },
     armazenaEstagiario: function armazenaEstagiario() {
       this.$store.commit('armazenaEstagiarioSelecionado', this.estagiarioClicado);
     },
@@ -79984,7 +80016,7 @@ var render = function() {
                 _c("option", { attrs: { default: "" } }),
                 _vm._v(" "),
                 _vm._l(_vm.instituicoes, function(instituicao) {
-                  return _c("option", [
+                  return _c("option", { key: instituicao.id }, [
                     _vm._v(_vm._s(instituicao.razao_social))
                   ])
                 })
@@ -82241,7 +82273,21 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vaga.dep_hierarquico))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.supervisor))]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vaga.supervisor ? vaga.supervisor.toUpperCase() : ""
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vaga.estagiario ? vaga.estagiario.toUpperCase() : ""
+                      )
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vaga.historico))])
                 ])
@@ -82273,7 +82319,27 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaLivre.dep_hierarquico))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vagaLivre.supervisor))]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vagaLivre.supervisor
+                          ? vagaLivre.supervisor.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.vaga.estagiario))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.vaga.estagiario
+                          ? _vm.vaga.estagiario.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaLivre.historico))])
                 ])
@@ -82305,7 +82371,21 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vaga.dep_hierarquico))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.supervisor))]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vaga.supervisor ? vaga.supervisor.toUpperCase() : ""
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vaga.estagiario ? vaga.estagiario.toUpperCase() : ""
+                      )
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vaga.historico))])
                 ])
@@ -82337,7 +82417,25 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaEmSelecao.dep_hierarquico))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vagaEmSelecao.supervisor))]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vagaEmSelecao.supervisor
+                          ? vagaEmSelecao.supervisor.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vagaEmSelecao.estagiario
+                          ? vagaEmSelecao.estagiario.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaEmSelecao.historico))])
                 ])
@@ -82369,7 +82467,25 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaCancelada.dep_hierarquico))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vagaCancelada.supervisor))]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vagaCancelada.supervisor
+                          ? vagaCancelada.supervisor.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vagaCancelada.estagiario
+                          ? vagaCancelada.estagiario.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaCancelada.historico))])
                 ])
@@ -82404,7 +82520,25 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaTransferida.dep_hierarquico))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vagaTransferida.supervisor))]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vagaTransferida.supervisor
+                          ? vagaTransferida.supervisor.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        vagaTransferida.estagiario
+                          ? vagaTransferida.estagiario.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vagaTransferida.historico))])
                 ])
@@ -82433,25 +82567,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Supervisor")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-dark" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Supervisor")]),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
       ])
@@ -82473,25 +82589,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Supervisor")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-dark" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Supervisor")]),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
       ])
@@ -82513,6 +82611,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Supervisor")]),
         _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
       ])
     ])
@@ -82532,6 +82632,52 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Supervisor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Supervisor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Vaga")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Departamento")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Supervisor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
       ])
@@ -102602,6 +102748,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+ // importar este módulo onde for usar qualquer destes computed
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
@@ -102629,19 +102776,23 @@ __webpack_require__.r(__webpack_exports__);
     },
     departamentosOrdenados: function departamentosOrdenados() {
       return lodash__WEBPACK_IMPORTED_MODULE_0___default.a.orderBy(this.departamentos, 'sigla');
-    }
-  } // supervisoresOrdenados() {
-  //     let lowerCaseSupervisores = _.clone(this.supervisores);
-  //     if(typeof(lowerCaseSupervisores.map) == 'undefined')
-  //         return;
-  //     lowerCaseSupervisores = lowerCaseSupervisores.map((supervisor) => {
-  //         supervisor.nome = supervisor.nome.toLowerCase();
-  //         return supervisor;
-  //     });
-  //     const sortedSupervisor = _.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
-  //     return sortedSupervisor;
-  // },
+    },
+    instituicoesOrdenadas: function instituicoesOrdenadas() {
+      var lowerCaseInstituicoes = lodash__WEBPACK_IMPORTED_MODULE_0___default.a.clone(this.instituicoes);
 
+      if (lowerCaseInstituicoes.length < 1) {
+        return;
+      } else {
+        lowerCaseInstituicoes = lowerCaseInstituicoes.map(function (instituicao) {
+          instituicao.razao_social = instituicao.razao_social.toLowerCase();
+          return instituicao;
+        });
+        return lowerCaseInstituicoes;
+      } // const sortedInstituicoes = _.orderBy(lowerCaseInstituicoes, ['razao_social'], ['asc']);
+      // return lowerCaseInstituicoes;
+
+    }
+  }
 });
 
 /***/ }),

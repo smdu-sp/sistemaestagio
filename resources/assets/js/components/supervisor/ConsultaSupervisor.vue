@@ -129,7 +129,8 @@ export default {
             nomeBuscado: '',
             auxiliarCpf: '', // usada para recuperar o cpf do estagiario clicado
             filtro: '',
-            idCurso: ''
+            idCurso: '',
+            teste: []
         }
     },
     beforeMount() {
@@ -141,6 +142,7 @@ export default {
     mixins: [filtros, computeds],
     computed: {
         supervisoresComFiltro() {
+            this.supervisores = this.supervisoresOrdem();
             this.supervisorFiltrado = this.supervisores
             if(this.filtro){
                 let exp = new RegExp(this.filtro.trim(), 'i');
@@ -151,6 +153,19 @@ export default {
         }
     },
     methods: {
+        supervisoresOrdem() {
+            let lowerCaseSupervisores = _.clone(this.supervisores);
+            if(typeof(lowerCaseSupervisores.map) == 'undefined')
+                return;
+            lowerCaseSupervisores = lowerCaseSupervisores.map((supervisor) => {
+                supervisor.nome = supervisor.nome.toLowerCase();
+                return supervisor;
+            });
+
+            const sortedSupervisor = _.orderBy(lowerCaseSupervisores, ['nome'], ['asc']);
+
+            return sortedSupervisor;
+        },
         armazenaEstagiario() {
             this.$store.commit('armazenaEstagiarioSelecionado', this.estagiarioClicado);
         },
