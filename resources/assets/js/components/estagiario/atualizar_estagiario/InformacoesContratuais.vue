@@ -101,8 +101,7 @@
                             id="inputSupervisor" 
                             v-model="post.supervisor"
                             disabled="disabled">
-                            <option></option>
-                            <option v-for="supervisor of supervisoresOrdenados">{{ supervisor.nome.toUpperCase() }}</option>
+                            <option>{{ post.supervisor }}</option>
                         </select>
                         <div class="invalid-feedback">
                             Supervisor não pode ser vazio

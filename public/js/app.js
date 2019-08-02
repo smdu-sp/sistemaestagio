@@ -4722,7 +4722,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'alteraVagaParaLivre', 'supervisoresOrdenados', 'vagasOrdenadas', 'carregaVaga', 'abreModalVaga', 'abreModalSupervisor', 'carregaSupervisor']
 });
@@ -6442,44 +6441,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6507,33 +6468,7 @@ __webpack_require__.r(__webpack_exports__);
   filters: {
     duasCasasDecimais: function duasCasasDecimais(numero) {
       return numero.toFixed(2);
-    } // cor(cor) {
-    //     if(cor === 0) {
-    //         return 'Não Cadastrado'
-    //     } else if(cor === 1) {
-    //         return 'Branco'
-    //     } else if(cor === 2) {
-    //         return 'Pardo'
-    //     } else if(cor === 3) {
-    //         return 'Amarelo';
-    //     } else if(cor === 4) {
-    //         return 'Preto';
-    //     } else if(cor === 5) {
-    //         return 'Indígena';
-    //     }
-    // }
-
-  },
-  computed: {// filtrarCota() {
-    //     if(this.filtro == 'Todas') {
-    //         return this.estagiariosOrdem;
-    //     } else {
-    //         let estagiario = this.estagiariosOrdem.filter(estagiario => {
-    //             return estagiario.raca_cor == this.filtro;
-    //         })
-    //         return estagiario;
-    //     }
-    // }
+    }
   },
   methods: {
     salvaEstagiariosContratados: function salvaEstagiariosContratados() {
@@ -6562,17 +6497,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-    // estagiariosOrdenados() { 
-    //     let lowerCaseEstagiarios = _.clone(this.estagiariosContratados);
-    //     if(typeof(lowerCaseEstagiarios.map) == 'undefined')
-    //         return;
-    //     lowerCaseEstagiarios = lowerCaseEstagiarios.map((estagiario) => {
-    //         estagiario.nome = estagiario.nome.toUpperCase();
-    //         return estagiario;
-    //     });
-    //     const sortedEstagiarios = _.orderBy(lowerCaseEstagiarios, ['nome'], ['asc']);
-    //     this.estagiariosOrdem = sortedEstagiarios;
-    // },
     retornaEstagiarios: function retornaEstagiarios() {
       var _this = this;
 
@@ -76885,16 +76809,7 @@ var render = function() {
                       }
                     }
                   },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.supervisoresOrdenados, function(supervisor) {
-                      return _c("option", [
-                        _vm._v(_vm._s(supervisor.nome.toUpperCase()))
-                      ])
-                    })
-                  ],
-                  2
+                  [_c("option", [_vm._v(_vm._s(_vm.post.supervisor))])]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
@@ -81583,7 +81498,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("h4", [_vm._v("Cotas BCP (Portadores de deficiência)")]),
+      _c("h4", [_vm._v("Cotas PCD (Portadores de deficiência)")]),
       _vm._v(" "),
       _c("table", { staticClass: "table table-bordered" }, [
         _vm._m(1),
