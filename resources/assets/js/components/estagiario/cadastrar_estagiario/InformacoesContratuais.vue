@@ -2,7 +2,7 @@
     <form @submit.prevent="inserirEstagiario" method="post">
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <div class="row">
                     <div class="col-md-10">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="selectStatus">Status Vaga</label>
                     <select type="text" id="selectStatus" class="form-control" v-model="statusVaga.status">
@@ -44,7 +44,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="inputContrato">Contrato CIEE</label>
                     <input type="text" 
@@ -54,7 +54,7 @@
                         v-model="post.contrato" >
                 </div>
             </div>
-            <div class="col-md-3">
+            <div v-if="false" class="col-md-3">
                 <div class="form-group">
                     <label for="inputTceSuperEstagios">TCE Super Estágios</label>
                     <input type="text" 

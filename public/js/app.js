@@ -6441,6 +6441,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6449,12 +6491,18 @@ __webpack_require__.r(__webpack_exports__);
       estagiarios: [],
       estagiariosContratados: [],
       estagiariosOrdem: [],
-      estagiariosBrancos: [],
-      estagiariosPardos: [],
-      estagiariosAmarelos: [],
-      estagiariosPretos: [],
-      estagiariosIndígenas: [],
-      estagiariosDeficientes: [],
+      estagiariosBrancosMasculinos: [],
+      estagiariosBrancosFemininos: [],
+      estagiariosPardosMasculinos: [],
+      estagiariosPardosFemininos: [],
+      estagiariosAmarelosMasculinos: [],
+      estagiariosAmarelosFemininos: [],
+      estagiariosPretosMasculinos: [],
+      estagiariosPretosFemininos: [],
+      estagiariosIndigenasMasculinos: [],
+      estagiariosIndigenasFemininos: [],
+      estagiariosDeficientesMasculinos: [],
+      estagiariosDeficientesFemininos: [],
       msg: {
         error: false,
         success: false
@@ -6483,17 +6531,43 @@ __webpack_require__.r(__webpack_exports__);
     classificaEstagiarios: function classificaEstagiarios() {
       for (var i in this.estagiariosContratados) {
         if (this.estagiariosContratados[i].deficiencia) {
+          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
+            this.estagiariosDeficientesMasculinos.push(this.estagiarios[i]);
+          } else {
+            this.estagiariosDeficientesFemininos.push(this.estagiarios[i]);
+          }
+
           this.estagiariosDeficientes.push(this.estagiariosContratados[i]);
         } else if (this.estagiariosContratados[i].raca_cor === 1) {
-          this.estagiariosBrancos.push(this.estagiarios[i]);
+          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
+            this.estagiariosBrancosMasculinos.push(this.estagiarios[i]);
+          } else {
+            this.estagiariosBrancosFemininos.push(this.estagiarios[i]);
+          }
         } else if (this.estagiariosContratados[i].raca_cor === 2) {
-          this.estagiariosPardos.push(this.estagiarios[i]);
+          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
+            this.estagiariosPardosMasculinos.push(this.estagiarios[i]);
+          } else {
+            this.estagiariosPardosFemininos.push(this.estagiarios[i]);
+          }
         } else if (this.estagiariosContratados[i].raca_cor === 3) {
-          this.estagiariosAmarelos.push(this.estagiarios[i]);
+          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
+            this.estagiariosAmarelosMasculinos.push(this.estagiarios[i]);
+          } else {
+            this.estagiariosAmarelosFemininos.push(this.estagiarios[i]);
+          }
         } else if (this.estagiariosContratados[i].raca_cor === 4) {
-          this.estagiariosPretos.push(this.estagiarios[i]);
+          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
+            this.estagiariosPretosMasculinos.push(this.estagiarios[i]);
+          } else {
+            this.estagiariosPretosFemininos.push(this.estagiarios[i]);
+          }
         } else if (this.estagiariosContratados[i].raca_cor === 5) {
-          this.estagiariosIndígenas.push(this.estagiarios[i]);
+          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
+            this.estagiariosIndigenasMasculinos.push(this.estagiarios[i]);
+          } else {
+            this.estagiariosIndigenasFemininos.push(this.estagiarios[i]);
+          }
         }
       }
     },
@@ -39826,6 +39900,25 @@ exports.push([module.i, "\n.col-3 {\r\n    margin: 0;\r\n    padding: 0;\n}\n.co
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.vertical[data-v-69299420] {\r\n    vertical-align: middle;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/EntradasSaidasRenovacao.vue?vue&type=style&index=0&id=690676c1&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/EntradasSaidasRenovacao.vue?vue&type=style&index=0&id=690676c1&scoped=true&lang=css& ***!
@@ -71709,6 +71802,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/EntradasSaidasRenovacao.vue?vue&type=style&index=0&id=690676c1&scoped=true&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/EntradasSaidasRenovacao.vue?vue&type=style&index=0&id=690676c1&scoped=true&lang=css& ***!
@@ -80348,7 +80471,7 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-4" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-10" }, [
               _c("div", { staticClass: "form-group" }, [
@@ -80435,7 +80558,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-4" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "selectStatus" } }, [
               _vm._v("Status Vaga")
@@ -80493,7 +80616,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-4" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputContrato" } }, [
               _vm._v("Contrato CIEE")
@@ -80523,39 +80646,9 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputTceSuperEstagios" } }, [
-              _vm._v("TCE Super Estágios")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.tc_superestagios,
-                  expression: "post.tc_superestagios"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                maxlength: "11",
-                id: "inputTceSuperEstagios"
-              },
-              domProps: { value: _vm.post.tc_superestagios },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "tc_superestagios", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
+        false
+          ? undefined
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -81399,15 +81492,19 @@ var render = function() {
         _vm._v(" "),
         _c("tbody", [
           _c("tr", [
-            _c("td", [_vm._v("Brancos")]),
+            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+              _vm._v("Brancos")
+            ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosBrancos.length))]),
+            _c("td", [_vm._v("Masculino")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosBrancosMasculinos.length))]),
             _vm._v(" "),
             _c("td", [
               _vm._v(
                 _vm._s(
                   _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosBrancos.length /
+                    (_vm.estagiariosBrancosMasculinos.length /
                       _vm.estagiariosContratados.length) *
                       100
                   )
@@ -81417,15 +81514,15 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("td", [_vm._v("Pardos")]),
+            _c("td", [_vm._v("Feminino")]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosPardos.length))]),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosBrancosFemininos.length))]),
             _vm._v(" "),
             _c("td", [
               _vm._v(
                 _vm._s(
                   _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosPardos.length /
+                    (_vm.estagiariosBrancosFemininos.length /
                       _vm.estagiariosContratados.length) *
                       100
                   )
@@ -81435,15 +81532,19 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("td", [_vm._v("Amarelos")]),
+            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+              _vm._v("Pardos")
+            ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosAmarelos.length))]),
+            _c("td", [_vm._v("Masculino")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosPardosMasculinos.length))]),
             _vm._v(" "),
             _c("td", [
               _vm._v(
                 _vm._s(
                   _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosAmarelos.length /
+                    (_vm.estagiariosPardosMasculinos.length /
                       _vm.estagiariosContratados.length) *
                       100
                   )
@@ -81453,15 +81554,15 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("td", [_vm._v("Negros")]),
+            _c("td", [_vm._v("Feminino")]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosPretos.length))]),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosPardosFemininos.length))]),
             _vm._v(" "),
             _c("td", [
               _vm._v(
                 _vm._s(
                   _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosPretos.length /
+                    (_vm.estagiariosPardosFemininos.length /
                       _vm.estagiariosContratados.length) *
                       100
                   )
@@ -81471,15 +81572,167 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("td", [_vm._v("Indígenas")]),
+            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+              _vm._v("Amarelos")
+            ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosIndígenas.length))]),
+            _c("td", [_vm._v("Masculino")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(_vm.estagiariosAmarelosMasculinos.length))
+            ]),
             _vm._v(" "),
             _c("td", [
               _vm._v(
                 _vm._s(
                   _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosIndígenas.length /
+                    (_vm.estagiariosAmarelosMasculinos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Feminino")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosAmarelosFemininos.length))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosAmarelosFemininos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+              _vm._v("Negros")
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Masculino")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosPretosMasculinos.length))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosPretosMasculinos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Feminino")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.estagiariosPretosFemininos.length))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosPretosFemininos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+              _vm._v("Indígenas")
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Masculino")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(_vm.estagiariosIndigenasMasculinos.length))
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosIndigenasMasculinos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Feminino")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(_vm.estagiariosIndigenasFemininos.length))
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosIndigenasFemininos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+              _vm._v("Deficientes")
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Masculino")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(_vm.estagiariosDeficientesMasculinos.length))
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosDeficientesMasculinos.length /
+                      _vm.estagiariosContratados.length) *
+                      100
+                  )
+                )
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Feminino")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(_vm.estagiariosDeficientesFemininos.length))
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("duasCasasDecimais")(
+                    (_vm.estagiariosDeficientesFemininos.length /
                       _vm.estagiariosContratados.length) *
                       100
                   )
@@ -81491,35 +81744,11 @@ var render = function() {
           _c("tr", [
             _c("td", [_vm._v("Total")]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosContratados.length))]),
+            _c("td", { staticClass: "text-center", attrs: { colspan: "2" } }, [
+              _vm._v(_vm._s(_vm.estagiariosContratados.length))
+            ]),
             _vm._v(" "),
             _c("td", [_vm._v("100")])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("h4", [_vm._v("Cotas PCD (Portadores de deficiência)")]),
-      _vm._v(" "),
-      _c("table", { staticClass: "table table-bordered" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("td", [_vm._v("Deficientes")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosDeficientes.length))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosDeficientes.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
-            ])
           ])
         ])
       ])
@@ -81534,17 +81763,7 @@ var staticRenderFns = [
     return _c("thead", { staticClass: "thead-dark" }, [
       _c("th", { staticClass: "text-center" }, [_vm._v("Tipo")]),
       _vm._v(" "),
-      _c("th", { staticClass: "text-center" }, [_vm._v("Quantidade")]),
-      _vm._v(" "),
-      _c("th", { staticClass: "text-center" }, [_vm._v("%")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-dark" }, [
-      _c("th", { staticClass: "text-center" }, [_vm._v("Tipo")]),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Gênero")]),
       _vm._v(" "),
       _c("th", { staticClass: "text-center" }, [_vm._v("Quantidade")]),
       _vm._v(" "),
@@ -102108,7 +102327,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Cotas_vue_vue_type_template_id_69299420_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Cotas.vue?vue&type=template&id=69299420&scoped=true& */ "./resources/assets/js/components/relatorios/Cotas.vue?vue&type=template&id=69299420&scoped=true&");
 /* harmony import */ var _Cotas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cotas.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/relatorios/Cotas.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& */ "./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -102116,7 +102337,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Cotas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Cotas_vue_vue_type_template_id_69299420_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Cotas_vue_vue_type_template_id_69299420_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -102145,6 +102366,22 @@ component.options.__file = "resources/assets/js/components/relatorios/Cotas.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Cotas.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=style&index=0&id=69299420&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Cotas_vue_vue_type_style_index_0_id_69299420_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
