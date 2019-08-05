@@ -1994,6 +1994,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exibeModalEstagiario', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta', 'exibeModalSupervisor', 'menuRelatorios', 'mostrarMenuRelatorios']
 });
@@ -5664,8 +5667,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'validaNome', 'nomeValido', 'validaCodEstudante', 'codValido', 'validaContratante', 'contratanteValido', 'validaEndereco', 'enderecoValido', 'validaEstado', 'estadoValido', 'validaCep', 'cepValido', 'validaBairro', 'bairroValido', 'validaComplemento', 'complementoValido', 'validaCelular', 'celularValido', 'validaNacionalidade', 'nacionalidadeValida', 'validaNaturalidade', 'naturalidadeValida', 'validaRaca', 'racaValida', 'validaCpf', 'cpfValido', 'validaRg', 'rgValido', 'validaEmail', 'emailValido', 'validaInstituicao', 'instituicaoValida', 'validaCurso', 'cursoValido', 'converteCep', 'valorNacionalidade', 'abreModalCartaoAcesso', 'carregaCartaoAcesso', 'cartoesOrdenados', 'cursosOrdenados', 'verificaDuplicidadeCpf', 'verificaDuplicidadeCodEstudante']
+  props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'validaNome', 'nomeValido', 'validaCodEstudante', 'codValido', 'validaContratante', 'contratanteValido', 'validaEndereco', 'enderecoValido', 'validaEstado', 'estadoValido', 'validaCep', 'cepValido', 'validaBairro', 'bairroValido', 'validaComplemento', 'complementoValido', 'validaCelular', 'celularValido', 'validaNacionalidade', 'nacionalidadeValida', 'validaNaturalidade', 'naturalidadeValida', 'validaRaca', 'racaValida', 'validaCpf', 'cpfValido', 'validaRg', 'rgValido', 'validaEmail', 'emailValido', 'validaInstituicao', 'instituicaoValida', 'validaCurso', 'cursoValido', 'converteCep', 'valorNacionalidade', 'abreModalCartaoAcesso', 'carregaCartaoAcesso', 'cartoesOrdenados', 'cursosOrdenados', 'verificaDuplicidadeCpf', 'verificaDuplicidadeCodEstudante', 'abreModalInstituicaoEnsino', 'carregaInstituicoes']
 });
 
 /***/ }),
@@ -6027,6 +6042,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6085,7 +6106,8 @@ __webpack_require__.r(__webpack_exports__);
       contadorCadastro: 0,
       exibeModalCartaoAcesso: false,
       exibeModalVaga: false,
-      urlPadrao: '/api/'
+      urlPadrao: '/api/',
+      exibeModalInstituicao: false
     };
   },
   mixins: [_mixins_computeds__WEBPACK_IMPORTED_MODULE_1__["default"]],
@@ -6112,6 +6134,13 @@ __webpack_require__.r(__webpack_exports__);
     carregaVaga: function carregaVaga() {
       var uriVagas = this.urlPadrao + 'vagas';
       this.requisicaoGet(uriVagas, 'vagas');
+    },
+    abreModalInstituicaoEnsino: function abreModalInstituicaoEnsino() {
+      this.exibeModalInstituicao = !this.exibeModalInstituicao;
+    },
+    carregaInstituicoes: function carregaInstituicoes() {
+      var uriInstituicoes = this.urlPadrao + 'instituicao';
+      this.requisicaoGet(uriInstituicoes, 'instituicoes');
     },
     abreModalCartaoAcesso: function abreModalCartaoAcesso() {
       this.exibeModalCartaoAcesso = !this.exibeModalCartaoAcesso;
@@ -6447,6 +6476,239 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mixins_methods__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/methods */ "./resources/assets/js/mixins/methods.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      instituicao: {},
+      estados: {},
+      revisarCampos: false,
+      razaoSocialValida: false,
+      campusValido: false,
+      msg: {
+        error: false,
+        success: false,
+        camposInvalidos: false,
+        erro: "Erro ao cadastrar Instituíção de Ensino",
+        sucesso: "Instituíção de Ensino cadastrada com sucesso",
+        campoInvalido: "Revise os campos em vermelho"
+      }
+    };
+  },
+  beforeMount: function beforeMount() {
+    this.retornaEstados();
+  },
+  mixins: [_mixins_methods__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  methods: {
+    retornaEstados: function retornaEstados() {
+      var _this = this;
+
+      var uriEstados = '/api/estados';
+      this.axios.get(uriEstados).then(function (response) {
+        _this.estados = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    validaRazaoSocial: function validaRazaoSocial(razaoSocial) {
+      this.validacao(razaoSocial, 'razaoSocialValida');
+    },
+    validaCampus: function validaCampus(campus) {
+      this.validacao(campus, 'campusValido');
+    },
+    validaCampos: function validaCampos() {
+      this.camposValidacao = [{
+        razaoSocialValida: this.instituicao.razao_social
+      }, {
+        campusValido: this.instituicao.campus
+      }];
+      var contadorCamposInvalidos = 0;
+
+      for (var i = 0; i <= this.camposValidacao.length; i++) {
+        for (var key in this.camposValidacao[i]) {
+          if (this.camposValidacao[i][key]) {
+            this[key] = false;
+            this.revisarCampos = false;
+          } else {
+            this[key] = true;
+            this.revisarCampos = true;
+            contadorCamposInvalidos++;
+          }
+        }
+      }
+
+      if (contadorCamposInvalidos == 0) {
+        this.msg.camposInvalidos = false;
+        this.inserirInstituicao();
+      } else {
+        this.msg.camposInvalidos = true;
+        this.scrollTop();
+      }
+    },
+    inserirInstituicao: function inserirInstituicao() {
+      var _this2 = this;
+
+      var uriInstituicao = '/api/instituicao';
+      this.axios.post(uriInstituicao, this.instituicao).then(function (response) {
+        _this2.msg.error = false;
+        _this2.msg.success = true;
+        _this2.instituicao = {};
+      })["catch"](function (error) {
+        _this2.msg.success = false;
+        _this2.msg.error = true;
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=script&lang=js& ***!
@@ -6457,7 +6719,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_filtros__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/filtros */ "./resources/assets/js/mixins/filtros.js");
-//
 //
 //
 //
@@ -39956,7 +40217,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.cadastraCartaoAcesso {\r\n    cursor: pointer;\r\n    width: 30px;\r\n    height: 30px;\n}\r\n", ""]);
+exports.push([module.i, "\n.cadastraCartaoAcesso {\r\n    cursor: pointer;\r\n    width: 30px;\r\n    height: 30px;\n}\n.cadastraInstituicao {\r\n    cursor: pointer;\r\n    width: 40px;\r\n    height: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -72868,6 +73129,18 @@ var render = function() {
                       )
                     ],
                     1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: { name: "Cadastro de Instituição" } } },
+                        [_vm._v("Instituição de ensino")]
+                      )
+                    ],
+                    1
                   )
                 ])
               : _vm._e()
@@ -80303,63 +80576,88 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "selectInstituicao" } }, [
-              _vm._v("Instituíção de Ensino")
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "selectInstituicao" } }, [
+                  _vm._v("Instituíção de Ensino")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.instituicao_ensino,
+                        expression: "post.instituicao_ensino"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.instituicaoValida },
+                    attrs: { id: "selectInstituicao" },
+                    on: {
+                      click: _vm.carregaInstituicoes,
+                      blur: _vm.validaInstituicao,
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.post,
+                          "instituicao_ensino",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { default: "" } }),
+                    _vm._v(" "),
+                    _vm._l(_vm.instituicoes, function(instituicao) {
+                      return _c("option", { key: instituicao.id }, [
+                        _vm._v(_vm._s(instituicao.razao_social))
+                      ])
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _vm.instituicaoValida
+                  ? _c("div", { staticClass: "invalid-feedback" }, [
+                      _vm._v(
+                        "\n                            Instituição não pode ser vazia\n                        "
+                      )
+                    ])
+                  : _vm._e()
+              ])
             ]),
             _vm._v(" "),
             _c(
-              "select",
+              "div",
               {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.instituicao_ensino,
-                    expression: "post.instituicao_ensino"
-                  }
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": _vm.instituicaoValida },
-                attrs: { id: "selectInstituicao" },
-                on: {
-                  blur: _vm.validaInstituicao,
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "instituicao_ensino",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
+                staticClass:
+                  "form-group d-flex flex-column align-items-baseline justify-content-end"
               },
               [
-                _c("option", { attrs: { default: "" } }),
-                _vm._v(" "),
-                _vm._l(_vm.instituicoes, function(instituicao) {
-                  return _c("option", { key: instituicao.id }, [
-                    _vm._v(_vm._s(instituicao.razao_social))
-                  ])
+                _c("img", {
+                  staticClass: "cadastraInstituicao",
+                  attrs: {
+                    src: __webpack_require__(/*! ../../../../../../public/icones/icons8-escola-64.png */ "./public/icones/icons8-escola-64.png"),
+                    alt: "Cadastrar Instituíção de Ensino"
+                  },
+                  on: { click: _vm.abreModalInstituicaoEnsino }
                 })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _vm.instituicaoValida
-              ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                    Instituição não pode ser vazia\n                "
-                  )
-                ])
-              : _vm._e()
+              ]
+            )
           ])
         ])
       ]),
@@ -81560,6 +81858,22 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
+        "b-modal",
+        {
+          attrs: { size: "xl", "ok-only": "" },
+          model: {
+            value: _vm.exibeModalInstituicao,
+            callback: function($$v) {
+              _vm.exibeModalInstituicao = $$v
+            },
+            expression: "exibeModalInstituicao"
+          }
+        },
+        [_c("cadastro-instituicao-component")],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "div",
         [
           _c(
@@ -81676,7 +81990,10 @@ var render = function() {
                           cursosOrdenados: _vm.cursosOrdenados,
                           verificaDuplicidadeCpf: _vm.verificaDuplicidadeCpf,
                           verificaDuplicidadeCodEstudante:
-                            _vm.verificaDuplicidadeCodEstudante
+                            _vm.verificaDuplicidadeCodEstudante,
+                          abreModalInstituicaoEnsino:
+                            _vm.abreModalInstituicaoEnsino,
+                          carregaInstituicoes: _vm.carregaInstituicoes
                         }
                       })
                     ],
@@ -81748,6 +82065,596 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=template&id=8fbc03f2&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=template&id=8fbc03f2& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("Cadastro de Instituição de Ensino")]),
+      _vm._v(" "),
+      _vm.msg.error
+        ? _c("div", { staticClass: "alert alert-danger" }, [
+            _vm._v("\n        " + _vm._s(_vm.msg.erro) + "\n    ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.msg.camposInvalidos
+        ? _c("div", { staticClass: "alert alert-danger" }, [
+            _vm._v("\n        " + _vm._s(_vm.msg.campoInvalido) + "\n    ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.msg.success
+        ? _c("div", { staticClass: "alert alert-success" }, [
+            _vm._v("\n        " + _vm._s(_vm.msg.sucesso) + "\n    ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "b-card",
+        { attrs: { "no-body": "" } },
+        [
+          _c(
+            "b-tabs",
+            { attrs: { card: "" } },
+            [
+              _c(
+                "b-tab",
+                { attrs: { title: "Informações da Instituíção", active: "" } },
+                [
+                  _c("b-card-text", [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.validaCampos($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-9" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Razão social")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.razao_social,
+                                    expression: "instituicao.razao_social"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: { "is-invalid": _vm.razaoSocialValida },
+                                attrs: { type: "text", maxlength: "150" },
+                                domProps: {
+                                  value: _vm.instituicao.razao_social
+                                },
+                                on: {
+                                  blur: _vm.validaRazaoSocial,
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "razao_social",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.razaoSocialValida
+                                ? _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                                        Digite a razão social por favor\n                                    "
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-3" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Campus")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.campus,
+                                    expression: "instituicao.campus"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: { "is-invalid": _vm.campusValido },
+                                attrs: { type: "text", maxlength: "150" },
+                                domProps: { value: _vm.instituicao.campus },
+                                on: {
+                                  blur: _vm.validaCampus,
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "campus",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.campusValido
+                                ? _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                                        Digite o campus por favor\n                                    "
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-5" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Endereço")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.endereco,
+                                    expression: "instituicao.endereco"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", maxlength: "150" },
+                                domProps: { value: _vm.instituicao.endereco },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "endereco",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-3" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Bairro")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.bairro,
+                                    expression: "instituicao.bairro"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", maxlength: "50" },
+                                domProps: { value: _vm.instituicao.bairro },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "bairro",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-2" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("CEP")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.cep,
+                                    expression: "instituicao.cep"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", maxlength: "11" },
+                                domProps: { value: _vm.instituicao.cep },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "cep",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-2" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("UF")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.instituicao.uf,
+                                      expression: "instituicao.uf"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.instituicao,
+                                        "uf",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.estados, function(estado) {
+                                  return _c("option", { key: estado.id }, [
+                                    _vm._v(_vm._s(estado.uf))
+                                  ])
+                                }),
+                                0
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-2" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Telefone")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.telefone,
+                                    expression: "instituicao.telefone"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", maxlength: "13" },
+                                domProps: { value: _vm.instituicao.telefone },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "telefone",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-3" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("CNPJ")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.cnpj,
+                                    expression: "instituicao.cnpj"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", maxlength: "18" },
+                                domProps: { value: _vm.instituicao.cnpj },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "cnpj",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-4" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Representante")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.representada_por,
+                                    expression: "instituicao.representada_por"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", maxlength: "100" },
+                                domProps: {
+                                  value: _vm.instituicao.representada_por
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "representada_por",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-3" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Cargo")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.cargo,
+                                    expression: "instituicao.cargo"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", maxlength: "50" },
+                                domProps: { value: _vm.instituicao.cargo },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "cargo",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-5" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Responsável pelo estágio")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.responsavel,
+                                    expression: "instituicao.responsavel"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", maxlength: "100" },
+                                domProps: {
+                                  value: _vm.instituicao.responsavel
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "responsavel",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-3" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v("Cargo")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.instituicao.cargo1,
+                                    expression: "instituicao.cargo1"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", maxlength: "50" },
+                                domProps: { value: _vm.instituicao.cargo1 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.instituicao,
+                                      "cargo1",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.instituicao.descricao,
+                                  expression: "instituicao.descricao"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                maxlength: "150",
+                                cols: "30",
+                                rows: "5"
+                              },
+                              domProps: { value: _vm.instituicao.descricao },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.instituicao,
+                                    "descricao",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("botoes-component", {
+                          attrs: { titulo: (_vm.nomebotao = "Salvar") }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=template&id=69299420&scoped=true&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/Cotas.vue?vue&type=template&id=69299420&scoped=true& ***!
@@ -81770,11 +82677,7 @@ var render = function() {
       _c(
         "div",
         { staticClass: "d-flex mb-2" },
-        [
-          _c("h4", { staticClass: "mr-2" }, [_vm._v("Cotas Raciais")]),
-          _vm._v(" "),
-          _c("botao-imprimir-component")
-        ],
+        [_c("botao-imprimir-component")],
         1
       ),
       _vm._v(" "),
@@ -100703,6 +101606,17 @@ module.exports = "/images/icons8-adicionar-usuario-masculino-30.png?90f1318835be
 
 /***/ }),
 
+/***/ "./public/icones/icons8-escola-64.png":
+/*!********************************************!*\
+  !*** ./public/icones/icons8-escola-64.png ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/icons8-escola-64.png?346210ea23de83900c896ccdb8e47fb7";
+
+/***/ }),
+
 /***/ "./public/icones/icons8-impressora-30.png":
 /*!************************************************!*\
   !*** ./public/icones/icons8-impressora-30.png ***!
@@ -100869,7 +101783,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/BotaoEmail.vue */ "./resources/assets/js/components/BotaoEmail.vue");
 /* harmony import */ var _components_BotaoImprimir_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/BotaoImprimir.vue */ "./resources/assets/js/components/BotaoImprimir.vue");
 /* harmony import */ var _components_supervisor_AlteracaoSupervisor_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/supervisor/AlteracaoSupervisor.vue */ "./resources/assets/js/components/supervisor/AlteracaoSupervisor.vue");
-/* harmony import */ var _components_relatorios_Vagas_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/relatorios/Vagas.vue */ "./resources/assets/js/components/relatorios/Vagas.vue");
+/* harmony import */ var _components_instituicao_ensino_Instituicao_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/instituicao_ensino/Instituicao.vue */ "./resources/assets/js/components/instituicao_ensino/Instituicao.vue");
 /* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -100957,6 +101871,7 @@ Vue.component('botao-email-component', _components_BotaoEmail_vue__WEBPACK_IMPOR
 Vue.component('consulta-supervisor-component', _components_supervisor_ConsultaSupervisor_vue__WEBPACK_IMPORTED_MODULE_27__["default"]);
 Vue.component('botao-imprimir-component', _components_BotaoImprimir_vue__WEBPACK_IMPORTED_MODULE_30__["default"]);
 Vue.component('alteracao-supervisor-component', _components_supervisor_AlteracaoSupervisor_vue__WEBPACK_IMPORTED_MODULE_31__["default"]);
+Vue.component('cadastro-instituicao-component', _components_instituicao_ensino_Instituicao_vue__WEBPACK_IMPORTED_MODULE_32__["default"]);
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
@@ -102694,6 +103609,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/instituicao_ensino/Instituicao.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/assets/js/components/instituicao_ensino/Instituicao.vue ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Instituicao_vue_vue_type_template_id_8fbc03f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Instituicao.vue?vue&type=template&id=8fbc03f2& */ "./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=template&id=8fbc03f2&");
+/* harmony import */ var _Instituicao_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Instituicao.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Instituicao_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Instituicao_vue_vue_type_template_id_8fbc03f2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Instituicao_vue_vue_type_template_id_8fbc03f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/instituicao_ensino/Instituicao.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Instituicao_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Instituicao.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Instituicao_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=template&id=8fbc03f2&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=template&id=8fbc03f2& ***!
+  \**********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Instituicao_vue_vue_type_template_id_8fbc03f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Instituicao.vue?vue&type=template&id=8fbc03f2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/instituicao_ensino/Instituicao.vue?vue&type=template&id=8fbc03f2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Instituicao_vue_vue_type_template_id_8fbc03f2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Instituicao_vue_vue_type_template_id_8fbc03f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/relatorios/Cotas.vue":
 /*!*************************************************************!*\
   !*** ./resources/assets/js/components/relatorios/Cotas.vue ***!
@@ -103353,6 +104337,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/mixins/methods.js":
+/*!***********************************************!*\
+  !*** ./resources/assets/js/mixins/methods.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    validacao: function validacao(valorCampo, variavelBooleana) {
+      if (!valorCampo.target.value) {
+        this[variavelBooleana] = true;
+      } else {
+        this[variavelBooleana] = false;
+      }
+    },
+    scrollTop: function scrollTop() {
+      window.scrollTo(0, 0);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/routes.js":
 /*!***************************************!*\
   !*** ./resources/assets/js/routes.js ***!
@@ -103375,6 +104385,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_relatorios_Cotas_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/relatorios/Cotas.vue */ "./resources/assets/js/components/relatorios/Cotas.vue");
 /* harmony import */ var _components_supervisor_AlteracaoSupervisor_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/supervisor/AlteracaoSupervisor.vue */ "./resources/assets/js/components/supervisor/AlteracaoSupervisor.vue");
 /* harmony import */ var _components_FFI_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/FFI.vue */ "./resources/assets/js/components/FFI.vue");
+/* harmony import */ var _components_instituicao_ensino_Instituicao_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/instituicao_ensino/Instituicao.vue */ "./resources/assets/js/components/instituicao_ensino/Instituicao.vue");
+
 
 
 
@@ -103435,6 +104447,10 @@ var routes = [{
   name: 'FFI',
   path: '/ffi',
   component: _components_FFI_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+}, {
+  name: 'Cadastro de Instituição',
+  path: '/cadastrarInstituicao',
+  component: _components_instituicao_ensino_Instituicao_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
 }];
 
 /***/ }),

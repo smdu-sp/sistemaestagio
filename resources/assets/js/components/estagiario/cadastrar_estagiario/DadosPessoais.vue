@@ -408,20 +408,32 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="selectInstituicao">Instituíção de Ensino</label>
-                <select class="form-control" 
-                    @blur="validaInstituicao"
-                    :class="{'is-invalid': instituicaoValida}"
-                    id="selectInstituicao" 
-                    v-model="post.instituicao_ensino" >
-                    <option default></option>
-                    <option v-for="instituicao of instituicoes" :key="instituicao.id">{{ instituicao.razao_social }}</option>
-                </select>
-                <div v-if="instituicaoValida" class="invalid-feedback">
-                    Instituição não pode ser vazia
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="selectInstituicao">Instituíção de Ensino</label>
+                        <select class="form-control" 
+                            @click="carregaInstituicoes"
+                            @blur="validaInstituicao"
+                            :class="{'is-invalid': instituicaoValida}"
+                            id="selectInstituicao" 
+                            v-model="post.instituicao_ensino" >
+                            <option default></option>
+                            <option v-for="instituicao of instituicoes" :key="instituicao.id">{{ instituicao.razao_social }}</option>
+                        </select>
+                        <div v-if="instituicaoValida" class="invalid-feedback">
+                            Instituição não pode ser vazia
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
+                    <img src="../../../../../../public/icones/icons8-escola-64.png"
+                        alt="Cadastrar Instituíção de Ensino"
+                        class="cadastraInstituicao"
+                        @click="abreModalInstituicaoEnsino">
                 </div>
             </div>
+            
         </div>
     </div><!--/row-->
 
@@ -563,7 +575,8 @@ export default {
         'converteCep', 'valorNacionalidade',
         'abreModalCartaoAcesso', 'carregaCartaoAcesso',
         'cartoesOrdenados', 'cursosOrdenados',
-        'verificaDuplicidadeCpf','verificaDuplicidadeCodEstudante'
+        'verificaDuplicidadeCpf','verificaDuplicidadeCodEstudante',
+        'abreModalInstituicaoEnsino', 'carregaInstituicoes'
     ]
 }
 </script>
@@ -572,5 +585,10 @@ export default {
     cursor: pointer;
     width: 30px;
     height: 30px;
+}
+.cadastraInstituicao {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
 }
 </style>

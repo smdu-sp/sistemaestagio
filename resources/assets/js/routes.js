@@ -10,6 +10,7 @@ import RelatorioVagas from './components/relatorios/Vagas.vue';
 import RelatorioCotas from './components/relatorios/Cotas.vue';
 import AlteracaoSupervisor from './components/supervisor/AlteracaoSupervisor.vue';
 import FFI from './components/FFI.vue';
+import CadastroInstituicao from './components/instituicao_ensino/Instituicao.vue';
 
 export const routes = [
     {
@@ -71,5 +72,10 @@ export const routes = [
         name: 'FFI',
         path: '/ffi',
         component: FFI
+    },
+    {
+        name: 'Cadastro de Instituição',
+        path: '/cadastrarInstituicao',
+        component: CadastroInstituicao
     }
 ];

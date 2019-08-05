@@ -52,6 +52,9 @@
                                 <li>
                                     <router-link :to="{name: 'Cadastro de Vagas'}">Vaga</router-link>
                                 </li>
+                                <li>
+                                    <router-link :to="{name: 'Cadastro de Instituição'}">Instituição de ensino</router-link>
+                                </li>
                             </ul>
                         </transition>
                     </li>

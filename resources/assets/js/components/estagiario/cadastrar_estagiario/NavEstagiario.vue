@@ -28,6 +28,10 @@
         <cadastro-vaga-component></cadastro-vaga-component>
     </b-modal>
 
+     <b-modal v-model="exibeModalInstituicao" size="xl" ok-only>
+        <cadastro-instituicao-component></cadastro-instituicao-component>
+    </b-modal>
+
     <div> <!-- Exibe este modal caso o cpf já exista na base de dados -->
         <b-modal v-model="modalCpf" ok-only>
             <p>O CPF inserido já existe na base de dados</p>
@@ -94,6 +98,8 @@
                     :cursosOrdenados="cursosOrdenados"
                     :verificaDuplicidadeCpf="verificaDuplicidadeCpf"
                     :verificaDuplicidadeCodEstudante="verificaDuplicidadeCodEstudante"
+                    :abreModalInstituicaoEnsino="abreModalInstituicaoEnsino"
+                    :carregaInstituicoes="carregaInstituicoes"
                     />
                 </b-card-text>
             </b-tab>
@@ -195,7 +201,8 @@ export default {
             contadorCadastro: 0,
             exibeModalCartaoAcesso: false,
             exibeModalVaga: false,
-            urlPadrao: '/api/'
+            urlPadrao: '/api/',
+            exibeModalInstituicao: false
         }
     },
     mixins: [computeds],
@@ -226,6 +233,14 @@ export default {
             const uriVagas = this.urlPadrao+'vagas';
 
             this.requisicaoGet(uriVagas, 'vagas');
+        },
+        abreModalInstituicaoEnsino() {
+            this.exibeModalInstituicao = !this.exibeModalInstituicao;
+        },
+        carregaInstituicoes() {
+            const uriInstituicoes = this.urlPadrao+'instituicao';
+
+            this.requisicaoGet(uriInstituicoes, 'instituicoes');
         },
         abreModalCartaoAcesso() {
             this.exibeModalCartaoAcesso = !this.exibeModalCartaoAcesso;

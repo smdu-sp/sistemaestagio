@@ -62,7 +62,7 @@ import CadastroCartaoAcesso from './components/cartao_acesso/CadastroCartaoAcess
 import BotaoEmail from './components/BotaoEmail.vue';
 import BotaoImprimir from './components/BotaoImprimir.vue';
 import SupervisorAlteracao from './components/supervisor/AlteracaoSupervisor.vue';
-import RelatorioVagas from './components/relatorios/Vagas.vue'
+import InstituicaoEnsino from './components/instituicao_ensino/Instituicao.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -88,6 +88,7 @@ Vue.component('botao-email-component', BotaoEmail);
 Vue.component('consulta-supervisor-component', ConsultaSupervisor);
 Vue.component('botao-imprimir-component', BotaoImprimir);
 Vue.component('alteracao-supervisor-component', SupervisorAlteracao);
+Vue.component('cadastro-instituicao-component', InstituicaoEnsino);
 
 import { routes } from './routes.js';
 

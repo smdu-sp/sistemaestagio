@@ -3,7 +3,6 @@
         <h1 class="text-center">Relatório de Cotas</h1>
         <div class="col-md-12">
             <div class="d-flex mb-2">
-                <h4 class="mr-2">Cotas Raciais</h4> 
                 <botao-imprimir-component></botao-imprimir-component>
             </div>
             <table class="table table-bordered table-hover">
