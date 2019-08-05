@@ -9,6 +9,7 @@ import EntradasSaidasRenovacao from './components/relatorios/EntradasSaidasRenov
 import RelatorioVagas from './components/relatorios/Vagas.vue';
 import RelatorioCotas from './components/relatorios/Cotas.vue';
 import AlteracaoSupervisor from './components/supervisor/AlteracaoSupervisor.vue';
+import FFI from './components/FFI.vue';
 
 export const routes = [
     {
@@ -65,5 +66,10 @@ export const routes = [
         name: 'Alteração Supervisor',
         path: '/alteracaoSupervisor',
         component: AlteracaoSupervisor
+    },
+    {
+        name: 'FFI',
+        path: '/ffi',
+        component: FFI
     }
 ];

@@ -75,6 +75,9 @@
                         </ul>
                     </transition>
                 </li>
+                <li>
+                    <router-link :to="{name: 'FFI'}">Folha de Frequência</router-link>
+                </li>
             </ul>                    
         </nav><!--/nav-->
     </aside>
