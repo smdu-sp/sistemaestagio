@@ -3030,6 +3030,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3145,6 +3146,15 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    calcularRecesso: function calcularRecesso() {
+      if (this.post.dt_inicial_1) {
+        var data = new Date(this.post.dt_inicial_1);
+        var dataFormatada = data.setDate(data.getDate());
+        console.log(dataFormatada);
+      } else {
+        console.log('Não Tem');
+      }
+    },
     carregaSupervisor: function carregaSupervisor() {
       var uriSupervisores = '/api/supervisores';
       this.requisicaoGet(uriSupervisores, 'supervisores');
@@ -4997,8 +5007,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['post', 'inserirEstagiario']
+  props: ['post', 'inserirEstagiario', 'calcularRecesso']
 });
 
 /***/ }),
@@ -7595,7 +7608,7 @@ __webpack_require__.r(__webpack_exports__);
     acrescentaSupervisorEEstagiarioVaga: function acrescentaSupervisorEEstagiarioVaga() {
       for (var i in this.estagiarios) {
         for (var k in this.vagas) {
-          if (this.estagiarios[i].cod_vaga === this.vagas[k].id) {
+          if (this.estagiarios[i].cod_vaga === this.vagas[k].id && this.estagiarios[i].situacao == 1) {
             this.vagas[k].supervisor = this.estagiarios[i].supervisor;
             this.vagas[k].estagiario = this.estagiarios[i].nome;
           }
@@ -74827,7 +74840,8 @@ var render = function() {
                             _c("recesso-atualizar", {
                               attrs: {
                                 post: _vm.post,
-                                inserirEstagiario: _vm.inserirEstagiario
+                                inserirEstagiario: _vm.inserirEstagiario,
+                                calcularRecesso: _vm.calcularRecesso
                               }
                             })
                           ],
@@ -78228,30 +78242,38 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("Qtd dias Restantes")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.qt_dias_restantes,
-                  expression: "post.qt_dias_restantes"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.post.qt_dias_restantes },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+          _c("label", { attrs: { for: "" } }, [_vm._v("Qtd dias Restantes")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-inline" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post.qt_dias_restantes,
+                    expression: "post.qt_dias_restantes"
                   }
-                  _vm.$set(_vm.post, "qt_dias_restantes", $event.target.value)
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number" },
+                domProps: { value: _vm.post.qt_dias_restantes },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.post, "qt_dias_restantes", $event.target.value)
+                  }
                 }
-              }
-            })
+              }),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "btn btn-primary ml-3",
+                attrs: { type: "button", value: "Calcular Recesso" },
+                on: { click: _vm.calcularRecesso }
+              })
+            ])
           ])
         ])
       ]),
@@ -83657,13 +83679,21 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.vaga.estagiario))]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.vaga.estagiario
+                          ? vagaLivre.estagiario.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
                       _vm._s(
                         _vm.vaga.estagiario
-                          ? _vm.vaga.estagiario.toUpperCase()
+                          ? vagaLivre.estagiario.toUpperCase()
                           : ""
                       )
                     )

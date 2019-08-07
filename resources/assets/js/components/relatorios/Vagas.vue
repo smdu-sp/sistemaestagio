@@ -90,8 +90,8 @@
                         <td>{{ vagaLivre.status }}</td>
                         <td>{{ vagaLivre.dep_hierarquico }}</td>
                         <td>{{ vagaLivre.supervisor ? vagaLivre.supervisor.toUpperCase() : '' }}</td>
-                        <td>{{ vaga.estagiario }}</td>
-                        <td>{{ vaga.estagiario ? vaga.estagiario.toUpperCase() : '' }}</td>
+                        <td>{{ vaga.estagiario ? vagaLivre.estagiario.toUpperCase() : '' }}</td>
+                        <td>{{ vaga.estagiario ? vagaLivre.estagiario.toUpperCase() : '' }}</td>
                         <td>{{ vagaLivre.historico }}</td>
                     </tr>
                 </tbody>
@@ -394,7 +394,7 @@ export default {
         acrescentaSupervisorEEstagiarioVaga() {
             for(let i in this.estagiarios) {
                 for(let k in this.vagas) {
-                    if(this.estagiarios[i].cod_vaga === this.vagas[k].id) {
+                    if(this.estagiarios[i].cod_vaga === this.vagas[k].id && this.estagiarios[i].situacao == 1) {
                         this.vagas[k].supervisor = this.estagiarios[i].supervisor;
                         this.vagas[k].estagiario = this.estagiarios[i].nome;
                     }

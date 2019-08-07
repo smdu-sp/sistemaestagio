@@ -177,6 +177,7 @@
                   <recesso-atualizar
                   :post="post"
                   :inserirEstagiario="inserirEstagiario"
+                  :calcularRecesso="calcularRecesso"
                   />
               </b-card-text>
           </b-tab>
@@ -301,6 +302,15 @@ export default {
     }
   },
   methods: {
+    calcularRecesso() {
+      if(this.post.dt_inicial_1) { 
+        const data = new Date(this.post.dt_inicial_1)
+        const dataFormatada = data.setDate(data.getDate())
+        console.log(dataFormatada)
+      } else {
+        console.log('Não Tem')
+      }
+    },
     carregaSupervisor() {
         const uriSupervisores = '/api/supervisores';
 

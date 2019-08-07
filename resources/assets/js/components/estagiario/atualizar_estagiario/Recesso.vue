@@ -14,9 +14,12 @@
                 </div>
             </div>
             <div class="col-md-3 ml-2">
-                <div class="form-group">
-                    <label for="">Qtd dias Restantes</label>
-                    <input type="number" class="form-control" v-model="post.qt_dias_restantes" >
+                        <label for="">Qtd dias Restantes</label>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input type="number" class="form-control" v-model="post.qt_dias_restantes" >
+                        <input type="button" class="btn btn-primary ml-3" @click="calcularRecesso" value="Calcular Recesso">
+                    </div>
                 </div>
             </div>
         </div>
@@ -175,7 +178,7 @@
 
 <script>
 export default {
-    props: ['post', 'inserirEstagiario']
+    props: ['post', 'inserirEstagiario', 'calcularRecesso']
 }
 </script>
 
