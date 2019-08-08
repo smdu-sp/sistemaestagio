@@ -16,18 +16,8 @@ class CursoController extends Controller
         return $id;        
     }
 
-    public function contaCursos() {
-        $cursos = Curso::all();
-        $num = 0;
-        foreach($cursos as $curso) {
-            $num += 1;
-        }
-        return $num;
-    }
-
     public function setCurso(Request $request) {
         $curso = Curso::create([
-            'id'=>$this->contaCursos(),
             'formacao'=>$request->input('formacao')
         ]);
 

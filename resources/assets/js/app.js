@@ -63,6 +63,7 @@ import BotaoEmail from './components/BotaoEmail.vue';
 import BotaoImprimir from './components/BotaoImprimir.vue';
 import SupervisorAlteracao from './components/supervisor/AlteracaoSupervisor.vue';
 import InstituicaoEnsino from './components/instituicao_ensino/Instituicao.vue';
+import CadastrarCurso from './components/curso/Curso.vue';
 
 Vue.component('aside-component', AsideComponent);
 Vue.component('home-component', HomeComponent);
@@ -89,6 +90,7 @@ Vue.component('consulta-supervisor-component', ConsultaSupervisor);
 Vue.component('botao-imprimir-component', BotaoImprimir);
 Vue.component('alteracao-supervisor-component', SupervisorAlteracao);
 Vue.component('cadastro-instituicao-component', InstituicaoEnsino);
+Vue.component('cadastrar-curso-component', CadastrarCurso);
 
 import { routes } from './routes.js';
 
@@ -102,10 +104,3 @@ new Vue({
     store,
     router: router
 });
-
-// const app = new Vue({
-//     store,
-//     el: '#app'
-// })
-
-// const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');

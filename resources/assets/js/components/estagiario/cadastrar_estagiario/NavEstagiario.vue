@@ -28,8 +28,12 @@
         <cadastro-vaga-component></cadastro-vaga-component>
     </b-modal>
 
-     <b-modal v-model="exibeModalInstituicao" size="xl" ok-only>
+    <b-modal v-model="exibeModalInstituicao" size="xl" ok-only>
         <cadastro-instituicao-component></cadastro-instituicao-component>
+    </b-modal>
+
+    <b-modal v-model="exibeModalCurso" size="lg" ok-only>
+        <cadastrar-curso-component></cadastrar-curso-component>
     </b-modal>
 
     <div> <!-- Exibe este modal caso o cpf já exista na base de dados -->
@@ -100,6 +104,7 @@
                     :verificaDuplicidadeCodEstudante="verificaDuplicidadeCodEstudante"
                     :abreModalInstituicaoEnsino="abreModalInstituicaoEnsino"
                     :carregaInstituicoes="carregaInstituicoes"
+                    :abreModalCurso="abreModalCurso"
                     />
                 </b-card-text>
             </b-tab>
@@ -202,7 +207,8 @@ export default {
             exibeModalCartaoAcesso: false,
             exibeModalVaga: false,
             urlPadrao: '/api/',
-            exibeModalInstituicao: false
+            exibeModalInstituicao: false,
+            exibeModalCurso: false
         }
     },
     mixins: [computeds],
@@ -226,6 +232,9 @@ export default {
         
     },
     methods: {
+        abreModalCurso() {
+            this.exibeModalCurso = !this.exibeModalCurso;
+        },
         abreModalVaga() {
             this.exibeModalVaga = !this.exibeModalVaga;
         },

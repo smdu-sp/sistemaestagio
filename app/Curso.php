@@ -9,7 +9,6 @@ class Curso extends Model
     protected $table = 'tab_formacoes_supervisores';
     public $timestamps = false;
     protected $fillable = [
-        'id',
         'formacao'
     ];
 }

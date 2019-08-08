@@ -30,6 +30,9 @@
                             <li>
                                 <router-link :to="{name: 'Consulta de Supervisor'}">Supervisor</router-link>
                             </li>
+                            <li>
+                                <router-link :to="{name: 'Consulta de Vaga'}">Vaga</router-link>
+                            </li>
                         </ul>
                     </transition>
                 <li>
@@ -47,13 +50,16 @@
                                     <router-link :to="{name: 'Cadastro de Cartão de Acesso'}">Cartão de Acesso</router-link>
                                 </li>
                                 <li>
+                                    <router-link :to="{name: 'Cadastro de Curso'}">Curso</router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: 'Cadastro de Instituição'}">Instituição de ensino</router-link>
+                                </li>
+                                <li>
                                     <router-link :to="{name: 'Cadastro de Supervisores'}">Supervisor</router-link>
                                 </li>
                                 <li>
                                     <router-link :to="{name: 'Cadastro de Vagas'}">Vaga</router-link>
-                                </li>
-                                <li>
-                                    <router-link :to="{name: 'Cadastro de Instituição'}">Instituição de ensino</router-link>
                                 </li>
                             </ul>
                         </transition>
@@ -67,7 +73,10 @@
                     <transition name="fade">
                         <ul v-if="menuRelatorios">
                             <li id="show-btn">
-                                <router-link :to="{name: 'Relatório de Entradas, Saídas e Renovação'}">Entrada, Saída e Renovação - 30 dias</router-link>
+                                <router-link :to="{name: 'Estagiários desligados'}">Desligados</router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{name: 'Relatório de Entradas, Saídas e Renovação'}">Entrada, Saída e Renovação</router-link>
                             </li>
                             <li>
                                 <router-link :to="{name: 'Relatório de Vagas'}">Vagas</router-link>

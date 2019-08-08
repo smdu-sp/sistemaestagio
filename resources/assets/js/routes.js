@@ -11,6 +11,9 @@ import RelatorioCotas from './components/relatorios/Cotas.vue';
 import AlteracaoSupervisor from './components/supervisor/AlteracaoSupervisor.vue';
 import FFI from './components/FFI.vue';
 import CadastroInstituicao from './components/instituicao_ensino/Instituicao.vue';
+import CadastroCurso from './components/curso/Curso.vue';
+import ConsultaVaga from './components/vaga/ConsultaVaga.vue';
+import consultaDesligados from './components/relatorios/Desligados.vue';
 
 export const routes = [
     {
@@ -77,5 +80,20 @@ export const routes = [
         name: 'Cadastro de Instituição',
         path: '/cadastrarInstituicao',
         component: CadastroInstituicao
+    },
+    {
+        name: 'Cadastro de Curso',
+        path: '/cadastroCurso',
+        component: CadastroCurso
+    },
+    {
+        name: 'Consulta de Vaga',
+        path: '/consultaVaga',
+        component: ConsultaVaga
+    },
+    {
+        name: 'Estagiários desligados',
+        path: '/consultaDesligados',
+        component: consultaDesligados
     }
 ];

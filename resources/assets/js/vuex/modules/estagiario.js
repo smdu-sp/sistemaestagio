@@ -76,11 +76,34 @@ export default {
             let dataAtualMais90Dias = dataAtual.setDate(dataAtual.getDate() + 90);
 
             for(let i in estagiarios) {
-                let dataEstagiario = estagiarios[i].dt_termino;
-                let novaData = new Date(dataEstagiario);
-                let novaDataFormatada = novaData.setDate(novaData.getDate());      
-                if(novaDataFormatada >= dataAtualFormatada && novaDataFormatada <= dataAtualMais90Dias){
-                    context.commit('armazenaContratosVencer', estagiarios[i]);
+                if(estagiarios[i].dt_inicio_3_aditivo) {
+                    let dataEstagiario = estagiarios[i].dt_inicio_3_aditivo;
+                    let novaData = new Date(dataEstagiario);
+                    let novaDataFormatada = novaData.setDate(novaData.getDate());      
+                    if(novaDataFormatada >= dataAtualFormatada && novaDataFormatada <= dataAtualMais90Dias){
+                        context.commit('armazenaContratosVencer', estagiarios[i]);
+                    }
+                } else if(estagiarios[i].dt_inicio_2_aditivo) {
+                    let dataEstagiario = estagiarios[i].dt_inicio_2_aditivo;
+                    let novaData = new Date(dataEstagiario);
+                    let novaDataFormatada = novaData.setDate(novaData.getDate());      
+                    if(novaDataFormatada >= dataAtualFormatada && novaDataFormatada <= dataAtualMais90Dias){
+                        context.commit('armazenaContratosVencer', estagiarios[i]);
+                    }
+                } else if(estagiarios[i].dt_inicio_1_aditivo) {
+                    let dataEstagiario = estagiarios[i].dt_inicio_1_aditivo
+                    let novaData = new Date(dataEstagiario);
+                    let novaDataFormatada = novaData.setDate(novaData.getDate());      
+                    if(novaDataFormatada >= dataAtualFormatada && novaDataFormatada <= dataAtualMais90Dias){
+                        context.commit('armazenaContratosVencer', estagiarios[i]);
+                    }
+                } else {
+                    let dataEstagiario = estagiarios[i].dt_termino;
+                    let novaData = new Date(dataEstagiario);
+                    let novaDataFormatada = novaData.setDate(novaData.getDate());      
+                    if(novaDataFormatada >= dataAtualFormatada && novaDataFormatada <= dataAtualMais90Dias){
+                        context.commit('armazenaContratosVencer', estagiarios[i]);
+                    }
                 }
             }
         },

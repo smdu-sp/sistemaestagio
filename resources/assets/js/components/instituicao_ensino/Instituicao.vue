@@ -125,7 +125,7 @@
                                     </textarea>
                                 </div>
                             </div>
-                            <botoes-component :titulo="nomebotao = 'Salvar'"></botoes-component>
+                            <botoes-component :titulo="nomebotao = 'Cadastrar'"></botoes-component>
                         </form>
                     </b-card-text>
                 </b-tab>

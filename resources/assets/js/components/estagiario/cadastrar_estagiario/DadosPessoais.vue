@@ -440,17 +440,27 @@
     <!--row-->
     <div class="row">
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="selectCurso">Curso/Formação</label>
-                <select class="form-control" 
-                    @blur="validaCurso"
-                    :class="{'is-invalid':cursoValido}"
-                    id="selectCurso" 
-                    v-model="post.curso_formacao" >
-                    <option v-for="curso in cursosOrdenados" :value="curso.id">{{ curso.formacao.toUpperCase() }}</option>
-                </select>
-                <div v-if="cursoValido" class="invalid-feedback">
-                    Curso não pode ser vazio
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="selectCurso">Curso/Formação</label>
+                        <select class="form-control" 
+                            @blur="validaCurso"
+                            :class="{'is-invalid':cursoValido}"
+                            id="selectCurso" 
+                            v-model="post.curso_formacao" >
+                            <option v-for="curso in cursosOrdenados" :value="curso.id">{{ curso.formacao.toUpperCase() }}</option>
+                        </select>
+                        <div v-if="cursoValido" class="invalid-feedback">
+                            Curso não pode ser vazio
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
+                    <img src="../../../../../../public/icones/icons8-curso-atribuir-64.png"
+                        alt="Cadastrar Curso"
+                        class="cadastrarCurso"
+                        @click="abreModalCurso">
                 </div>
             </div>
         </div>
@@ -576,7 +586,8 @@ export default {
         'abreModalCartaoAcesso', 'carregaCartaoAcesso',
         'cartoesOrdenados', 'cursosOrdenados',
         'verificaDuplicidadeCpf','verificaDuplicidadeCodEstudante',
-        'abreModalInstituicaoEnsino', 'carregaInstituicoes'
+        'abreModalInstituicaoEnsino', 'carregaInstituicoes',
+        'abreModalCurso'
     ]
 }
 </script>
@@ -587,6 +598,11 @@ export default {
     height: 30px;
 }
 .cadastraInstituicao {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+.cadastrarCurso {
     cursor: pointer;
     width: 40px;
     height: 40px;
