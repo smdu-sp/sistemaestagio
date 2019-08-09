@@ -62,7 +62,7 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Departamento</th>
                         <th scope="col">Supervisor</th>
-                        <th scope="col">Vencimento</th>
+                        <th scope="col">Desligamento</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +75,7 @@
                                 </td>
                             <td>{{ estagiarioDesligado.dep_hierarquico ? estagiarioDesligado.dep_hierarquico : 'NÃO CADASTRADO' }}</td>
                             <td>{{ estagiarioDesligado.supervisor.toUpperCase() }}</td>
-                            <td>{{ estagiarioDesligado.dt_termino | dataFormatada }}</td>                        
+                            <td>{{ estagiarioDesligado.desligado | dataFormatada }}</td>                        
                         </tr>
                         <template v-if="!estagiariosDesligados30Dias.length">
                             <tr>
@@ -181,7 +181,7 @@ export default {
             let dataAtualMenos30Dias = dataAtual.setDate(dataAtual.getDate() - 30);
 
             for(let i in this.estagiarios) {
-                let dataEstagiario = this.estagiarios[i].dt_termino
+                let dataEstagiario = this.estagiarios[i].desligado;
                 let novaData = new Date(dataEstagiario);
                 let novaDataFormatada = novaData.setDate(novaData.getDate());
                 if(novaDataFormatada >= dataAtualMenos30Dias && novaDataFormatada <= dataAtualTime){

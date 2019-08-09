@@ -23,6 +23,9 @@
                                 <label for="">Situação</label>
                                 <select name="" id="" class="form-control" v-model="vagaSelecionada.situacao">
                                     <option>{{ vagaSelecionada.situacao }}</option>
+                                    <option>NÃO DISTRIBUIDA</option>
+                                    <option>CANCELADA</option>
+                                    <option>DISTRIBUIDA</option>
                                 </select>
                             </div>
                             <div class="col-md-3">

@@ -177,7 +177,6 @@
                   <recesso-atualizar
                   :post="post"
                   :inserirEstagiario="inserirEstagiario"
-                  :calcularRecesso="calcularRecesso"
                   />
               </b-card-text>
           </b-tab>
@@ -302,15 +301,6 @@ export default {
     }
   },
   methods: {
-    calcularRecesso() {
-      if(this.post.dt_inicial_1) { 
-        const data = new Date(this.post.dt_inicial_1)
-        const dataFormatada = data.setDate(data.getDate())
-        console.log(dataFormatada)
-      } else {
-        console.log('Não Tem')
-      }
-    },
     carregaSupervisor() {
         const uriSupervisores = '/api/supervisores';
 
@@ -335,11 +325,21 @@ export default {
 
         this.requisicaoGet(uriCartoes, 'cartoes');
     },
+    insereDataDesligamento() {
+      const dataHoje = new Date();
+      const dia = dataHoje.getDate() < 10 ? `0${dataHoje.getDate()}` : `${dataHoje.getDate()}`;
+      const mes = dataHoje.getMonth() + 1 < 10 ? `0${dataHoje.getMonth() + 1}` : `${dataHoje.getMonth() + 1}`;
+      const ano = dataHoje.getFullYear();
+      const dataFormatada = `${ano}-${mes}-${dia}`;
+
+      this.post.desligado = dataFormatada
+    },
     alteraVagaParaLivre(situacao) {
       if(situacao.target.value == 5) {
         this.statusVaga.status = 'LIVRE'
         document.getElementById('selectStatus').disabled = true
       }
+      this.insereDataDesligamento();
     },
     selecionaPrimeiroDaLista() {
         if(this.filtro) {

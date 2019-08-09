@@ -29,7 +29,7 @@
                     <label for="selectSupervisor">Supervisor</label>
                     <select id="selectSupervisor" class="form-control" v-model="supervisorFiltrado">
                         <option value="">Todos</option>
-                        <option v-for="supervisor of supervisoresOrdenados" :key="supervisor.rf">{{ supervisor.nome.toUpperCase()  }}</option>
+                        <option v-for="supervisor of supervisoresSort" :key="supervisor.rf">{{ supervisor.nome }}</option>
                     </select>
                 </div>
             </div>
@@ -61,8 +61,8 @@
                         <td>{{ vaga.id }}</td>
                         <td>{{ vaga.status }}</td>
                         <td>{{ vaga.dep_hierarquico }}</td>
-                        <td>{{ vaga.supervisor ? vaga.supervisor.toUpperCase() : '' }}</td>
-                        <td>{{ vaga.estagiario ? vaga.estagiario.toUpperCase() : '' }}</td>
+                        <td>{{ vaga.supervisor }}</td>
+                        <td>{{ vaga.estagiario }}</td>
                         <td>{{ vaga.historico }}</td>
                     </tr>
                 </tbody>
@@ -89,9 +89,8 @@
                         <td>{{ vagaLivre.id }}</td>
                         <td>{{ vagaLivre.status }}</td>
                         <td>{{ vagaLivre.dep_hierarquico }}</td>
-                        <td>{{ vagaLivre.supervisor ? vagaLivre.supervisor.toUpperCase() : '' }}</td>
-                        <td>{{ vaga.estagiario ? vagaLivre.estagiario.toUpperCase() : '' }}</td>
-                        <td>{{ vaga.estagiario ? vagaLivre.estagiario.toUpperCase() : '' }}</td>
+                        <td>{{ vagaLivre.supervisor }}</td>
+                        <td>{{ vagaLivre.estagiario }}</td>
                         <td>{{ vagaLivre.historico }}</td>
                     </tr>
                 </tbody>
@@ -118,8 +117,8 @@
                         <td>{{ vaga.id }}</td>
                         <td>{{ vaga.status }}</td>
                         <td>{{ vaga.dep_hierarquico }}</td>
-                        <td>{{ vaga.supervisor ? vaga.supervisor.toUpperCase() : '' }}</td>
-                        <td>{{ vaga.estagiario ? vaga.estagiario.toUpperCase() : '' }}</td>
+                        <td>{{ vaga.supervisor }}</td>
+                        <td>{{ vaga.estagiario }}</td>
                         <td>{{ vaga.historico }}</td>
                     </tr>
                 </tbody>
@@ -147,8 +146,8 @@
                         <td>{{ vagaEmSelecao.id }}</td>
                         <td>{{ vagaEmSelecao.status }}</td>
                         <td>{{ vagaEmSelecao.dep_hierarquico }}</td>
-                        <td>{{ vagaEmSelecao.supervisor ? vagaEmSelecao.supervisor.toUpperCase() : '' }}</td>
-                        <td>{{ vagaEmSelecao.estagiario ? vagaEmSelecao.estagiario.toUpperCase() : '' }}</td>
+                        <td>{{ vagaEmSelecao.supervisor }}</td>
+                        <td>{{ vagaEmSelecao.estagiario }}</td>
                         <td>{{ vagaEmSelecao.historico }}</td>
                     </tr>
                 </tbody>
@@ -175,8 +174,8 @@
                         <td>{{ vagaCancelada.id }}</td>
                         <td>{{ vagaCancelada.status }}</td>
                         <td>{{ vagaCancelada.dep_hierarquico }}</td>
-                        <td>{{ vagaCancelada.supervisor ? vagaCancelada.supervisor.toUpperCase() : '' }}</td>
-                        <td>{{ vagaCancelada.estagiario ? vagaCancelada.estagiario.toUpperCase() : '' }}</td>
+                        <td>{{ vagaCancelada.supervisor  }}</td>
+                        <td>{{ vagaCancelada.estagiario }}</td>
                         <td>{{ vagaCancelada.historico }}</td>
                     </tr>
                 </tbody>
@@ -203,8 +202,8 @@
                         <td>{{ vagaTransferida.id }}</td>
                         <td>{{ vagaTransferida.status }}</td>
                         <td>{{ vagaTransferida.dep_hierarquico }}</td>
-                        <td>{{ vagaTransferida.supervisor ? vagaTransferida.supervisor.toUpperCase() : '' }}</td>
-                        <td>{{ vagaTransferida.estagiario ? vagaTransferida.estagiario.toUpperCase() : '' }}</td>
+                        <td>{{ vagaTransferida.supervisor }}</td>
+                        <td>{{ vagaTransferida.estagiario }}</td>
                         <td>{{ vagaTransferida.historico }}</td>
                     </tr>
                 </tbody>
@@ -217,6 +216,7 @@
 
 <script>
 import { setTimeout } from 'timers';
+import _ from 'lodash';
 import computeds from '../../mixins/computeds';
 export default {
     data() {
@@ -248,6 +248,9 @@ export default {
                 return departamento.tipo === "PAI"
             })
             return departamentosPai
+        },
+        supervisoresSort() {
+            return _.orderBy(this.supervisores, 'nome');
         },
         vagasPorDepartamento() {
             // filtro somente por status
@@ -386,6 +389,9 @@ export default {
             this.axios.get(uriSupervisores)
             .then(response => {
                 this.supervisores = response.data;
+                for(let i in this.supervisores) {
+                    this.supervisores[i].nome = this.supervisores[i].nome.toUpperCase();
+                }
             })
             .catch(error => {
                 console.log(error)
@@ -395,8 +401,8 @@ export default {
             for(let i in this.estagiarios) {
                 for(let k in this.vagas) {
                     if(this.estagiarios[i].cod_vaga === this.vagas[k].id && this.estagiarios[i].situacao == 1) {
-                        this.vagas[k].supervisor = this.estagiarios[i].supervisor;
-                        this.vagas[k].estagiario = this.estagiarios[i].nome;
+                        this.vagas[k].supervisor = this.estagiarios[i].supervisor.toUpperCase();
+                        this.vagas[k].estagiario = this.estagiarios[i].nome.toUpperCase();
                     }
                 }
             }
@@ -407,6 +413,9 @@ export default {
             this.axios.get(uriEstagiarios)
             .then(response => {
                 this.estagiarios = response.data;
+                for(let i in this.estagiarios) {
+                    this.estagiarios[i].nome = this.estagiarios[i].nome.toUpperCase()
+                }
             })
             .catch(error => {
                 console.log(error);

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Cadastro de Instituição de Ensino</h1>
+        <h1 class="text-center">Cadastro de Instituição de Ensino</h1>
 
         <div v-if="msg.error" class="alert alert-danger">
             {{ msg.erro }}
