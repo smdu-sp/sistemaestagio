@@ -1,7 +1,7 @@
 <template>    
     <div>
 
-        <b-modal ref="modalContratosVencidos" size="xl" title="Contratos a Vencer nos Próximos 90 dias" ok-only>
+        <b-modal ref="modalContratosVencidos" size="x1" title="Contratos a Vencer nos Próximos 90 dias" ok-only>
             <div id="printable">
                 <h1 class="titulo-relatorio">Contratos a vencer nos próximos 90 dias</h1>
                 <table class="table table-bordered table-hover">

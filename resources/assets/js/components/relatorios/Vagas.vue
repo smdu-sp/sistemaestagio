@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div> 
         <h1 class="text-center">Relatório de vagas</h1>
         <div class="row">
             <div class="col-md-3">
@@ -52,13 +52,13 @@
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Estagiário</th>
-                        <th scope="row">Histórico</th>
+                        <th scope="row">Observações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(vaga, indice) of vagasPorDepartamento" :key="vaga.id">
                         <td>{{ indice + 1 }}</td>
-                        <td>{{ vaga.id }}</td>
+                        <td><b-link href="#" id="modalHistoricoVagas" style="cursor: pointer;" @click="abrirModalHistoricoVagas(vaga.id)">{{ vaga.id }}</b-link></td>
                         <td>{{ vaga.status }}</td>
                         <td>{{ vaga.dep_hierarquico }}</td>
                         <td>{{ vaga.supervisor }}</td>
@@ -67,9 +67,43 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+            <div>
+            </div>
+            <!--Modal - Histórico da Vaga-->
+           <template>
+            <div>
+                <b-modal ref="modalHistoricoVagas" hide-footer title="Histórico da vaga" size="lg">
+                <div class="d-block text-center">
+                   <h4>Vaga {{ vagaAtual }}</h4>
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="row">Cód. Vaga</th>
+                                <th scope="row">Nome do Estagiário</th>
+                                <th scope="row">Data início</th>
+                                <th scope="row">Data fim</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(historicoEstagiarios, indice) of historicoVagas" :key="historicoEstagiarios.cpf">
+                                <td>{{ historicoEstagiarios.cod_vaga }}</td>
+                                <td>{{ historicoEstagiarios.nome }}</td>
+                                <td>{{ new Date(historicoEstagiarios.dt_inicio).toLocaleDateString() }}</td>
+                                <td>{{ new Date(historicoEstagiarios.dt_termino).toLocaleDateString() }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div v-if="historicoVagas.length === 0">
+                        <h4>Não há histórico para esta vaga.</h4>
+                    </div>
+                </div>
+                <b-button class="mt-3" variant="outline-danger" block @click="fecharModalHistoricoVagas">Fechar</b-button>
+                </b-modal>
+            </div>
+            </template>
+             </div>
         
-        <div v-if="status === 'Livres'">
+            <div v-if="status === 'Livres'">
             <h5 class="total-vagas alert alert-info">Total de vagas: {{ vagasPorDepartamento.length }}</h5>
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
@@ -80,7 +114,7 @@
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Estagiário</th>
-                        <th scope="row">Histórico</th>
+                        <th scope="row">Observações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -108,13 +142,13 @@
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Estagiário</th>
-                        <th scope="row">Histórico</th>
+                        <th scope="row">Observações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(vaga, indice) of vagasPorDepartamento" :key="vaga.id">
                         <td>{{ indice + 1 }}</td>
-                        <td>{{ vaga.id }}</td>
+                        <td><a v-b-modal.modalHistoricoVagas>{{ vaga.id }}</a></td>
                         <td>{{ vaga.status }}</td>
                         <td>{{ vaga.dep_hierarquico }}</td>
                         <td>{{ vaga.supervisor }}</td>
@@ -137,7 +171,7 @@
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Estagiário</th>
-                        <th scope="row">Histórico</th>
+                        <th scope="row">Observações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -165,7 +199,8 @@
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Estagiário</th>
-                        <th scope="row">Histórico</th>
+                        <th scope="row">Observações
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -193,7 +228,7 @@
                         <th scope="row">Departamento</th>
                         <th scope="row">Supervisor</th>
                         <th scope="row">Estagiário</th>
-                        <th scope="row">Histórico</th>
+                        <th scope="row">Observações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -227,6 +262,8 @@ export default {
             estagiarios: {},
             supervisores: {},
             vagas: [],
+            vagaAtual: '123',
+            historicoVagas: [],
             departamentos: [],
             vagasOcupadas: [],
             vagasEmSelecao: [],
@@ -378,6 +415,23 @@ export default {
         },
     },
     methods: {
+       abrirModalHistoricoVagas(idVaga) {           
+        //    Atualiza informações do modal                   
+        this.vagaAtual = idVaga;
+        this.historicoVagas = [];
+        for (let i in this.estagiarios){
+            if(this.estagiarios[i].cod_vaga === this.vagaAtual){
+                this.historicoVagas.push(this.estagiarios[i]);
+            }
+        }        
+
+        //    Exibe modal
+        this.$refs['modalHistoricoVagas'].show()
+        },
+        fecharModalHistoricoVagas() {
+        this.$refs['modalHistoricoVagas'].hide()
+      },
+
         limparFiltro() {
             this.status = 'Todas';
             this.departamentoFiltrado = '';

@@ -65,8 +65,9 @@
 
                         
                         <div class="row mt-2 tabela">
-                            <table class="table table-striped">
-                                <thead>
+                        
+                            <table class="table table-striped block-column">
+                                <thead align="center">
                                     <tr>
                                         <th scope="col">Nome</th>
                                         <th scope="col">RF</th>
@@ -77,6 +78,8 @@
                                         <!-- <th scope="col">Atividades Estagiário</th> -->
                                         <th scope="col">Situação</th>
                                         <th scope="col">CPF</th>
+                                        <th scope="col">Telefone </th>
+                                        <th scope="col">E-mail</th>
                                         <th scope="col">Estagiários</th>
                                     </tr>
                                 </thead>
@@ -92,6 +95,8 @@
                                         <td>{{ supervisor.situacao }}</td>
                                         <td v-if="supervisor.cpf">{{ supervisor.cpf }}</td>
                                         <td v-else>NÃO CADASTRADO</td>
+                                        <td>{{ supervisor.tel_contato }}</td>
+                                        <td>{{ supervisor.e_mail }}</td>
                                         <td class="td-estagiario">
                                             <a href="" @click.prevent="consultaEstagiario" v-for="estagiario of supervisor.estagiarios" :key="estagiario" class="estagiario">
                                                 <tr>
@@ -324,5 +329,9 @@ export default {
 
 .valor {
     margin-left: 2%;
+}
+
+.block-column > thead > tr > th {
+    min-width: 10em;
 }
 </style>

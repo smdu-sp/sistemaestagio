@@ -7645,6 +7645,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7657,6 +7692,8 @@ __webpack_require__.r(__webpack_exports__);
       estagiarios: {},
       supervisores: {},
       vagas: [],
+      vagaAtual: '123',
+      historicoVagas: [],
       departamentos: [],
       vagasOcupadas: [],
       vagasEmSelecao: [],
@@ -7815,6 +7852,23 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    abrirModalHistoricoVagas: function abrirModalHistoricoVagas(idVaga) {
+      //    Atualiza informações do modal                   
+      this.vagaAtual = idVaga;
+      this.historicoVagas = [];
+
+      for (var i in this.estagiarios) {
+        if (this.estagiarios[i].cod_vaga === this.vagaAtual) {
+          this.historicoVagas.push(this.estagiarios[i]);
+        }
+      } //    Exibe modal
+
+
+      this.$refs['modalHistoricoVagas'].show();
+    },
+    fecharModalHistoricoVagas: function fecharModalHistoricoVagas() {
+      this.$refs['modalHistoricoVagas'].hide();
+    },
     limparFiltro: function limparFiltro() {
       this.status = 'Todas';
       this.departamentoFiltrado = '';
@@ -8498,6 +8552,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_computeds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/computeds */ "./resources/assets/js/mixins/computeds.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -40722,7 +40781,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.tabela {\r\n    overflow: scroll;\r\n    height: 500px;\n}\n.estagiario {\r\n    text-transform: capitalize;\r\n    margin-bottom: 4px;\n}\n.td-estagiario {\r\n    background-color: transparent!important;\n}\n.linha {\r\n    display: -webkit-box;\r\n    display: flex;\r\n    border: 1px solid #ccc;\n}\n.dado {\r\n    font-weight: bold;\r\n    margin-left: 2%;\n}\n.valor {\r\n    margin-left: 2%;\n}\r\n", ""]);
+exports.push([module.i, "\n.tabela {\r\n    overflow: scroll;\r\n    height: 500px;\n}\n.estagiario {\r\n    text-transform: capitalize;\r\n    margin-bottom: 4px;\n}\n.td-estagiario {\r\n    background-color: transparent!important;\n}\n.linha {\r\n    display: -webkit-box;\r\n    display: flex;\r\n    border: 1px solid #ccc;\n}\n.dado {\r\n    font-weight: bold;\r\n    margin-left: 2%;\n}\n.valor {\r\n    margin-left: 2%;\n}\n.block-column > thead > tr > th {\r\n    min-width: 10em;\n}\r\n", ""]);
 
 // exports
 
@@ -74062,7 +74121,7 @@ var render = function() {
         {
           ref: "modalContratosVencidos",
           attrs: {
-            size: "xl",
+            size: "x1",
             title: "Contratos a Vencer nos Próximos 90 dias",
             "ok-only": ""
           }
@@ -84270,37 +84329,178 @@ var render = function() {
     ]),
     _vm._v(" "),
     _vm.status === "Todas"
-      ? _c("div", [
-          _c("h5", { staticClass: "total-vagas alert alert-info" }, [
-            _vm._v("Total de vagas: " + _vm._s(_vm.vagasPorDepartamento.length))
-          ]),
-          _vm._v(" "),
-          _c("table", { staticClass: "table table-bordered table-hover" }, [
-            _vm._m(0),
+      ? _c(
+          "div",
+          [
+            _c("h5", { staticClass: "total-vagas alert alert-info" }, [
+              _vm._v(
+                "Total de vagas: " + _vm._s(_vm.vagasPorDepartamento.length)
+              )
+            ]),
             _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.vagasPorDepartamento, function(vaga, indice) {
-                return _c("tr", { key: vaga.id }, [
-                  _c("td", [_vm._v(_vm._s(indice + 1))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.id))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.status))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.dep_hierarquico))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.supervisor))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.estagiario))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.historico))])
-                ])
-              }),
-              0
-            )
-          ])
-        ])
+            _c("table", { staticClass: "table table-bordered table-hover" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.vagasPorDepartamento, function(vaga, indice) {
+                  return _c("tr", { key: vaga.id }, [
+                    _c("td", [_vm._v(_vm._s(indice + 1))]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "b-link",
+                          {
+                            staticStyle: { cursor: "pointer" },
+                            attrs: { href: "#", id: "modalHistoricoVagas" },
+                            on: {
+                              click: function($event) {
+                                return _vm.abrirModalHistoricoVagas(vaga.id)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(vaga.id))]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(vaga.status))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(vaga.dep_hierarquico))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(vaga.supervisor))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(vaga.estagiario))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(vaga.historico))])
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div"),
+            _vm._v(" "),
+            [
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-modal",
+                    {
+                      ref: "modalHistoricoVagas",
+                      attrs: {
+                        "hide-footer": "",
+                        title: "Histórico da vaga",
+                        size: "lg"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "d-block text-center" }, [
+                        _c("h4", [_vm._v("Vaga " + _vm._s(_vm.vagaAtual))]),
+                        _vm._v(" "),
+                        _c(
+                          "table",
+                          { staticClass: "table table-bordered table-hover" },
+                          [
+                            _c("thead", { staticClass: "thead-dark" }, [
+                              _c("tr", [
+                                _c("th", { attrs: { scope: "row" } }, [
+                                  _vm._v("Cód. Vaga")
+                                ]),
+                                _vm._v(" "),
+                                _c("th", { attrs: { scope: "row" } }, [
+                                  _vm._v("Nome do Estagiário")
+                                ]),
+                                _vm._v(" "),
+                                _c("th", { attrs: { scope: "row" } }, [
+                                  _vm._v("Data início")
+                                ]),
+                                _vm._v(" "),
+                                _c("th", { attrs: { scope: "row" } }, [
+                                  _vm._v("Data fim")
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              _vm._l(_vm.historicoVagas, function(
+                                historicoEstagiarios,
+                                indice
+                              ) {
+                                return _c(
+                                  "tr",
+                                  { key: historicoEstagiarios.cpf },
+                                  [
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(historicoEstagiarios.cod_vaga)
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(historicoEstagiarios.nome))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(
+                                          new Date(
+                                            historicoEstagiarios.dt_inicio
+                                          ).toLocaleDateString()
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(
+                                          new Date(
+                                            historicoEstagiarios.dt_termino
+                                          ).toLocaleDateString()
+                                        )
+                                      )
+                                    ])
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.historicoVagas.length === 0
+                          ? _c("div", [
+                              _c("h4", [
+                                _vm._v("Não há histórico para esta vaga.")
+                              ])
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
+                          staticClass: "mt-3",
+                          attrs: { variant: "outline-danger", block: "" },
+                          on: { click: _vm.fecharModalHistoricoVagas }
+                        },
+                        [_vm._v("Fechar")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]
+          ],
+          2
+        )
       : _vm._e(),
     _vm._v(" "),
     _vm.status === "Livres"
@@ -84352,7 +84552,21 @@ var render = function() {
                 return _c("tr", { key: vaga.id }, [
                   _c("td", [_vm._v(_vm._s(indice + 1))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(vaga.id))]),
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        directives: [
+                          {
+                            name: "b-modal",
+                            rawName: "v-b-modal.modalHistoricoVagas",
+                            modifiers: { modalHistoricoVagas: true }
+                          }
+                        ]
+                      },
+                      [_vm._v(_vm._s(vaga.id))]
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(vaga.status))]),
                   _vm._v(" "),
@@ -84496,7 +84710,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Observações")])
       ])
     ])
   },
@@ -84518,7 +84732,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Observações")])
       ])
     ])
   },
@@ -84540,7 +84754,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Observações")])
       ])
     ])
   },
@@ -84562,7 +84776,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Observações")])
       ])
     ])
   },
@@ -84584,7 +84798,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
+        _c("th", { attrs: { scope: "row" } }, [
+          _vm._v("Observações\n                    ")
+        ])
       ])
     ])
   },
@@ -84606,7 +84822,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [_vm._v("Histórico")])
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Observações")])
       ])
     ])
   }
@@ -85679,115 +85895,135 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "row mt-2 tabela" }, [
-                      _c("table", { staticClass: "table table-striped" }, [
-                        _c("thead", [
-                          _c("tr", [
-                            _c("th", { attrs: { scope: "col" } }, [
-                              _vm._v("Nome")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { attrs: { scope: "col" } }, [
-                              _vm._v("RF")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { attrs: { scope: "col" } }, [
-                              _vm._v("Departamento")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { attrs: { scope: "col" } }, [
-                              _vm._v("Cargo")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { attrs: { scope: "col" } }, [
-                              _vm._v("Formação")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { attrs: { scope: "col" } }, [
-                              _vm._v("Situação")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { attrs: { scope: "col" } }, [
-                              _vm._v("CPF")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { attrs: { scope: "col" } }, [
-                              _vm._v("Estagiários")
+                      _c(
+                        "table",
+                        { staticClass: "table table-striped block-column" },
+                        [
+                          _c("thead", { attrs: { align: "center" } }, [
+                            _c("tr", [
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("Nome")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("RF")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("Departamento")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("Cargo")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("Formação")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("Situação")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("CPF")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("Telefone ")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("E-mail")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("Estagiários")
+                              ])
                             ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.supervisoresComFiltro, function(
-                            supervisor
-                          ) {
-                            return _c("tr", { key: supervisor.rf }, [
-                              _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(_vm._s(supervisor.nome.toUpperCase()))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(supervisor.rf))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  _vm._s(
-                                    supervisor.departamento
-                                      ? supervisor.departamento
-                                      : "NÃO CADASTRADO"
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.supervisoresComFiltro, function(
+                              supervisor
+                            ) {
+                              return _c("tr", { key: supervisor.rf }, [
+                                _c("th", { attrs: { scope: "row" } }, [
+                                  _vm._v(_vm._s(supervisor.nome.toUpperCase()))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(supervisor.rf))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(
+                                      supervisor.departamento
+                                        ? supervisor.departamento
+                                        : "NÃO CADASTRADO"
+                                    )
                                   )
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(_vm._s(supervisor.cargo_funcao))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(supervisor.formacao))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(supervisor.situacao))]),
-                              _vm._v(" "),
-                              supervisor.cpf
-                                ? _c("td", [_vm._v(_vm._s(supervisor.cpf))])
-                                : _c("td", [_vm._v("NÃO CADASTRADO")]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "td-estagiario" },
-                                _vm._l(supervisor.estagiarios, function(
-                                  estagiario
-                                ) {
-                                  return _c(
-                                    "a",
-                                    {
-                                      key: estagiario,
-                                      staticClass: "estagiario",
-                                      attrs: { href: "" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.consultaEstagiario($event)
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(supervisor.cargo_funcao))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(supervisor.formacao))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(supervisor.situacao))]),
+                                _vm._v(" "),
+                                supervisor.cpf
+                                  ? _c("td", [_vm._v(_vm._s(supervisor.cpf))])
+                                  : _c("td", [_vm._v("NÃO CADASTRADO")]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(supervisor.tel_contato))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(supervisor.e_mail))]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "td-estagiario" },
+                                  _vm._l(supervisor.estagiarios, function(
+                                    estagiario
+                                  ) {
+                                    return _c(
+                                      "a",
+                                      {
+                                        key: estagiario,
+                                        staticClass: "estagiario",
+                                        attrs: { href: "" },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.consultaEstagiario(
+                                              $event
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [
-                                      _c("tr", [
-                                        _vm._v(
-                                          "\n                                                  " +
-                                            _vm._s(estagiario) +
-                                            "\n                                                  "
-                                        ),
-                                        _c("span", { staticClass: "linha" })
-                                      ])
-                                    ]
-                                  )
-                                }),
-                                0
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      ])
+                                      },
+                                      [
+                                        _c("tr", [
+                                          _vm._v(
+                                            "\n                                                  " +
+                                              _vm._s(estagiario) +
+                                              "\n                                                  "
+                                          ),
+                                          _c("span", { staticClass: "linha" })
+                                        ])
+                                      ]
+                                    )
+                                  }),
+                                  0
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      )
                     ])
                   ])
                 ],
@@ -106033,8 +106269,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\Development\api\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! c:\Development\api\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! C:\Iva9\Projetos\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! C:\Iva9\Projetos\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })
