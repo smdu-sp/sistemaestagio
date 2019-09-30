@@ -15,7 +15,8 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Departamento</th>
                             <th scope="col">Supervisor</th>
-                            <th scope="col">Desligado</th>
+                            <th scope="col">Admissão</th>
+                            <th scope="col">Desligamento</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +25,7 @@
                             <td>{{ estagiario.nome }}</td>
                             <td>{{ estagiario.dep_hierarquico }}</td>
                             <td>{{ estagiario.supervisor }}</td>
+                            <td>{{ estagiario.dt_inicio | dataFormatada }}</td>
                             <td>{{ estagiario.desligado | dataFormatada }}</td>
                         </tr>
                     </tbody>

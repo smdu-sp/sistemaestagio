@@ -141,8 +141,7 @@ export default {
     beforeMount() {
         this.retornaCargos();
         this.retornaEstagiarios();
-        this.retornaSupervisores();
-        this.retornaCursos();
+        
     },
     mixins: [filtros, computeds],
     computed: {
@@ -204,6 +203,15 @@ export default {
                 }
             }
         },
+        excluiSupervisorSemEstagiario(){
+            let tempSupervisores = [];
+            for (let i in this.supervisores) {
+                if(this.supervisores[i].estagiarios.length >= 1){
+                    tempSupervisores.push(this.supervisores[i]);
+                }
+            }
+            this.supervisores = tempSupervisores;
+        },
         retornaDepartamentos() {
             const uriDepartamentos = '/api/departamentos';
 
@@ -213,7 +221,8 @@ export default {
                 this.departamentos = response.data;
                 this.exibeDepartamento();
                 this.arrayEstagiarios();
-                this.relacionaEstagiarioAoSupervisor();                
+                this.relacionaEstagiarioAoSupervisor();
+                this.excluiSupervisorSemEstagiario();
             })
             .catch(error => {
                 console.log("Erro: "+error);
@@ -246,6 +255,8 @@ export default {
             .get(uriEstagiario)
             .then(response => {
                 this.estagiarios = response.data;
+                this.retornaSupervisores();
+                this.retornaCursos();
             })
             .catch(error => {
                 console.log("Erro: "+error);

@@ -7122,6 +7122,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7429,8 +7431,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mixins_computeds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/computeds */ "./resources/assets/js/mixins/computeds.js");
-//
-//
 //
 //
 //
@@ -8695,8 +8695,6 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     this.retornaCargos();
     this.retornaEstagiarios();
-    this.retornaSupervisores();
-    this.retornaCursos();
   },
   mixins: [_mixins_filtros__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_computeds__WEBPACK_IMPORTED_MODULE_2__["default"]],
   computed: {
@@ -8764,6 +8762,17 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
+    excluiSupervisorSemEstagiario: function excluiSupervisorSemEstagiario() {
+      var tempSupervisores = [];
+
+      for (var i in this.supervisores) {
+        if (this.supervisores[i].estagiarios.length >= 1) {
+          tempSupervisores.push(this.supervisores[i]);
+        }
+      }
+
+      this.supervisores = tempSupervisores;
+    },
     retornaDepartamentos: function retornaDepartamentos() {
       var _this = this;
 
@@ -8776,6 +8785,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.arrayEstagiarios();
 
         _this.relacionaEstagiarioAoSupervisor();
+
+        _this.excluiSupervisorSemEstagiario();
       })["catch"](function (error) {
         console.log("Erro: " + error);
       });
@@ -8806,6 +8817,10 @@ __webpack_require__.r(__webpack_exports__);
       var uriEstagiario = '/api/estagiarios';
       this.axios.get(uriEstagiario).then(function (response) {
         _this3.estagiarios = response.data;
+
+        _this3.retornaSupervisores();
+
+        _this3.retornaCursos();
       })["catch"](function (error) {
         console.log("Erro: " + error);
       });
@@ -83679,6 +83694,12 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
+                      _vm._s(_vm._f("dataFormatada")(estagiario.dt_inicio))
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
                       _vm._s(_vm._f("dataFormatada")(estagiario.desligado))
                     )
                   ])
@@ -83708,7 +83729,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Supervisor")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Desligado")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Admissão")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Desligamento")])
       ])
     ])
   }
@@ -84381,8 +84404,6 @@ var render = function() {
                 0
               )
             ]),
-            _vm._v(" "),
-            _c("div"),
             _vm._v(" "),
             [
               _c(

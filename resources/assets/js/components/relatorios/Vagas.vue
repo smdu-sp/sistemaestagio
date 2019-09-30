@@ -67,8 +67,6 @@
                     </tr>
                 </tbody>
             </table>
-            <div>
-            </div>
             <!--Modal - Histórico da Vaga-->
            <template>
             <div>
