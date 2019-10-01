@@ -6018,6 +6018,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'abreModalSupervisor', 'carregaSupervisor', 'abreModalVaga', 'carregaVaga', 'supervisoresOrdenados', 'vagasOrdenadas', 'departamentosOrdenados']
 });
@@ -8552,6 +8553,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_computeds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/computeds */ "./resources/assets/js/mixins/computeds.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+//
+//
+//
+//
 //
 //
 //
@@ -40796,7 +40801,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.tabela {\r\n    overflow: scroll;\r\n    height: 500px;\n}\n.estagiario {\r\n    text-transform: capitalize;\r\n    margin-bottom: 4px;\n}\n.td-estagiario {\r\n    background-color: transparent!important;\n}\n.linha {\r\n    display: -webkit-box;\r\n    display: flex;\r\n    border: 1px solid #ccc;\n}\n.dado {\r\n    font-weight: bold;\r\n    margin-left: 2%;\n}\n.valor {\r\n    margin-left: 2%;\n}\n.block-column > thead > tr > th {\r\n    min-width: 10em;\n}\r\n", ""]);
+exports.push([module.i, "\n.tabela {\r\n    overflow: scroll;\r\n    height: 100%;\r\n    overflow-x: auto;\n}\n.tabela > table {\r\n    font-size: xx-small;\n}\n.estagiario {\r\n    text-transform: capitalize;\r\n    margin-bottom: 4px;\n}\n.td-estagiario {\r\n    background-color: transparent!important;\n}\n.linha {\r\n    display: -webkit-box;\r\n    display: flex;\r\n    border: 1px solid #ccc;\n}\n.dado {\r\n    font-weight: bold;\r\n    margin-left: 2%;\n}\n.valor {\r\n    margin-left: 2%;\n}\n.block-column > thead > tr > th {\r\n    min-width: 10em;\n}\n.local-imprimir {\r\n    right: 0;\r\n    position: absolute;\r\n    display: inline-block;\r\n    margin-right: 3em;\r\n    margin-top: 1em;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -81795,67 +81800,13 @@ var render = function() {
               ]
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "selectStatus" } }, [
-              _vm._v("Status Vaga")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.statusVaga.status,
-                    expression: "statusVaga.status"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "selectStatus" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.statusVaga,
-                      "status",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { default: "" } }, [
-                  _vm._v(_vm._s(_vm.statusVaga.status))
-                ]),
-                _vm._v(" "),
-                _vm.statusVaga.status != "OCUPADA"
-                  ? _c("option", [_vm._v("OCUPADA")])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.statusVaga.status != "EM SELEÇÃO"
-                  ? _c("option", [_vm._v("EM SELEÇÃO")])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.statusVaga.status != "LIVRE"
-                  ? _c("option", [_vm._v("LIVRE")])
-                  : _vm._e()
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4" }, [
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-4", staticStyle: { "margin-left": "-12px" } },
+        [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputContrato" } }, [
               _vm._v("Contrato CIEE")
@@ -81883,12 +81834,12 @@ var render = function() {
               }
             })
           ])
-        ]),
-        _vm._v(" "),
-        false
-          ? undefined
-          : _vm._e()
-      ]),
+        ]
+      ),
+      _vm._v(" "),
+      false
+        ? undefined
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6" }, [
@@ -85754,6 +85705,13 @@ var render = function() {
   return _c(
     "div",
     [
+      _c(
+        "div",
+        { staticClass: "local-imprimir" },
+        [_c("botao-imprimir-component")],
+        1
+      ),
+      _vm._v(" "),
       _c("h1", { staticClass: "text-center" }, [
         _vm._v("Consulta de Supervisor")
       ]),
@@ -85931,15 +85889,7 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("th", { attrs: { scope: "col" } }, [
-                                _vm._v("Departamento")
-                              ]),
-                              _vm._v(" "),
-                              _c("th", { attrs: { scope: "col" } }, [
                                 _vm._v("Cargo")
-                              ]),
-                              _vm._v(" "),
-                              _c("th", { attrs: { scope: "col" } }, [
-                                _vm._v("Formação")
                               ]),
                               _vm._v(" "),
                               _c("th", { attrs: { scope: "col" } }, [
@@ -85950,9 +85900,16 @@ var render = function() {
                                 _vm._v("CPF")
                               ]),
                               _vm._v(" "),
-                              _c("th", { attrs: { scope: "col" } }, [
-                                _vm._v("Telefone ")
-                              ]),
+                              _c(
+                                "th",
+                                {
+                                  staticStyle: {
+                                    "min-width": "10em !important"
+                                  },
+                                  attrs: { scope: "col" }
+                                },
+                                [_vm._v("Telefone ")]
+                              ),
                               _vm._v(" "),
                               _c("th", { attrs: { scope: "col" } }, [
                                 _vm._v("E-mail")
@@ -85977,20 +85934,8 @@ var render = function() {
                                 _c("td", [_vm._v(_vm._s(supervisor.rf))]),
                                 _vm._v(" "),
                                 _c("td", [
-                                  _vm._v(
-                                    _vm._s(
-                                      supervisor.departamento
-                                        ? supervisor.departamento
-                                        : "NÃO CADASTRADO"
-                                    )
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("td", [
                                   _vm._v(_vm._s(supervisor.cargo_funcao))
                                 ]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(supervisor.formacao))]),
                                 _vm._v(" "),
                                 _c("td", [_vm._v(_vm._s(supervisor.situacao))]),
                                 _vm._v(" "),

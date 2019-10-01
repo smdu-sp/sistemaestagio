@@ -33,18 +33,19 @@
                 </div>
             </div>
             
-            <div class="col-md-4">
+            <!--<div class="col-md-4">
                 <div class="form-group">
                     <label for="selectStatus">Status Vaga</label>
-                    <select type="text" id="selectStatus" class="form-control" v-model="statusVaga.status">
+                   <select type="text" id="selectStatus" class="form-control" v-model="statusVaga.status">
                         <option default>{{ statusVaga.status }}</option>
                         <option v-if="statusVaga.status != 'OCUPADA'">OCUPADA</option>
                         <option v-if="statusVaga.status != 'EM SELEÇÃO'">EM SELEÇÃO</option>
                         <option v-if="statusVaga.status != 'LIVRE'">LIVRE</option>
                     </select>
-                </div>
+                </div>-->
+
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" style="margin-left: -12px">
                 <div class="form-group">
                     <label for="inputContrato">Contrato CIEE</label>
                     <input type="text" 

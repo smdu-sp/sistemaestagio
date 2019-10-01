@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="local-imprimir">
+            <botao-imprimir-component></botao-imprimir-component>
+        </div>
         <h1 class="text-center">Consulta de Supervisor</h1>
           <!--Modal ativado quando o usuário clica no nome de algum estagiário -->
     <b-modal ref="consulta-estagiario" size="lg" hide-footer title="Consulta de Estagiário">
@@ -52,6 +55,7 @@
     </b-modal>
   <!--Modal-->
 
+        <!--Pagina de dados para impressao-->
         <b-card no-body>
             <b-tabs card>
                 <b-tab title="Supervisores" active>
@@ -71,14 +75,14 @@
                                     <tr>
                                         <th scope="col">Nome</th>
                                         <th scope="col">RF</th>
-                                        <th scope="col">Departamento</th>
                                         <th scope="col">Cargo</th>
-                                        <th scope="col">Formação</th>
-                                        <!-- <th scope="col">Conselhor Profissional</th> -->
+                                        <!--<th scope="col">Departamento</th>-->
+                                        <!--<th scope="col">Formação</th>-->
+                                        <!-- <th scope="col">Conselhor Profissional</th>-->
                                         <!-- <th scope="col">Atividades Estagiário</th> -->
                                         <th scope="col">Situação</th>
                                         <th scope="col">CPF</th>
-                                        <th scope="col">Telefone </th>
+                                        <th scope="col" style="min-width: 10em !important">Telefone </th>
                                         <th scope="col">E-mail</th>
                                         <th scope="col">Estagiários</th>
                                     </tr>
@@ -87,9 +91,9 @@
                                     <tr v-for="supervisor of supervisoresComFiltro" :key="supervisor.rf">
                                         <th scope="row">{{ supervisor.nome.toUpperCase() }}</th>
                                         <td>{{ supervisor.rf }}</td>
-                                        <td>{{ supervisor.departamento ? supervisor.departamento : 'NÃO CADASTRADO' }}</td>
                                         <td>{{ supervisor.cargo_funcao }}</td>
-                                        <td>{{ supervisor.formacao }}</td>
+                                        <!--<td>{{ supervisor.departamento ? supervisor.departamento : 'NÃO CADASTRADO' }}</td>-->
+                                        <!--<td>{{ supervisor.formacao }}</td>-->
                                         <!-- <th scope="row">{{ supervisor.conselho_profissional }}</th> -->
                                         <!-- <th scope="row">{{ supervisor.atividades_estagiario }}</th> -->
                                         <td>{{ supervisor.situacao }}</td>
@@ -112,7 +116,7 @@
                     </b-card-text>
                 </b-tab>
             </b-tabs>
-        </b-card>
+        </b-card>        
     </div>
 </template>
 
@@ -319,7 +323,12 @@ export default {
 <style>
 .tabela {
     overflow: scroll;
-    height: 500px;
+    height: 100%;
+    overflow-x: auto;
+}
+.tabela > table {
+    font-size: xx-small;
+
 }
 .estagiario {
     text-transform: capitalize;
@@ -345,4 +354,12 @@ export default {
 .block-column > thead > tr > th {
     min-width: 10em;
 }
+.local-imprimir {
+    right: 0;
+    position: absolute;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 1em;
+}
+
 </style>
