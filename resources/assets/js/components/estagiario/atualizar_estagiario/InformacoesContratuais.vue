@@ -17,7 +17,7 @@
                                 v-model="post.cod_vaga" 
                                 >
                                 <option></option>
-                                <option v-for="vaga of vagasOrdenadas">{{ vaga.id }}</option>
+                                <option v-for="vaga of vagasLivres">{{ vaga.id }}</option>
                             </select>
                             <div v-if="vagaValida" class="invalid-feedback">
                                 Vaga não pode ser vazia
@@ -29,7 +29,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <!--STATUS DA VAGA SERÁ GERENCIADO VIA BD-->
+            <div v-if="false" class="col-md-3">
                 <div class="form-group">
                     <label for="selectStatus">Status Vaga</label>
                     <select type="text" id="selectStatus" class="form-control" v-model="statusVaga.status">
@@ -183,7 +184,8 @@
                 <input type="date" class="form-control" id="inputDataDesligamento" v-model="post.desligado">
             </div>
         </div>
-        <div class="col-md-3">
+        <!-- DESATIVADO INDEFINIDAMENTE -->
+        <div v-if="false" class="col-md-3">
             <div class="form-group">
                 <label for="inputSemestreDesligamento">Semestre de desligamento</label>
                 <input type="number" class="form-control" id="inputSemestreDesligamento" v-model="post.semestre_desligamento">
@@ -251,7 +253,48 @@
 </template>
 <script>
 export default {
+    data () {
+        return {
+            // vagas passíveis de utilização (incluindo a do próprio estagiário)
+            vagasLivres: [],
+            todasVagas: [],
+            msg: {
+                error: false,
+                success: false
+            }
+        }
 
+    },
+    beforeMount () {
+        
+        const uriVagas = '/api/vagas';
+
+        this.axios.get(uriVagas).then(response => {
+            this.msg.error = false;
+            this.todasVagas = response.data;
+
+            for (var i in this.todasVagas) {
+                if(this.todasVagas[i].status.length === 5){
+                    this.vagasLivres.push(this.todasVagas[i]);
+                }
+            }
+            console.log(this.post.cod_vaga);            
+        })
+        .catch(error => {
+            this.msg.error = true;
+            this.msg.erro = 'Erro ao retornar vagas do banco de dados';
+        })
+    },
+    watch: {
+        post: function() {
+            for (var i in this.todasVagas) {
+                if(this.todasVagas[i].id === this.post.cod_vaga) {
+                    this.vagasLivres.push(this.todasVagas[i]);
+                    break;
+                }
+            }
+        }
+    },
     props: [
         'post', 
         'departamentos', 
@@ -266,14 +309,25 @@ export default {
         'vagaValida',
         'selectVaga',
         'statusVaga',
-        'validaDepartamento', 'departamentoValido',
-        'validaSetor', 'setorValido',
-        'validaSupervisor', 'supervisorValido',
-        'validaHorarioEntrada', 'horarioEntradaValido',
-        'validaHorarioSaida', 'horarioSaidaValido',
-        'validaSituacao', 'situacaoValida', 'alteraVagaParaLivre',
-        'supervisoresOrdenados', 'vagasOrdenadas', 'carregaVaga',
-        'abreModalVaga', 'abreModalSupervisor', 'carregaSupervisor'
+        'validaDepartamento',
+        'departamentoValido',
+        'validaSetor', 
+        'setorValido',
+        'validaSupervisor', 
+        'supervisorValido',
+        'validaHorarioEntrada', 
+        'horarioEntradaValido',
+        'validaHorarioSaida', 
+        'horarioSaidaValido',
+        'validaSituacao', 
+        'situacaoValida', 
+        'alteraVagaParaLivre',
+        'supervisoresOrdenados', 
+        'vagasOrdenadas', 
+        'carregaVaga',
+        'abreModalVaga', 
+        'abreModalSupervisor', 
+        'carregaSupervisor'
     ]
 
 }

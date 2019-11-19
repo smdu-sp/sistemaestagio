@@ -2135,6 +2135,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4927,7 +4935,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      // vagas passíveis de utilização (incluindo a do próprio estagiário)
+      vagasLivres: [],
+      todasVagas: [],
+      msg: {
+        error: false,
+        success: false
+      }
+    };
+  },
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    var uriVagas = '/api/vagas';
+    this.axios.get(uriVagas).then(function (response) {
+      _this.msg.error = false;
+      _this.todasVagas = response.data;
+
+      for (var i in _this.todasVagas) {
+        if (_this.todasVagas[i].status.length === 5) {
+          _this.vagasLivres.push(_this.todasVagas[i]);
+        }
+      }
+
+      console.log(_this.post.cod_vaga);
+    })["catch"](function (error) {
+      _this.msg.error = true;
+      _this.msg.erro = 'Erro ao retornar vagas do banco de dados';
+    });
+  },
+  watch: {
+    post: function post() {
+      for (var i in this.todasVagas) {
+        if (this.todasVagas[i].id === this.post.cod_vaga) {
+          this.vagasLivres.push(this.todasVagas[i]);
+          break;
+        }
+      }
+    }
+  },
   props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'alteraVagaParaLivre', 'supervisoresOrdenados', 'vagasOrdenadas', 'carregaVaga', 'abreModalVaga', 'abreModalSupervisor', 'carregaSupervisor']
 });
 
@@ -5018,109 +5069,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+Date.prototype.addDays = function (days) {
+  var date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['post', 'inserirEstagiario']
+  data: function data() {
+    return {
+      solicitacoes: [1, 2, 3, 4, 5, 6, 7] // solicitacoes: [1]
+
+    };
+  },
+  props: ["post", "inserirEstagiario"],
+  watch: {
+    post: function post() {
+      this.calculoDiasFerias(); // Calcula término da solicitação de férias
+
+      this.atualizaInfoDias();
+    }
+  },
+  methods: {
+    calculoDiasFerias: function calculoDiasFerias() {
+      // var date1 = new Date("10/03/2019");
+      var date1 = new Date(this.post.dt_inicio);
+      var date2 = new Date();
+      var differenceInTime = date2.getTime() - date1.getTime();
+      var differenceInDays = differenceInTime / (1000 * 3600 * 24);
+      var meses = differenceInDays / 30;
+      var recesso = parseInt(meses) * 2.5;
+      var result = Math.round(recesso);
+      this.post.diasFerias = result; // return result;
+    },
+    calculoDiasGozados: function calculoDiasGozados(dtInicial, dtFinal, diasSolicitados) {
+      //   dtInicial, dtFinal: string
+      var resultado = 0;
+      var dtAtual = new Date();
+      dtInicial = new Date(dtInicial);
+      dtFinal = new Date(dtFinal); // Verifica se data de término é igual à data inicial
+
+      if (diasSolicitados === "1") {
+        return dtFinal < dtAtual ? 1 : 0;
+      }
+
+      if (dtAtual < dtInicial) {
+        return 0;
+      }
+
+      if (dtAtual < dtFinal) {
+        resultado = new Date(dtAtual - dtInicial).getDate();
+      } else {
+        resultado = new Date(dtFinal - dtInicial).getDate() + 1;
+      }
+
+      return resultado > diasSolicitados ? 0 : resultado;
+    },
+    atualizaInfoDias: function atualizaInfoDias() {
+      /** Atualiza data final **/
+      // Percorre array de solicitações (7 ao todo)
+      for (var i = 1; i <= this.solicitacoes.length; i++) {
+        // Verifica se número de dias solicitados é 0
+        if (this.post['qt_dias_solicitada_' + i] == '0') {
+          this.post['dt_inicial_' + i] = null;
+          this.post["dt_termino_" + i] = null;
+        } else {
+          this.post["dt_termino_" + i] = this.simplificaData(new Date(this.post["dt_inicial_" + i]).addDays(parseInt(this.post["qt_dias_solicitada_" + i])));
+        }
+      } //   Atualiza dias gozados
+
+
+      this.post["qt_dias_gozados"] = 0; // Calcula dias gozados para cada solicitação de férias
+
+      for (var i in this.solicitacoes) {
+        i++;
+        this.post["diasGozados" + i] = this.calculoDiasGozados(this.post["dt_inicial_" + i], this.post["dt_termino_" + i], this.post["qt_dias_solicitada_" + i]); // Atualiza total de dias gozados
+
+        this.post.qt_dias_gozados += parseInt(this.post["diasGozados" + i]);
+      }
+
+      this.post.qt_dias_restantes = this.post.diasFerias - this.post.qt_dias_gozados;
+    },
+    simplificaData: function simplificaData(fullDate) {
+      var ano = fullDate.getFullYear();
+      var mes = fullDate.getMonth() + 1;
+
+      if (mes < 10) {
+        mes = "0" + mes;
+      }
+
+      var dia = fullDate.getDate();
+
+      if (dia < 10) {
+        dia = "0" + dia;
+      }
+
+      return ano + "-" + mes + "-" + dia;
+    }
+  }
 });
 
 /***/ }),
@@ -6018,8 +6064,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      vagasLivres: [],
+      msg: {
+        error: false,
+        success: false
+      }
+    };
+  },
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    var uriVagas = '/api/vagas';
+    this.axios.get(uriVagas).then(function (response) {
+      _this.msg.error = false;
+      var vagasRetornadas = response.data;
+
+      for (var i in vagasRetornadas) {
+        if (vagasRetornadas[i].status.length === 5) {
+          _this.vagasLivres.push(vagasRetornadas[i]);
+        }
+      }
+    })["catch"](function (error) {
+      _this.msg.error = true;
+      _this.msg.erro = 'Erro ao retornar vagas do banco de dados';
+    });
+  },
+  methods: {
+    ocupaVaga: function ocupaVaga() {// TODO: OCUPAR VAGA
+      // this.statusVaga.status = 'OCUPADA';
+      // var app = this;
+      // window.setTimeout(function() {
+      //     console.log(this.statusVaga);
+      // }, 1500);
+    }
+  },
   props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'abreModalSupervisor', 'carregaSupervisor', 'abreModalVaga', 'carregaVaga', 'supervisoresOrdenados', 'vagasOrdenadas', 'departamentosOrdenados']
 });
 
@@ -9163,6 +9244,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_computeds__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/computeds */ "./resources/assets/js/mixins/computeds.js");
+//
+//
 //
 //
 //
@@ -73931,6 +74014,8 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-3 d-flex flex-column" }, [
             _c(
@@ -73947,11 +74032,27 @@ var render = function() {
     ),
     _vm._v(" "),
     _vm.relatorio
-      ? _c("div", { staticClass: "row mt-2 divIframe" }, [_vm._m(0)])
+      ? _c("div", { staticClass: "row mt-2 divIframe" }, [_vm._m(1)])
       : _vm._e()
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", [_vm._v("Nome")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        staticStyle: { width: "30em" },
+        attrs: { type: "text", name: "nome", placeholder: "ex: João da Silva" }
+      })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -77802,7 +77903,7 @@ var render = function() {
                   [
                     _c("option"),
                     _vm._v(" "),
-                    _vm._l(_vm.vagasOrdenadas, function(vaga) {
+                    _vm._l(_vm.vagasLivres, function(vaga) {
                       return _c("option", [_vm._v(_vm._s(vaga.id))])
                     })
                   ],
@@ -77839,63 +77940,9 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "selectStatus" } }, [
-              _vm._v("Status Vaga")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.statusVaga.status,
-                    expression: "statusVaga.status"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "selectStatus" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.statusVaga,
-                      "status",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { default: "" } }, [
-                  _vm._v(_vm._s(_vm.statusVaga.status))
-                ]),
-                _vm._v(" "),
-                _vm.statusVaga.status != "OCUPADA"
-                  ? _c("option", [_vm._v("OCUPADA")])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.statusVaga.status != "EM SELEÇÃO"
-                  ? _c("option", [_vm._v("EM SELEÇÃO")])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.statusVaga.status != "LIVRE"
-                  ? _c("option", [_vm._v("LIVRE")])
-                  : _vm._e()
-              ]
-            )
-          ])
-        ]),
+        false
+          ? undefined
+          : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
@@ -78478,39 +78525,9 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputSemestreDesligamento" } }, [
-              _vm._v("Semestre de desligamento")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.semestre_desligamento,
-                  expression: "post.semestre_desligamento"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", id: "inputSemestreDesligamento" },
-              domProps: { value: _vm.post.semestre_desligamento },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.post,
-                    "semestre_desligamento",
-                    $event.target.value
-                  )
-                }
-              }
-            })
-          ])
-        ])
+        false
+          ? undefined
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -78809,19 +78826,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.post.qt_dias_legais,
-                  expression: "post.qt_dias_legais"
+                  value: _vm.post.diasFerias,
+                  expression: "post.diasFerias"
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.post.qt_dias_legais },
+              attrs: { type: "number", readonly: "" },
+              domProps: { value: _vm.post.diasFerias },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.post, "qt_dias_legais", $event.target.value)
+                  _vm.$set(_vm.post, "diasFerias", $event.target.value)
                 }
               }
             })
@@ -78842,7 +78859,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "number" },
+              attrs: { type: "number", readonly: "" },
               domProps: { value: _vm.post.qt_dias_gozados },
               on: {
                 input: function($event) {
@@ -78871,7 +78888,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "number" },
+                attrs: { type: "number", readonly: "" },
                 domProps: { value: _vm.post.qt_dias_restantes },
                 on: {
                   input: function($event) {
@@ -78889,649 +78906,112 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("1. Qtd dias Solicitado")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.qt_dias_solicitada_1,
-                  expression: "post.qt_dias_solicitada_1"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.post.qt_dias_solicitada_1 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+      _vm._l(_vm.solicitacoes, function(i) {
+        return _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "" } }, [
+                _vm._v(_vm._s(i) + ". Qtd dias Solicitado")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post["qt_dias_solicitada_" + i],
+                    expression: "post['qt_dias_solicitada_'+i]"
                   }
-                  _vm.$set(
-                    _vm.post,
-                    "qt_dias_solicitada_1",
-                    $event.target.value
-                  )
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("1. Data Inicial")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_inicial_1,
-                  expression: "post.dt_inicial_1"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_inicial_1 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number" },
+                domProps: { value: _vm.post["qt_dias_solicitada_" + i] },
+                on: {
+                  change: function($event) {
+                    return _vm.atualizaInfoDias()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.post,
+                      "qt_dias_solicitada_" + i,
+                      $event.target.value
+                    )
                   }
-                  _vm.$set(_vm.post, "dt_inicial_1", $event.target.value)
                 }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("1. Data de Término")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_termino_1,
-                  expression: "post.dt_termino_1"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_termino_1 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3 ml-2" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "" } }, [
+                _vm._v(_vm._s(i) + ". Data Inicial")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post["dt_inicial_" + i],
+                    expression: "post['dt_inicial_'+i]"
                   }
-                  _vm.$set(_vm.post, "dt_termino_1", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("2. Qtd dias Solicitado")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.qt_dias_solicitada_2,
-                  expression: "post.qt_dias_solicitada_2"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.post.qt_dias_solicitada_2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "date",
+                  readonly: _vm.post["qt_dias_solicitada_" + i] == 0
+                },
+                domProps: { value: _vm.post["dt_inicial_" + i] },
+                on: {
+                  change: function($event) {
+                    return _vm.atualizaInfoDias()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.post, "dt_inicial_" + i, $event.target.value)
                   }
-                  _vm.$set(
-                    _vm.post,
-                    "qt_dias_solicitada_2",
-                    $event.target.value
-                  )
                 }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("2. Data Inicial")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_inicial_2,
-                  expression: "post.dt_inicial_2"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_inicial_2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3 ml-2" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "" } }, [
+                _vm._v(_vm._s(i) + ". Data de Término")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post["dt_termino_" + i],
+                    expression: "post['dt_termino_'+i]"
                   }
-                  _vm.$set(_vm.post, "dt_inicial_2", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("2. Data de Término")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_termino_2,
-                  expression: "post.dt_termino_2"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_termino_2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                ],
+                staticClass: "form-control",
+                attrs: { type: "date", readonly: "" },
+                domProps: { value: _vm.post["dt_termino_" + i] },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.post, "dt_termino_" + i, $event.target.value)
                   }
-                  _vm.$set(_vm.post, "dt_termino_2", $event.target.value)
                 }
-              }
-            })
+              })
+            ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("3. Qtd dias Solicitado")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.qt_dias_solicitada_3,
-                  expression: "post.qt_dias_solicitada_3"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.post.qt_dias_solicitada_3 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.post,
-                    "qt_dias_solicitada_3",
-                    $event.target.value
-                  )
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("3. Data Inicial")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_inicial_3,
-                  expression: "post.dt_inicial_3"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_inicial_3 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_inicial_3", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("3. Data de Término")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_termino_3,
-                  expression: "post.dt_termino_3"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_termino_3 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_termino_3", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("4. Qtd dias Solicitado")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.qt_dias_solicitada_4,
-                  expression: "post.qt_dias_solicitada_4"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.post.qt_dias_solicitada_4 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.post,
-                    "qt_dias_solicitada_4",
-                    $event.target.value
-                  )
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("4. Data Inicial")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_termino_4,
-                  expression: "post.dt_termino_4"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_termino_4 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_termino_4", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("4. Data de Término")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_inicial_4,
-                  expression: "post.dt_inicial_4"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_inicial_4 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_inicial_4", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("5. Qtd dias Solicitado")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.qt_dias_solicitada_5,
-                  expression: "post.qt_dias_solicitada_5"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.post.qt_dias_solicitada_5 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.post,
-                    "qt_dias_solicitada_5",
-                    $event.target.value
-                  )
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("5. Data Inicial")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_inicial_5,
-                  expression: "post.dt_inicial_5"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_inicial_5 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_inicial_5", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("5. Data de Término")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_termino_5,
-                  expression: "post.dt_termino_5"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_termino_5 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_termino_5", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("6. Qtd dias Solicitado")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.qt_dias_solicitada_6,
-                  expression: "post.qt_dias_solicitada_6"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.post.qt_dias_solicitada_6 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.post,
-                    "qt_dias_solicitada_6",
-                    $event.target.value
-                  )
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("6. Data Inicial")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_inicial_6,
-                  expression: "post.dt_inicial_6"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_inicial_6 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_inicial_6", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("6. Data de Término")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_termino_6,
-                  expression: "post.dt_termino_6"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_termino_6 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_termino_6", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("7. Qtd dias Solicitado")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.qt_dias_solicitada_7,
-                  expression: "post.qt_dias_solicitada_7"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.post.qt_dias_solicitada_7 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.post,
-                    "qt_dias_solicitada_7",
-                    $event.target.value
-                  )
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("7. Data Inicial")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_inicial_7,
-                  expression: "post.dt_inicial_7"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_inicial_7 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_inicial_7", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 ml-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("7. Data de Término")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.dt_termino_7,
-                  expression: "post.dt_termino_7 "
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.post.dt_termino_7 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "dt_termino_7", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
-      ]),
+      }),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-12" }, [
@@ -79567,7 +79047,7 @@ var render = function() {
       _vm._v(" "),
       _c("botoes-component", { attrs: { titulo: (_vm.nomeBotao = "Salvar") } })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -81756,7 +81236,9 @@ var render = function() {
                               : $$selectedVal[0]
                           )
                         },
-                        _vm.selectVaga
+                        function($event) {
+                          _vm.selectVaga, _vm.ocupaVaga()
+                        }
                       ],
                       click: _vm.carregaVaga,
                       blur: _vm.validaVaga
@@ -81765,7 +81247,7 @@ var render = function() {
                   [
                     _c("option"),
                     _vm._v(" "),
-                    _vm._l(_vm.vagasOrdenadas, function(vaga) {
+                    _vm._l(_vm.vagasLivres, function(vaga) {
                       return _c("option", [_vm._v(_vm._s(vaga.id))])
                     })
                   ],
@@ -82349,12 +81831,11 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "botoes-component",
-        { attrs: { titulo: (_vm.nomeBotao = "Cadastrar") } },
-        [_c("botao-email-component", { attrs: { post: _vm.post } })],
-        1
-      )
+      _c("botoes-component", {
+        attrs: { titulo: (_vm.nomeBotao = "Cadastrar") }
+      }),
+      _vm._v(" "),
+      _c("botao-email-component", { attrs: { post: _vm.post } })
     ],
     1
   )

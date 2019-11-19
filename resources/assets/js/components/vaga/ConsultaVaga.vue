@@ -56,8 +56,10 @@
                             </div>
                         </div>
                         <div class="row d-flex justify-content-end">
-                            <input type="button" value="Salvar" class="btn btn-primary" @click="atualizaVaga">
+                            <input type="button" value="Salvar" class="btn btn-primary" 
+                            @click="atualizaVaga">
                         </div>
+                      
                     </b-card-text>
                 </b-tab>
             </b-tabs>

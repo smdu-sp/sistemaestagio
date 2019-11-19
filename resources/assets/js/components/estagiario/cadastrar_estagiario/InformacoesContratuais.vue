@@ -9,7 +9,7 @@
                         <div class="form-group">
                             <label for="selectVaga">Codigo Vaga</label>
                             <select type="text" 
-                                @change="selectVaga"
+                                @change="selectVaga, ocupaVaga()"
                                 @click="carregaVaga"
                                 @blur="validaVaga"
                                 :class="{'is-invalid': vagaValida}" 
@@ -18,7 +18,7 @@
                                 v-model="post.cod_vaga" 
                                 >
                                 <option></option>
-                                <option v-for="vaga of vagasOrdenadas">{{ vaga.id }}</option>
+                                <option v-for="vaga of vagasLivres">{{ vaga.id }}</option>
                             </select>
                             <div v-if="vagaValida" class="invalid-feedback">
                                 Vaga não pode ser vazia
@@ -185,14 +185,52 @@
             </div>
         </div>
     </div>
-    <botoes-component :titulo="nomeBotao = 'Cadastrar'">
-        <botao-email-component :post="post"></botao-email-component>
-    </botoes-component>
-</form>
+    <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component>
+    <botao-email-component :post="post"></botao-email-component>
 
+</form>
 </template>
 <script>
 export default {
+    data () {
+        return {
+            vagasLivres: [],
+            msg: {
+                error: false,
+                success: false
+            }
+        }
+    },
+    beforeMount () {
+        
+        const uriVagas = '/api/vagas';
+
+        this.axios.get(uriVagas).then(response => {
+            this.msg.error = false;
+            var vagasRetornadas = response.data;
+
+            for (var i in vagasRetornadas) {
+                if(vagasRetornadas[i].status.length === 5){
+                    this.vagasLivres.push(vagasRetornadas[i]);
+                }
+            }
+        })
+        .catch(error => {
+            this.msg.error = true;
+            this.msg.erro = 'Erro ao retornar vagas do banco de dados';
+        })
+    },
+    methods: {
+        ocupaVaga: function() {
+            // TODO: OCUPAR VAGA
+            
+            // this.statusVaga.status = 'OCUPADA';
+            // var app = this;
+            // window.setTimeout(function() {
+            //     console.log(this.statusVaga);
+            // }, 1500);
+        }
+    },
     props: [
         'post', 
         'departamentos', 

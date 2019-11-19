@@ -23,6 +23,14 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label>Nome</label>
+                <br>
+                <input type="text" class="form-control" style="width: 30em" name="nome" placeholder="ex: João da Silva"/>
+
+            </div>
+
             <div class="row">
                 <div class="col-md-3 d-flex flex-column">
                     <button class="btn btn-success" @click="gerarRelatorio">Gerar</button>
@@ -38,31 +46,31 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            departamentos: [],
-            mes: new Date().getMonth()+1,
-            ano: new Date().getFullYear(),
-            relatorio: false
-        }
-    },
-    beforeMount() {
-        this.retornaDepartamentos();
-    },
-    methods: {
-        gerarRelatorio() {
-            this.relatorio = true;
+    export default {
+        data() {
+            return {
+                departamentos: [],
+                mes: new Date().getMonth()+1,
+                ano: new Date().getFullYear(),
+                relatorio: false
+            }
         },
-        retornaDepartamentos() {
-            const uriDepartamentos = '/api/departamentos';
+        beforeMount() {
+            this.retornaDepartamentos();
+        },
+        methods: {
+            gerarRelatorio() {
+                this.relatorio = true;
+            },
+            retornaDepartamentos() {
+                const uriDepartamentos = '/api/departamentos';
 
-            this.axios.get(uriDepartamentos).then(response => {
-                this.departamentos = response.data;
-            }).catch(error => console.log(error))
+                this.axios.get(uriDepartamentos).then(response => {
+                    this.departamentos = response.data;
+                }).catch(error => console.log(error))
+            }
         }
     }
-}
 </script>
 
 <style>
