@@ -4937,6 +4937,95 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4952,7 +5041,7 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this = this;
 
-    var uriVagas = '/api/vagas';
+    var uriVagas = "/api/vagas";
     this.axios.get(uriVagas).then(function (response) {
       _this.msg.error = false;
       _this.todasVagas = response.data;
@@ -4966,7 +5055,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(_this.post.cod_vaga);
     })["catch"](function (error) {
       _this.msg.error = true;
-      _this.msg.erro = 'Erro ao retornar vagas do banco de dados';
+      _this.msg.erro = "Erro ao retornar vagas do banco de dados";
     });
   },
   watch: {
@@ -4979,7 +5068,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'alteraVagaParaLivre', 'supervisoresOrdenados', 'vagasOrdenadas', 'carregaVaga', 'abreModalVaga', 'abreModalSupervisor', 'carregaSupervisor']
+  props: ["post", "departamentos", "supervisores", "inserirEstagiario", "alteracaoSupervisor", "horarioVariavel", "dataModificacao", "horaModificacao", "vagas", "validaVaga", "vagaValida", "selectVaga", "statusVaga", "validaDepartamento", "departamentoValido", "validaSetor", "setorValido", "validaSupervisor", "supervisorValido", "validaHorarioEntrada", "horarioEntradaValido", "validaHorarioSaida", "horarioSaidaValido", "validaSituacao", "situacaoValida", "alteraVagaParaLivre", "supervisoresOrdenados", "vagasOrdenadas", "carregaVaga", "abreModalVaga", "abreModalSupervisor", "carregaSupervisor"]
 });
 
 /***/ }),
@@ -6064,6 +6153,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6071,7 +6171,8 @@ __webpack_require__.r(__webpack_exports__);
       msg: {
         error: false,
         success: false
-      }
+      },
+      depSetores: []
     };
   },
   beforeMount: function beforeMount() {
@@ -6099,6 +6200,24 @@ __webpack_require__.r(__webpack_exports__);
       // window.setTimeout(function() {
       //     console.log(this.statusVaga);
       // }, 1500);
+    },
+    atualizaSetor: function atualizaSetor() {
+      this.depSetores = [];
+      var nomeDepartamento = ''; // console.log(this.departamentos);
+
+      for (var dep in this.departamentos) {
+        if (this.departamentos[dep].sigla === this.post.dep_hierarquico) {
+          nomeDepartamento = this.departamentos[dep].departamentos;
+          break;
+        }
+      }
+
+      for (var i in this.departamentos) {
+        if (this.departamentos[i].departamentos === nomeDepartamento) {
+          this.depSetores.push(this.departamentos[i].sigla);
+        }
+      } // console.log(this.depSetores) 
+
     }
   },
   props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'abreModalSupervisor', 'carregaSupervisor', 'abreModalVaga', 'carregaVaga', 'supervisoresOrdenados', 'vagasOrdenadas', 'departamentosOrdenados']
@@ -8975,6 +9094,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -77912,9 +78032,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.vagaValida
                   ? _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                                Vaga não pode ser vazia\n                            "
-                      )
+                      _vm._v("Vaga não pode ser vazia")
                     ])
                   : _vm._e()
               ])
@@ -77937,6 +78055,71 @@ var render = function() {
                 })
               ]
             )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "inputSituacao" } }, [
+              _vm._v("Situação")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post.situacao,
+                    expression: "post.situacao"
+                  }
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.situacaoValida },
+                attrs: { id: "inputSituacao" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.post,
+                        "situacao",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    _vm.alteraVagaParaLivre
+                  ],
+                  blur: _vm.validaSituacao
+                }
+              },
+              [
+                _c("option", { attrs: { value: "1" } }, [_vm._v("CONTRATADO")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "5" } }, [_vm._v("DESLIGADO")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [
+                  _vm._v("EM CONTRATAÇÃO")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [
+                  _vm._v("EM DESLIGAMENTO")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v("Situação não pode ser vazia")
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -78062,9 +78245,7 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Departamento não pode ficar em branco\n                "
-              )
+              _vm._v("Departamento não pode ficar em branco")
             ])
           ])
         ]),
@@ -78121,9 +78302,7 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Setor não pode ser vazio\n                "
-              )
+              _vm._v("Setor não pode ser vazio")
             ])
           ])
         ]),
@@ -78176,9 +78355,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                            Supervisor não pode ser vazio\n                        "
-                  )
+                  _vm._v("Supervisor não pode ser vazio")
                 ])
               ])
             ]),
@@ -78562,9 +78739,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Horário de entrada não pode ser vazio\n                "
-              )
+              _vm._v("Horário de entrada não pode ser vazio")
             ])
           ])
         ]),
@@ -78600,9 +78775,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Horário de saída não pode ser vazio\n                "
-              )
+              _vm._v("Horário de saída não pode ser vazio")
             ])
           ])
         ]),
@@ -78613,6 +78786,7 @@ var render = function() {
           [
             _c("div", { staticClass: "form-group" }, [
               _c("span", [_vm._v("Horário variável")]),
+              _vm._v(" "),
               _c("br"),
               _vm._v(" "),
               _c("input", {
@@ -78661,88 +78835,11 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(
-                  "\n                    Data de término não pode ser vazio\n                "
-                )
+                _vm._v("Data de término não pode ser vazio")
               ])
             ])
           ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputSituacao" } }, [
-              _vm._v("Situação")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.situacao,
-                    expression: "post.situacao"
-                  }
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": _vm.situacaoValida },
-                attrs: { id: "inputSituacao" },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.post,
-                        "situacao",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                    _vm.alteraVagaParaLivre
-                  ],
-                  blur: _vm.validaSituacao
-                }
-              },
-              [
-                _c("option", { attrs: { value: "1" } }, [_vm._v("CONTRATADO")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "5" } }, [_vm._v("DESLIGADO")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("EM CONTRATAÇÃO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [
-                  _vm._v("EM DESLIGAMENTO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "4" } }, [
-                  _vm._v("EM RENOVAÇÃO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "6" } }, [
-                  _vm._v("TCE CANCELADO")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Situação não pode ser vazia\n                "
-              )
-            ])
-          ])
-        ])
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -81282,42 +81379,108 @@ var render = function() {
               ]
             )
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4", staticStyle: { "margin-left": "-12px" } },
-        [
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputContrato" } }, [
-              _vm._v("Contrato CIEE")
+            _c("label", { attrs: { for: "inputSituacao" } }, [
+              _vm._v("Situação")
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.contrato,
-                  expression: "post.contrato"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", maxlength: "20", id: "inputContrato" },
-              domProps: { value: _vm.post.contrato },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post.situacao,
+                    expression: "post.situacao"
                   }
-                  _vm.$set(_vm.post, "contrato", $event.target.value)
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.situacaoValida },
+                attrs: { id: "inputSituacao", required: "" },
+                on: {
+                  blur: _vm.validaSituacao,
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.post,
+                      "situacao",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c("option", { attrs: { value: "1" } }, [_vm._v("CONTRATADO")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "5" } }, [_vm._v("DESLIGADO")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [
+                  _vm._v("EM CONTRATAÇÃO")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [
+                  _vm._v("EM DESLIGAMENTO")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "4" } }, [
+                  _vm._v("EM RENOVAÇÃO")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Situação não pode ser vazia\n                "
+              )
+            ])
           ])
-        ]
-      ),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-3", staticStyle: { "margin-left": "-12px" } },
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "inputContrato" } }, [
+                _vm._v("Contrato CIEE")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post.contrato,
+                    expression: "post.contrato"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", maxlength: "20", id: "inputContrato" },
+                domProps: { value: _vm.post.contrato },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.post, "contrato", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]
+        )
+      ]),
       _vm._v(" "),
       false
         ? undefined
@@ -81346,21 +81509,28 @@ var render = function() {
                 attrs: { id: "selectDepartamento", required: "" },
                 on: {
                   blur: _vm.validaDepartamento,
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "dep_hierarquico",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.post,
+                        "dep_hierarquico",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    function($event) {
+                      return _vm.atualizaSetor(_vm.post.dep_hierarquico)
+                    }
+                  ]
                 }
               },
               [
@@ -81425,10 +81595,8 @@ var render = function() {
               [
                 _c("option"),
                 _vm._v(" "),
-                _vm._l(_vm.departamentosOrdenados, function(departamento) {
-                  return departamento.tipo == "FILHO"
-                    ? _c("option", [_vm._v(_vm._s(departamento.sigla))])
-                    : _vm._e()
+                _vm._l(_vm.depSetores, function(setor) {
+                  return _c("option", [_vm._v(_vm._s(setor))])
                 })
               ],
               2
@@ -81726,77 +81894,7 @@ var render = function() {
               ])
             ])
           ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputSituacao" } }, [
-              _vm._v("Situação")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.situacao,
-                    expression: "post.situacao"
-                  }
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": _vm.situacaoValida },
-                attrs: { id: "inputSituacao", required: "" },
-                on: {
-                  blur: _vm.validaSituacao,
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "situacao",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "1" } }, [_vm._v("CONTRATADO")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "5" } }, [_vm._v("DESLIGADO")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("EM CONTRATAÇÃO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [
-                  _vm._v("EM DESLIGAMENTO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "4" } }, [
-                  _vm._v("EM RENOVAÇÃO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "6" } }, [
-                  _vm._v("TCE CANCELADO")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Situação não pode ser vazia\n                "
-              )
-            ])
-          ])
-        ])
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -85675,6 +85773,8 @@ var render = function() {
                                   _c("option", [_vm._v("CANCELADA")]),
                                   _vm._v(" "),
                                   _c("option", [_vm._v("DISTRIBUIDA")]),
+                                  _vm._v(" "),
+                                  _c("option", [_vm._v("NÃO DISTRIBUIDA")]),
                                   _vm._v(" "),
                                   _c("option", [_vm._v("TRANSFERIDA")])
                                 ]
