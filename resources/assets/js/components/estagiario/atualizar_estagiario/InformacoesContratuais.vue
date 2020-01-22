@@ -107,7 +107,7 @@
             <option>{{ post.dep_hierarquico }}</option>
             <option
               v-for="departamento of departamentos"
-              v-if="departamento.tipo == 'PAI'"
+              v-if="departamento.tipo === 'PAI'"
             >{{ departamento.sigla }}</option>
           </select>
           <div class="invalid-feedback">Departamento não pode ficar em branco</div>
@@ -126,7 +126,7 @@
             <option></option>
             <option
               v-for="departamento of departamentos"
-              v-if="departamento.tipo == 'FILHO'"
+              v-if="departamento.tipo === 'FILHO'"
             >{{ departamento.sigla }}</option>
           </select>
           <div class="invalid-feedback">Setor não pode ser vazio</div>
