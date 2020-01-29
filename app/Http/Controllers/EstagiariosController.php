@@ -169,7 +169,10 @@ class EstagiariosController extends Controller
         $cpf->setor_estagiado = $request->input('setor_estagiado');
         $cpf->supervisor = $request->input('supervisor');
         // $cpf->dt_inicio = $request->input('dt_inicio');
-        $cpf->dt_inicio = ajustaData($request->input('dt_inicio'));
+        // $cpf->dt_inicio = ajustaData($request->input('dt_inicio'));
+
+        $cpf->dt_inicio = $request->input('dt_inicio');
+
         $cpf->dt_termino_inicial_lauda = $request->input('dt_termino_inicial_lauda');
         $cpf->dt_termino = $request->input('dt_termino');
         $cpf->dt_inicio_1_aditivo = $request->input('dt_inicio_1_aditivo');
