@@ -9,7 +9,7 @@
                         <div class="form-group">
                             <label for="selectVaga">Codigo Vaga</label>
                             <select type="text" 
-                                @change="selectVaga, ocupaVaga()"
+                                @change="selectVaga"
                                 @click="carregaVaga"
                                 @blur="validaVaga"
                                 :class="{'is-invalid': vagaValida}" 
@@ -25,14 +25,40 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
                         <img class="cadastraVaga" @click="abreModalVaga" src="../../../../../../public/icones/icons8-adicionar-regra-48.png" alt="Adicionar Vaga">
                     </div>
-                    
                 </div>
             </div>
             
+            <div class="col-md-3">
+            <div class="form-group">
+                <label for="inputSituacao">Situação</label>
+                <select id="inputSituacao" @blur="validaSituacao" :class="{'is-invalid':situacaoValida}" class="form-control" v-model="post.situacao" required>
+                    <option value="1">CONTRATADO</option>
+                    <option value="5">DESLIGADO</option>
+                    <option value="2">EM CONTRATAÇÃO</option>
+                    <option value="3">EM DESLIGAMENTO</option>
+                    <option value="4">EM RENOVAÇÃO</option>
+                    <!-- <option value="6">TCE CANCELADO</option> -->
+                </select>
+                <div class="invalid-feedback">
+                    Situação não pode ser vazia
+                </div>
+            </div>
+        </div>
+
+         <div class="col-md-3" style="margin-left: -12px">
+                <div class="form-group">
+                    <label for="inputContrato">Contrato CIEE</label>
+                    <input type="text" 
+                        maxlength="20"
+                        class="form-control" 
+                        id="inputContrato" 
+                        v-model="post.contrato" >
+                </div>
+            </div>
+
             <!--<div class="col-md-4">
                 <div class="form-group">
                     <label for="selectStatus">Status Vaga</label>
@@ -43,18 +69,9 @@
                         <option v-if="statusVaga.status != 'LIVRE'">LIVRE</option>
                     </select>
                 </div>-->
+            </div>
 
-            </div>
-            <div class="col-md-4" style="margin-left: -12px">
-                <div class="form-group">
-                    <label for="inputContrato">Contrato CIEE</label>
-                    <input type="text" 
-                        maxlength="20"
-                        class="form-control" 
-                        id="inputContrato" 
-                        v-model="post.contrato" >
-                </div>
-            </div>
+           
             <div v-if="false" class="col-md-3">
                 <div class="form-group">
                     <label for="inputTceSuperEstagios">TCE Super Estágios</label>
@@ -71,7 +88,13 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="selectDepartamento">Dep. Hierárquico</label>
-                <select class="form-control" @blur="validaDepartamento" :class="{'is-invalid':departamentoValido}" id="selectDepartamento" v-model="post.dep_hierarquico" required>
+                <select class="form-control" @blur="validaDepartamento" 
+                    :class="{'is-invalid':departamentoValido}" 
+                    id="selectDepartamento" 
+                    v-model="post.dep_hierarquico" 
+                    v-on:change="atualizaSetor(post.dep_hierarquico)" 
+                    required>
+
                     <option></option>
                     <option v-for="departamento of departamentosOrdenados" v-if="departamento.tipo == 'PAI'">{{ departamento.sigla }}</option>
                 </select>
@@ -83,9 +106,13 @@
         <div class="col-md-6">
             <div class="setor-estag">
                 <label for="selectSetor">Setor Estagiado</label>
-                <select class="form-control" @blur="validaSetor" :class="{'is-invalid':setorValido}" id="selectSetor" v-model="post.setor_estagiado" required>
+                <select class="form-control" @blur="validaSetor" :class="{'is-invalid':setorValido}" id="selectSetor" 
+                v-model="post.setor_estagiado" required>
                     <option></option>
-                    <option v-for="departamento of departamentosOrdenados" v-if="departamento.tipo == 'FILHO'">{{ departamento.sigla }}</option>
+                    <!-- <option v-for="departamento of departamentosOrdenados" 
+                        v-if="departamento.tipo == 'FILHO'">{{ departamento.sigla }}</option> -->
+                        <option v-for="departamento of departamentosOrdenados" v-if="departamento.tipo == 'FILHO' || departamento.tipo == 'OUTROS' || departamento.tipo == 'PAI'">{{ departamento.sigla }}</option>
+                        <!-- <option v-for="setor in depSetores">{{ setor }}</option> -->
                 </select>
                 <div class="invalid-feedback">
                     Setor não pode ser vazio
@@ -159,22 +186,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="inputSituacao">Situação</label>
-                <select id="inputSituacao" @blur="validaSituacao" :class="{'is-invalid':situacaoValida}" class="form-control" v-model="post.situacao" required>
-                    <option value="1">CONTRATADO</option>
-                    <option value="5">DESLIGADO</option>
-                    <option value="2">EM CONTRATAÇÃO</option>
-                    <option value="3">EM DESLIGAMENTO</option>
-                    <option value="4">EM RENOVAÇÃO</option>
-                    <option value="6">TCE CANCELADO</option>
-                </select>
-                <div class="invalid-feedback">
-                    Situação não pode ser vazia
-                </div>
-            </div>
-        </div>
+
     </div>
 
     <div class="row">
@@ -185,8 +197,26 @@
             </div>
         </div>
     </div>
-    <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component>
+    <!-- <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component> -->
+
+
+
+    <!-- botão de teste -->
+    <div>
+    <hr>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-end">
+                <slot>
+                </slot> <!-- Para poder implementar botões adicionais onde o componente for importado -->
+                <button type="submit" class="btn btn-primary ml-2">
+                    Cadastrar
+                </button>
+            </div>
+        </div>
+    </div>
     <botao-email-component :post="post"></botao-email-component>
+</div>
 
 </form>
 </template>
@@ -198,7 +228,8 @@ export default {
             msg: {
                 error: false,
                 success: false
-            }
+            },
+            depSetores: []
         }
     },
     beforeMount () {
@@ -221,14 +252,38 @@ export default {
         })
     },
     methods: {
-        ocupaVaga: function() {
-            // TODO: OCUPAR VAGA
+        atualizaStatusVaga: function(e) {            
+            if(this.post.situacao == '5') {
+                return;
+            }
+            this.vagaAtualizada = {};
             
-            // this.statusVaga.status = 'OCUPADA';
-            // var app = this;
-            // window.setTimeout(function() {
-            //     console.log(this.statusVaga);
-            // }, 1500);
+
+            for(let i in this.vagas){
+                if(this.vagas[i].id == this.post.cod_vaga){
+                    this.vagaAtualizada = this.vagas[i];
+                }
+            }
+            
+            this.vagaAtualizada.status = "OCUPADA";
+        },
+        atualizaSetor: function () {
+            this.depSetores = [];
+            var nomeDepartamento = '';
+            // console.log(this.departamentos);
+            for (var dep in this.departamentos) {
+                if (this.departamentos[dep].sigla === this.post.dep_hierarquico) {
+                    nomeDepartamento = this.departamentos[dep].departamentos;
+                    break;
+                }
+            }
+
+            for (var i in this.departamentos) {
+                if (this.departamentos[i].departamentos === nomeDepartamento) {
+                    this.depSetores.push(this.departamentos[i].sigla)
+                }
+            }
+            // console.log(this.depSetores) 
         }
     },
     props: [

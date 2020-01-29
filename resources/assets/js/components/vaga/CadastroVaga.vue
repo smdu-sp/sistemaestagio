@@ -49,6 +49,7 @@
                                             v-model="vaga.situacao">
                                             <option>CANCELADA</option>
                                             <option>DISTRIBUIDA</option>
+                                            <option>NÃO DISTRIBUIDA</option>
                                             <option>TRANSFERIDA</option>
                                         </select>
                                         <div v-if="situacaoValida" class="invalid-feedback">

@@ -3139,15 +3139,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3174,7 +3165,8 @@ __webpack_require__.r(__webpack_exports__);
       emailValido: false,
       instituicaoValida: false,
       cursoValido: false,
-      vagaAlterada: '',
+      vagaAlterada: "",
+      vagaAtualizada: {},
       departamentoValido: false,
       setorValido: false,
       supervisorValido: false,
@@ -3196,10 +3188,10 @@ __webpack_require__.r(__webpack_exports__);
         vagaAlterada: false,
         vagaNaoAlterada: false
       },
-      auxiliarCpf: '',
+      auxiliarCpf: "",
       mostrarConteudoConsulta: false,
       loading: false,
-      filtro: '',
+      filtro: "",
       estagiarios: {},
       estagiarioFiltrado: {},
       exibeModalCartaoAcesso: false,
@@ -3213,7 +3205,7 @@ __webpack_require__.r(__webpack_exports__);
       this.estagiarioFiltrado = this.estagiarios;
 
       if (this.filtro) {
-        var exp = new RegExp(this.filtro.trim(), 'i');
+        var exp = new RegExp(this.filtro.trim(), "i");
         this.estagiarioFiltrado = this.estagiarioFiltrado.filter(function (estagiario) {
           return exp.test(estagiario.nome);
         });
@@ -3224,22 +3216,22 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    var uriEstagiario = '/api/estagiarios';
-    var uriCartoes = '/api/cartao';
-    var uriEstados = '/api/estados';
-    var uriInstituicoes = '/api/instituicao';
-    var uriCursos = '/api/cursos';
-    var uriDepartamentos = '/api/departamentos';
-    var uriSupervisores = '/api/supervisores';
-    var uriVagas = '/api/vagas';
-    this.requisicaoGet(uriCartoes, 'cartoes');
-    this.requisicaoGet(uriEstados, 'estados');
-    this.requisicaoGet(uriInstituicoes, 'instituicoes');
-    this.requisicaoGet(uriCursos, 'cursos');
-    this.requisicaoGet(uriDepartamentos, 'departamentos');
-    this.requisicaoGet(uriSupervisores, 'supervisores');
-    this.requisicaoGet(uriVagas, 'vagas');
-    this.requisicaoGet(uriEstagiario, 'estagiarios');
+    var uriEstagiario = "/api/estagiarios";
+    var uriCartoes = "/api/cartao";
+    var uriEstados = "/api/estados";
+    var uriInstituicoes = "/api/instituicao";
+    var uriCursos = "/api/cursos";
+    var uriDepartamentos = "/api/departamentos";
+    var uriSupervisores = "/api/supervisores";
+    var uriVagas = "/api/vagas";
+    this.requisicaoGet(uriCartoes, "cartoes");
+    this.requisicaoGet(uriEstados, "estados");
+    this.requisicaoGet(uriInstituicoes, "instituicoes");
+    this.requisicaoGet(uriCursos, "cursos");
+    this.requisicaoGet(uriDepartamentos, "departamentos");
+    this.requisicaoGet(uriSupervisores, "supervisores");
+    this.requisicaoGet(uriVagas, "vagas");
+    this.requisicaoGet(uriEstagiario, "estagiarios");
   },
   mounted: function mounted() {
     if (this.$store.state.estagiario.estagiarioSelecionado) {
@@ -3264,8 +3256,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     carregaSupervisor: function carregaSupervisor() {
-      var uriSupervisores = '/api/supervisores';
-      this.requisicaoGet(uriSupervisores, 'supervisores');
+      var uriSupervisores = "/api/supervisores";
+      this.requisicaoGet(uriSupervisores, "supervisores");
     },
     abreModalSupervisor: function abreModalSupervisor() {
       this.exibeModalSupervisor = !this.exibeModalSupervisor;
@@ -3274,15 +3266,15 @@ __webpack_require__.r(__webpack_exports__);
       this.exibeModalVaga = !this.exibeModalVaga;
     },
     carregaVaga: function carregaVaga() {
-      var uriVagas = '/api/vagas';
-      this.requisicaoGet(uriVagas, 'vagas');
+      var uriVagas = "/api/vagas";
+      this.requisicaoGet(uriVagas, "vagas");
     },
     abreModalCartaoAcesso: function abreModalCartaoAcesso() {
       this.exibeModalCartaoAcesso = !this.exibeModalCartaoAcesso;
     },
     carregaCartaoAcesso: function carregaCartaoAcesso() {
-      var uriCartoes = '/api/cartao';
-      this.requisicaoGet(uriCartoes, 'cartoes');
+      var uriCartoes = "/api/cartao";
+      this.requisicaoGet(uriCartoes, "cartoes");
     },
     insereDataDesligamento: function insereDataDesligamento() {
       var dataHoje = new Date();
@@ -3294,8 +3286,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     alteraVagaParaLivre: function alteraVagaParaLivre(situacao) {
       if (situacao.target.value == 5) {
-        this.statusVaga.status = 'LIVRE';
-        document.getElementById('selectStatus').disabled = true;
+        this.statusVaga.status = "LIVRE";
+        document.getElementById("selectStatus").disabled = true;
       }
 
       this.insereDataDesligamento();
@@ -3323,10 +3315,10 @@ __webpack_require__.r(__webpack_exports__);
       this.selectVaga();
     },
     exibeModalEstagiario: function exibeModalEstagiario() {
-      this.$refs['consulta-estagiario'].show();
+      this.$refs["consulta-estagiario"].show();
     },
     escondeModalEstagiario: function escondeModalEstagiario() {
-      this.$refs['consulta-estagiario'].hide();
+      this.$refs["consulta-estagiario"].hide();
     },
     validacaoCpf: function validacaoCpf() {
       // Valida o CPF do Modal
@@ -3355,78 +3347,78 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     validaNome: function validaNome(nome) {
-      this.validacao(nome, 'nomeValido');
+      this.validacao(nome, "nomeValido");
     },
     validaCodEstudante: function validaCodEstudante(cod) {
-      this.validacao(cod, 'codValido');
+      this.validacao(cod, "codValido");
     },
     validaContratante: function validaContratante(contratante) {
-      this.validacao(contratante, 'contratanteValido');
+      this.validacao(contratante, "contratanteValido");
     },
     validaVaga: function validaVaga(vaga) {
-      this.validacao(vaga, 'vagaValida');
+      this.validacao(vaga, "vagaValida");
     },
     validaEndereco: function validaEndereco(endereco) {
-      this.validacao(endereco, 'enderecoValido');
+      this.validacao(endereco, "enderecoValido");
     },
     validaComplemento: function validaComplemento(complemento) {
-      this.validacao(complemento, 'complementoValido');
+      this.validacao(complemento, "complementoValido");
     },
     validaBairro: function validaBairro(bairro) {
-      this.validacao(bairro, 'bairroValido');
+      this.validacao(bairro, "bairroValido");
     },
     validaEstado: function validaEstado(estado) {
-      this.validacao(estado, 'estadoValido');
+      this.validacao(estado, "estadoValido");
     },
     validaCep: function validaCep(cep) {
-      this.validacao(cep, 'cepValido');
+      this.validacao(cep, "cepValido");
     },
     validaCelular: function validaCelular(celular) {
-      this.validacao(celular, 'celularValido');
+      this.validacao(celular, "celularValido");
     },
     validaNacionalidade: function validaNacionalidade(nacionalidade) {
-      this.validacao(nacionalidade, 'nacionalidadeValida');
+      this.validacao(nacionalidade, "nacionalidadeValida");
     },
     validaRaca: function validaRaca(raca) {
-      this.validacao(raca, 'racaValida');
+      this.validacao(raca, "racaValida");
     },
     validaCpf: function validaCpf(cpf) {
-      this.validacao(cpf, 'cpfValido');
+      this.validacao(cpf, "cpfValido");
     },
     // Valida o CPF do Modal
     validaCpfForm: function validaCpfForm(cpf) {
-      this.validacao(cpf, 'cpfValidoForm');
+      this.validacao(cpf, "cpfValidoForm");
     },
     // Valida o CPF do Formulário de Update
     validaRg: function validaRg(rg) {
-      this.validacao(rg, 'rgValido');
+      this.validacao(rg, "rgValido");
     },
     validaEmail: function validaEmail(email) {
-      this.validacao(email, 'emailValido');
+      this.validacao(email, "emailValido");
     },
     validaInstituicao: function validaInstituicao(instituicao) {
-      this.validacao(instituicao, 'instituicaoValida');
+      this.validacao(instituicao, "instituicaoValida");
     },
     validaCurso: function validaCurso(curso) {
-      this.validacao(curso, 'cursoValido');
+      this.validacao(curso, "cursoValido");
     },
     validaDepartamento: function validaDepartamento(departamento) {
-      this.validacao(departamento, 'departamentoValido');
+      this.validacao(departamento, "departamentoValido");
     },
     validaSetor: function validaSetor(setor) {
-      this.validacao(setor, 'setorValido');
+      this.validacao(setor, "setorValido");
     },
     validaSupervisor: function validaSupervisor(supervisor) {
-      this.validacao(supervisor, 'supervisorValido');
+      this.validacao(supervisor, "supervisorValido");
     },
     validaHorarioEntrada: function validaHorarioEntrada(horaEntrada) {
-      this.validacao(horaEntrada, 'horarioEntradaValido');
+      this.validacao(horaEntrada, "horarioEntradaValido");
     },
     validaHorarioSaida: function validaHorarioSaida(horaSaida) {
-      this.validacao(horaSaida, 'horarioSaidaValido');
+      this.validacao(horaSaida, "horarioSaidaValido");
     },
     validaSituacao: function validaSituacao(situacao) {
-      this.validacao(situacao, 'situacaoValida');
+      this.validacao(situacao, "situacaoValida");
     },
     converteNascimento: function converteNascimento() {
       if (this.post.data_nascimento) {
@@ -3598,7 +3590,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.loading = false;
         _this2.msg.error = true;
-        _this2.msg.erro = 'A pesquisa não retornou dados';
+        _this2.msg.erro = "A pesquisa não retornou dados";
         _this2.post.cpf = _this2.auxiliarCpf;
       });
     },
@@ -3637,7 +3629,7 @@ __webpack_require__.r(__webpack_exports__);
       var celular = this.post.fone_celular;
 
       if (celular) {
-        if (celular.substr(0, 1) != '(') {
+        if (celular.substr(0, 1) != "(") {
           var codArea = celular.substr(0, 2);
           var telParte1 = celular.substr(2, 5);
           var telParte2 = celular.substr(7, celular.length);
@@ -3677,7 +3669,7 @@ __webpack_require__.r(__webpack_exports__);
       var fone = this.post.fone_residencial;
 
       if (fone) {
-        if (fone.substr(0, 1) != '(') {
+        if (fone.substr(0, 1) != "(") {
           var codArea = fone.substr(0, 2);
           var telParte1 = fone.substr(2, 4);
           var telParte2 = fone.substr(6, fone.length);
@@ -3696,11 +3688,11 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.post.dt_inicio) {
-        this.post.dt_inicio == "".concat(this.post.dt_inicio.substr(0, 10), " 00:00:00") ? this.post.dt_inicio : this.post.dt_inicio += ' 00:00:00';
+        this.post.dt_inicio == "".concat(this.post.dt_inicio.substr(0, 10), " 00:00:00") ? this.post.dt_inicio : this.post.dt_inicio += " 00:00:00";
       }
 
       if (this.post.dt_termino) {
-        this.post.dt_termino == "".concat(this.post.dt_termino.substr(0, 10), " 00:00:00") ? this.post.dt_termino : this.post.dt_termino += ' 00:00:00';
+        this.post.dt_termino == "".concat(this.post.dt_termino.substr(0, 10), " 00:00:00") ? this.post.dt_termino : this.post.dt_termino += " 00:00:00";
       }
 
       if (this.post.dt_termino) {
@@ -3708,89 +3700,90 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.post.dt_inicial_1) {
-        this.post.dt_inicial_1 == "".concat(this.post.dt_inicial_1.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_1 : this.post.dt_inicial_1 += ' 00:00:00';
+        this.post.dt_inicial_1 == "".concat(this.post.dt_inicial_1.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_1 : this.post.dt_inicial_1 += " 00:00:00";
       }
 
       if (this.post.dt_inicial_2) {
-        this.post.dt_inicial_2 == "".concat(this.post.dt_inicial_2.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_2 : this.post.dt_inicial_2 += ' 00:00:00';
+        this.post.dt_inicial_2 == "".concat(this.post.dt_inicial_2.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_2 : this.post.dt_inicial_2 += " 00:00:00";
       }
 
       if (this.post.dt_inicial_3) {
-        this.post.dt_inicial_3 == "".concat(this.post.dt_inicial_3.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_3 : this.post.dt_inicial_3 += ' 00:00:00';
+        this.post.dt_inicial_3 == "".concat(this.post.dt_inicial_3.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_3 : this.post.dt_inicial_3 += " 00:00:00";
       }
 
       if (this.post.dt_inicial_4) {
-        this.post.dt_inicial_4 == "".concat(this.post.dt_inicial_4.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_4 : this.post.dt_inicial_4 += ' 00:00:00';
+        this.post.dt_inicial_4 == "".concat(this.post.dt_inicial_4.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_4 : this.post.dt_inicial_4 += " 00:00:00";
       }
 
       if (this.post.dt_inicial_5) {
-        this.post.dt_inicial_5 == "".concat(this.post.dt_inicial_5.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_5 : this.post.dt_inicial_5 += ' 00:00:00';
+        this.post.dt_inicial_5 == "".concat(this.post.dt_inicial_5.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_5 : this.post.dt_inicial_5 += " 00:00:00";
       }
 
       if (this.post.dt_inicial_6) {
-        this.post.dt_inicial_6 == "".concat(this.post.dt_inicial_6.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_6 : this.post.dt_inicial_6 += ' 00:00:00';
+        this.post.dt_inicial_6 == "".concat(this.post.dt_inicial_6.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_6 : this.post.dt_inicial_6 += " 00:00:00";
       }
 
       if (this.post.dt_inicial_7) {
-        this.post.dt_inicial_7 == "".concat(this.post.dt_inicial_7.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_7 : this.post.dt_inicial_7 += ' 00:00:00';
+        this.post.dt_inicial_7 == "".concat(this.post.dt_inicial_7.substr(0, 10), " 00:00:00") ? this.post.dt_inicial_7 : this.post.dt_inicial_7 += " 00:00:00";
       }
 
       if (this.post.dt_inicio_1_aditivo) {
-        this.post.dt_inicio_1_aditivo == "".concat(this.post.dt_inicio_1_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_inicio_1_aditivo : this.post.dt_inicio_1_aditivo += ' 00:00:00';
+        this.post.dt_inicio_1_aditivo == "".concat(this.post.dt_inicio_1_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_inicio_1_aditivo : this.post.dt_inicio_1_aditivo += " 00:00:00";
       }
 
       if (this.post.dt_inicio_2_aditivo) {
-        this.post.dt_inicio_2_aditivo == "".concat(this.post.dt_inicio_2_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_inicio_2_aditivo : this.post.dt_inicio_2_aditivo += ' 00:00:00';
+        this.post.dt_inicio_2_aditivo == "".concat(this.post.dt_inicio_2_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_inicio_2_aditivo : this.post.dt_inicio_2_aditivo += " 00:00:00";
       }
 
       if (this.post.dt_termino_1_aditivo) {
-        this.post.dt_termino_1_aditivo == "".concat(this.post.dt_termino_1_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_termino_1_aditivo : this.post.dt_termino_1_aditivo += ' 00:00:00';
+        this.post.dt_termino_1_aditivo == "".concat(this.post.dt_termino_1_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_termino_1_aditivo : this.post.dt_termino_1_aditivo += " 00:00:00";
       }
 
       if (this.post.dt_termino_2_aditivo) {
-        this.post.dt_termino_2_aditivo == "".concat(this.post.dt_termino_2_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_termino_2_aditivo : this.post.dt_termino_2_aditivo += ' 00:00:00';
+        this.post.dt_termino_2_aditivo == "".concat(this.post.dt_termino_2_aditivo.substr(0, 10), " 00:00:00") ? this.post.dt_termino_2_aditivo : this.post.dt_termino_2_aditivo += " 00:00:00";
       }
 
       if (this.post.dt_termino_1) {
-        this.post.dt_termino_1 == "".concat(this.post.dt_termino_1.substr(0, 10), " 00:00:00") ? this.post.dt_termino_1 : this.post.dt_termino_1 += ' 00:00:00';
+        this.post.dt_termino_1 == "".concat(this.post.dt_termino_1.substr(0, 10), " 00:00:00") ? this.post.dt_termino_1 : this.post.dt_termino_1 += " 00:00:00";
       }
 
       if (this.post.dt_termino_2) {
-        this.post.dt_termino_2 == "".concat(this.post.dt_termino_2.substr(0, 10), " 00:00:00") ? this.post.dt_termino_2 : this.post.dt_termino_2 += ' 00:00:00';
+        this.post.dt_termino_2 == "".concat(this.post.dt_termino_2.substr(0, 10), " 00:00:00") ? this.post.dt_termino_2 : this.post.dt_termino_2 += " 00:00:00";
       }
 
       if (this.post.dt_termino_3) {
-        this.post.dt_termino_3 == "".concat(this.post.dt_termino_3.substr(0, 10), " 00:00:00") ? this.post.dt_termino_3 : this.post.dt_termino_3 += ' 00:00:00';
+        this.post.dt_termino_3 == "".concat(this.post.dt_termino_3.substr(0, 10), " 00:00:00") ? this.post.dt_termino_3 : this.post.dt_termino_3 += " 00:00:00";
       }
 
       if (this.post.dt_termino_4) {
-        this.post.dt_termino_4 == "".concat(this.post.dt_termino_4.substr(0, 10), " 00:00:00") ? this.post.dt_termino_4 : this.post.dt_termino_4 += ' 00:00:00';
+        this.post.dt_termino_4 == "".concat(this.post.dt_termino_4.substr(0, 10), " 00:00:00") ? this.post.dt_termino_4 : this.post.dt_termino_4 += " 00:00:00";
       }
 
       if (this.post.dt_termino_5) {
-        this.post.dt_termino_5 == "".concat(this.post.dt_termino_5.substr(0, 10), " 00:00:00") ? this.post.dt_termino_5 : this.post.dt_termino_5 += ' 00:00:00';
+        this.post.dt_termino_5 == "".concat(this.post.dt_termino_5.substr(0, 10), " 00:00:00") ? this.post.dt_termino_5 : this.post.dt_termino_5 += " 00:00:00";
       }
 
       if (this.post.dt_termino_6) {
-        this.post.dt_termino_6 == "".concat(this.post.dt_termino_6.substr(0, 10), " 00:00:00") ? this.post.dt_termino_6 : this.post.dt_termino_6 += ' 00:00:00';
+        this.post.dt_termino_6 == "".concat(this.post.dt_termino_6.substr(0, 10), " 00:00:00") ? this.post.dt_termino_6 : this.post.dt_termino_6 += " 00:00:00";
       }
 
       if (this.post.dt_termino_7) {
-        this.post.dt_termino_7 == "".concat(this.post.dt_termino_7.substr(0, 10), " 00:00:00") ? this.post.dt_termino_7 : this.post.dt_termino_7 += ' 00:00:00';
+        this.post.dt_termino_7 == "".concat(this.post.dt_termino_7.substr(0, 10), " 00:00:00") ? this.post.dt_termino_7 : this.post.dt_termino_7 += " 00:00:00";
       }
 
       if (this.post.data_nascimento) {
-        this.post.data_nascimento == "".concat(this.post.data_nascimento.substr(0, 10), " 00:00:00") ? this.post.data_nascimento : this.post.data_nascimento += ' 00:00:00';
+        this.post.data_nascimento == "".concat(this.post.data_nascimento.substr(0, 10), " 00:00:00") ? this.post.data_nascimento : this.post.data_nascimento += " 00:00:00";
       }
 
       if (this.post.desligado) {
-        this.post.desligado == "".concat(this.post.desligado.substr(0, 10), " 00:00:00") ? this.post.desligado : this.post.desligado += ' 00:00:00';
+        this.post.desligado == "".concat(this.post.desligado.substr(0, 10), " 00:00:00") ? this.post.desligado : this.post.desligado += " 00:00:00";
       }
     },
     scrollTop: function scrollTop() {
       window.scrollTo(0, 0);
     },
     inserirEstagiario: function inserirEstagiario() {
+      console.log("INSERIDO");
       this.alteracaoSupervisor();
       this.horarioVariavel();
       this.dataModificacao();
@@ -3856,7 +3849,7 @@ __webpack_require__.r(__webpack_exports__);
         _this4.converteHorarioSaida();
 
         _this4.msg.success = true;
-        _this4.msg.sucesso = 'Dados atualizados com sucesso!';
+        _this4.msg.sucesso = "Dados atualizados com sucesso!";
 
         _this4.scrollTop();
       })["catch"](function (e) {
@@ -3909,7 +3902,7 @@ __webpack_require__.r(__webpack_exports__);
         _this4.converteHorarioSaida();
 
         _this4.msg.error = true;
-        _this4.msg.erro = 'Erro ao atualizar dados';
+        _this4.msg.erro = "Erro ao atualizar dados";
 
         _this4.scrollTop();
       });
@@ -4937,6 +4930,95 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4952,7 +5034,7 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this = this;
 
-    var uriVagas = '/api/vagas';
+    var uriVagas = "/api/vagas";
     this.axios.get(uriVagas).then(function (response) {
       _this.msg.error = false;
       _this.todasVagas = response.data;
@@ -4966,7 +5048,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(_this.post.cod_vaga);
     })["catch"](function (error) {
       _this.msg.error = true;
-      _this.msg.erro = 'Erro ao retornar vagas do banco de dados';
+      _this.msg.erro = "Erro ao retornar vagas do banco de dados";
     });
   },
   watch: {
@@ -4979,7 +5061,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'alteraVagaParaLivre', 'supervisoresOrdenados', 'vagasOrdenadas', 'carregaVaga', 'abreModalVaga', 'abreModalSupervisor', 'carregaSupervisor']
+  props: ["post", "departamentos", "supervisores", "inserirEstagiario", "alteracaoSupervisor", "horarioVariavel", "dataModificacao", "horaModificacao", "vagas", "validaVaga", "vagaValida", "selectVaga", "statusVaga", "validaDepartamento", "departamentoValido", "validaSetor", "setorValido", "validaSupervisor", "supervisorValido", "validaHorarioEntrada", "horarioEntradaValido", "validaHorarioSaida", "horarioSaidaValido", "validaSituacao", "situacaoValida", "alteraVagaParaLivre", "supervisoresOrdenados", "vagasOrdenadas", "carregaVaga", "abreModalVaga", "abreModalSupervisor", "carregaSupervisor"]
 });
 
 /***/ }),
@@ -6064,6 +6146,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6071,7 +6183,8 @@ __webpack_require__.r(__webpack_exports__);
       msg: {
         error: false,
         success: false
-      }
+      },
+      depSetores: []
     };
   },
   beforeMount: function beforeMount() {
@@ -6093,12 +6206,38 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    ocupaVaga: function ocupaVaga() {// TODO: OCUPAR VAGA
-      // this.statusVaga.status = 'OCUPADA';
-      // var app = this;
-      // window.setTimeout(function() {
-      //     console.log(this.statusVaga);
-      // }, 1500);
+    atualizaStatusVaga: function atualizaStatusVaga(e) {
+      if (this.post.situacao == '5') {
+        return;
+      }
+
+      this.vagaAtualizada = {};
+
+      for (var i in this.vagas) {
+        if (this.vagas[i].id == this.post.cod_vaga) {
+          this.vagaAtualizada = this.vagas[i];
+        }
+      }
+
+      this.vagaAtualizada.status = "OCUPADA";
+    },
+    atualizaSetor: function atualizaSetor() {
+      this.depSetores = [];
+      var nomeDepartamento = ''; // console.log(this.departamentos);
+
+      for (var dep in this.departamentos) {
+        if (this.departamentos[dep].sigla === this.post.dep_hierarquico) {
+          nomeDepartamento = this.departamentos[dep].departamentos;
+          break;
+        }
+      }
+
+      for (var i in this.departamentos) {
+        if (this.departamentos[i].departamentos === nomeDepartamento) {
+          this.depSetores.push(this.departamentos[i].sigla);
+        }
+      } // console.log(this.depSetores) 
+
     }
   },
   props: ['post', 'departamentos', 'supervisores', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'vagas', 'validaVaga', 'vagaValida', 'selectVaga', 'statusVaga', 'validaDepartamento', 'departamentoValido', 'validaSetor', 'setorValido', 'validaSupervisor', 'supervisorValido', 'validaHorarioEntrada', 'horarioEntradaValido', 'validaHorarioSaida', 'horarioSaidaValido', 'validaSituacao', 'situacaoValida', 'abreModalSupervisor', 'carregaSupervisor', 'abreModalVaga', 'carregaVaga', 'supervisoresOrdenados', 'vagasOrdenadas', 'departamentosOrdenados']
@@ -6444,6 +6583,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     alteraStatusVaga: function alteraStatusVaga() {
+      // Atualiza status da vaga          
+      if (this.post.situacao != '5') {
+        this.statusVaga.status = "OCUPADA";
+      } // this.vagaAtualizada = {};
+      // for(let i in this.vagas){
+      //     if(this.vagas[i].id == this.post.cod_vaga){
+      //         this.vagaAtualizada = this.vagas[i];
+      //     }
+      // }
+      // this.vagaAtualizada.status = "OCUPADA";           
+
+
+      console.log("DEU CERTO");
       var uriVagas = "".concat(this.urlPadrao, "vagas/").concat(this.statusVaga.id);
       this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
         return response;
@@ -8975,6 +9127,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -40732,7 +40885,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.ul-estagiario[data-v-85b6c4a0] {\r\n  margin: 0;\r\n  padding: 0;\r\n  border: 1px solid #ccc;\r\n  border-radius: 0px 0px 20px 20px;\n}\n.ul-estagiario .item-estagiario[data-v-85b6c4a0] {\r\n  list-style: none;\r\n  margin-left: 10px;\r\n  cursor:pointer;\n}\n.fim-lista[data-v-85b6c4a0] {\r\n  margin-top: 20px;\r\n  list-style: none;\n}\n.card[data-v-85b6c4a0] {\r\n  width: 98%;\n}\n.card-body[data-v-85b6c4a0] {\r\n  height: 100%;\n}\r\n", ""]);
+exports.push([module.i, "\n.ul-estagiario[data-v-85b6c4a0] {\r\n  margin: 0;\r\n  padding: 0;\r\n  border: 1px solid #ccc;\r\n  border-radius: 0px 0px 20px 20px;\n}\n.ul-estagiario .item-estagiario[data-v-85b6c4a0] {\r\n  list-style: none;\r\n  margin-left: 10px;\r\n  cursor: pointer;\n}\n.fim-lista[data-v-85b6c4a0] {\r\n  margin-top: 20px;\r\n  list-style: none;\n}\n.card[data-v-85b6c4a0] {\r\n  width: 98%;\n}\n.card-body[data-v-85b6c4a0] {\r\n  height: 100%;\n}\r\n", ""]);
 
 // exports
 
@@ -75211,9 +75364,7 @@ var render = function() {
               _vm._v(" "),
               _vm.cpfInvalido
                 ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\r\n                O CPF deve ter 11 números\r\n              "
-                    )
+                    _vm._v("O CPF deve ter 11 números")
                   ])
                 : _vm._e(),
               _vm._v(" "),
@@ -75398,27 +75549,25 @@ var render = function() {
         ? [
             _vm.msg.success
               ? _c("div", { staticClass: "alert alert-success mt-2" }, [
-                  _vm._v("\r\n      " + _vm._s(_vm.msg.sucesso) + "\r\n    ")
+                  _vm._v(_vm._s(_vm.msg.sucesso))
                 ])
               : _vm._e(),
             _vm._v(" "),
             _vm.msg.error
               ? _c("div", { staticClass: "alert alert-danger mt-2" }, [
-                  _vm._v("\r\n      " + _vm._s(_vm.msg.erro) + "\r\n    ")
+                  _vm._v(_vm._s(_vm.msg.erro))
                 ])
               : _vm._e(),
             _vm._v(" "),
             _vm.msg.vagaAlterada
               ? _c("div", { staticClass: "alert alert-success" }, [
-                  _vm._v(
-                    "\r\n      " + _vm._s(_vm.msg.vagaSuccess) + "\r\n    "
-                  )
+                  _vm._v(_vm._s(_vm.msg.vagaSuccess))
                 ])
               : _vm._e(),
             _vm._v(" "),
             _vm.msg.vagaNaoAlterada
               ? _c("div", { staticClass: "alert alert-danger" }, [
-                  _vm._v("\r\n      " + _vm._s(_vm.msg.vagaError) + "\r\n    ")
+                  _vm._v(_vm._s(_vm.msg.vagaError))
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -77912,9 +78061,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.vagaValida
                   ? _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                                Vaga não pode ser vazia\n                            "
-                      )
+                      _vm._v("Vaga não pode ser vazia")
                     ])
                   : _vm._e()
               ])
@@ -77937,6 +78084,71 @@ var render = function() {
                 })
               ]
             )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "inputSituacao" } }, [
+              _vm._v("Situação")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post.situacao,
+                    expression: "post.situacao"
+                  }
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.situacaoValida },
+                attrs: { id: "inputSituacao" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.post,
+                        "situacao",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    _vm.alteraVagaParaLivre
+                  ],
+                  blur: _vm.validaSituacao
+                }
+              },
+              [
+                _c("option", { attrs: { value: "1" } }, [_vm._v("CONTRATADO")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "5" } }, [_vm._v("DESLIGADO")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [
+                  _vm._v("EM CONTRATAÇÃO")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [
+                  _vm._v("EM DESLIGAMENTO")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v("Situação não pode ser vazia")
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -78053,7 +78265,7 @@ var render = function() {
                 _c("option", [_vm._v(_vm._s(_vm.post.dep_hierarquico))]),
                 _vm._v(" "),
                 _vm._l(_vm.departamentos, function(departamento) {
-                  return departamento.tipo == "PAI"
+                  return departamento.tipo === "PAI"
                     ? _c("option", [_vm._v(_vm._s(departamento.sigla))])
                     : _vm._e()
                 })
@@ -78062,9 +78274,7 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Departamento não pode ficar em branco\n                "
-              )
+              _vm._v("Departamento não pode ficar em branco")
             ])
           ])
         ]),
@@ -78112,7 +78322,7 @@ var render = function() {
                 _c("option"),
                 _vm._v(" "),
                 _vm._l(_vm.departamentos, function(departamento) {
-                  return departamento.tipo == "FILHO"
+                  return departamento.tipo === "FILHO"
                     ? _c("option", [_vm._v(_vm._s(departamento.sigla))])
                     : _vm._e()
                 })
@@ -78121,9 +78331,7 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Setor não pode ser vazio\n                "
-              )
+              _vm._v("Setor não pode ser vazio")
             ])
           ])
         ]),
@@ -78176,9 +78384,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                            Supervisor não pode ser vazio\n                        "
-                  )
+                  _vm._v("Supervisor não pode ser vazio")
                 ])
               ])
             ]),
@@ -78562,9 +78768,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Horário de entrada não pode ser vazio\n                "
-              )
+              _vm._v("Horário de entrada não pode ser vazio")
             ])
           ])
         ]),
@@ -78600,9 +78804,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Horário de saída não pode ser vazio\n                "
-              )
+              _vm._v("Horário de saída não pode ser vazio")
             ])
           ])
         ]),
@@ -78613,6 +78815,7 @@ var render = function() {
           [
             _c("div", { staticClass: "form-group" }, [
               _c("span", [_vm._v("Horário variável")]),
+              _vm._v(" "),
               _c("br"),
               _vm._v(" "),
               _c("input", {
@@ -78661,88 +78864,11 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(
-                  "\n                    Data de término não pode ser vazio\n                "
-                )
+                _vm._v("Data de término não pode ser vazio")
               ])
             ])
           ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputSituacao" } }, [
-              _vm._v("Situação")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.situacao,
-                    expression: "post.situacao"
-                  }
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": _vm.situacaoValida },
-                attrs: { id: "inputSituacao" },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.post,
-                        "situacao",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                    _vm.alteraVagaParaLivre
-                  ],
-                  blur: _vm.validaSituacao
-                }
-              },
-              [
-                _c("option", { attrs: { value: "1" } }, [_vm._v("CONTRATADO")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "5" } }, [_vm._v("DESLIGADO")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("EM CONTRATAÇÃO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [
-                  _vm._v("EM DESLIGAMENTO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "4" } }, [
-                  _vm._v("EM RENOVAÇÃO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "6" } }, [
-                  _vm._v("TCE CANCELADO")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Situação não pode ser vazia\n                "
-              )
-            ])
-          ])
-        ])
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -81236,9 +81362,7 @@ var render = function() {
                               : $$selectedVal[0]
                           )
                         },
-                        function($event) {
-                          _vm.selectVaga, _vm.ocupaVaga()
-                        }
+                        _vm.selectVaga
                       ],
                       click: _vm.carregaVaga,
                       blur: _vm.validaVaga
@@ -81282,42 +81406,108 @@ var render = function() {
               ]
             )
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4", staticStyle: { "margin-left": "-12px" } },
-        [
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputContrato" } }, [
-              _vm._v("Contrato CIEE")
+            _c("label", { attrs: { for: "inputSituacao" } }, [
+              _vm._v("Situação")
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.contrato,
-                  expression: "post.contrato"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", maxlength: "20", id: "inputContrato" },
-              domProps: { value: _vm.post.contrato },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post.situacao,
+                    expression: "post.situacao"
                   }
-                  _vm.$set(_vm.post, "contrato", $event.target.value)
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.situacaoValida },
+                attrs: { id: "inputSituacao", required: "" },
+                on: {
+                  blur: _vm.validaSituacao,
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.post,
+                      "situacao",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c("option", { attrs: { value: "1" } }, [_vm._v("CONTRATADO")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "5" } }, [_vm._v("DESLIGADO")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [
+                  _vm._v("EM CONTRATAÇÃO")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [
+                  _vm._v("EM DESLIGAMENTO")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "4" } }, [
+                  _vm._v("EM RENOVAÇÃO")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Situação não pode ser vazia\n                "
+              )
+            ])
           ])
-        ]
-      ),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-3", staticStyle: { "margin-left": "-12px" } },
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "inputContrato" } }, [
+                _vm._v("Contrato CIEE")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post.contrato,
+                    expression: "post.contrato"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", maxlength: "20", id: "inputContrato" },
+                domProps: { value: _vm.post.contrato },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.post, "contrato", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]
+        )
+      ]),
       _vm._v(" "),
       false
         ? undefined
@@ -81346,21 +81536,28 @@ var render = function() {
                 attrs: { id: "selectDepartamento", required: "" },
                 on: {
                   blur: _vm.validaDepartamento,
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "dep_hierarquico",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.post,
+                        "dep_hierarquico",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    function($event) {
+                      return _vm.atualizaSetor(_vm.post.dep_hierarquico)
+                    }
+                  ]
                 }
               },
               [
@@ -81426,7 +81623,9 @@ var render = function() {
                 _c("option"),
                 _vm._v(" "),
                 _vm._l(_vm.departamentosOrdenados, function(departamento) {
-                  return departamento.tipo == "FILHO"
+                  return departamento.tipo == "FILHO" ||
+                    departamento.tipo == "OUTROS" ||
+                    departamento.tipo == "PAI"
                     ? _c("option", [_vm._v(_vm._s(departamento.sigla))])
                     : _vm._e()
                 })
@@ -81726,77 +81925,7 @@ var render = function() {
               ])
             ])
           ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputSituacao" } }, [
-              _vm._v("Situação")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.situacao,
-                    expression: "post.situacao"
-                  }
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": _vm.situacaoValida },
-                attrs: { id: "inputSituacao", required: "" },
-                on: {
-                  blur: _vm.validaSituacao,
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "situacao",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "1" } }, [_vm._v("CONTRATADO")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "5" } }, [_vm._v("DESLIGADO")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("EM CONTRATAÇÃO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [
-                  _vm._v("EM DESLIGAMENTO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "4" } }, [
-                  _vm._v("EM RENOVAÇÃO")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "6" } }, [
-                  _vm._v("TCE CANCELADO")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Situação não pode ser vazia\n                "
-              )
-            ])
-          ])
-        ])
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -81831,13 +81960,42 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("botoes-component", {
-        attrs: { titulo: (_vm.nomeBotao = "Cadastrar") }
-      }),
-      _vm._v(" "),
-      _c("botao-email-component", { attrs: { post: _vm.post } })
-    ],
-    1
+      _c(
+        "div",
+        [
+          _c("hr"),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-12 d-flex justify-content-end" },
+                [
+                  _vm._t("default"),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary ml-2",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Cadastrar\n                "
+                      )
+                    ]
+                  )
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("botao-email-component", { attrs: { post: _vm.post } })
+        ],
+        1
+      )
+    ]
   )
 }
 var staticRenderFns = []
@@ -85675,6 +85833,8 @@ var render = function() {
                                   _c("option", [_vm._v("CANCELADA")]),
                                   _vm._v(" "),
                                   _c("option", [_vm._v("DISTRIBUIDA")]),
+                                  _vm._v(" "),
+                                  _c("option", [_vm._v("NÃO DISTRIBUIDA")]),
                                   _vm._v(" "),
                                   _c("option", [_vm._v("TRANSFERIDA")])
                                 ]
