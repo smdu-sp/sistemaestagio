@@ -9,7 +9,7 @@
                         <div class="form-group">
                             <label for="selectVaga">Codigo Vaga</label>
                             <select type="text" 
-                                @change="selectVaga, ocupaVaga()"
+                                @change="selectVaga"
                                 @click="carregaVaga"
                                 @blur="validaVaga"
                                 :class="{'is-invalid': vagaValida}" 
@@ -111,7 +111,8 @@
                     <option></option>
                     <!-- <option v-for="departamento of departamentosOrdenados" 
                         v-if="departamento.tipo == 'FILHO'">{{ departamento.sigla }}</option> -->
-                        <option v-for="setor in depSetores">{{ setor }}</option>
+                        <option v-for="departamento of departamentosOrdenados" v-if="departamento.tipo == 'FILHO' || departamento.tipo == 'OUTROS' || departamento.tipo == 'PAI'">{{ departamento.sigla }}</option>
+                        <!-- <option v-for="setor in depSetores">{{ setor }}</option> -->
                 </select>
                 <div class="invalid-feedback">
                     Setor não pode ser vazio
@@ -196,8 +197,26 @@
             </div>
         </div>
     </div>
-    <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component>
+    <!-- <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component> -->
+
+
+
+    <!-- botão de teste -->
+    <div>
+    <hr>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-end">
+                <slot>
+                </slot> <!-- Para poder implementar botões adicionais onde o componente for importado -->
+                <button type="submit" class="btn btn-primary ml-2">
+                    Cadastrar
+                </button>
+            </div>
+        </div>
+    </div>
     <botao-email-component :post="post"></botao-email-component>
+</div>
 
 </form>
 </template>
@@ -233,14 +252,20 @@ export default {
         })
     },
     methods: {
-        ocupaVaga: function() {
-            // TODO: OCUPAR VAGA
+        atualizaStatusVaga: function(e) {            
+            if(this.post.situacao == '5') {
+                return;
+            }
+            this.vagaAtualizada = {};
             
-            // this.statusVaga.status = 'OCUPADA';
-            // var app = this;
-            // window.setTimeout(function() {
-            //     console.log(this.statusVaga);
-            // }, 1500);
+
+            for(let i in this.vagas){
+                if(this.vagas[i].id == this.post.cod_vaga){
+                    this.vagaAtualizada = this.vagas[i];
+                }
+            }
+            
+            this.vagaAtualizada.status = "OCUPADA";
         },
         atualizaSetor: function () {
             this.depSetores = [];

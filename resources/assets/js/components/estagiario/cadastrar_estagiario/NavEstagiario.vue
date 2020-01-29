@@ -331,6 +331,23 @@ export default {
             }
         },
         alteraStatusVaga() {
+            // Atualiza status da vaga          
+            if(this.post.situacao != '5') {
+                this.statusVaga.status = "OCUPADA";
+            }
+            // this.vagaAtualizada = {};
+            
+
+            // for(let i in this.vagas){
+            //     if(this.vagas[i].id == this.post.cod_vaga){
+            //         this.vagaAtualizada = this.vagas[i];
+            //     }
+            // }
+            
+            // this.vagaAtualizada.status = "OCUPADA";           
+            
+            console.log("DEU CERTO");
+
             let uriVagas = `${this.urlPadrao}vagas/${this.statusVaga.id}`;
             this.axios.patch(uriVagas, this.statusVaga).then(response => response);
         },

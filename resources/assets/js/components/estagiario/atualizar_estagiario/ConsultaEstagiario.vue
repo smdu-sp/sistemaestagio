@@ -206,6 +206,7 @@ export default {
       instituicaoValida: false,
       cursoValido: false,
       vagaAlterada: "",
+      vagaAtualizada: {},
       departamentoValido: false,
       setorValido: false,
       supervisorValido: false,
@@ -887,6 +888,7 @@ export default {
       window.scrollTo(0, 0);
     },
     inserirEstagiario() {
+      console.log("INSERIDO");
       this.alteracaoSupervisor();
       this.horarioVariavel();
       this.dataModificacao();
@@ -960,6 +962,7 @@ export default {
           this.converteHorarioSaida();
           this.msg.success = true;
           this.msg.sucesso = "Dados atualizados com sucesso!";
+          
           this.scrollTop();
         })
         .catch(e => {

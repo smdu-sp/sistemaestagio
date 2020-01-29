@@ -3166,6 +3166,7 @@ __webpack_require__.r(__webpack_exports__);
       instituicaoValida: false,
       cursoValido: false,
       vagaAlterada: "",
+      vagaAtualizada: {},
       departamentoValido: false,
       setorValido: false,
       supervisorValido: false,
@@ -3782,6 +3783,7 @@ __webpack_require__.r(__webpack_exports__);
       window.scrollTo(0, 0);
     },
     inserirEstagiario: function inserirEstagiario() {
+      console.log("INSERIDO");
       this.alteracaoSupervisor();
       this.horarioVariavel();
       this.dataModificacao();
@@ -6155,6 +6157,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6185,12 +6206,20 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    ocupaVaga: function ocupaVaga() {// TODO: OCUPAR VAGA
-      // this.statusVaga.status = 'OCUPADA';
-      // var app = this;
-      // window.setTimeout(function() {
-      //     console.log(this.statusVaga);
-      // }, 1500);
+    atualizaStatusVaga: function atualizaStatusVaga(e) {
+      if (this.post.situacao == '5') {
+        return;
+      }
+
+      this.vagaAtualizada = {};
+
+      for (var i in this.vagas) {
+        if (this.vagas[i].id == this.post.cod_vaga) {
+          this.vagaAtualizada = this.vagas[i];
+        }
+      }
+
+      this.vagaAtualizada.status = "OCUPADA";
     },
     atualizaSetor: function atualizaSetor() {
       this.depSetores = [];
@@ -6554,6 +6583,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     alteraStatusVaga: function alteraStatusVaga() {
+      // Atualiza status da vaga          
+      if (this.post.situacao != '5') {
+        this.statusVaga.status = "OCUPADA";
+      } // this.vagaAtualizada = {};
+      // for(let i in this.vagas){
+      //     if(this.vagas[i].id == this.post.cod_vaga){
+      //         this.vagaAtualizada = this.vagas[i];
+      //     }
+      // }
+      // this.vagaAtualizada.status = "OCUPADA";           
+
+
+      console.log("DEU CERTO");
       var uriVagas = "".concat(this.urlPadrao, "vagas/").concat(this.statusVaga.id);
       this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
         return response;
@@ -81320,9 +81362,7 @@ var render = function() {
                               : $$selectedVal[0]
                           )
                         },
-                        function($event) {
-                          _vm.selectVaga, _vm.ocupaVaga()
-                        }
+                        _vm.selectVaga
                       ],
                       click: _vm.carregaVaga,
                       blur: _vm.validaVaga
@@ -81582,8 +81622,12 @@ var render = function() {
               [
                 _c("option"),
                 _vm._v(" "),
-                _vm._l(_vm.depSetores, function(setor) {
-                  return _c("option", [_vm._v(_vm._s(setor))])
+                _vm._l(_vm.departamentosOrdenados, function(departamento) {
+                  return departamento.tipo == "FILHO" ||
+                    departamento.tipo == "OUTROS" ||
+                    departamento.tipo == "PAI"
+                    ? _c("option", [_vm._v(_vm._s(departamento.sigla))])
+                    : _vm._e()
                 })
               ],
               2
@@ -81916,13 +81960,42 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("botoes-component", {
-        attrs: { titulo: (_vm.nomeBotao = "Cadastrar") }
-      }),
-      _vm._v(" "),
-      _c("botao-email-component", { attrs: { post: _vm.post } })
-    ],
-    1
+      _c(
+        "div",
+        [
+          _c("hr"),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-12 d-flex justify-content-end" },
+                [
+                  _vm._t("default"),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary ml-2",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Cadastrar\n                "
+                      )
+                    ]
+                  )
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("botao-email-component", { attrs: { post: _vm.post } })
+        ],
+        1
+      )
+    ]
   )
 }
 var staticRenderFns = []
