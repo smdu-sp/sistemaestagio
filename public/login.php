@@ -2,6 +2,9 @@
 // Inicia a sessão
 session_start();
 
+if (isset($_SESSION['SesID'])) {
+    $_SESSION["loggedin"] = true;
+}
 // Verifica se o usuário já está logado. Se sim, redireciona à página do Painel
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
