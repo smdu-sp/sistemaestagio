@@ -2,10 +2,10 @@
     <form @submit.prevent="inserirEstagiario" method="post">
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
 
-                <div class="row">
-                    <div class="col-md-10">
+                <div class="row"> 
+                   <div class="col-md-10">
                         <div class="form-group">
                             <label for="selectVaga">Codigo Vaga</label>
                             <select type="text" 
@@ -58,52 +58,7 @@
                         v-model="post.contrato" >
                 </div>
             </div>
-
-            <!--<div class="col-md-4">
-                <div class="form-group">
-                    <label for="selectStatus">Status Vaga</label>
-                   <select type="text" id="selectStatus" class="form-control" v-model="statusVaga.status">
-                        <option default>{{ statusVaga.status }}</option>
-                        <option v-if="statusVaga.status != 'OCUPADA'">OCUPADA</option>
-                        <option v-if="statusVaga.status != 'EM SELEÇÃO'">EM SELEÇÃO</option>
-                        <option v-if="statusVaga.status != 'LIVRE'">LIVRE</option>
-                    </select>
-                </div>-->
-            </div>
-
-           
-            <div v-if="false" class="col-md-3">
-                <div class="form-group">
-                    <label for="inputTceSuperEstagios">TCE Super Estágios</label>
-                    <input type="text" 
-                        maxlength="11" 
-                        class="form-control" 
-                        id="inputTceSuperEstagios" 
-                        v-model="post.tc_superestagios">
-                </div>
-            </div>
-        </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="selectDepartamento">Dep. Hierárquico</label>
-                <select class="form-control" @blur="validaDepartamento" 
-                    :class="{'is-invalid':departamentoValido}" 
-                    id="selectDepartamento" 
-                    v-model="post.dep_hierarquico" 
-                    v-on:change="atualizaSetor(post.dep_hierarquico)" 
-                    required>
-
-                    <option></option>
-                    <option v-for="departamento of departamentosOrdenados" v-if="departamento.tipo == 'PAI'">{{ departamento.sigla }}</option>
-                </select>
-                <div class="invalid-feedback">
-                    Departamento não pode ficar em branco
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
+            <div class="col-md-3">
             <div class="setor-estag">
                 <label for="selectSetor">Setor Estagiado</label>
                 <select class="form-control" @blur="validaSetor" :class="{'is-invalid':setorValido}" id="selectSetor" 
@@ -120,11 +75,12 @@
             </div>
         </div>
     </div>
+
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-11">
 
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-11">
                     <div class="form-group">
                         <label for="inputSupervisor">Supervisor</label>
                         <select class="form-control" @blur="validaSupervisor" @click="carregaSupervisor" :class="{'is-invalid':supervisorValido}" id="inputSupervisor" v-model="post.supervisor" required>
@@ -143,16 +99,16 @@
             </div>
             
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5">
             <div class="form-group">
-                <label for="inputInicio">Data Início</label>
+                <label for="inputInicio">Data Início do Estágio</label>
                     <input type="date" class="form-control" id="inputInicio" v-model="post.dt_inicio" required>
 
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5">
             <div class="form-group">
-                <label for="inputTermino">Data Término</label>
+                <label for="inputTermino">Data Término do Contrato</label>
                     <input type="date" class="form-control" id="inputTermino" v-model="post.dt_termino" required>
             </div>
         </div>
@@ -161,7 +117,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
-                <label for="inputHorarioEntrada">Horário de Entrada</label>
+                <label for="inputHorarioEntrada">Entrada do Estagiário</label>
                 <input type="time" @blur="validaHorarioEntrada" :class="{'is-invalid':horarioEntradaValido}" class="form-control" id="inputHorarioEntrada" v-model="post.horario_entrada">
                 <div class="invalid-feedback">
                     Horário de entrada não pode ser vazio
@@ -170,7 +126,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label for="inputHorarioSaida">Horário de Saída</label>
+                <label for="inputHorarioSaida">Saída do Estagiário</label>
                 <input type="time" @blur="validaHorarioSaida" :class="{'is-invalid':horarioSaidaValido}" class="form-control" id="inputHorarioSaida" v-model="post.horario_saida">
                 <div class="invalid-feedback">
                     Horário de saída não pode ser vazio
@@ -215,7 +171,6 @@
             </div>
         </div>
     </div>
-    <botao-email-component :post="post"></botao-email-component>
 </div>
 
 </form>

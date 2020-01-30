@@ -5893,52 +5893,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'validaNome', 'nomeValido', 'validaCodEstudante', 'codValido', 'validaContratante', 'contratanteValido', 'validaEndereco', 'enderecoValido', 'validaEstado', 'estadoValido', 'validaCep', 'cepValido', 'validaBairro', 'bairroValido', 'validaComplemento', 'complementoValido', 'validaCelular', 'celularValido', 'validaNacionalidade', 'nacionalidadeValida', 'validaNaturalidade', 'naturalidadeValida', 'validaRaca', 'racaValida', 'validaCpf', 'cpfValido', 'validaRg', 'rgValido', 'validaEmail', 'emailValido', 'validaInstituicao', 'instituicaoValida', 'validaCurso', 'cursoValido', 'converteCep', 'valorNacionalidade', 'abreModalCartaoAcesso', 'carregaCartaoAcesso', 'cartoesOrdenados', 'cursosOrdenados', 'verificaDuplicidadeCpf', 'verificaDuplicidadeCodEstudante', 'abreModalInstituicaoEnsino', 'carregaInstituicoes', 'abreModalCurso']
 });
@@ -5954,51 +5908,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -79522,7 +79431,7 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-5" }, [
+        _c("div", { staticClass: "col-md-8" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputNome" } }, [_vm._v("Nome")]),
             _vm._v(" "),
@@ -79590,50 +79499,6 @@ var render = function() {
                 }
               }
             })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Portador de deficiência?")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.deficiencia,
-                    expression: "post.deficiencia"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "deficiencia",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "0" } }, [_vm._v("NÃO")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("SIM")])
-              ]
-            )
           ])
         ])
       ]),
@@ -79726,9 +79591,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("option", [_vm._v("SMDU")]),
                 _vm._v(" "),
-                _c("option", [_vm._v("SEL")]),
-                _vm._v(" "),
-                _c("option", [_vm._v("SMUL")])
+                _c("option", [_vm._v("SEL")])
               ]
             ),
             _vm._v(" "),
@@ -79744,108 +79607,43 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputLogin" } }, [_vm._v("Login")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.login,
-                  expression: "post.login"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                maxlength: "7",
-                id: "inputLogin",
-                placeholder: "Ex: x455214"
-              },
-              domProps: { value: _vm.post.login },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "login", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-10" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "selectCartao" } }, [
-                  _vm._v("Cartão Acesso")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.post.cartao_acesso,
-                        expression: "post.cartao_acesso"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "selectCartao" },
-                    on: {
-                      click: _vm.carregaCartaoAcesso,
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.post,
-                          "cartao_acesso",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.cartoesOrdenados, function(cartao) {
-                      return _c("option", [
-                        _vm._v(_vm._s(cartao.id.toUpperCase()))
-                      ])
-                    })
-                  ],
-                  2
-                )
-              ])
-            ]),
+            _c("label", [_vm._v("Portador de deficiência?")]),
             _vm._v(" "),
             _c(
-              "div",
+              "select",
               {
-                staticClass:
-                  "form-group d-flex flex-column align-items-baseline justify-content-end"
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post.deficiencia,
+                    expression: "post.deficiencia"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.post,
+                      "deficiencia",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
               },
               [
-                _c("img", {
-                  staticClass: "cadastraCartaoAcesso",
-                  attrs: {
-                    src: __webpack_require__(/*! ../../../../../../public/icones/icons8-adicionar-48.png */ "./public/icones/icons8-adicionar-48.png"),
-                    alt: "Adicionar Cartão de Acesso"
-                  },
-                  on: { click: _vm.abreModalCartaoAcesso }
-                })
+                _c("option", { attrs: { value: "0" } }, [_vm._v("NÃO")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("SIM")])
               ]
             )
           ])
@@ -80704,36 +80502,6 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputPai" } }, [
-              _vm._v("Nome do Pai")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.nome_pai,
-                  expression: "post.nome_pai"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", maxlength: "170", id: "inputPai" },
-              domProps: { value: _vm.post.nome_pai },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "nome_pai", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputEmailPessoal" } }, [
               _vm._v("E-mail pessoal")
             ]),
@@ -80773,42 +80541,6 @@ var render = function() {
                   )
                 ])
               : _vm._e()
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputEmailCorporativo" } }, [
-              _vm._v("E-mail corporativo")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.email_corporativo,
-                  expression: "post.email_corporativo"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "email",
-                maxlength: "100",
-                id: "inputEmailCorporativo"
-              },
-              domProps: { value: _vm.post.email_corporativo },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "email_corporativo", $event.target.value)
-                }
-              }
-            })
           ])
         ]),
         _vm._v(" "),
@@ -80900,7 +80632,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-8" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-10" }, [
               _c("div", { staticClass: "form-group" }, [
@@ -81037,7 +80769,11 @@ var render = function() {
                 _vm._v(" "),
                 _c("option", [_vm._v("5º/1º")]),
                 _vm._v(" "),
-                _c("option", [_vm._v("5º/2º")])
+                _c("option", [_vm._v("5º/2º")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("6º/1º")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("6º/2º")])
               ]
             )
           ])
@@ -81091,36 +80827,6 @@ var render = function() {
               ]
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputDuracaoCurso" } }, [
-              _vm._v("\n                    Semestres\n                ")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.duracao_curso,
-                  expression: "post.duracao_curso"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", id: "inputDuracaoCurso" },
-              domProps: { value: _vm.post.duracao_curso },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "duracao_curso", $event.target.value)
-                }
-              }
-            })
-          ])
         ])
       ]),
       _vm._v(" "),
@@ -81131,7 +80837,7 @@ var render = function() {
             { staticClass: "form-group" },
             [
               _c("label", { attrs: { for: "inputHorario" } }, [
-                _vm._v("Horário")
+                _vm._v("Horário de Estudo")
               ]),
               _vm._v(" "),
               _c("the-mask", {
@@ -81321,7 +81027,7 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-10" }, [
               _c("div", { staticClass: "form-group" }, [
@@ -81506,81 +81212,9 @@ var render = function() {
               })
             ])
           ]
-        )
-      ]),
-      _vm._v(" "),
-      false
-        ? undefined
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "selectDepartamento" } }, [
-              _vm._v("Dep. Hierárquico")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.dep_hierarquico,
-                    expression: "post.dep_hierarquico"
-                  }
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": _vm.departamentoValido },
-                attrs: { id: "selectDepartamento", required: "" },
-                on: {
-                  blur: _vm.validaDepartamento,
-                  change: [
-                    function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.post,
-                        "dep_hierarquico",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                    function($event) {
-                      return _vm.atualizaSetor(_vm.post.dep_hierarquico)
-                    }
-                  ]
-                }
-              },
-              [
-                _c("option"),
-                _vm._v(" "),
-                _vm._l(_vm.departamentosOrdenados, function(departamento) {
-                  return departamento.tipo == "PAI"
-                    ? _c("option", [_vm._v(_vm._s(departamento.sigla))])
-                    : _vm._e()
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                "\n                    Departamento não pode ficar em branco\n                "
-              )
-            ])
-          ])
-        ]),
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "setor-estag" }, [
             _c("label", { attrs: { for: "selectSetor" } }, [
               _vm._v("Setor Estagiado")
@@ -81643,9 +81277,9 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-11" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-10" }, [
+            _c("div", { staticClass: "col-md-11" }, [
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "inputSupervisor" } }, [
                   _vm._v("Supervisor")
@@ -81727,10 +81361,10 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-5" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputInicio" } }, [
-              _vm._v("Data Início")
+              _vm._v("Data Início do Estágio")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -81757,10 +81391,10 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-5" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputTermino" } }, [
-              _vm._v("Data Término")
+              _vm._v("Data Término do Contrato")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -81792,7 +81426,7 @@ var render = function() {
         _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputHorarioEntrada" } }, [
-              _vm._v("Horário de Entrada")
+              _vm._v("Entrada do Estagiário")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -81830,7 +81464,7 @@ var render = function() {
         _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputHorarioSaida" } }, [
-              _vm._v("Horário de Saída")
+              _vm._v("Saída do Estagiário")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -81960,41 +81594,31 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c("hr"),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "div",
-                { staticClass: "col-md-12 d-flex justify-content-end" },
-                [
-                  _vm._t("default"),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary ml-2",
-                      attrs: { type: "submit" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    Cadastrar\n                "
-                      )
-                    ]
-                  )
-                ],
-                2
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("botao-email-component", { attrs: { post: _vm.post } })
-        ],
-        1
-      )
+      _c("div", [
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-12 d-flex justify-content-end" },
+              [
+                _vm._t("default"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary ml-2",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("\n                    Cadastrar\n                ")]
+                )
+              ],
+              2
+            )
+          ])
+        ])
+      ])
     ]
   )
 }
