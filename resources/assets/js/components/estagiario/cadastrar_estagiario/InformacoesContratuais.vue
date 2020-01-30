@@ -103,7 +103,6 @@
             <div class="form-group">
                 <label for="inputInicio">Data Início do Estágio</label>
                     <input type="date" class="form-control" id="inputInicio" v-model="post.dt_inicio" required>
-
             </div>
         </div>
         <div class="col-md-5">
@@ -153,25 +152,11 @@
             </div>
         </div>
     </div>
-    <!-- <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component> -->
+    <botoes-component :titulo="nomeBotao = 'Cadastrar'"></botoes-component>
 
 
 
-    <!-- botão de teste -->
-    <div>
-    <hr>
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-end">
-                <slot>
-                </slot> <!-- Para poder implementar botões adicionais onde o componente for importado -->
-                <button type="submit" class="btn btn-primary ml-2">
-                    Cadastrar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 </form>
 </template>

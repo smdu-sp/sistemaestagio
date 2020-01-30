@@ -501,7 +501,7 @@
         </div>
     </div>
     <botoes-component :titulo="nomeBotao = 'Cadastrar'">
-        <botao-email-component :post="post"></botao-email-component>
+        <!-- <botao-email-component :post="post"></botao-email-component> -->
     </botoes-component>
 </form>
 
@@ -546,11 +546,6 @@ export default {
 }
 </script>
 <style>
-.cadastraCartaoAcesso {
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-}
 .cadastraInstituicao {
     cursor: pointer;
     width: 40px;

@@ -77,35 +77,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <div class="form-group">
                 <label for="inputLogin">Login</label>
                 <input type="text" class="form-control" maxlength="7" id="inputLogin" v-model="post.login" placeholder="Ex: x455214">
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="form-group">
-                        <label for="selectCartao">Cartão Acesso</label>
-                        <select 
-                            @click="carregaCartaoAcesso"
-                            class="form-control" 
-                            id="selectCartao" 
-                            v-model="post.cartao_acesso">
-                            <option></option>
-                            <option v-for="cartao of cartoesOrdenados">{{ cartao.id }}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group d-flex flex-column align-items-baseline justify-content-end">
-                    <img src="../../../../../../public/icones/icons8-adicionar-48.png"
-                        @click="abreModalCartaoAcesso"
-                        alt="Adicionar Cartão de Acesso"
-                        class="cadastraCartaoAcesso">
-                </div>
-            </div>
-        </div>
+        </div> -->
+        
     </div><!--/row-->
 
     <div class="row">
@@ -371,12 +349,7 @@
 
     <!--row-->
     <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="inputPai">Nome do Pai</label>
-                <input type="text" class="form-control" maxlength="170" id="inputPai" v-model="post.nome_pai">
-            </div>
-        </div>
+
         <div class="col-md-6">
             <div class="form-group">
                 <label for="inputEmailPessoal">E-mail pessoal</label>
@@ -395,12 +368,7 @@
     </div><!--/row-->
     <!--row-->
     <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="inputEmailCorporativo">E-mail corporativo</label>
-                <input type="email" class="form-control" maxlength="100" id="inputEmailCorporativo" v-model="post.email_corporativo">
-            </div>
-        </div>
+
         <div class="col-md-6">
             <div class="form-group">
                 <label for="selectInstituicao">Instituíção de Ensino</label>
@@ -467,21 +435,14 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="inputDuracaoCurso">
-                    Semestres
-                </label>
-                <input type="number" class="form-control" id="inputDuracaoCurso" v-model="post.duracao_curso">
-            </div>
-        </div>
+
     </div><!--/row-->
     
     <!--row-->
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
-                <label for="inputHorario">Horário</label>
+                <label for="inputHorario">Horário de estudo</label>
                 <the-mask type="text" class="form-control" v-b-tooltip.hover title="Somente números" id="inputHorario" v-model="post.horario" mask="##:## às ##:##"></the-mask>
 
             </div>

@@ -4509,45 +4509,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['post', 'cartoes', 'estados', 'instituicoes', 'cursos', 'inserirEstagiario', 'alteracaoSupervisor', 'horarioVariavel', 'dataModificacao', 'horaModificacao', 'validaNome', 'nomeValido', 'validaCodEstudante', 'codValido', 'validaContratante', 'contratanteValido', 'validaEndereco', 'enderecoValido', 'validaEstado', 'estadoValido', 'validaCep', 'cepValido', 'validaBairro', 'bairroValido', 'validaComplemento', 'complementoValido', 'validaCelular', 'celularValido', 'validaNacionalidade', 'nacionalidadeValida', 'validaRaca', 'racaValida', 'cpfValidoForm', 'validaCpfForm', 'validaRg', 'rgValido', 'validaEmail', 'emailValido', 'validaInstituicao', 'instituicaoValida', 'validaCurso', 'cursoValido', 'converteCep', 'showModal', 'carregaCartaoAcesso', 'cartoesOrdenados', 'cursosOrdenados', 'abreModalCartaoAcesso']
 });
@@ -6070,21 +6031,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6495,16 +6441,8 @@ __webpack_require__.r(__webpack_exports__);
       // Atualiza status da vaga          
       if (this.post.situacao != '5') {
         this.statusVaga.status = "OCUPADA";
-      } // this.vagaAtualizada = {};
-      // for(let i in this.vagas){
-      //     if(this.vagas[i].id == this.post.cod_vaga){
-      //         this.vagaAtualizada = this.vagas[i];
-      //     }
-      // }
-      // this.vagaAtualizada.status = "OCUPADA";           
+      }
 
-
-      console.log("DEU CERTO");
       var uriVagas = "".concat(this.urlPadrao, "vagas/").concat(this.statusVaga.id);
       this.axios.patch(uriVagas, this.statusVaga).then(function (response) {
         return response;
@@ -6534,6 +6472,8 @@ __webpack_require__.r(__webpack_exports__);
     cadastraBanco: function cadastraBanco() {
       var _this = this;
 
+      console.log("Entrou em cadastraBanco");
+      console.warn(this.post);
       var uriEstagiarios = this.urlPadrao + 'estagiarios';
       this.axios.post(uriEstagiarios, this.post).then(function (response) {
         _this.msg.sucesso = 'Estagiário Cadastrado com sucesso!';
@@ -6557,17 +6497,14 @@ __webpack_require__.r(__webpack_exports__);
         codValido: this.post.cod_estudante
       }, {
         vagaValida: this.post.cod_vaga
-      }, {
-        contratanteValido: this.post.contratado_por
-      }, {
+      }, //{contratanteValido: this.post.contratado_por},
+      {
         enderecoValido: this.post.endereco
       }, {
         complementoValido: this.post.nro
-      }, {
-        bairroValido: this.post.bairro
-      }, {
-        estadoValido: this.post.estado
-      }, {
+      }, // {bairroValido: this.post.bairro},
+      // {estadoValido: this.post.estado},
+      {
         cepValido: this.post.cep
       }, {
         celularValido: this.post.fone_celular
@@ -6585,19 +6522,14 @@ __webpack_require__.r(__webpack_exports__);
         emailValido: this.post.email_pessoal
       }, {
         instituicaoValida: this.post.instituicao_ensino
-      }, {
-        cursoValido: this.post.curso_formacao
-      }, {
-        departamentoValido: this.post.dep_hierarquico
-      }, {
+      }, // {cursoValido: this.post.curso_formacao},
+      //{departamentoValido: this.post.dep_hierarquico},
+      {
         setorValido: this.post.setor_estagiado
-      }, {
-        supervisorValido: this.post.supervisor
-      }, {
-        dataInicioValida: this.post.dt_inicio
-      }, {
-        dataFimValida: this.post.dt_inicio
-      }, {
+      }, // {supervisorValido: this.post.supervisor},
+      // {dataInicioValida: this.post.dt_inicio},
+      // {dataFimValida: this.post.dt_inicio},
+      {
         horarioEntradaValido: this.post.horario_entrada
       }, {
         horarioSaidaValido: this.post.horario_saida
@@ -6615,11 +6547,14 @@ __webpack_require__.r(__webpack_exports__);
             this[key] = true;
             this.revisarCampos = true;
             contadorCamposInvalidos++;
+            console.log(contadorCamposInvalidos + "- Campo inválido: " + this[key]);
+            console.log(this.camposValidacao[i]);
           }
         }
       }
 
       if (contadorCamposInvalidos == 0) {
+        // validação de formulario
         this.cadastraBanco();
       } else {
         this.scrollTop();
@@ -40832,7 +40767,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.cadastraCartaoAcesso {\r\n    cursor: pointer;\r\n    width: 30px;\r\n    height: 30px;\n}\n.cadastraInstituicao {\r\n    cursor: pointer;\r\n    width: 40px;\r\n    height: 40px;\n}\n.cadastrarCurso {\r\n    cursor: pointer;\r\n    width: 40px;\r\n    height: 40px;\n}\r\n", ""]);
+exports.push([module.i, "\n.cadastraInstituicao {\r\n    cursor: pointer;\r\n    width: 40px;\r\n    height: 40px;\n}\n.cadastrarCurso {\r\n    cursor: pointer;\r\n    width: 40px;\r\n    height: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -76234,113 +76169,6 @@ var render = function() {
                 ])
               : _vm._e()
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputLogin" } }, [_vm._v("Login")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.login,
-                  expression: "post.login"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                maxlength: "7",
-                id: "inputLogin",
-                placeholder: "Ex: x455214"
-              },
-              domProps: { value: _vm.post.login },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "login", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-10" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "selectCartao" } }, [
-                  _vm._v("Cartão Acesso")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.post.cartao_acesso,
-                        expression: "post.cartao_acesso"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "selectCartao" },
-                    on: {
-                      click: _vm.carregaCartaoAcesso,
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.post,
-                          "cartao_acesso",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.cartoesOrdenados, function(cartao) {
-                      return _c("option", [_vm._v(_vm._s(cartao.id))])
-                    })
-                  ],
-                  2
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "form-group d-flex flex-column align-items-baseline justify-content-end"
-              },
-              [
-                _c("img", {
-                  staticClass: "cadastraCartaoAcesso",
-                  attrs: {
-                    src: __webpack_require__(/*! ../../../../../../public/icones/icons8-adicionar-48.png */ "./public/icones/icons8-adicionar-48.png"),
-                    alt: "Adicionar Cartão de Acesso"
-                  },
-                  on: { click: _vm.abreModalCartaoAcesso }
-                })
-              ]
-            )
-          ])
         ])
       ]),
       _vm._v(" "),
@@ -77167,36 +76995,6 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputPai" } }, [
-              _vm._v("Nome do Pai")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.nome_pai,
-                  expression: "post.nome_pai"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", maxlength: "170", id: "inputPai" },
-              domProps: { value: _vm.post.nome_pai },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "nome_pai", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "inputEmailPessoal" } }, [
               _vm._v("E-mail pessoal")
             ]),
@@ -77241,40 +77039,6 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputEmailCorporativo" } }, [
-              _vm._v("E-mail corporativo")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.email_corporativo,
-                  expression: "post.email_corporativo"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "email",
-                maxlength: "100",
-                id: "inputEmailCorporativo"
-              },
-              domProps: { value: _vm.post.email_corporativo },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "email_corporativo", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "selectInstituicao" } }, [
@@ -77517,36 +77281,6 @@ var render = function() {
               ]
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputDuracaoCurso" } }, [
-              _vm._v("\n                    Semestres\n                ")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.duracao_curso,
-                  expression: "post.duracao_curso"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", id: "inputDuracaoCurso" },
-              domProps: { value: _vm.post.duracao_curso },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "duracao_curso", $event.target.value)
-                }
-              }
-            })
-          ])
         ])
       ]),
       _vm._v(" "),
@@ -77557,7 +77291,7 @@ var render = function() {
             { staticClass: "form-group" },
             [
               _c("label", { attrs: { for: "inputHorario" } }, [
-                _vm._v("Horário")
+                _vm._v("Horário de estudo")
               ]),
               _vm._v(" "),
               _c("the-mask", {
@@ -80971,12 +80705,9 @@ var render = function() {
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _c(
-        "botoes-component",
-        { attrs: { titulo: (_vm.nomeBotao = "Cadastrar") } },
-        [_c("botao-email-component", { attrs: { post: _vm.post } })],
-        1
-      )
+      _c("botoes-component", {
+        attrs: { titulo: (_vm.nomeBotao = "Cadastrar") }
+      })
     ],
     1
   )
@@ -81594,32 +81325,11 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", [
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-md-12 d-flex justify-content-end" },
-              [
-                _vm._t("default"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary ml-2",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("\n                    Cadastrar\n                ")]
-                )
-              ],
-              2
-            )
-          ])
-        ])
-      ])
-    ]
+      _c("botoes-component", {
+        attrs: { titulo: (_vm.nomeBotao = "Cadastrar") }
+      })
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -101988,17 +101698,6 @@ module.exports = function(module) {
 	return module;
 };
 
-
-/***/ }),
-
-/***/ "./public/icones/icons8-adicionar-48.png":
-/*!***********************************************!*\
-  !*** ./public/icones/icons8-adicionar-48.png ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/icons8-adicionar-48.png?c9506d9cab864092d5c8ca5f03bda866";
 
 /***/ }),
 

@@ -335,19 +335,7 @@ export default {
             if(this.post.situacao != '5') {
                 this.statusVaga.status = "OCUPADA";
             }
-            // this.vagaAtualizada = {};
             
-
-            // for(let i in this.vagas){
-            //     if(this.vagas[i].id == this.post.cod_vaga){
-            //         this.vagaAtualizada = this.vagas[i];
-            //     }
-            // }
-            
-            // this.vagaAtualizada.status = "OCUPADA";           
-            
-            console.log("DEU CERTO");
-
             let uriVagas = `${this.urlPadrao}vagas/${this.statusVaga.id}`;
             this.axios.patch(uriVagas, this.statusVaga).then(response => response);
         },
@@ -369,6 +357,8 @@ export default {
             }
         },
         cadastraBanco() {
+            console.log("Entrou em cadastraBanco");
+            console.warn(this.post);
             let uriEstagiarios = this.urlPadrao+'estagiarios';
             this.axios
             .post(uriEstagiarios, this.post)
@@ -393,11 +383,11 @@ export default {
                 {nomeValido: this.post.nome},
                 {codValido: this.post.cod_estudante},
                 {vagaValida: this.post.cod_vaga},
-                {contratanteValido: this.post.contratado_por},
+                //{contratanteValido: this.post.contratado_por},
                 {enderecoValido: this.post.endereco},
                 {complementoValido: this.post.nro},
-                {bairroValido: this.post.bairro},
-                {estadoValido: this.post.estado},
+                // {bairroValido: this.post.bairro},
+                // {estadoValido: this.post.estado},
                 {cepValido: this.post.cep},
                 {celularValido: this.post.fone_celular},
                 {nacionalidadeValida: this.post.nacionalidade},
@@ -407,12 +397,12 @@ export default {
                 {rgValido: this.post.rg},
                 {emailValido: this.post.email_pessoal},
                 {instituicaoValida: this.post.instituicao_ensino},
-                {cursoValido: this.post.curso_formacao},
-                {departamentoValido: this.post.dep_hierarquico},
+                // {cursoValido: this.post.curso_formacao},
+                //{departamentoValido: this.post.dep_hierarquico},
                 {setorValido: this.post.setor_estagiado},
-                {supervisorValido: this.post.supervisor},
-                {dataInicioValida: this.post.dt_inicio},
-                {dataFimValida: this.post.dt_inicio},
+                // {supervisorValido: this.post.supervisor},
+                // {dataInicioValida: this.post.dt_inicio},
+                // {dataFimValida: this.post.dt_inicio},
                 {horarioEntradaValido: this.post.horario_entrada},
                 {horarioSaidaValido: this.post.horario_saida},
                 {situacaoValida: this.post.situacao}
@@ -428,11 +418,13 @@ export default {
                         this[key] = true;
                         this.revisarCampos = true;
                         contadorCamposInvalidos++;
+                        console.log(contadorCamposInvalidos + "- Campo inválido: "+this[key]);
+                        console.log(this.camposValidacao[i]);
                     }
                 }
             }
 
-            if(contadorCamposInvalidos == 0) {
+            if(contadorCamposInvalidos == 0) { // validação de formulario
                 this.cadastraBanco();
             } else {
                 this.scrollTop();
