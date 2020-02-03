@@ -122,6 +122,12 @@ class EstagiariosController extends Controller
     }
 
     public function update(Request $request, Estagiario $cpf) {
+        function corrigeData($d) {
+            if (strpos($d, 'NaN') >= 0) {
+                return null;
+            }
+            return $d;
+        }
         $cpf->nome = $request->input('nome');
         $cpf->contrato = $request->input('contrato');
         $cpf->tc_superestagios= $request->input('tc_superestagios');
@@ -168,8 +174,8 @@ class EstagiariosController extends Controller
         $cpf->dep_hierarquico = $request->input('dep_hierarquico');
         $cpf->setor_estagiado = $request->input('setor_estagiado');
         $cpf->supervisor = $request->input('supervisor');
-        // $cpf->dt_inicio = $request->input('dt_inicio');
-        $cpf->dt_inicio = ajustaData($request->input('dt_inicio'));
+        $cpf->dt_inicio = $request->input('dt_inicio');
+        
         $cpf->dt_termino_inicial_lauda = $request->input('dt_termino_inicial_lauda');
         $cpf->dt_termino = $request->input('dt_termino');
         $cpf->dt_inicio_1_aditivo = $request->input('dt_inicio_1_aditivo');
@@ -194,25 +200,26 @@ class EstagiariosController extends Controller
         $cpf->qt_dias_restantes = $request->input('qt_dias_restantes');
         $cpf->qt_dias_solicitada_1 = $request->input('qt_dias_solicitada_1');
         $cpf->dt_inicial_1 = $request->input('dt_inicial_1');
-        $cpf->dt_termino_1 = $request->input('dt_termino_1');
+
+        $cpf->dt_termino_1 = corrigeData($request->input('dt_termino_1'));
         $cpf->qt_dias_solicitada_2 = $request->input('qt_dias_solicitada_2');
-        $cpf->dt_inicial_2 = $request->input('dt_inicial_2');
-        $cpf->dt_termino_2 = $request->input('dt_termino_2');
+        $cpf->dt_inicial_2 = corrigeData($request->input('dt_inicial_2'));
+        $cpf->dt_termino_2 = corrigeData($request->input('dt_termino_2'));
         $cpf->qt_dias_solicitada_3 = $request->input('qt_dias_solicitada_3');
-        $cpf->dt_inicial_3 = $request->input('dt_inicial_3');
-        $cpf->dt_termino_3 = $request->input('dt_termino_3');
+        $cpf->dt_inicial_3 = corrigeData($request->input('dt_inicial_3'));
+        $cpf->dt_termino_3 = corrigeData($request->input('dt_termino_3'));
         $cpf->qt_dias_solicitada_4 = $request->input('qt_dias_solicitada_4');
-        $cpf->dt_inicial_4 = $request->input('dt_inicial_4');
-        $cpf->dt_termino_4 = $request->input('dt_termino_4');
+        $cpf->dt_inicial_4 = corrigeData($request->input('dt_inicial_4'));
+        $cpf->dt_termino_4 = corrigeData($request->input('dt_termino_4'));
         $cpf->qt_dias_solicitada_5 = $request->input('qt_dias_solicitada_5');
-        $cpf->dt_inicial_5 = $request->input('dt_inicial_5');
-        $cpf->dt_termino_5 = $request->input('dt_termino_5');
+        $cpf->dt_inicial_5 = corrigeData($request->input('dt_inicial_5'));
+        $cpf->dt_termino_5 = corrigeData($request->input('dt_termino_5'));
         $cpf->qt_dias_solicitada_6 = $request->input('qt_dias_solicitada_6');
-        $cpf->dt_inicial_6 = $request->input('dt_inicial_6');
-        $cpf->dt_termino_6 = $request->input('dt_termino_6');
+        $cpf->dt_inicial_6 = corrigeData($request->input('dt_inicial_6'));
+        $cpf->dt_termino_6 = corrigeData($request->input('dt_termino_6'));
         $cpf->qt_dias_solicitada_7 = $request->input('qt_dias_solicitada_7');
-        $cpf->dt_inicial_7 = $request->input('dt_inicial_7');
-        $cpf->dt_termino_7 = $request->input('dt_termino_7');
+        $cpf->dt_inicial_7 = corrigeData($request->input('dt_inicial_7'));
+        $cpf->dt_termino_7 = corrigeData($request->input('dt_termino_7'));
         $cpf->observacoes3 = $request->input('observacoes3');
         $cpf->instituicao_bancaria = $request->input('instituicao_bancaria');
         $cpf->agencia = $request->input('agencia');
@@ -230,11 +237,5 @@ class EstagiariosController extends Controller
         $cpf->delete();
 
         return $cpf;
-    }
-    public function ajustaData (String $dataRecebida) {
-        $d=strtotime($dataRecebida);
-        $d = $d->format('Y-m-d H:i:s');
-        
-        return $d;
     }
 }
