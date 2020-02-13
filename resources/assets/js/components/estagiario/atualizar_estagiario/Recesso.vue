@@ -108,10 +108,9 @@ export default {
       var recesso = parseInt(meses) * 2.5;
       var result = Math.round(recesso);
       this.post.diasFerias = result;
-      // return result;
+      return result;
     },
-    calculoDiasGozados(dtInicial, dtFinal, diasSolicitados) {
-      //   dtInicial, dtFinal: string
+    calculoDiasGozados(dtInicial, dtFinal, diasSolicitados) { // dtInicial, dtFinal: string
       let resultado = 0;
       let dtAtual = new Date();
       dtInicial = new Date(dtInicial);
@@ -154,7 +153,8 @@ export default {
       }
 
     //   Atualiza dias gozados
-    this.post["qt_dias_gozados"] = 0;
+    this.post["qt_dias_gozados"] = 0;    
+
     // Calcula dias gozados para cada solicitação de férias
       for (var i in this.solicitacoes) {
         i++;          
@@ -163,8 +163,7 @@ export default {
           this.post["dt_termino_" + i],
           this.post["qt_dias_solicitada_" + i]
         );
-        // Atualiza total de dias gozados
-        this.post.qt_dias_gozados += parseInt(this.post["diasGozados" + i]);  
+        this.post.qt_dias_gozados += this.post["diasGozados" + i] >= 0 ? this.post["diasGozados" + i] : 0;  
       }
       this.post.qt_dias_restantes = this.post.diasFerias - this.post.qt_dias_gozados;
     },

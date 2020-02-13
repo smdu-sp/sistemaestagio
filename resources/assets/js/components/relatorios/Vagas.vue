@@ -24,7 +24,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="selectSupervisor">Supervisor</label>
                     <select id="selectSupervisor" class="form-control" v-model="supervisorFiltrado">
@@ -33,16 +33,18 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3 d-flex flex-column justify-content-end">
+            <div class="col-md-4 d-flex flex-column justify-content-end">
                 <div class="form-group">
                     <button class="btn btn-warning" @click="limparFiltro">Limpar Filtros</button>
                     <botao-imprimir-component></botao-imprimir-component>
+                    <botao-excel nome='relatorio_vagas'></botao-excel>
                 </div>
             </div>
         </div>
 
         <div v-if="status === 'Todas'">
             <h5 class="total-vagas alert alert-info">Total de vagas: {{ vagasPorDepartamento.length }}</h5>
+            <div id="divTabela">
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -67,6 +69,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
             <!--Modal - Histórico da Vaga-->
            <template>
             <div>

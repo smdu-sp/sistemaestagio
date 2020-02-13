@@ -2,11 +2,12 @@
     <div id="printable">
         <h1 class="d-inline-block">Estagiários desligados</h1>
         <botao-imprimir-component></botao-imprimir-component>
+        <botao-excel nome="estagiarios_desligados"></botao-excel>
         <div v-if="msg.error" class="alert alert-danger">
             {{ msg.erro }}
         </div>
         <div class="col-md-12">
-            <div>
+            <div id="divTabela">
                 <h5 class="alert alert-info">Total: {{ estagiariosDesligados.length }}</h5>
                 <table class="table table-bordered table-hover">
                     <thead class="thead-dark">

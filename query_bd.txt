@@ -1,0 +1,29 @@
+# Brancos
+testeselect nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 1 
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('MASCULINO') AND tab_cota_racial.codigo = 1;
+select nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 1 
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('FEMININO') AND tab_cota_racial.codigo = 1;
+
+# Pardos
+select nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 2
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('MASCULINO') AND tab_cota_racial.codigo = 2;
+select nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 2
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('FEMININO') AND tab_cota_racial.codigo = 2;
+
+# Amarelos
+select nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 3
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('MASCULINO') AND tab_cota_racial.codigo = 3;
+select nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 3
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('FEMININO') AND tab_cota_racial.codigo = 3;
+
+# Pretos
+select nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 4
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('MASCULINO') AND tab_cota_racial.codigo = 4;
+select nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 4
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('FEMININO') AND tab_cota_racial.codigo = 4;
+
+# Indígenas
+select nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 5
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('MASCULINO') AND tab_cota_racial.codigo = 5;
+select nome, raca_cor, cor, sexo FROM tab_cad_estagiarios, tab_cota_racial WHERE tab_cad_estagiarios.raca_cor = 5
+AND tab_cad_estagiarios.desligado is null AND tab_cad_estagiarios.sexo IN ('FEMININO') AND tab_cota_racial.codigo = 5;

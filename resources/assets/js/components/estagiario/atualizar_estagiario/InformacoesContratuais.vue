@@ -79,40 +79,9 @@
           />
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label for="inputTceSuperEstagios">TCE Super Estágios</label>
-          <input
-            type="text"
-            maxlength="11"
-            class="form-control"
-            id="inputTceSuperEstagios"
-            v-model="post.tc_superestagios"
-          />
-        </div>
-      </div>
     </div>
 
     <div class="row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label for="selectDepartamento">Dep. Hierárquico</label>
-          <select
-            class="form-control"
-            @blur="validaDepartamento"
-            :class="{'is-invalid':departamentoValido}"
-            id="selectDepartamento"
-            v-model="post.dep_hierarquico"
-          >
-            <option>{{ post.dep_hierarquico }}</option>
-            <option
-              v-for="departamento of departamentos"
-              v-if="departamento.tipo === 'PAI'"
-            >{{ departamento.sigla }}</option>
-          </select>
-          <div class="invalid-feedback">Departamento não pode ficar em branco</div>
-        </div>
-      </div>
       <div class="col-md-3">
         <div class="setor-estag">
           <label for="selectSetor">Setor Estagiado</label>
@@ -126,7 +95,7 @@
             <option></option>
             <option
               v-for="departamento of departamentos"
-              v-if="departamento.tipo === 'FILHO'"
+              v-if="departamento.tipo === 'FILHO' | departamento.tipo === 'PAI'"
             >{{ departamento.sigla }}</option>
           </select>
           <div class="invalid-feedback">Setor não pode ser vazio</div>

@@ -2054,6 +2054,46 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoExcel.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/BotaoExcel.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["nome", "trocaNome"],
+  methods: {
+    exportarXLS: function exportarXLS() {
+      var nomeTabela = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Tabela";
+      // e.preventDefault();
+      var table_div = document.getElementById("divTabela");
+      var blobData = new Blob(["\uFEFF" + table_div.outerHTML], {
+        type: "application/vnd.ms-excel"
+      });
+      var url = window.URL.createObjectURL(blobData);
+      var a = document.createElement("a");
+      a.href = url;
+      var nomeArquivo = nomeTabela + "_" + new Date().getDate() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getFullYear();
+      a.download = nomeArquivo;
+      a.click();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoImprimir.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/BotaoImprimir.vue?vue&type=script&lang=js& ***!
@@ -2067,19 +2107,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     imprimir: function imprimir() {
-      document.getElementsByClassName("col-12")[0].style.visibility = 'hidden';
-      document.getElementsByClassName("col-12")[1].style.visibility = 'hidden';
+      document.getElementsByClassName("col-12")[0].style.visibility = "hidden";
+      document.getElementsByClassName("col-12")[1].style.visibility = "hidden";
       document.getElementById("menu-lateral").parentElement.style.display = "none";
-      document.getElementsByClassName('col-9')[0].classList.add('col-11');
+      document.getElementsByClassName("col-9")[0].classList.add("col-11");
       window.print();
       window.setTimeout(function () {
         document.getElementById("menu-lateral").parentElement.style.display = "block";
-        document.getElementsByClassName('col-9')[0].classList.remove('col-11');
-        document.getElementsByClassName("col-12")[0].style.visibility = 'visible';
-        document.getElementsByClassName("col-12")[1].style.visibility = 'visible';
+        document.getElementsByClassName("col-9")[0].classList.remove("col-11");
+        document.getElementsByClassName("col-12")[0].style.visibility = "visible";
+        document.getElementsByClassName("col-12")[1].style.visibility = "visible";
       }, 100);
     }
   }
@@ -3239,9 +3284,11 @@ __webpack_require__.r(__webpack_exports__);
       this.post = this.$store.state.estagiario.estagiarioSelecionado;
       this.post.curso_formacao = this.$store.state.estagiario.idCursoEstagiarioSelecionado;
       this.auxiliarCpf = this.post.cpf;
-      this.converteNascimento();
-      this.converteHorarioEntrada();
-      this.converteHorarioSaida();
+      this.converteNascimento(); // this.converteHorarioEntrada();
+      // this.converteHorarioSaida();
+
+      this.post.horario_entrada = this.converteHorario(this.post.horario_entrada);
+      this.post.horario_saida = this.converteHorario(this.post.horario_saida);
       this.converteDataInicio();
       this.converteDataTermino();
       this.converteTermosAditivos();
@@ -3302,9 +3349,11 @@ __webpack_require__.r(__webpack_exports__);
       this.post = this.estagiarioFiltrado[indice];
       this.escondeModalEstagiario();
       this.auxiliarCpf = this.post.cpf;
-      this.converteNascimento();
-      this.converteHorarioEntrada();
-      this.converteHorarioSaida();
+      this.converteNascimento(); // this.converteHorarioEntrada();
+      // this.converteHorarioSaida();
+
+      this.post.horario_entrada = this.converteHorario(this.post.horario_entrada);
+      this.post.horario_saida = this.converteHorario(this.post.horario_saida);
       this.converteDataInicio();
       this.converteDataTermino();
       this.converteTermosAditivos();
@@ -3425,10 +3474,38 @@ __webpack_require__.r(__webpack_exports__);
         this.post.data_nascimento = this.post.data_nascimento.substr(0, 10);
       }
     },
-    converteHorarioEntrada: function converteHorarioEntrada() {
-      if (this.post.horario_entrada) {
-        this.post.horario_entrada = this.post.horario_entrada.substr(11, 19);
+    // converteHorarioEntrada() {
+    //   if (this.post.horario_entrada) {
+    //     let minutos = new Date(this.post.horario_entrada).getMinutes();
+    //     if(!minutos >= 0) {
+    //       // Formato antigo (data)
+    //       if(this.post.horario_entrada.toString().length >= 19){
+    //         this.post.horario_entrada = this.post.horario_entrada.toString().substr(11, 19);
+    //       }            
+    //       return;
+    //     }
+    //     minutos = minutos.length > 1 ? minutos : minutos + '0';
+    //     this.post.horario_entrada = new Date(this.post.horario_entrada).getHours() + ':' + minutos;
+    //   }
+    // },
+    converteHorario: function converteHorario(horario) {
+      if (horario) {
+        var minutos = new Date(horario).getMinutes();
+
+        if (!minutos >= 0) {
+          // Formato antigo (data)
+          if (horario.toString().length >= 19) {
+            horario = horario.toString().substr(11, 19);
+          }
+
+          return horario;
+        }
+
+        minutos = minutos.length > 1 ? minutos : minutos + '0';
+        horario = new Date(horario).getHours() + ':' + minutos;
       }
+
+      return horario;
     },
     converteHorarioSaida: function converteHorarioSaida() {
       if (this.post.horario_saida) {
@@ -3558,11 +3635,11 @@ __webpack_require__.r(__webpack_exports__);
         _this2.estagiario = response.data;
         _this2.post = _this2.estagiario;
 
-        _this2.converteNascimento();
+        _this2.converteNascimento(); // this.converteHorarioEntrada();
 
-        _this2.converteHorarioEntrada();
 
-        _this2.converteHorarioSaida();
+        _this2.post.horario_entrada = _this2.converteHorario(_this2.post.horario_entrada);
+        _this2.post.horario_saida = _this2.converteHorario(_this2.post.horario_saida); // this.converteHorarioSaida();
 
         _this2.converteDataInicio();
 
@@ -3842,12 +3919,12 @@ __webpack_require__.r(__webpack_exports__);
 
         if (_this4.post.desligado) {
           _this4.post.desligado = _this4.post.desligado.substr(0, 10);
-        }
+        } // this.converteHorarioEntrada();
+        // this.converteHorarioSaida();
 
-        _this4.converteHorarioEntrada();
 
-        _this4.converteHorarioSaida();
-
+        _this4.post.horario_entrada = _this4.converteHorario(_this4.post.horario_entrada);
+        _this4.post.horario_saida = _this4.converteHorario(_this4.post.horario_saida);
         _this4.msg.success = true;
         _this4.msg.sucesso = "Dados atualizados com sucesso!";
 
@@ -3895,12 +3972,12 @@ __webpack_require__.r(__webpack_exports__);
 
         if (_this4.post.desligado) {
           _this4.post.desligado = _this4.post.desligado.substr(0, 10);
-        }
+        } // this.converteHorarioEntrada();
+        // this.converteHorarioSaida();
 
-        _this4.converteHorarioEntrada();
 
-        _this4.converteHorarioSaida();
-
+        _this4.post.horario_entrada = _this4.converteHorario(_this4.post.horario_entrada);
+        _this4.post.horario_saida = _this4.converteHorario(_this4.post.horario_saida);
         _this4.msg.error = true;
         _this4.msg.erro = "Erro ao atualizar dados";
 
@@ -4949,37 +5026,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5143,10 +5189,11 @@ Date.prototype.addDays = function (days) {
       var meses = differenceInDays / 30;
       var recesso = parseInt(meses) * 2.5;
       var result = Math.round(recesso);
-      this.post.diasFerias = result; // return result;
+      this.post.diasFerias = result;
+      return result;
     },
     calculoDiasGozados: function calculoDiasGozados(dtInicial, dtFinal, diasSolicitados) {
-      //   dtInicial, dtFinal: string
+      // dtInicial, dtFinal: string
       var resultado = 0;
       var dtAtual = new Date();
       dtInicial = new Date(dtInicial);
@@ -5186,9 +5233,8 @@ Date.prototype.addDays = function (days) {
 
       for (var i in this.solicitacoes) {
         i++;
-        this.post["diasGozados" + i] = this.calculoDiasGozados(this.post["dt_inicial_" + i], this.post["dt_termino_" + i], this.post["qt_dias_solicitada_" + i]); // Atualiza total de dias gozados
-
-        this.post.qt_dias_gozados += parseInt(this.post["diasGozados" + i]);
+        this.post["diasGozados" + i] = this.calculoDiasGozados(this.post["dt_inicial_" + i], this.post["dt_termino_" + i], this.post["qt_dias_solicitada_" + i]);
+        this.post.qt_dias_gozados += this.post["diasGozados" + i] >= 0 ? this.post["diasGozados" + i] : 0;
       }
 
       this.post.qt_dias_restantes = this.post.diasFerias - this.post.qt_dias_gozados;
@@ -7045,13 +7091,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      filtro: 'Todas',
+      filtro: "Todas",
       estagiarios: [],
       estagiariosContratados: [],
+      estagiariosBrancos: [],
+      estagiariosPardos: [],
+      estagiariosAmarelos: [],
+      estagiariosPretos: [],
+      estagiariosIndigenas: [],
+      estagiariosNaoDefinidos: [],
+      estagiariosDeficientes: [],
       estagiariosOrdem: [],
       estagiariosBrancosMasculinos: [],
       estagiariosBrancosFemininos: [],
@@ -7063,6 +7129,8 @@ __webpack_require__.r(__webpack_exports__);
       estagiariosPretosFemininos: [],
       estagiariosIndigenasMasculinos: [],
       estagiariosIndigenasFemininos: [],
+      estagiariosNaoDefinidosMasculinos: [],
+      estagiariosNaoDefinidosFemininos: [],
       estagiariosDeficientesMasculinos: [],
       estagiariosDeficientesFemininos: [],
       msg: {
@@ -7083,7 +7151,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     salvaEstagiariosContratados: function salvaEstagiariosContratados() {
       for (var i in this.estagiarios) {
-        if (this.estagiarios[i].situacao === 1) {
+        if (this.estagiarios[i].situacao == 1) {
+          this.estagiariosContratados.push(this.estagiarios[i]);
+        } else if (this.estagiarios[i].deficiencia == 1 && this.estagiarios[i].situacao == 1) {
           this.estagiariosContratados.push(this.estagiarios[i]);
         }
       }
@@ -7092,51 +7162,85 @@ __webpack_require__.r(__webpack_exports__);
     },
     classificaEstagiarios: function classificaEstagiarios() {
       for (var i in this.estagiariosContratados) {
-        if (this.estagiariosContratados[i].deficiencia) {
-          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
-            this.estagiariosDeficientesMasculinos.push(this.estagiarios[i]);
-          } else {
-            this.estagiariosDeficientesFemininos.push(this.estagiarios[i]);
-          }
+        if (this.estagiariosContratados[i].raca_cor == 1) {
+          this.estagiariosBrancos.push(this.estagiariosContratados[i]);
+        } else if (this.estagiariosContratados[i].raca_cor == 2) {
+          this.estagiariosPardos.push(this.estagiariosContratados[i]);
+        } else if (this.estagiariosContratados[i].raca_cor == 3) {
+          this.estagiariosAmarelos.push(this.estagiariosContratados[i]);
+        } else if (this.estagiariosContratados[i].raca_cor == 4) {
+          this.estagiariosPretos.push(this.estagiariosContratados[i]);
+        } else if (this.estagiariosContratados[i].raca_cor == 5) {
+          this.estagiariosIndigenas.push(this.estagiariosContratados[i]);
+        } else if (this.estagiariosContratados[i].raca_cor == 0) {
+          this.estagiariosNaoDefinidos.push(this.estagiariosContratados[i]);
+        }
 
+        if (this.estagiariosContratados[i].deficiencia == 1) {
           this.estagiariosDeficientes.push(this.estagiariosContratados[i]);
-        } else if (this.estagiariosContratados[i].raca_cor === 1) {
-          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
-            this.estagiariosBrancosMasculinos.push(this.estagiarios[i]);
-          } else {
-            this.estagiariosBrancosFemininos.push(this.estagiarios[i]);
-          }
-        } else if (this.estagiariosContratados[i].raca_cor === 2) {
-          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
-            this.estagiariosPardosMasculinos.push(this.estagiarios[i]);
-          } else {
-            this.estagiariosPardosFemininos.push(this.estagiarios[i]);
-          }
-        } else if (this.estagiariosContratados[i].raca_cor === 3) {
-          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
-            this.estagiariosAmarelosMasculinos.push(this.estagiarios[i]);
-          } else {
-            this.estagiariosAmarelosFemininos.push(this.estagiarios[i]);
-          }
-        } else if (this.estagiariosContratados[i].raca_cor === 4) {
-          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
-            this.estagiariosPretosMasculinos.push(this.estagiarios[i]);
-          } else {
-            this.estagiariosPretosFemininos.push(this.estagiarios[i]);
-          }
-        } else if (this.estagiariosContratados[i].raca_cor === 5) {
-          if (this.estagiariosContratados[i].sexo === 'MASCULINO') {
-            this.estagiariosIndigenasMasculinos.push(this.estagiarios[i]);
-          } else {
-            this.estagiariosIndigenasFemininos.push(this.estagiarios[i]);
-          }
+        }
+      }
+
+      for (var i in this.estagiariosBrancos) {
+        if (this.estagiariosBrancos[i].sexo == "MASCULINO" || this.estagiariosBrancos[i].sexo == "Masculino") {
+          this.estagiariosBrancosMasculinos.push(this.estagiariosBrancos[i]);
+        } else if (this.estagiariosBrancos[i].sexo == "FEMININO" || this.estagiariosBrancos[i].sexo == "Feminino") {
+          this.estagiariosBrancosFemininos.push(this.estagiariosBrancos[i]);
+        }
+      }
+
+      for (var i in this.estagiariosPardos) {
+        if (this.estagiariosPardos[i].sexo == "MASCULINO" || this.estagiariosPardos[i].sexo == "Masculino") {
+          this.estagiariosPardosMasculinos.push(this.estagiariosPardos[i]);
+        } else if (this.estagiariosPardos[i].sexo == "FEMININO" || this.estagiariosPardos[i].sexo == "Feminino") {
+          this.estagiariosPardosFemininos.push(this.estagiariosPardos[i]);
+        }
+      }
+
+      for (var i in this.estagiariosAmarelos) {
+        if (this.estagiariosAmarelos[i].sexo == "MASCULINO" || this.estagiariosAmarelos[i].sexo == "Masculino") {
+          this.estagiariosAmarelosMasculinos.push(this.estagiariosAmarelos[i]);
+        } else if (this.estagiariosAmarelos[i].sexo == "FEMININO" || this.estagiariosAmarelos[i].sexo == "Feminino") {
+          this.estagiariosAmarelosFemininos.push(this.estagiariosAmarelos[i]);
+        }
+      }
+
+      for (var i in this.estagiariosPretos) {
+        if (this.estagiariosPretos[i].sexo == "MASCULINO" || this.estagiariosPretos[i].sexo == "Masculino") {
+          this.estagiariosPretosMasculinos.push(this.estagiariosPretos[i]);
+        } else if (this.estagiariosPretos[i].sexo == "FEMININO" || this.estagiariosPretos[i].sexo == "Feminino") {
+          this.estagiariosPretosFemininos.push(this.estagiariosPretos[i]);
+        }
+      }
+
+      for (var i in this.estagiariosIndigenas) {
+        if (this.estagiariosIndigenas[i].sexo == "MASCULINO" || this.estagiariosIndigenas[i].sexo == "Masculino") {
+          this.estagiariosIndigenasMasculinos.push(this.estagiariosIndigenas[i]);
+        } else if (this.estagiariosIndigenas[i].sexo == "FEMININO" || this.estagiariosIndigenas[i].sexo == "Feminino") {
+          this.estagiariosIndigenasFemininos.push(this.estagiariosIndigenas[i]);
+        }
+      }
+
+      for (var i in this.estagiariosNaoDefinidos) {
+        if (this.estagiariosNaoDefinidos[i].sexo == "MASCULINO" || this.estagiariosNaoDefinidos[i].sexo == "Masculino") {
+          this.estagiariosNaoDefinidosMasculinos.push(this.estagiariosNaoDefinidos[i]);
+        } else if (this.estagiariosNaoDefinidos[i].sexo == "FEMININO" || this.estagiariosNaoDefinidos[i].sexo == "Feminino") {
+          this.estagiariosNaoDefinidosFemininos.push(this.estagiariosNaoDefinidos[i]);
+        }
+      }
+
+      for (var i in this.estagiariosDeficientes) {
+        if (this.estagiariosDeficientes[i].sexo == "MASCULINO" || this.estagiariosDeficientes[i].sexo == "Masculino") {
+          this.estagiariosDeficientesMasculinos.push(this.estagiariosDeficientes[i]);
+        } else if (this.estagiariosDeficientes[i].sexo == "FEMININO" || this.estagiariosDeficientes[i].sexo == "Feminino") {
+          this.estagiariosDeficientesFemininos.push(this.estagiariosDeficientes[i]);
         }
       }
     },
     retornaEstagiarios: function retornaEstagiarios() {
       var _this = this;
 
-      var uriEstagiarios = '/api/estagiarios';
+      var uriEstagiarios = "/api/estagiarios";
       this.axios.get(uriEstagiarios).then(function (response) {
         _this.estagiarios = response.data;
         _this.msg.error = false;
@@ -7165,6 +7269,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_filtros__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/filtros */ "./resources/assets/js/mixins/filtros.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+//
 //
 //
 //
@@ -7390,8 +7495,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7400,7 +7503,7 @@ __webpack_require__.r(__webpack_exports__);
       estagiariosContratados30Dias: [],
       estagiariosDesligados30Dias: [],
       estagiariosRenovados30Dias: [],
-      selecao: 'Entradas'
+      selecao: "Entradas"
     };
   },
   mixins: [_mixins_filtros__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -7411,7 +7514,7 @@ __webpack_require__.r(__webpack_exports__);
     salvaEstagiarios: function salvaEstagiarios() {
       var _this = this;
 
-      var uriEstagiarios = '/api/estagiarios';
+      var uriEstagiarios = "/api/estagiarios";
       this.axios.get(uriEstagiarios).then(function (response) {
         _this.estagiarios = response.data;
 
@@ -7462,19 +7565,19 @@ __webpack_require__.r(__webpack_exports__);
         var dataEstagiario2Aditivo = this.estagiarios[i].dt_inicio_2_aditivo;
         var dataEstagiario3Aditivo = this.estagiarios[i].dt_inicio_3_aditivo;
 
-        if (typeof dataEstagiario1Aditivo == 'null') {
+        if (typeof dataEstagiario1Aditivo == "null") {
           return;
         } else {
           var novaData1Aditivo = new Date(dataEstagiario1Aditivo);
           var novaData1Formatada = novaData1Aditivo.setDate(novaData1Aditivo.getDate());
         }
 
-        if (typeof dataEstagiario2Aditivo == 'null') {
+        if (typeof dataEstagiario2Aditivo == "null") {
           var novaData2Aditivo = new Date(dataEstagiario2Aditivo);
           var novaData2Formatada = novaData2Aditivo.setDate(novaData2Aditivo.getDate());
         }
 
-        if (typeof dataEstagiario3Aditivo == 'null') {
+        if (typeof dataEstagiario3Aditivo == "null") {
           return;
         } else {
           var novaData3Aditivo = new Date(dataEstagiario3Aditivo);
@@ -7509,6 +7612,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mixins_computeds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/computeds */ "./resources/assets/js/mixins/computeds.js");
+//
+//
+//
 //
 //
 //
@@ -40603,6 +40709,25 @@ exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\r\n  -webkit
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoExcel.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/BotaoExcel.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.img-exportar-excel {\r\n  cursor: pointer;\r\n  width: 45px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoImprimir.vue?vue&type=style&index=0&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/BotaoImprimir.vue?vue&type=style&index=0&lang=css& ***!
@@ -40615,7 +40740,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.img-imprimir {\r\n    cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.img-imprimir {\r\n  cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
@@ -40824,7 +40949,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.vertical[data-v-69299420] {\r\n    vertical-align: middle;\n}\r\n", ""]);
+exports.push([module.i, "\n.vertical[data-v-69299420] {\r\n  vertical-align: middle;\n}\r\n", ""]);
 
 // exports
 
@@ -40843,7 +40968,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n@media print {\nbody *[data-v-690676c1] {\r\n    visibility: hidden;\n}\n#printable[data-v-690676c1], #printable *[data-v-690676c1] {\r\n    visibility: visible;\n}\n#printable[data-v-690676c1] {\r\n    position: fixed;\r\n    left: 0;\r\n    top: 0;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n@media print {\nbody *[data-v-690676c1] {\r\n    visibility: hidden;\n}\n#printable[data-v-690676c1],\r\n  #printable *[data-v-690676c1] {\r\n    visibility: visible;\n}\n#printable[data-v-690676c1] {\r\n    position: fixed;\r\n    left: 0;\r\n    top: 0;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -72414,6 +72539,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoExcel.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/BotaoExcel.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./BotaoExcel.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoExcel.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoImprimir.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/BotaoImprimir.vue?vue&type=style&index=0&lang=css& ***!
@@ -73866,6 +74021,41 @@ var render = function() {
     },
     [_vm._v("Solicitar cartão de acesso")]
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoExcel.vue?vue&type=template&id=5f5e43f9&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/BotaoExcel.vue?vue&type=template&id=5f5e43f9& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("img", {
+    staticClass: "img-exportar-excel",
+    attrs: {
+      src: __webpack_require__(/*! ../../../../public/icones/icons8-excel.png */ "./public/icones/icons8-excel.png"),
+      alt: "Exportar Relatório"
+    },
+    on: {
+      click: function($event) {
+        return _vm.exportarXLS(_vm.nome)
+      }
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -77827,101 +78017,10 @@ var render = function() {
               }
             })
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputTceSuperEstagios" } }, [
-              _vm._v("TCE Super Estágios")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.tc_superestagios,
-                  expression: "post.tc_superestagios"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                maxlength: "11",
-                id: "inputTceSuperEstagios"
-              },
-              domProps: { value: _vm.post.tc_superestagios },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "tc_superestagios", $event.target.value)
-                }
-              }
-            })
-          ])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "selectDepartamento" } }, [
-              _vm._v("Dep. Hierárquico")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.dep_hierarquico,
-                    expression: "post.dep_hierarquico"
-                  }
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": _vm.departamentoValido },
-                attrs: { id: "selectDepartamento" },
-                on: {
-                  blur: _vm.validaDepartamento,
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "dep_hierarquico",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", [_vm._v(_vm._s(_vm.post.dep_hierarquico))]),
-                _vm._v(" "),
-                _vm._l(_vm.departamentos, function(departamento) {
-                  return departamento.tipo === "PAI"
-                    ? _c("option", [_vm._v(_vm._s(departamento.sigla))])
-                    : _vm._e()
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v("Departamento não pode ficar em branco")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "setor-estag" }, [
             _c("label", { attrs: { for: "selectSetor" } }, [
@@ -77965,7 +78064,8 @@ var render = function() {
                 _c("option"),
                 _vm._v(" "),
                 _vm._l(_vm.departamentos, function(departamento) {
-                  return departamento.tipo === "FILHO"
+                  return (departamento.tipo === "FILHO") |
+                    (departamento.tipo === "PAI")
                     ? _c("option", [_vm._v(_vm._s(departamento.sigla))])
                     : _vm._e()
                 })
@@ -82269,273 +82369,351 @@ var render = function() {
     _c("div", { staticClass: "col-md-12" }, [
       _c(
         "div",
-        { staticClass: "d-flex mb-2" },
-        [_c("botao-imprimir-component")],
+        { staticClass: "d-flex mb-12" },
+        [
+          _c("botao-imprimir-component"),
+          _vm._v(" "),
+          _c("botao-excel", { attrs: { nome: "Cotas" } })
+        ],
         1
       ),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-bordered table-hover" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
-              _vm._v("Brancos")
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Masculino")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosBrancosMasculinos.length))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosBrancosMasculinos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
+      _c("div", { attrs: { id: "divTabela" } }, [
+        _c("table", { staticClass: "table table-bordered table-hover" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+                _vm._v("Brancos")
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Masculino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosBrancosMasculinos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosBrancosMasculinos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
                   )
                 )
-              )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Feminino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosBrancosFemininos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosBrancosFemininos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+                _vm._v("Pardos")
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Masculino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosPardosMasculinos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosPardosMasculinos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Feminino")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.estagiariosPardosFemininos.length))]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosPardosFemininos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+                _vm._v("Amarelos")
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Masculino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosAmarelosMasculinos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosAmarelosMasculinos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Feminino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosAmarelosFemininos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosAmarelosFemininos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+                _vm._v("Negros")
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Masculino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosPretosMasculinos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosPretosMasculinos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Feminino")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.estagiariosPretosFemininos.length))]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosPretosFemininos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+                _vm._v("Indígenas")
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Masculino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosIndigenasMasculinos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosIndigenasMasculinos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Feminino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosIndigenasFemininos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosIndigenasFemininos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+                _vm._v("Não Definidos")
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Masculino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosNaoDefinidosMasculinos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosNaoDefinidosMasculinos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Feminino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosNaoDefinidosFemininos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosNaoDefinidosFemininos.length /
+                        _vm.estagiariosContratados.length) *
+                        100
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Total")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center", attrs: { colspan: "2" } },
+                [_vm._v(_vm._s(_vm.estagiariosContratados.length))]
+              ),
+              _vm._v(" "),
+              _c("td", [_vm._v("100.00")])
             ])
           ]),
           _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("Feminino")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosBrancosFemininos.length))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosBrancosFemininos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
+          _vm._m(1),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
+                _vm._v("Deficientes")
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Masculino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosDeficientesMasculinos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosDeficientesMasculinos.length /
+                        _vm.estagiariosDeficientes.length) *
+                        100
+                    )
                   )
                 )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
-              _vm._v("Pardos")
+              ])
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v("Masculino")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosPardosMasculinos.length))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosPardosMasculinos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
+            _c("tr", [
+              _c("td", [_vm._v("Feminino")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.estagiariosDeficientesFemininos.length))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("duasCasasDecimais")(
+                      (_vm.estagiariosDeficientesFemininos.length /
+                        _vm.estagiariosDeficientes.length) *
+                        100
+                    )
                   )
                 )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("Feminino")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosPardosFemininos.length))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosPardosFemininos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
-              _vm._v("Amarelos")
+              ])
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v("Masculino")]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm.estagiariosAmarelosMasculinos.length))
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosAmarelosMasculinos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
+            _c("tr", [
+              _c("td", [_vm._v("Total")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center", attrs: { colspan: "2" } },
+                [_vm._v(_vm._s(_vm.estagiariosDeficientes.length))]
+              ),
+              _vm._v(" "),
+              _c("td", [_vm._v("100")])
             ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("Feminino")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosAmarelosFemininos.length))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosAmarelosFemininos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
-              _vm._v("Negros")
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Masculino")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosPretosMasculinos.length))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosPretosMasculinos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("Feminino")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.estagiariosPretosFemininos.length))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosPretosFemininos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
-              _vm._v("Indígenas")
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Masculino")]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm.estagiariosIndigenasMasculinos.length))
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosIndigenasMasculinos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("Feminino")]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm.estagiariosIndigenasFemininos.length))
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosIndigenasFemininos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", { staticClass: "vertical", attrs: { rowspan: "2" } }, [
-              _vm._v("Deficientes")
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Masculino")]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm.estagiariosDeficientesMasculinos.length))
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosDeficientesMasculinos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("Feminino")]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm.estagiariosDeficientesFemininos.length))
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm._f("duasCasasDecimais")(
-                    (_vm.estagiariosDeficientesFemininos.length /
-                      _vm.estagiariosContratados.length) *
-                      100
-                  )
-                )
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("Total")]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-center", attrs: { colspan: "2" } }, [
-              _vm._v(_vm._s(_vm.estagiariosContratados.length))
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v("100")])
           ])
         ])
       ])
@@ -82548,7 +82726,21 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-dark" }, [
-      _c("th", { staticClass: "text-center" }, [_vm._v("Tipo")]),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Etnia")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Gênero")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Quantidade")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("%")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("th", { staticClass: "text-center" }, [_vm._v("Deficientes")]),
       _vm._v(" "),
       _c("th", { staticClass: "text-center" }, [_vm._v("Gênero")]),
       _vm._v(" "),
@@ -82589,6 +82781,8 @@ var render = function() {
       _vm._v(" "),
       _c("botao-imprimir-component"),
       _vm._v(" "),
+      _c("botao-excel", { attrs: { nome: "estagiarios_desligados" } }),
+      _vm._v(" "),
       _vm.msg.error
         ? _c("div", { staticClass: "alert alert-danger" }, [
             _vm._v("\n        " + _vm._s(_vm.msg.erro) + "\n    ")
@@ -82596,7 +82790,7 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
-        _c("div", [
+        _c("div", { attrs: { id: "divTabela" } }, [
           _c("h5", { staticClass: "alert alert-info" }, [
             _vm._v("Total: " + _vm._s(_vm.estagiariosDesligados.length))
           ]),
@@ -82745,241 +82939,237 @@ var render = function() {
             _c(
               "div",
               { staticClass: "form-group" },
-              [_c("botao-imprimir-component")],
+              [
+                _c("botao-imprimir-component"),
+                _vm._v(" "),
+                _c("botao-excel", { attrs: { nome: _vm.selecao } })
+              ],
               1
             )
           ]
         )
       ]),
       _vm._v(" "),
-      _vm.selecao === "Entradas"
-        ? _c("div", [
-            _c("h5", { staticClass: "total-vagas alert alert-info" }, [
-              _vm._v(
-                "Total: " + _vm._s(_vm.estagiariosContratados30Dias.length)
-              )
-            ]),
-            _vm._v(" "),
-            _c("table", { staticClass: "table table-bordered table-hover" }, [
-              _vm._m(0),
+      _c("div", { attrs: { id: "divTabela" } }, [
+        _vm.selecao === "Entradas"
+          ? _c("div", [
+              _c("h5", { staticClass: "total-vagas alert alert-info" }, [
+                _vm._v(
+                  "Total: " + _vm._s(_vm.estagiariosContratados30Dias.length)
+                )
+              ]),
               _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  _vm._l(_vm.estagiariosContratados30Dias, function(
-                    estagiarioContratado,
-                    indice
-                  ) {
-                    return _c("tr", { key: estagiarioContratado.nome }, [
-                      _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v(_vm._s(indice + 1))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(estagiarioContratado.nome.toUpperCase()) +
-                            "\n                                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            estagiarioContratado.dep_hierarquico
-                              ? estagiarioContratado.dep_hierarquico
-                              : "NÃO CADASTRADO"
+              _c("table", { staticClass: "table table-bordered table-hover" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  [
+                    _vm._l(_vm.estagiariosContratados30Dias, function(
+                      estagiarioContratado,
+                      indice
+                    ) {
+                      return _c("tr", { key: estagiarioContratado.nome }, [
+                        _c("th", { attrs: { scope: "row" } }, [
+                          _vm._v(_vm._s(indice + 1))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(estagiarioContratado.nome.toUpperCase())
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(estagiarioContratado.supervisor.toUpperCase())
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            _vm._f("dataFormatada")(
-                              estagiarioContratado.dt_inicio
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              estagiarioContratado.dep_hierarquico
+                                ? estagiarioContratado.dep_hierarquico
+                                : "NÃO CADASTRADO"
                             )
                           )
-                        )
-                      ])
-                    ])
-                  }),
-                  _vm._v(" "),
-                  !_vm.estagiariosContratados30Dias.length
-                    ? [_vm._m(1)]
-                    : _vm._e()
-                ],
-                2
-              )
-            ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.selecao === "Saídas"
-        ? _c("div", [
-            _c("h5", { staticClass: "total-vagas alert alert-info" }, [
-              _vm._v("Total: " + _vm._s(_vm.estagiariosDesligados30Dias.length))
-            ]),
-            _vm._v(" "),
-            _c("table", { staticClass: "table table-bordered table-hover" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  _vm._l(_vm.estagiariosDesligados30Dias, function(
-                    estagiarioDesligado,
-                    indice
-                  ) {
-                    return _c("tr", { key: estagiarioDesligado.nome }, [
-                      _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v(_vm._s(indice + 1))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(estagiarioDesligado.nome.toUpperCase()) +
-                            "\n                            "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            estagiarioDesligado.dep_hierarquico
-                              ? estagiarioDesligado.dep_hierarquico
-                              : "NÃO CADASTRADO"
-                          )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(estagiarioDesligado.supervisor.toUpperCase())
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            _vm._f("dataFormatada")(
-                              estagiarioDesligado.desligado
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              estagiarioContratado.supervisor.toUpperCase()
                             )
                           )
-                        )
-                      ])
-                    ])
-                  }),
-                  _vm._v(" "),
-                  !_vm.estagiariosDesligados30Dias.length
-                    ? [_vm._m(3)]
-                    : _vm._e()
-                ],
-                2
-              )
-            ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.selecao === "Renovação"
-        ? _c("div", [
-            _c("h5", { staticClass: "total-vagas alert alert-info" }, [
-              _vm._v("Total: " + _vm._s(_vm.estagiariosRenovados30Dias.length))
-            ]),
-            _vm._v(" "),
-            _c("table", { staticClass: "table table-bordered table-hover" }, [
-              _vm._m(4),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  _vm._l(_vm.estagiariosRenovados30Dias, function(
-                    estagiarioRenovado,
-                    indice
-                  ) {
-                    return _c("tr", { key: estagiarioRenovado.nome }, [
-                      _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v(_vm._s(indice + 1))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(estagiarioRenovado.nome.toUpperCase()) +
-                            "\n                            "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            estagiarioRenovado.dep_hierarquico
-                              ? estagiarioRenovado.dep_hierarquico
-                              : "NÃO CADASTRADO"
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              _vm._f("dataFormatada")(
+                                estagiarioContratado.dt_inicio
+                              )
+                            )
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(estagiarioRenovado.supervisor.toUpperCase())
-                        )
-                      ]),
-                      _vm._v(" "),
-                      estagiarioRenovado.dt_inicio_3_aditivo
-                        ? _c("td", [
-                            _vm._v(
-                              "\n                            " +
+                        ])
+                      ])
+                    }),
+                    _vm._v(" "),
+                    !_vm.estagiariosContratados30Dias.length
+                      ? [_vm._m(1)]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.selecao === "Saídas"
+          ? _c("div", [
+              _c("h5", { staticClass: "total-vagas alert alert-info" }, [
+                _vm._v(
+                  "Total: " + _vm._s(_vm.estagiariosDesligados30Dias.length)
+                )
+              ]),
+              _vm._v(" "),
+              _c("table", { staticClass: "table table-bordered table-hover" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  [
+                    _vm._l(_vm.estagiariosDesligados30Dias, function(
+                      estagiarioDesligado,
+                      indice
+                    ) {
+                      return _c("tr", { key: estagiarioDesligado.nome }, [
+                        _c("th", { attrs: { scope: "row" } }, [
+                          _vm._v(_vm._s(indice + 1))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(estagiarioDesligado.nome.toUpperCase()))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              estagiarioDesligado.dep_hierarquico
+                                ? estagiarioDesligado.dep_hierarquico
+                                : "NÃO CADASTRADO"
+                            )
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(estagiarioDesligado.supervisor.toUpperCase())
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              _vm._f("dataFormatada")(
+                                estagiarioDesligado.desligado
+                              )
+                            )
+                          )
+                        ])
+                      ])
+                    }),
+                    _vm._v(" "),
+                    !_vm.estagiariosDesligados30Dias.length
+                      ? [_vm._m(3)]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.selecao === "Renovação"
+          ? _c("div", [
+              _c("h5", { staticClass: "total-vagas alert alert-info" }, [
+                _vm._v(
+                  "Total: " + _vm._s(_vm.estagiariosRenovados30Dias.length)
+                )
+              ]),
+              _vm._v(" "),
+              _c("table", { staticClass: "table table-bordered table-hover" }, [
+                _vm._m(4),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  [
+                    _vm._l(_vm.estagiariosRenovados30Dias, function(
+                      estagiarioRenovado,
+                      indice
+                    ) {
+                      return _c("tr", { key: estagiarioRenovado.nome }, [
+                        _c("th", { attrs: { scope: "row" } }, [
+                          _vm._v(_vm._s(indice + 1))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(estagiarioRenovado.nome.toUpperCase()))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              estagiarioRenovado.dep_hierarquico
+                                ? estagiarioRenovado.dep_hierarquico
+                                : "NÃO CADASTRADO"
+                            )
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(estagiarioRenovado.supervisor.toUpperCase())
+                          )
+                        ]),
+                        _vm._v(" "),
+                        estagiarioRenovado.dt_inicio_3_aditivo
+                          ? _c("td", [
+                              _vm._v(
                                 _vm._s(
                                   _vm._f("dataFormatada")(
                                     estagiarioRenovado.dt_inicio_3_aditivo
                                   )
-                                ) +
-                                "\n                        "
-                            )
-                          ])
-                        : estagiarioRenovado.dt_inicio_2_aditivo
-                        ? _c("td", [
-                            _vm._v(
-                              "\n                            " +
+                                )
+                              )
+                            ])
+                          : estagiarioRenovado.dt_inicio_2_aditivo
+                          ? _c("td", [
+                              _vm._v(
                                 _vm._s(
                                   _vm._f("dataFormatada")(
                                     estagiarioRenovado.dt_inicio_2_aditivo
                                   )
-                                ) +
-                                "\n                        "
-                            )
-                          ])
-                        : _c("td", [
-                            _vm._v(
-                              "\n                            " +
+                                )
+                              )
+                            ])
+                          : _c("td", [
+                              _vm._v(
                                 _vm._s(
                                   _vm._f("dataFormatada")(
                                     estagiarioRenovado.dt_inicio_1_aditivo
                                   )
-                                ) +
-                                "\n                        "
-                            )
-                          ])
-                    ])
-                  }),
-                  _vm._v(" "),
-                  !_vm.estagiariosRenovados30Dias.length
-                    ? [_vm._m(5)]
-                    : _vm._e()
-                ],
-                2
-              )
+                                )
+                              )
+                            ])
+                      ])
+                    }),
+                    _vm._v(" "),
+                    !_vm.estagiariosRenovados30Dias.length
+                      ? [_vm._m(5)]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
             ])
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ])
   ])
 }
@@ -83201,7 +83391,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-3" }, [
+      _c("div", { staticClass: "col-md-6" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "selectSupervisor" } }, [
             _vm._v("Supervisor")
@@ -83252,7 +83442,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "col-md-3 d-flex flex-column justify-content-end" },
+        { staticClass: "col-md-4 d-flex flex-column justify-content-end" },
         [
           _c(
             "div",
@@ -83267,7 +83457,9 @@ var render = function() {
                 [_vm._v("Limpar Filtros")]
               ),
               _vm._v(" "),
-              _c("botao-imprimir-component")
+              _c("botao-imprimir-component"),
+              _vm._v(" "),
+              _c("botao-excel", { attrs: { nome: "relatorio_vagas" } })
             ],
             1
           )
@@ -83285,48 +83477,50 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("table", { staticClass: "table table-bordered table-hover" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.vagasPorDepartamento, function(vaga, indice) {
-                  return _c("tr", { key: vaga.id }, [
-                    _c("td", [_vm._v(_vm._s(indice + 1))]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        _c(
-                          "b-link",
-                          {
-                            staticStyle: { cursor: "pointer" },
-                            attrs: { href: "#", id: "modalHistoricoVagas" },
-                            on: {
-                              click: function($event) {
-                                return _vm.abrirModalHistoricoVagas(vaga.id)
+            _c("div", { attrs: { id: "divTabela" } }, [
+              _c("table", { staticClass: "table table-bordered table-hover" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.vagasPorDepartamento, function(vaga, indice) {
+                    return _c("tr", { key: vaga.id }, [
+                      _c("td", [_vm._v(_vm._s(indice + 1))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c(
+                            "b-link",
+                            {
+                              staticStyle: { cursor: "pointer" },
+                              attrs: { href: "#", id: "modalHistoricoVagas" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.abrirModalHistoricoVagas(vaga.id)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v(_vm._s(vaga.id))]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(vaga.status))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(vaga.dep_hierarquico))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(vaga.supervisor))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(vaga.estagiario))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(vaga.historico))])
-                  ])
-                }),
-                0
-              )
+                            },
+                            [_vm._v(_vm._s(vaga.id))]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(vaga.status))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(vaga.dep_hierarquico))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(vaga.supervisor))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(vaga.estagiario))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(vaga.historico))])
+                    ])
+                  }),
+                  0
+                )
+              ])
             ]),
             _vm._v(" "),
             [
@@ -101745,6 +101939,17 @@ module.exports = "/images/icons8-escola-64.png?346210ea23de83900c896ccdb8e47fb7"
 
 /***/ }),
 
+/***/ "./public/icones/icons8-excel.png":
+/*!****************************************!*\
+  !*** ./public/icones/icons8-excel.png ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/icons8-excel.png?27d957cda0054bc98797a5a53ebd4be6";
+
+/***/ }),
+
 /***/ "./public/icones/icons8-impressora-30.png":
 /*!************************************************!*\
   !*** ./public/icones/icons8-impressora-30.png ***!
@@ -101910,10 +102115,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_cartao_acesso_CadastroCartaoAcesso__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/cartao_acesso/CadastroCartaoAcesso */ "./resources/assets/js/components/cartao_acesso/CadastroCartaoAcesso.vue");
 /* harmony import */ var _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/BotaoEmail.vue */ "./resources/assets/js/components/BotaoEmail.vue");
 /* harmony import */ var _components_BotaoImprimir_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/BotaoImprimir.vue */ "./resources/assets/js/components/BotaoImprimir.vue");
-/* harmony import */ var _components_supervisor_AlteracaoSupervisor_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/supervisor/AlteracaoSupervisor.vue */ "./resources/assets/js/components/supervisor/AlteracaoSupervisor.vue");
-/* harmony import */ var _components_instituicao_ensino_Instituicao_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/instituicao_ensino/Instituicao.vue */ "./resources/assets/js/components/instituicao_ensino/Instituicao.vue");
-/* harmony import */ var _components_curso_Curso_vue__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/curso/Curso.vue */ "./resources/assets/js/components/curso/Curso.vue");
-/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
+/* harmony import */ var _components_BotaoExcel_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/BotaoExcel.vue */ "./resources/assets/js/components/BotaoExcel.vue");
+/* harmony import */ var _components_supervisor_AlteracaoSupervisor_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/supervisor/AlteracaoSupervisor.vue */ "./resources/assets/js/components/supervisor/AlteracaoSupervisor.vue");
+/* harmony import */ var _components_instituicao_ensino_Instituicao_vue__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/instituicao_ensino/Instituicao.vue */ "./resources/assets/js/components/instituicao_ensino/Instituicao.vue");
+/* harmony import */ var _components_curso_Curso_vue__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/curso/Curso.vue */ "./resources/assets/js/components/curso/Curso.vue");
+/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -101977,6 +102183,7 @@ Vue.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_6___default.a);
 
 
 
+
 Vue.component('aside-component', _components_AsideComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
 Vue.component('home-component', _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 Vue.component('header-component', _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
@@ -102000,13 +102207,14 @@ Vue.component('cadastro-cartao-acesso-component', _components_cartao_acesso_Cada
 Vue.component('botao-email-component', _components_BotaoEmail_vue__WEBPACK_IMPORTED_MODULE_29__["default"]);
 Vue.component('consulta-supervisor-component', _components_supervisor_ConsultaSupervisor_vue__WEBPACK_IMPORTED_MODULE_27__["default"]);
 Vue.component('botao-imprimir-component', _components_BotaoImprimir_vue__WEBPACK_IMPORTED_MODULE_30__["default"]);
-Vue.component('alteracao-supervisor-component', _components_supervisor_AlteracaoSupervisor_vue__WEBPACK_IMPORTED_MODULE_31__["default"]);
-Vue.component('cadastro-instituicao-component', _components_instituicao_ensino_Instituicao_vue__WEBPACK_IMPORTED_MODULE_32__["default"]);
-Vue.component('cadastrar-curso-component', _components_curso_Curso_vue__WEBPACK_IMPORTED_MODULE_33__["default"]);
+Vue.component('botao-excel', _components_BotaoExcel_vue__WEBPACK_IMPORTED_MODULE_31__["default"]);
+Vue.component('alteracao-supervisor-component', _components_supervisor_AlteracaoSupervisor_vue__WEBPACK_IMPORTED_MODULE_32__["default"]);
+Vue.component('cadastro-instituicao-component', _components_instituicao_ensino_Instituicao_vue__WEBPACK_IMPORTED_MODULE_33__["default"]);
+Vue.component('cadastrar-curso-component', _components_curso_Curso_vue__WEBPACK_IMPORTED_MODULE_34__["default"]);
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
-  routes: _routes_js__WEBPACK_IMPORTED_MODULE_34__["routes"]
+  routes: _routes_js__WEBPACK_IMPORTED_MODULE_35__["routes"]
 });
 new Vue({
   el: '#app',
@@ -102222,6 +102430,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoEmail_vue_vue_type_template_id_f48f7b44___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoEmail_vue_vue_type_template_id_f48f7b44___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/BotaoExcel.vue":
+/*!*******************************************************!*\
+  !*** ./resources/assets/js/components/BotaoExcel.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BotaoExcel_vue_vue_type_template_id_5f5e43f9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BotaoExcel.vue?vue&type=template&id=5f5e43f9& */ "./resources/assets/js/components/BotaoExcel.vue?vue&type=template&id=5f5e43f9&");
+/* harmony import */ var _BotaoExcel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BotaoExcel.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/BotaoExcel.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _BotaoExcel_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BotaoExcel.vue?vue&type=style&index=0&lang=css& */ "./resources/assets/js/components/BotaoExcel.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _BotaoExcel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BotaoExcel_vue_vue_type_template_id_5f5e43f9___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BotaoExcel_vue_vue_type_template_id_5f5e43f9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/BotaoExcel.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/BotaoExcel.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/assets/js/components/BotaoExcel.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BotaoExcel.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoExcel.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/BotaoExcel.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************!*\
+  !*** ./resources/assets/js/components/BotaoExcel.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./BotaoExcel.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoExcel.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/BotaoExcel.vue?vue&type=template&id=5f5e43f9&":
+/*!**************************************************************************************!*\
+  !*** ./resources/assets/js/components/BotaoExcel.vue?vue&type=template&id=5f5e43f9& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_template_id_5f5e43f9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BotaoExcel.vue?vue&type=template&id=5f5e43f9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/BotaoExcel.vue?vue&type=template&id=5f5e43f9&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_template_id_5f5e43f9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BotaoExcel_vue_vue_type_template_id_5f5e43f9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

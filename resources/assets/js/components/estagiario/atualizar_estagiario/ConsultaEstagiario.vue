@@ -280,8 +280,10 @@ export default {
       this.post.curso_formacao = this.$store.state.estagiario.idCursoEstagiarioSelecionado;
       this.auxiliarCpf = this.post.cpf;
       this.converteNascimento();
-      this.converteHorarioEntrada();
-      this.converteHorarioSaida();
+      // this.converteHorarioEntrada();
+      // this.converteHorarioSaida();
+      this.post.horario_entrada = this.converteHorario(this.post.horario_entrada);
+      this.post.horario_saida = this.converteHorario(this.post.horario_saida);
       this.converteDataInicio();
       this.converteDataTermino();
       this.converteTermosAditivos();
@@ -352,8 +354,10 @@ export default {
       this.escondeModalEstagiario();
       this.auxiliarCpf = this.post.cpf;
       this.converteNascimento();
-      this.converteHorarioEntrada();
-      this.converteHorarioSaida();
+      // this.converteHorarioEntrada();
+      // this.converteHorarioSaida();
+      this.post.horario_entrada = this.converteHorario(this.post.horario_entrada);
+      this.post.horario_saida = this.converteHorario(this.post.horario_saida);
       this.converteDataInicio();
       this.converteDataTermino();
       this.converteTermosAditivos();
@@ -469,10 +473,34 @@ export default {
         this.post.data_nascimento = this.post.data_nascimento.substr(0, 10);
       }
     },
-    converteHorarioEntrada() {
-      if (this.post.horario_entrada) {
-        this.post.horario_entrada = this.post.horario_entrada.substr(11, 19);
+    // converteHorarioEntrada() {
+    //   if (this.post.horario_entrada) {
+    //     let minutos = new Date(this.post.horario_entrada).getMinutes();
+    //     if(!minutos >= 0) {
+    //       // Formato antigo (data)
+    //       if(this.post.horario_entrada.toString().length >= 19){
+    //         this.post.horario_entrada = this.post.horario_entrada.toString().substr(11, 19);
+    //       }            
+    //       return;
+    //     }
+    //     minutos = minutos.length > 1 ? minutos : minutos + '0';
+    //     this.post.horario_entrada = new Date(this.post.horario_entrada).getHours() + ':' + minutos;
+    //   }
+    // },
+    converteHorario(horario) {
+      if (horario) {
+        let minutos = new Date(horario).getMinutes();
+        if(!minutos >= 0) {
+          // Formato antigo (data)
+          if(horario.toString().length >= 19){
+            horario = horario.toString().substr(11, 19);
+          }            
+          return horario;
+        }
+        minutos = minutos.length > 1 ? minutos : minutos + '0';
+        horario = new Date(horario).getHours() + ':' + minutos;
       }
+      return horario;
     },
     converteHorarioSaida() {
       if (this.post.horario_saida) {
@@ -607,8 +635,10 @@ export default {
           this.estagiario = response.data;
           this.post = this.estagiario;
           this.converteNascimento();
-          this.converteHorarioEntrada();
-          this.converteHorarioSaida();
+          // this.converteHorarioEntrada();
+          this.post.horario_entrada = this.converteHorario(this.post.horario_entrada);
+          this.post.horario_saida = this.converteHorario(this.post.horario_saida);
+          // this.converteHorarioSaida();
           this.converteDataInicio();
           this.converteDataTermino();
           this.selectVaga();
@@ -958,8 +988,10 @@ export default {
           if (this.post.desligado) {
             this.post.desligado = this.post.desligado.substr(0, 10);
           }
-          this.converteHorarioEntrada();
-          this.converteHorarioSaida();
+          // this.converteHorarioEntrada();
+          // this.converteHorarioSaida();
+          this.post.horario_entrada = this.converteHorario(this.post.horario_entrada);
+          this.post.horario_saida = this.converteHorario(this.post.horario_saida);
           this.msg.success = true;
           this.msg.sucesso = "Dados atualizados com sucesso!";
           
@@ -1019,8 +1051,10 @@ export default {
           if (this.post.desligado) {
             this.post.desligado = this.post.desligado.substr(0, 10);
           }
-          this.converteHorarioEntrada();
-          this.converteHorarioSaida();
+          // this.converteHorarioEntrada();
+          // this.converteHorarioSaida();
+          this.post.horario_entrada = this.converteHorario(this.post.horario_entrada)
+          this.post.horario_saida = this.converteHorario(this.post.horario_saida);
           this.msg.error = true;
           this.msg.erro = "Erro ao atualizar dados";
           this.scrollTop();
