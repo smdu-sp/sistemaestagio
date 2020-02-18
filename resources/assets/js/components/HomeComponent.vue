@@ -17,7 +17,6 @@
         </div><!--/col-9-->
       </div><!--/col-3-->
     </div><!-- /row -->
-  </div> <!-- /container-fluid -->
 </template>
 
 <script>

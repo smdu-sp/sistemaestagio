@@ -84,6 +84,9 @@
                             <li>
                                 <router-link :to="{name: 'Relatório de Cotas'}">Cotas</router-link>
                             </li>
+                            <li>
+                                <router-link :to="{name: 'Relatório de Recessos do Mês'}">Recessos do Mês</router-link>
+                            </li>
                         </ul>
                     </transition>
                 </li>

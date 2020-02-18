@@ -85,7 +85,6 @@ export default {
   data() {
     return {
       solicitacoes: [1, 2, 3, 4, 5, 6, 7]
-      // solicitacoes: [1]
     };
   },
   props: ["post", "inserirEstagiario"],
@@ -99,7 +98,6 @@ export default {
   },
   methods: {
     calculoDiasFerias() {
-      // var date1 = new Date("10/03/2019");
       var date1 = new Date(this.post.dt_inicio);
       var date2 = new Date();
       var differenceInTime = date2.getTime() - date1.getTime();

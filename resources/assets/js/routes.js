@@ -14,6 +14,7 @@ import CadastroInstituicao from './components/instituicao_ensino/Instituicao.vue
 import CadastroCurso from './components/curso/Curso.vue';
 import ConsultaVaga from './components/vaga/ConsultaVaga.vue';
 import consultaDesligados from './components/relatorios/Desligados.vue';
+import RecessosMes from './components/relatorios/RecessosMes.vue';
 
 export const routes = [
     {
@@ -65,6 +66,11 @@ export const routes = [
         name: 'Relatório de Cotas',
         path: '/cotas',
         component: RelatorioCotas
+    },
+    {
+        name: 'Relatório de Recessos do Mês',
+        path: '/RecessosMes',
+        component: RecessosMes
     },
     {
         name: 'Alteração Supervisor',

@@ -593,7 +593,7 @@ export default {
         this.post.dt_inicial_5 = this.post.dt_inicial_5.substr(0, 10);
       }
       if (this.post.dt_inicial_6) {
-        this.post.dt_inicial_5 = this.post.dt_inicial_5.substr(0, 10);
+        this.post.dt_inicial_6 = this.post.dt_inicial_6.substr(0, 10);
       }
       if (this.post.dt_inicial_7) {
         this.post.dt_inicial_7 = this.post.dt_inicial_7.substr(0, 10);

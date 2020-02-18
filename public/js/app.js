@@ -2006,6 +2006,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exibeModalEstagiario', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta', 'exibeModalSupervisor', 'menuRelatorios', 'mostrarMenuRelatorios']
 });
@@ -2288,7 +2291,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -3584,7 +3586,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.post.dt_inicial_6) {
-        this.post.dt_inicial_5 = this.post.dt_inicial_5.substr(0, 10);
+        this.post.dt_inicial_6 = this.post.dt_inicial_6.substr(0, 10);
       }
 
       if (this.post.dt_inicial_7) {
@@ -5024,8 +5026,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5167,8 +5167,7 @@ Date.prototype.addDays = function (days) {
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      solicitacoes: [1, 2, 3, 4, 5, 6, 7] // solicitacoes: [1]
-
+      solicitacoes: [1, 2, 3, 4, 5, 6, 7]
     };
   },
   props: ["post", "inserirEstagiario"],
@@ -5181,7 +5180,6 @@ Date.prototype.addDays = function (days) {
   },
   methods: {
     calculoDiasFerias: function calculoDiasFerias() {
-      // var date1 = new Date("10/03/2019");
       var date1 = new Date(this.post.dt_inicio);
       var date2 = new Date();
       var differenceInTime = date2.getTime() - date1.getTime();
@@ -7598,6 +7596,137 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dias: [],
+      estagiariosComRecesso: [],
+      mesEscolhido: "0",
+      anoEscolhido: "2019",
+      estagiariosRecessoEscolhido: []
+    };
+  },
+  props: ["post"],
+  beforeMount: function beforeMount() {
+    this.retornaEstagiarios();
+  },
+  mounted: function mounted() {
+    this.atualizaRelatorio();
+  },
+  methods: {
+    atualizaRelatorio: function atualizaRelatorio() {
+      this.estagiariosRecessoEscolhido = [];
+
+      for (var i in this.estagiariosComRecesso) {
+        for (var j = 1; j <= 7; j++) {
+          var dataRecesso = new Date(this.estagiariosComRecesso[i]["dt_inicial_" + j]);
+
+          if (dataRecesso.getFullYear() == this.anoEscolhido && dataRecesso.getMonth() == this.mesEscolhido) {
+            // var novoEstagiario = this.estagiariosComRecesso[i];
+            var novoEstagiario = {};
+            novoEstagiario.nome = this.estagiariosComRecesso[i].nome;
+            novoEstagiario.inicioRecesso = this.estagiariosComRecesso[i]["dt_inicial_" + j];
+            novoEstagiario.terminoRecesso = this.estagiariosComRecesso[i]["dt_termino_" + j];
+            this.estagiariosRecessoEscolhido.push(novoEstagiario);
+          }
+        }
+      }
+    },
+    calculaDias: function calculaDias(dataInicial, dataTermino) {
+      var total = (new Date(dataTermino) - new Date(dataInicial)) / 86400000 + 1;
+      return total;
+    },
+    converteData: function converteData(dataAConverter) {
+      var ano = new Date(dataAConverter).getFullYear();
+      var mes = new Date(dataAConverter).getMonth() + 1;
+      var dia = new Date(dataAConverter).getDate();
+      var dataConvertida = dia + "/" + mes + "/" + ano;
+      return dataConvertida;
+    },
+    retornaEstagiarios: function retornaEstagiarios() {
+      var _this = this;
+
+      var uriEstagiarios = "/api/estagiarios";
+      this.axios.get(uriEstagiarios).then(function (response) {
+        for (var i in response.data) {
+          if (response.data[i].qt_dias_gozados > "0") {
+            _this.estagiariosComRecesso.push(response.data[i]);
+          }
+        }
+      })["catch"](function (error) {
+        _this.msg.success = false;
+        _this.msg.error = true;
+        _this.msg.erro = "Erro ao retornar estagiários do banco";
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Vagas.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/Vagas.vue?vue&type=script&lang=js& ***!
@@ -7864,19 +7993,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      status: 'Todas',
-      departamentoFiltrado: '',
-      supervisorFiltrado: '',
+      status: "Todas",
+      departamentoFiltrado: "",
+      supervisorFiltrado: "",
       estagiarios: {},
       supervisores: {},
       vagas: [],
-      vagaAtual: '123',
+      vagaAtual: "123",
       historicoVagas: [],
       departamentos: [],
       vagasOcupadas: [],
@@ -7901,134 +8047,134 @@ __webpack_require__.r(__webpack_exports__);
       return departamentosPai;
     },
     supervisoresSort: function supervisoresSort() {
-      return lodash__WEBPACK_IMPORTED_MODULE_1___default.a.orderBy(this.supervisores, 'nome');
+      return lodash__WEBPACK_IMPORTED_MODULE_1___default.a.orderBy(this.supervisores, "nome");
     },
     vagasPorDepartamento: function vagasPorDepartamento() {
       var _this = this;
 
       // filtro somente por status
-      if (this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Todas') {
+      if (this.departamentoFiltrado === "" && this.supervisorFiltrado === "" && this.status === "Todas") {
         return this.vagas;
-      } else if (this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Livres') {
+      } else if (this.departamentoFiltrado === "" && this.supervisorFiltrado === "" && this.status === "Livres") {
         return this.vagasLivres;
-      } else if (this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Ocupadas') {
+      } else if (this.departamentoFiltrado === "" && this.supervisorFiltrado === "" && this.status === "Ocupadas") {
         return this.vagasOcupadas;
-      } else if (this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Em seleção') {
+      } else if (this.departamentoFiltrado === "" && this.supervisorFiltrado === "" && this.status === "Em seleção") {
         return this.vagasEmSelecao;
-      } else if (this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'TRANSFERIDA.SMG') {
+      } else if (this.departamentoFiltrado === "" && this.supervisorFiltrado === "" && this.status === "TRANSFERIDA.SMG") {
         return this.vagasTransferidas;
-      } else if (this.departamentoFiltrado === '' && this.supervisorFiltrado === '' && this.status === 'Canceladas') {
+      } else if (this.departamentoFiltrado === "" && this.supervisorFiltrado === "" && this.status === "Canceladas") {
         return this.vagasCanceladas;
       } // filtro somente por departamento
-      else if (this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Todas') {
+      else if (this.departamentoFiltrado != "" && this.supervisorFiltrado === "" && this.status === "Todas") {
           var vagas = this.vagas.filter(function (vaga) {
             return vaga.dep_hierarquico === _this.departamentoFiltrado;
           });
           return vagas;
         } // filtro somente por supervisor
-        else if (this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Todas') {
+        else if (this.departamentoFiltrado === "" && this.supervisorFiltrado != "" && this.status === "Todas") {
             var _vagas = this.vagas.filter(function (vaga) {
               return vaga.supervisor === _this.supervisorFiltrado;
             });
 
             return _vagas;
           } // filtro somente por supervisor e status
-          else if (this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Ocupadas') {
+          else if (this.departamentoFiltrado === "" && this.supervisorFiltrado != "" && this.status === "Ocupadas") {
               var _vagas2 = this.vagas.filter(function (vaga) {
-                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === 'OCUPADA';
+                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === "OCUPADA";
               });
 
               return _vagas2;
-            } else if (this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Livres') {
+            } else if (this.departamentoFiltrado === "" && this.supervisorFiltrado != "" && this.status === "Livres") {
               var _vagas3 = this.vagas.filter(function (vaga) {
-                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === 'LIVRE';
+                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === "LIVRE";
               });
 
               return _vagas3;
-            } else if (this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Em seleção') {
+            } else if (this.departamentoFiltrado === "" && this.supervisorFiltrado != "" && this.status === "Em seleção") {
               var _vagas4 = this.vagas.filter(function (vaga) {
-                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === 'EM SELEÇÃO';
+                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === "EM SELEÇÃO";
               });
 
               return _vagas4;
-            } else if (this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'Canceladas') {
+            } else if (this.departamentoFiltrado === "" && this.supervisorFiltrado != "" && this.status === "Canceladas") {
               var _vagas5 = this.vagas.filter(function (vaga) {
-                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === 'CANCELADA';
+                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === "CANCELADA";
               });
 
               return _vagas5;
-            } else if (this.departamentoFiltrado === '' && this.supervisorFiltrado != '' && this.status === 'TRANSFERIDA.SMG') {
+            } else if (this.departamentoFiltrado === "" && this.supervisorFiltrado != "" && this.status === "TRANSFERIDA.SMG") {
               var _vagas6 = this.vagas.filter(function (vaga) {
-                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === 'TRANSFERIDA.SMG';
+                return vaga.supervisor === _this.supervisorFiltrado && vaga.status === "TRANSFERIDA.SMG";
               });
 
               return _vagas6;
             } // filtro somente por supervisor e departamento
-            else if (this.departamentoFiltrado != '' && this.supervisorFiltrado != '' && this.status === 'Todas') {
+            else if (this.departamentoFiltrado != "" && this.supervisorFiltrado != "" && this.status === "Todas") {
                 var _vagas7 = this.vagas.filter(function (vaga) {
                   return vaga.supervisor === _this.supervisorFiltrado && vaga.dep_hierarquico === _this.departamentoFiltrado;
                 });
 
                 return _vagas7;
               } // filtro somente por status e departamento
-              else if (this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Livres') {
+              else if (this.departamentoFiltrado != "" && this.supervisorFiltrado === "" && this.status === "Livres") {
                   var _vagas8 = this.vagas.filter(function (vaga) {
-                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'LIVRE';
+                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "LIVRE";
                   });
 
                   return _vagas8;
-                } else if (this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Ocupadas') {
+                } else if (this.departamentoFiltrado != "" && this.supervisorFiltrado === "" && this.status === "Ocupadas") {
                   var _vagas9 = this.vagas.filter(function (vaga) {
-                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'OCUPADA';
+                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "OCUPADA";
                   });
 
                   return _vagas9;
-                } else if (this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Em seleção') {
+                } else if (this.departamentoFiltrado != "" && this.supervisorFiltrado === "" && this.status === "Em seleção") {
                   var _vagas10 = this.vagas.filter(function (vaga) {
-                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'EM SELEÇÃO';
+                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "EM SELEÇÃO";
                   });
 
                   return _vagas10;
-                } else if (this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'Canceladas') {
+                } else if (this.departamentoFiltrado != "" && this.supervisorFiltrado === "" && this.status === "Canceladas") {
                   var _vagas11 = this.vagas.filter(function (vaga) {
-                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'CANCELADA';
+                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "CANCELADA";
                   });
 
                   return _vagas11;
-                } else if (this.departamentoFiltrado != '' && this.supervisorFiltrado === '' && this.status === 'TRANSFERIDA.SMG') {
+                } else if (this.departamentoFiltrado != "" && this.supervisorFiltrado === "" && this.status === "TRANSFERIDA.SMG") {
                   var _vagas12 = this.vagas.filter(function (vaga) {
-                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'TRANSFERIDA.SMG';
+                    return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "TRANSFERIDA.SMG";
                   });
 
                   return _vagas12;
                 } // filtro por departamento, supervisor e status
-                else if (this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'Livres') {
+                else if (this.departamentoFiltrado != "" && this.supervisorFiltrado != "" & this.status === "Livres") {
                     var _vagas13 = this.vagas.filter(function (vaga) {
-                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'LIVRE' && vaga.supervisor === _this.supervisorFiltrado;
+                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "LIVRE" && vaga.supervisor === _this.supervisorFiltrado;
                     });
 
                     return _vagas13;
-                  } else if (this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'Ocupadas') {
+                  } else if (this.departamentoFiltrado != "" && this.supervisorFiltrado != "" & this.status === "Ocupadas") {
                     var _vagas14 = this.vagas.filter(function (vaga) {
-                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'OCUPADA' && vaga.supervisor === _this.supervisorFiltrado;
+                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "OCUPADA" && vaga.supervisor === _this.supervisorFiltrado;
                     });
 
                     return _vagas14;
-                  } else if (this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'Em seleção') {
+                  } else if (this.departamentoFiltrado != "" && this.supervisorFiltrado != "" & this.status === "Em seleção") {
                     var _vagas15 = this.vagas.filter(function (vaga) {
-                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'EM SELEÇÃO' && vaga.supervisor === _this.supervisorFiltrado;
+                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "EM SELEÇÃO" && vaga.supervisor === _this.supervisorFiltrado;
                     });
 
                     return _vagas15;
-                  } else if (this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'Canceladas') {
+                  } else if (this.departamentoFiltrado != "" && this.supervisorFiltrado != "" & this.status === "Canceladas") {
                     var _vagas16 = this.vagas.filter(function (vaga) {
-                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'CANCELADA' && vaga.supervisor === _this.supervisorFiltrado;
+                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "CANCELADA" && vaga.supervisor === _this.supervisorFiltrado;
                     });
 
                     return _vagas16;
-                  } else if (this.departamentoFiltrado != '' && this.supervisorFiltrado != '' & this.status === 'TRANSFERIDA.SMG') {
+                  } else if (this.departamentoFiltrado != "" && this.supervisorFiltrado != "" & this.status === "TRANSFERIDA.SMG") {
                     var _vagas17 = this.vagas.filter(function (vaga) {
-                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === 'TRANSFERIDA.SMG' && vaga.supervisor === _this.supervisorFiltrado;
+                      return vaga.dep_hierarquico === _this.departamentoFiltrado && vaga.status === "TRANSFERIDA.SMG" && vaga.supervisor === _this.supervisorFiltrado;
                     });
 
                     return _vagas17;
@@ -8037,7 +8183,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     abrirModalHistoricoVagas: function abrirModalHistoricoVagas(idVaga) {
-      //    Atualiza informações do modal                   
+      //    Atualiza informações do modal
       this.vagaAtual = idVaga;
       this.historicoVagas = [];
 
@@ -8048,20 +8194,20 @@ __webpack_require__.r(__webpack_exports__);
       } //    Exibe modal
 
 
-      this.$refs['modalHistoricoVagas'].show();
+      this.$refs["modalHistoricoVagas"].show();
     },
     fecharModalHistoricoVagas: function fecharModalHistoricoVagas() {
-      this.$refs['modalHistoricoVagas'].hide();
+      this.$refs["modalHistoricoVagas"].hide();
     },
     limparFiltro: function limparFiltro() {
-      this.status = 'Todas';
-      this.departamentoFiltrado = '';
-      this.supervisorFiltrado = '';
+      this.status = "Todas";
+      this.departamentoFiltrado = "";
+      this.supervisorFiltrado = "";
     },
     retornaSupervisores: function retornaSupervisores() {
       var _this2 = this;
 
-      var uriSupervisores = '/api/supervisores';
+      var uriSupervisores = "/api/supervisores";
       this.axios.get(uriSupervisores).then(function (response) {
         _this2.supervisores = response.data;
 
@@ -8085,7 +8231,7 @@ __webpack_require__.r(__webpack_exports__);
     retornaEstagiarios: function retornaEstagiarios() {
       var _this3 = this;
 
-      var uriEstagiarios = '/api/estagiarios';
+      var uriEstagiarios = "/api/estagiarios";
       this.axios.get(uriEstagiarios).then(function (response) {
         _this3.estagiarios = response.data;
 
@@ -8114,7 +8260,7 @@ __webpack_require__.r(__webpack_exports__);
     retornaVagas: function retornaVagas() {
       var _this4 = this;
 
-      var uriVagas = '/api/vagas';
+      var uriVagas = "/api/vagas";
       this.axios.get(uriVagas).then(function (response) {
         _this4.vagas = response.data;
 
@@ -8128,7 +8274,7 @@ __webpack_require__.r(__webpack_exports__);
     retornaDepartamentos: function retornaDepartamentos() {
       var _this5 = this;
 
-      var uriVagas = '/api/departamentos';
+      var uriVagas = "/api/departamentos";
       this.axios.get(uriVagas).then(function (response) {
         _this5.departamentos = response.data;
       })["catch"](function (error) {
@@ -73937,6 +74083,22 @@ var render = function() {
                       )
                     ],
                     1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: { name: "Relatório de Recessos do Mês" }
+                          }
+                        },
+                        [_vm._v("Recessos do Mês")]
+                      )
+                    ],
+                    1
                   )
                 ])
               : _vm._e()
@@ -83265,6 +83427,179 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("Mês")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.mesEscolhido,
+                expression: "mesEscolhido"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { name: "selectMes", id: "mesRecesso" },
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.mesEscolhido = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                _vm.atualizaRelatorio
+              ]
+            }
+          },
+          [
+            _c("option", { attrs: { value: "0" } }, [_vm._v("Janeiro")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1" } }, [_vm._v("Fevereiro")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "2" } }, [_vm._v("Março")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "3" } }, [_vm._v("Abril")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "4" } }, [_vm._v("Maio")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "5" } }, [_vm._v("Junho")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "6" } }, [_vm._v("Julho")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "7" } }, [_vm._v("Agosto")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "8" } }, [_vm._v("Setembro")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "9" } }, [_vm._v("Outubro")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "10" } }, [_vm._v("Novembro")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "11" } }, [_vm._v("Dezembro")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("Ano")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.anoEscolhido,
+              expression: "anoEscolhido"
+            }
+          ],
+          attrs: { type: "number", id: "anoRecesso", min: "2013" },
+          domProps: { value: _vm.anoEscolhido },
+          on: {
+            change: _vm.atualizaRelatorio,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.anoEscolhido = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("table", { staticClass: "table table-bordered table-hover" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.estagiariosRecessoEscolhido, function(estagiario) {
+              return _c("tr", [
+                _c("td", [_vm._v(_vm._s(estagiario.nome))]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(_vm._s(_vm.converteData(estagiario.inicioRecesso)))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(_vm._s(_vm.converteData(estagiario.terminoRecesso)))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    _vm._s(
+                      _vm.calculaDias(
+                        estagiario.inicioRecesso,
+                        estagiario.terminoRecesso
+                      )
+                    )
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("th", { staticClass: "text-center", attrs: { scope: "row" } }, [
+        _vm._v("Nome")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center", attrs: { scope: "row" } }, [
+        _vm._v("Início recesso")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center", attrs: { scope: "row" } }, [
+        _vm._v("Término recesso")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center", attrs: { scope: "row" } }, [
+        _vm._v("Total de dias")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/Vagas.vue?vue&type=template&id=0c3c5ab4&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/Vagas.vue?vue&type=template&id=0c3c5ab4& ***!
@@ -83937,9 +84272,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "row" } }, [_vm._v("Estagiário")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "row" } }, [
-          _vm._v("Observações\n                    ")
-        ])
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("Observações")])
       ])
     ])
   },
@@ -104412,6 +104745,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/relatorios/RecessosMes.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/assets/js/components/relatorios/RecessosMes.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _RecessosMes_vue_vue_type_template_id_4e0fc168_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true& */ "./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true&");
+/* harmony import */ var _RecessosMes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RecessosMes.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RecessosMes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RecessosMes_vue_vue_type_template_id_4e0fc168_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _RecessosMes_vue_vue_type_template_id_4e0fc168_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4e0fc168",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/relatorios/RecessosMes.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./RecessosMes.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true& ***!
+  \**************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_template_id_4e0fc168_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_template_id_4e0fc168_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_template_id_4e0fc168_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/relatorios/Vagas.vue":
 /*!*************************************************************!*\
   !*** ./resources/assets/js/components/relatorios/Vagas.vue ***!
@@ -105018,6 +105420,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_curso_Curso_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/curso/Curso.vue */ "./resources/assets/js/components/curso/Curso.vue");
 /* harmony import */ var _components_vaga_ConsultaVaga_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/vaga/ConsultaVaga.vue */ "./resources/assets/js/components/vaga/ConsultaVaga.vue");
 /* harmony import */ var _components_relatorios_Desligados_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/relatorios/Desligados.vue */ "./resources/assets/js/components/relatorios/Desligados.vue");
+/* harmony import */ var _components_relatorios_RecessosMes_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/relatorios/RecessosMes.vue */ "./resources/assets/js/components/relatorios/RecessosMes.vue");
+
 
 
 
@@ -105074,6 +105478,10 @@ var routes = [{
   name: 'Relatório de Cotas',
   path: '/cotas',
   component: _components_relatorios_Cotas_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+}, {
+  name: 'Relatório de Recessos do Mês',
+  path: '/RecessosMes',
+  component: _components_relatorios_RecessosMes_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
 }, {
   name: 'Alteração Supervisor',
   path: '/alteracaoSupervisor',

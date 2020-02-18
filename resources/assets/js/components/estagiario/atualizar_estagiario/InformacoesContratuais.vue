@@ -48,8 +48,6 @@
             <option value="5">DESLIGADO</option>
             <option value="2">EM CONTRATAÇÃO</option>
             <option value="3">EM DESLIGAMENTO</option>
-            <!-- <option value="4">EM RENOVAÇÃO</option>
-            <option value="6">TCE CANCELADO</option> -->
           </select>
           <div class="invalid-feedback">Situação não pode ser vazia</div>
         </div>
