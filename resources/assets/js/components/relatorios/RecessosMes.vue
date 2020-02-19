@@ -1,52 +1,69 @@
 <template>
-  <div class="row">
-    <div class="form-group">
-      <div class="col-md-4">
-        <label for>Mês</label>
-        <select
-          name="selectMes"
-          id="mesRecesso"
-          class="form-control"
-          v-model="mesEscolhido"
-          @change="atualizaRelatorio"
-        >
-          <option value="0">Janeiro</option>
-          <option value="1">Fevereiro</option>
-          <option value="2">Março</option>
-          <option value="3">Abril</option>
-          <option value="4">Maio</option>
-          <option value="5">Junho</option>
-          <option value="6">Julho</option>
-          <option value="7">Agosto</option>
-          <option value="8">Setembro</option>
-          <option value="9">Outubro</option>
-          <option value="10">Novembro</option>
-          <option value="11">Dezembro</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <label for>Ano</label>
-        <input type="number" id="anoRecesso" min="2013" v-model="anoEscolhido"
-          @change="atualizaRelatorio"
-        />
-      </div>
-      <div>
-        <table class="table table-bordered table-hover">
-          <thead class="thead-dark">
-            <th scope="row" class="text-center">Nome</th>
-            <th scope="row" class="text-center">Início recesso</th>
-            <th scope="row" class="text-center">Término recesso</th>
-            <th scope="row" class="text-center">Total de dias</th>
-          </thead>
-          <tbody>
-            <tr v-for="estagiario in estagiariosRecessoEscolhido">
-              <td>{{ estagiario.nome }}</td>
-              <td>{{ converteData(estagiario.inicioRecesso) }}</td>
-              <td>{{ converteData(estagiario.terminoRecesso) }}</td>
-              <td>{{ calculaDias(estagiario.inicioRecesso, estagiario.terminoRecesso) }}</td>
-            </tr>
-          </tbody>
-        </table>
+  <div>
+    <h1 class="text-center">Recessos do Mês</h1>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="form-group">
+          <div class="col-md-12 row">
+            <div class="col-md-4 space margem row">
+              <label for>Mês</label>
+              <select
+                name="selectMes"
+                id="mesRecesso"
+                class="form-control"
+                v-model="mesEscolhido"
+                @change="atualizaRelatorio"
+              >
+                <option value="0">Janeiro</option>
+                <option value="1">Fevereiro</option>
+                <option value="2">Março</option>
+                <option value="3">Abril</option>
+                <option value="4">Maio</option>
+                <option value="5">Junho</option>
+                <option value="6">Julho</option>
+                <option value="7">Agosto</option>
+                <option value="8">Setembro</option>
+                <option value="9">Outubro</option>
+                <option value="10">Novembro</option>
+                <option value="11">Dezembro</option>
+              </select>
+            </div>
+            <div class="col-md-4 row space separador">
+              <label for>Ano</label>
+              <input
+                type="number"
+                id="anoRecesso"
+                min="2013"
+                v-model="anoEscolhido"
+                @change="atualizaRelatorio"
+                class="form-control"
+                placeholder="Digite ano"
+              />
+            </div>
+            <div class="d-flex mb-4 space separador">
+              <botao-imprimir-component class="alinha-icons"></botao-imprimir-component>
+              <botao-excel nome="Recessos-do-mes" class="alinha-icons"></botao-excel>
+            </div>
+          </div>
+          <div id="divTabela" class="space">
+            <table class="table table-bordered table-hover">
+              <thead class="thead-dark">
+                <th scope="row" class="text-center">Nome</th>
+                <th scope="row" class="text-center">Início recesso</th>
+                <th scope="row" class="text-center">Término recesso</th>
+                <th scope="row" class="text-center">Total de dias</th>
+              </thead>
+              <tbody>
+                <tr v-for="estagiario in estagiariosRecessoEscolhido">
+                  <td>{{ estagiario.nome.toUpperCase() }}</td>
+                  <td>{{ converteData(estagiario.inicioRecesso) }}</td>
+                  <td>{{ converteData(estagiario.terminoRecesso) }}</td>
+                  <td>{{ calculaDias(estagiario.inicioRecesso, estagiario.terminoRecesso) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -58,9 +75,9 @@ export default {
     return {
       dias: [],
       estagiariosComRecesso: [],
+      estagiariosRecessoEscolhido: [],
       mesEscolhido: "0",
-      anoEscolhido: "2019",
-      estagiariosRecessoEscolhido: []
+      anoEscolhido: ""
     };
   },
   props: ["post"],
@@ -82,12 +99,27 @@ export default {
             dataRecesso.getFullYear() == this.anoEscolhido &&
             dataRecesso.getMonth() == this.mesEscolhido
           ) {
-            // var novoEstagiario = this.estagiariosComRecesso[i];
             var novoEstagiario = {};
-            novoEstagiario.nome = this.estagiariosComRecesso[i].nome;            
-            novoEstagiario.inicioRecesso = this.estagiariosComRecesso[i]["dt_inicial_" + j];
-            novoEstagiario.terminoRecesso = this.estagiariosComRecesso[i]["dt_termino_" + j];
+            novoEstagiario.nome = this.estagiariosComRecesso[i].nome;
+            novoEstagiario.inicioRecesso = this.estagiariosComRecesso[i][
+              "dt_inicial_" + j
+            ];
+            novoEstagiario.terminoRecesso = this.estagiariosComRecesso[i][
+              "dt_termino_" + j
+            ];
+            novoEstagiario.diasSolicitados = this.estagiariosComRecesso[i][
+              "qt_dias_solicitada_" + j
+            ];
+            if (this.estagiariosComRecesso[i]["dt_termino_" + j] == null) {
+              // this.estagiariosRecessoEscolhido.pull(novoEstagiario);
+              var novaData = new Date(
+                  this.estagiariosComRecesso[i]["dt_inicial_" + j]).getTime() +
+                  (this.estagiariosComRecesso[i]["qt_dias_solicitada_" + j] * 86400000);
+                  
+                  novaData = new Date(novaData).toLocaleString();
 
+              novoEstagiario.terminoRecesso = novaData;
+            }
             this.estagiariosRecessoEscolhido.push(novoEstagiario);
           }
         }
@@ -96,7 +128,7 @@ export default {
     calculaDias(dataInicial, dataTermino) {
       let total =
         (new Date(dataTermino) - new Date(dataInicial)) / 86400000 + 1;
-          return total;
+      return total.toFixed(0);
     },
     converteData(dataAConverter) {
       let ano = new Date(dataAConverter).getFullYear();
@@ -130,4 +162,20 @@ export default {
 </script>
 
 <style scoped>
+.space {
+  margin-top: 15px;
+}
+.margem {
+  margin-left: -8px;
+}
+.separador {
+  margin-left: 20px;
+}
+.descer-elemento {
+  margin-top: 30px;
+}
+.alinha-icons {
+  margin-bottom: -20px;
+  margin-top: 35px;
+}
 </style>

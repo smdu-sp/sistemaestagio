@@ -7659,14 +7659,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dias: [],
       estagiariosComRecesso: [],
+      estagiariosRecessoEscolhido: [],
       mesEscolhido: "0",
-      anoEscolhido: "2019",
-      estagiariosRecessoEscolhido: []
+      anoEscolhido: ""
     };
   },
   props: ["post"],
@@ -7685,11 +7702,19 @@ __webpack_require__.r(__webpack_exports__);
           var dataRecesso = new Date(this.estagiariosComRecesso[i]["dt_inicial_" + j]);
 
           if (dataRecesso.getFullYear() == this.anoEscolhido && dataRecesso.getMonth() == this.mesEscolhido) {
-            // var novoEstagiario = this.estagiariosComRecesso[i];
             var novoEstagiario = {};
             novoEstagiario.nome = this.estagiariosComRecesso[i].nome;
             novoEstagiario.inicioRecesso = this.estagiariosComRecesso[i]["dt_inicial_" + j];
             novoEstagiario.terminoRecesso = this.estagiariosComRecesso[i]["dt_termino_" + j];
+            novoEstagiario.diasSolicitados = this.estagiariosComRecesso[i]["qt_dias_solicitada_" + j];
+
+            if (this.estagiariosComRecesso[i]["dt_termino_" + j] == null) {
+              // this.estagiariosRecessoEscolhido.pull(novoEstagiario);
+              var novaData = new Date(this.estagiariosComRecesso[i]["dt_inicial_" + j]).getTime() + this.estagiariosComRecesso[i]["qt_dias_solicitada_" + j] * 86400000;
+              novaData = new Date(novaData).toLocaleString();
+              novoEstagiario.terminoRecesso = novaData;
+            }
+
             this.estagiariosRecessoEscolhido.push(novoEstagiario);
           }
         }
@@ -7697,7 +7722,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     calculaDias: function calculaDias(dataInicial, dataTermino) {
       var total = (new Date(dataTermino) - new Date(dataInicial)) / 86400000 + 1;
-      return total;
+      return total.toFixed(0);
     },
     converteData: function converteData(dataAConverter) {
       var ano = new Date(dataAConverter).getFullYear();
@@ -41121,6 +41146,25 @@ exports.push([module.i, "\n@media print {\nbody *[data-v-690676c1] {\r\n    visi
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.space[data-v-4e0fc168] {\r\n  margin-top: 15px;\n}\n.margem[data-v-4e0fc168] {\r\n  margin-left: -8px;\n}\n.separador[data-v-4e0fc168] {\r\n  margin-left: 20px;\n}\n.descer-elemento[data-v-4e0fc168] {\r\n  margin-top: 30px;\n}\n.alinha-icons[data-v-4e0fc168] {\r\n  margin-bottom: -20px;\r\n  margin-top: 35px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/CadastroSupervisor.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/supervisor/CadastroSupervisor.vue?vue&type=style&index=0&lang=css& ***!
@@ -73105,6 +73149,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/supervisor/CadastroSupervisor.vue?vue&type=style&index=0&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/supervisor/CadastroSupervisor.vue?vue&type=style&index=0&lang=css& ***!
@@ -83442,129 +83516,163 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("label", { attrs: { for: "" } }, [_vm._v("Mês")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.mesEscolhido,
-                expression: "mesEscolhido"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { name: "selectMes", id: "mesRecesso" },
-            on: {
-              change: [
-                function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.mesEscolhido = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+  return _c("div", [
+    _c("h1", { staticClass: "text-center" }, [_vm._v("Recessos do Mês")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "col-md-12 row" }, [
+            _c("div", { staticClass: "col-md-4 space margem row" }, [
+              _c("label", { attrs: { for: "" } }, [_vm._v("Mês")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.mesEscolhido,
+                      expression: "mesEscolhido"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "selectMes", id: "mesRecesso" },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.mesEscolhido = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.atualizaRelatorio
+                    ]
+                  }
                 },
-                _vm.atualizaRelatorio
-              ]
-            }
-          },
-          [
-            _c("option", { attrs: { value: "0" } }, [_vm._v("Janeiro")]),
+                [
+                  _c("option", { attrs: { value: "0" } }, [_vm._v("Janeiro")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [
+                    _vm._v("Fevereiro")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("Março")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [_vm._v("Abril")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "4" } }, [_vm._v("Maio")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "5" } }, [_vm._v("Junho")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "6" } }, [_vm._v("Julho")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "7" } }, [_vm._v("Agosto")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "8" } }, [_vm._v("Setembro")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "9" } }, [_vm._v("Outubro")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "10" } }, [
+                    _vm._v("Novembro")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "11" } }, [_vm._v("Dezembro")])
+                ]
+              )
+            ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "1" } }, [_vm._v("Fevereiro")]),
+            _c("div", { staticClass: "col-md-4 row space separador" }, [
+              _c("label", { attrs: { for: "" } }, [_vm._v("Ano")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.anoEscolhido,
+                    expression: "anoEscolhido"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "number",
+                  id: "anoRecesso",
+                  min: "2013",
+                  placeholder: "Digite ano"
+                },
+                domProps: { value: _vm.anoEscolhido },
+                on: {
+                  change: _vm.atualizaRelatorio,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.anoEscolhido = $event.target.value
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "2" } }, [_vm._v("Março")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "3" } }, [_vm._v("Abril")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "4" } }, [_vm._v("Maio")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "5" } }, [_vm._v("Junho")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "6" } }, [_vm._v("Julho")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "7" } }, [_vm._v("Agosto")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "8" } }, [_vm._v("Setembro")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "9" } }, [_vm._v("Outubro")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "10" } }, [_vm._v("Novembro")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "11" } }, [_vm._v("Dezembro")])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-3" }, [
-        _c("label", { attrs: { for: "" } }, [_vm._v("Ano")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.anoEscolhido,
-              expression: "anoEscolhido"
-            }
-          ],
-          attrs: { type: "number", id: "anoRecesso", min: "2013" },
-          domProps: { value: _vm.anoEscolhido },
-          on: {
-            change: _vm.atualizaRelatorio,
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.anoEscolhido = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("table", { staticClass: "table table-bordered table-hover" }, [
-          _vm._m(0),
+            _c(
+              "div",
+              { staticClass: "d-flex mb-4 space separador" },
+              [
+                _c("botao-imprimir-component", { staticClass: "alinha-icons" }),
+                _vm._v(" "),
+                _c("botao-excel", {
+                  staticClass: "alinha-icons",
+                  attrs: { nome: "Recessos-do-mes" }
+                })
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.estagiariosRecessoEscolhido, function(estagiario) {
-              return _c("tr", [
-                _c("td", [_vm._v(_vm._s(estagiario.nome))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(_vm._s(_vm.converteData(estagiario.inicioRecesso)))
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(_vm._s(_vm.converteData(estagiario.terminoRecesso)))
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    _vm._s(
-                      _vm.calculaDias(
-                        estagiario.inicioRecesso,
-                        estagiario.terminoRecesso
+          _c("div", { staticClass: "space", attrs: { id: "divTabela" } }, [
+            _c("table", { staticClass: "table table-bordered table-hover" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.estagiariosRecessoEscolhido, function(estagiario) {
+                  return _c("tr", [
+                    _c("td", [_vm._v(_vm._s(estagiario.nome.toUpperCase()))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm.converteData(estagiario.inicioRecesso)))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(_vm.converteData(estagiario.terminoRecesso))
                       )
-                    )
-                  )
-                ])
-              ])
-            }),
-            0
-          )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          _vm.calculaDias(
+                            estagiario.inicioRecesso,
+                            estagiario.terminoRecesso
+                          )
+                        )
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
         ])
       ])
     ])
@@ -104756,7 +104864,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RecessosMes_vue_vue_type_template_id_4e0fc168_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true& */ "./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=template&id=4e0fc168&scoped=true&");
 /* harmony import */ var _RecessosMes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RecessosMes.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _RecessosMes_vue_vue_type_style_index_0_id_4e0fc168_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css& */ "./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -104764,7 +104874,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _RecessosMes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _RecessosMes_vue_vue_type_template_id_4e0fc168_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _RecessosMes_vue_vue_type_template_id_4e0fc168_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -104793,6 +104903,22 @@ component.options.__file = "resources/assets/js/components/relatorios/RecessosMe
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./RecessosMes.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css&":
+/*!****************************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_style_index_0_id_4e0fc168_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/RecessosMes.vue?vue&type=style&index=0&id=4e0fc168&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_style_index_0_id_4e0fc168_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_style_index_0_id_4e0fc168_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_style_index_0_id_4e0fc168_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_style_index_0_id_4e0fc168_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RecessosMes_vue_vue_type_style_index_0_id_4e0fc168_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
