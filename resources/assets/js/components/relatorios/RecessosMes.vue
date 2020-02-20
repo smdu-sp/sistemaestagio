@@ -52,6 +52,7 @@
                 <th scope="row" class="text-center">Início recesso</th>
                 <th scope="row" class="text-center">Término recesso</th>
                 <th scope="row" class="text-center">Total de dias</th>
+                <th scope="row" class="text-center">Dias úteis</th>
               </thead>
               <tbody>
                 <tr v-for="estagiario in estagiariosRecessoEscolhido">
@@ -59,6 +60,7 @@
                   <td>{{ converteData(estagiario.inicioRecesso) }}</td>
                   <td>{{ converteData(estagiario.terminoRecesso) }}</td>
                   <td>{{ calculaDias(estagiario.inicioRecesso, estagiario.terminoRecesso) }}</td>
+                  <td>{{  }}</td>
                 </tr>
               </tbody>
             </table>

@@ -91,7 +91,7 @@ export default {
   watch: {
     post: function() {
       this.calculoDiasFerias();
-      
+
       // Calcula término da solicitação de férias
       this.atualizaInfoDias();
     }
@@ -108,62 +108,62 @@ export default {
       this.post.diasFerias = result;
       return result;
     },
-    calculoDiasGozados(dtInicial, dtFinal, diasSolicitados) { // dtInicial, dtFinal: string
+    calculoDiasGozados(dtInicial, dtFinal, diasSolicitados) {
+      // dtInicial, dtFinal: string
       let resultado = 0;
       let dtAtual = new Date();
       dtInicial = new Date(dtInicial);
       dtFinal = new Date(dtFinal);
 
       // Verifica se data de término é igual à data inicial
-      if(diasSolicitados === "1") {        
+      if (diasSolicitados === "1") {
         return dtFinal < dtAtual ? 1 : 0;
       }
 
-      if(dtAtual < dtInicial) {
+      if (dtAtual < dtInicial) {
         return 0;
       }
 
       if (dtAtual < dtFinal) {
-        resultado = new Date(dtAtual - dtInicial).getDate();        
-      }
-      else {
+        resultado = new Date(dtAtual - dtInicial).getDate();
+      } else {
         resultado = new Date(dtFinal - dtInicial).getDate() + 1;
       }
-      
+
       return resultado > diasSolicitados ? 0 : resultado;
     },
-    atualizaInfoDias() {      
+    atualizaInfoDias() {
       /** Atualiza data final **/
       // Percorre array de solicitações (7 ao todo)
       for (var i = 1; i <= this.solicitacoes.length; i++) {
         // Verifica se número de dias solicitados é 0
-        if (this.post['qt_dias_solicitada_'+i] == '0'){
-          this.post['dt_inicial_'+i] = null;
-          this.post["dt_termino_" + i] = null;
-        }
-        else {
+        if (this.post["qt_dias_solicitada_" + i] == "0" || this.post["qt_dias_solicitada_" + i] == null) {
+              this.post["dt_inicial_" + i] = null;
+              this.post["dt_termino_" + i] = null;
+        } else {
           this.post["dt_termino_" + i] = this.simplificaData(
-          new Date(this.post["dt_inicial_" + i]).addDays(
-            parseInt(this.post["qt_dias_solicitada_" + i])
-          )
-        );
+            new Date(this.post["dt_inicial_" + i]).addDays(
+              parseInt(this.post["qt_dias_solicitada_" + i])
+            ));
         }
       }
 
-    //   Atualiza dias gozados
-    this.post["qt_dias_gozados"] = 0;    
+      //   Atualiza dias gozados
+      this.post["qt_dias_gozados"] = 0;
 
-    // Calcula dias gozados para cada solicitação de férias
+      // Calcula dias gozados para cada solicitação de férias
       for (var i in this.solicitacoes) {
-        i++;          
+        i++;
         this.post["diasGozados" + i] = this.calculoDiasGozados(
           this.post["dt_inicial_" + i],
           this.post["dt_termino_" + i],
           this.post["qt_dias_solicitada_" + i]
         );
-        this.post.qt_dias_gozados += this.post["diasGozados" + i] >= 0 ? this.post["diasGozados" + i] : 0;  
+        this.post.qt_dias_gozados +=
+          this.post["diasGozados" + i] >= 0 ? this.post["diasGozados" + i] : 0;
       }
-      this.post.qt_dias_restantes = this.post.diasFerias - this.post.qt_dias_gozados;
+      this.post.qt_dias_restantes =
+        this.post.diasFerias - this.post.qt_dias_gozados;
     },
     simplificaData(fullDate) {
       let ano = fullDate.getFullYear();

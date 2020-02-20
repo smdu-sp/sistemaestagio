@@ -42,7 +42,6 @@ class EstagiariosController extends Controller
             'email_pessoal'=>$request->input('email_pessoal'),
             'email_corporativo'=>$request->input('email_corporativo'),
             'instituicao_ensino'=>$request->input('instituicao_ensino'),
-            // 'campus'=>$request->input('campus'),
             'curso_formacao'=>$request->input('curso_formacao'),
             'ano_semestre'=>$request->input('ano_semestre'),
             'periodo'=>$request->input('periodo'),
@@ -51,55 +50,17 @@ class EstagiariosController extends Controller
             'mes_ano_previsto_curso'=>$request->input('mes_ano_previsto_curso'),
             'matricula'=>$request->input('matricula'),
             'observacoes1'=>$request->input('observacoes1'),
-            // 'foto'=>$request->input('foto'),
             'dep_hierarquico'=>$request->input('dep_hierarquico'),
             'setor_estagiado'=>$request->input('setor_estagiado'),
             'supervisor'=>$request->input('supervisor'),
             'dt_inicio'=>$request->input('dt_inicio'),
             'dt_termino_inicial_lauda'=>$request->input('dt_termino_inicial_lauda'),
             'dt_termino'=>$request->input('dt_termino'),
-            // 'dt_inicio_1_aditivo'=>$request->input('dt_inicio_1_aditivo'),
-            // 'dt_termino_1_aditivo'=>$request->input('dt_termino_1_aditivo'),
-            // 'dt_inicio_2_aditivo'=>$request->input('dt_inicio_1_aditivo'),
-            // 'dt_termino_2_aditivo'=>$request->input('dt_termino_2_aditivo'),
-            // 'dt_inicio_3_aditivo'=>$request->input('dt_inicio_3_aditivo'),
-            // 'dt_termino_3_aditivo'=>$request->input('dt_termino_3_aditivo'),
-            // 'aditivo1'=>$request->input('aditivo1'),
-            // 'aditivo2'=>$request->input('aditivo2'),
-            // 'aditivo3'=>$request->input('aditivo3'),
             'horario_entrada'=>$request->input('horario_entrada'),
             'horario_saida'=>$request->input('horario_saida'),
             'horario_variavel'=>$request->input('horario_variavel'),
             'situacao'=>$request->input('situacao'),
-            // 'desligado'=>$request->input('desligado'),
             'observacao2'=>$request->input('observacao2'),
-            // 'semestre_desligamento'=>$request->input('semestre_desligamento'),
-            // 'qt_horas_estagiada'=>$request->input('qt_horas_estagiada'),
-            // 'qt_dias_legais'=>$request->input('qt_dias_legais'),
-            // 'qt_dias_gozados'=>$request->input('qt_dias_gozados'),
-            // 'qt_dias_restantes'=>$request->input('qt_dias_restantes'),
-            // 'qt_dias_solicitada_1'=>$request->input('qt_dias_solicitada_1'),
-            // 'dt_inicial_1'=>$request->input('dt_inicial_1'),
-            // 'dt_termino_1'=>$request->input('dt_termino_1'),
-            // 'qt_dias_solicitada_2'=>$request->input('qt_dias_solicitada_2'),
-            // 'dt_inicial_2'=>$request->input('dt_inicial_2'),
-            // 'dt_termino_2'=>$request->input('dt_termino_2'),
-            // 'qt_dias_solicitada_3'=>$request->input('qt_dias_solicitada_3'),
-            // 'dt_inicial_3'=>$request->input('dt_inicial_3'),
-            // 'dt_termino_3'=>$request->input('dt_termino_3'),
-            // 'qt_dias_solicitada_4'=>$request->input('qt_dias_solicitada_4'),
-            // 'dt_inicial_4'=>$request->input('dt_inicial_4'),
-            // 'dt_termino_4'=>$request->input('dt_termino_4'),
-            // 'qt_dias_solicitada_5'=>$request->input('qt_dias_solicitada_5'),
-            // 'dt_inicial_5'=>$request->input('dt_inicial_5'),
-            // 'dt_termino_5'=>$request->input('dt_termino_5'),
-            // 'qt_dias_solicitada_6'=>$request->input('qt_dias_solicitada_6'),
-            // 'dt_inicial_6'=>$request->input('dt_inicial_6'),
-            // 'dt_termino_6'=>$request->input('dt_termino_6'),
-            // 'qt_dias_solicitada_7'=>$request->input('qt_dias_solicitada_7'),
-            // 'dt_Inicial_7'=>$request->input('dt_Inicial_7'),
-            // 'dt_Termino_7'=>$request->input('dt_Termino_7'),
-            // 'observacoes3'=>$request->input('observacoes3'),
             'instituicao_bancaria'=>$request->input('instituicao_bancaria'),
             'agencia'=>$request->input('agencia'),
             'conta'=>$request->input('conta'),
@@ -123,7 +84,7 @@ class EstagiariosController extends Controller
 
     public function update(Request $request, Estagiario $cpf) {
         function corrigeData($d) {
-            if (strpos($d, 'NaN') >= 0) {
+            if (strpos($d, 'NaN') === 0 || strpos($d, 'NaN') > 0) {
                 return null;
             }
             return $d;
@@ -199,8 +160,8 @@ class EstagiariosController extends Controller
         $cpf->qt_dias_gozados = $request->input('qt_dias_gozados');
         $cpf->qt_dias_restantes = $request->input('qt_dias_restantes');
         $cpf->qt_dias_solicitada_1 = $request->input('qt_dias_solicitada_1');
-        $cpf->dt_inicial_1 = $request->input('dt_inicial_1');
-
+        
+        $cpf->dt_inicial_1 = corrigeData($request->input('dt_inicial_1'));
         $cpf->dt_termino_1 = corrigeData($request->input('dt_termino_1'));
         $cpf->qt_dias_solicitada_2 = $request->input('qt_dias_solicitada_2');
         $cpf->dt_inicial_2 = corrigeData($request->input('dt_inicial_2'));

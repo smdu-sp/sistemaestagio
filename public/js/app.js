@@ -5218,8 +5218,8 @@ Date.prototype.addDays = function (days) {
       // Percorre array de solicitações (7 ao todo)
       for (var i = 1; i <= this.solicitacoes.length; i++) {
         // Verifica se número de dias solicitados é 0
-        if (this.post['qt_dias_solicitada_' + i] == '0') {
-          this.post['dt_inicial_' + i] = null;
+        if (this.post["qt_dias_solicitada_" + i] == "0" || this.post["qt_dias_solicitada_" + i] == null) {
+          this.post["dt_inicial_" + i] = null;
           this.post["dt_termino_" + i] = null;
         } else {
           this.post["dt_termino_" + i] = this.simplificaData(new Date(this.post["dt_inicial_" + i]).addDays(parseInt(this.post["qt_dias_solicitada_" + i])));
@@ -7605,6 +7605,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -83666,7 +83668,9 @@ var render = function() {
                           )
                         )
                       )
-                    ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s())])
                   ])
                 }),
                 0
@@ -83698,6 +83702,10 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { staticClass: "text-center", attrs: { scope: "row" } }, [
         _vm._v("Total de dias")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center", attrs: { scope: "row" } }, [
+        _vm._v("Dias úteis")
       ])
     ])
   }
