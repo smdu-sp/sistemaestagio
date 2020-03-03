@@ -18,6 +18,7 @@
                             <th scope="col">Supervisor</th>
                             <th scope="col">Admissão</th>
                             <th scope="col">Desligamento</th>
+                            <th scope="col">Horas Estagiadas</th>
                         </tr>
                     </thead>
                     <tbody>

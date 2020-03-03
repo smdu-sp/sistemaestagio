@@ -76,6 +76,9 @@
                                 <router-link :to="{name: 'Estagiários desligados'}">Desligados</router-link>
                             </li>
                             <li>
+                                <router-link :to="{name: 'Relatório de Estagiários Contratados'}">Contratados</router-link>
+                            </li>
+                            <li>
                                 <router-link :to="{name: 'Relatório de Entradas, Saídas e Renovação'}">Entrada, Saída e Renovação</router-link>
                             </li>
                             <li>

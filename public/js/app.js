@@ -2009,6 +2009,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exibeModalEstagiario', 'menuCadastro', 'mostrarMenuCadastro', 'menuConsulta', 'mostrarMenuConsulta', 'exibeModalSupervisor', 'menuRelatorios', 'mostrarMenuRelatorios']
 });
@@ -7305,6 +7308,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7590,6 +7594,119 @@ __webpack_require__.r(__webpack_exports__);
           this.estagiariosRenovados30Dias.push(this.estagiarios[i]);
         }
       }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mixins_filtros__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/filtros */ "./resources/assets/js/mixins/filtros.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      estagiariosContratados: []
+    };
+  },
+  computed: {
+    estagiariosOrdenados: function estagiariosOrdenados() {
+      return lodash__WEBPACK_IMPORTED_MODULE_1___default.a.orderBy(this.estagiariosContratados, "nome");
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.retornaEstagiarios();
+  },
+  mixins: [_mixins_filtros__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  methods: {
+    retornaEstagiarios: function retornaEstagiarios() {
+      var _this = this;
+
+      var uriEstagiarios = "/api/estagiarios";
+      this.axios.get(uriEstagiarios).then(function (response) {
+        for (var _i in response.data) {
+          if (response.data[_i].desligado === null) {
+            response.data[_i].nome = response.data[_i].nome.toUpperCase();
+
+            _this.estagiariosContratados.push(response.data[_i]);
+          }
+        }
+
+        for (var i in _this.estagiariosContratados) {
+          if (_this.estagiariosContratados[i].dt_termino_3_aditivo !== null) {
+            _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_3_aditivo;
+          } else if (_this.estagiariosContratados[i].dt_termino_2_aditivo !== null) {
+            _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_2_aditivo;
+          } else if (_this.estagiariosContratados[i].dt_termino_1_aditivo !== null) {
+            _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_1_aditivo;
+          } else {
+            _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino;
+          }
+        } // if (estagiariosContratados.data[i].dt_termino_3_aditivo !== null) {
+        //   this.dataTermino.push(estagiariosContratados.data[i].dt_termino_3_aditivo);
+        // } else if (estagiariosContratados.data[i].dt_termino_2_aditivo !== null) {
+        //   this.dataTermino.push(estagiariosContratados.data[i].dt_termino_2_aditivo);
+        // } else if (estagiariosContratados.data[i].dt_termino_1_aditivo !== null) {
+        //   this.dataTermino.push(estagiariosContratados.data[i].dt_termino_1_aditivo);
+        // } else {
+        //   this.dataTermino.push(estagiariosContratados.data[i].dt_termino);
+        // }
+
+      })["catch"](function (error) {
+        _this.msg.success = false;
+        _this.msg.error = true;
+        _this.msg.erro = "Erro ao retornar estagiários do banco";
+      });
     }
   }
 });
@@ -74126,6 +74243,22 @@ var render = function() {
                         "router-link",
                         {
                           attrs: {
+                            to: { name: "Relatório de Estagiários Contratados" }
+                          }
+                        },
+                        [_vm._v("Contratados")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
                             to: {
                               name: "Relatório de Entradas, Saídas e Renovação"
                             }
@@ -83087,7 +83220,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Admissão")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Desligamento")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Desligamento")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Horas Estagiadas")])
       ])
     ])
   }
@@ -83493,6 +83628,106 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "5" } }, [
         _c("h1", [_vm._v("Não há contratos renovados nos últimos 30 dias")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=template&id=8298b136&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=template&id=8298b136& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "printable" } },
+    [
+      _c("h1", { staticClass: "d-inline-block" }, [
+        _vm._v("Estagiários Contratados")
+      ]),
+      _vm._v(" "),
+      _c("botao-imprimir-component"),
+      _vm._v(" "),
+      _c("botao-excel", { attrs: { nome: "estagiarios_contratados" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { attrs: { id: "divTabela" } }, [
+          _c("h5", { staticClass: "alert alert-info" }, [
+            _vm._v("Total: " + _vm._s(_vm.estagiariosContratados.length))
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table table-bordered table-hover" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.estagiariosOrdenados, function(estagiario, indice) {
+                return _c("tr", { key: estagiario.cod_estudante }, [
+                  _c("td", [_vm._v(_vm._s(indice + 1))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(estagiario.nome))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(estagiario.dep_hierarquico))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(estagiario.supervisor))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(_vm._f("dataFormatada")(estagiario.dt_inicio))
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(_vm._f("dataFormatada")(estagiario.dataTermino))
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Departamento")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Supervisor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Admissão")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Término de Contrato")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Horas Estagiadas")])
       ])
     ])
   }
@@ -104861,6 +105096,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/relatorios/EstagiariosContratados.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/assets/js/components/relatorios/EstagiariosContratados.vue ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EstagiariosContratados_vue_vue_type_template_id_8298b136___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EstagiariosContratados.vue?vue&type=template&id=8298b136& */ "./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=template&id=8298b136&");
+/* harmony import */ var _EstagiariosContratados_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EstagiariosContratados.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EstagiariosContratados_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EstagiariosContratados_vue_vue_type_template_id_8298b136___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EstagiariosContratados_vue_vue_type_template_id_8298b136___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/relatorios/EstagiariosContratados.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EstagiariosContratados_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./EstagiariosContratados.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EstagiariosContratados_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=template&id=8298b136&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=template&id=8298b136& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EstagiariosContratados_vue_vue_type_template_id_8298b136___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./EstagiariosContratados.vue?vue&type=template&id=8298b136& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/relatorios/EstagiariosContratados.vue?vue&type=template&id=8298b136&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EstagiariosContratados_vue_vue_type_template_id_8298b136___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EstagiariosContratados_vue_vue_type_template_id_8298b136___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/relatorios/RecessosMes.vue":
 /*!*******************************************************************!*\
   !*** ./resources/assets/js/components/relatorios/RecessosMes.vue ***!
@@ -105488,6 +105792,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   filters: {
     dataFormatada: function dataFormatada(data) {
+      if (data == null) {
+        return '';
+      }
+
       var ano = data.substring(0, 4);
       var mes = data.substring(5, 7);
       var dia = data.substring(8, 10);
@@ -105555,6 +105863,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_vaga_ConsultaVaga_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/vaga/ConsultaVaga.vue */ "./resources/assets/js/components/vaga/ConsultaVaga.vue");
 /* harmony import */ var _components_relatorios_Desligados_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/relatorios/Desligados.vue */ "./resources/assets/js/components/relatorios/Desligados.vue");
 /* harmony import */ var _components_relatorios_RecessosMes_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/relatorios/RecessosMes.vue */ "./resources/assets/js/components/relatorios/RecessosMes.vue");
+/* harmony import */ var _components_relatorios_EstagiariosContratados_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/relatorios/EstagiariosContratados.vue */ "./resources/assets/js/components/relatorios/EstagiariosContratados.vue");
+
 
 
 
@@ -105640,6 +105950,10 @@ var routes = [{
   name: 'Estagiários desligados',
   path: '/consultaDesligados',
   component: _components_relatorios_Desligados_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
+}, {
+  name: 'Relatório de Estagiários Contratados',
+  path: '/EstagiariosContratados',
+  component: _components_relatorios_EstagiariosContratados_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
 }];
 
 /***/ }),
@@ -106036,8 +106350,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Iva9\Projetos\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! C:\Iva9\Projetos\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! D:\Iva9\Projetos\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! D:\Iva9\Projetos\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })

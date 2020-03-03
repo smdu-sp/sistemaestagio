@@ -13,8 +13,9 @@ import FFI from './components/FFI.vue';
 import CadastroInstituicao from './components/instituicao_ensino/Instituicao.vue';
 import CadastroCurso from './components/curso/Curso.vue';
 import ConsultaVaga from './components/vaga/ConsultaVaga.vue';
-import consultaDesligados from './components/relatorios/Desligados.vue';
+import ConsultaDesligados from './components/relatorios/Desligados.vue';
 import RecessosMes from './components/relatorios/RecessosMes.vue';
+import EstagiariosContratados from './components/relatorios/EstagiariosContratados.vue';
 
 export const routes = [
     {
@@ -100,6 +101,11 @@ export const routes = [
     {
         name: 'Estagiários desligados',
         path: '/consultaDesligados',
-        component: consultaDesligados
+        component: ConsultaDesligados
+    },
+    {
+        name: 'Relatório de Estagiários Contratados',
+        path: '/EstagiariosContratados',
+        component: EstagiariosContratados
     }
 ];
