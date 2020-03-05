@@ -8,7 +8,7 @@
         <h5 class="alert alert-info">Total: {{ estagiariosContratados.length }}</h5>
         <table class="table table-bordered table-hover">
           <thead class="thead-dark">
-            <tr>
+            <tr class="centraliza-texto">
               <th scope="col">#</th>
               <th scope="col">Nome</th>
               <th scope="col">Departamento</th>
@@ -16,6 +16,7 @@
               <th scope="col">Admissão</th>
               <th scope="col">Término de Contrato</th>
               <th scope="col">Horas Estagiadas</th>
+              <th scope="col">Instituição de Ensino</th>
             </tr>
           </thead>
           <tbody>
@@ -29,6 +30,8 @@
               <td>{{ estagiario.supervisor }}</td>
               <td>{{ estagiario.dt_inicio | dataFormatada }}</td>
               <td>{{ estagiario.dataTermino | dataFormatada }}</td>
+              <td>1044</td>
+              <td>{{ estagiario.instituicoes }}</td>
             </tr>
           </tbody>
         </table>
@@ -69,38 +72,36 @@ export default {
             }
           }
           for (var i in this.estagiariosContratados) {
-              if (this.estagiariosContratados[i].dt_termino_3_aditivo !== null) {
-                  this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino_3_aditivo;
-              }
-              else if (this.estagiariosContratados[i].dt_termino_2_aditivo !== null) {
-                  this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino_2_aditivo;
-              }
-              else if (this.estagiariosContratados[i].dt_termino_1_aditivo !== null) {
-                  this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino_1_aditivo;
-              }
-              else {
-                  this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino;
-              }
+            if (this.estagiariosContratados[i].dt_termino_3_aditivo !== null) {
+              this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino_3_aditivo;
+            } else if (
+              this.estagiariosContratados[i].dt_termino_2_aditivo !== null
+            ) {
+              this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino_2_aditivo;
+            } else if (
+              this.estagiariosContratados[i].dt_termino_1_aditivo !== null
+            ) {
+              this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino_1_aditivo;
+            } else {
+              this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino;
+            }
           }
-        
-        // if (estagiariosContratados.data[i].dt_termino_3_aditivo !== null) {
-        //   this.dataTermino.push(estagiariosContratados.data[i].dt_termino_3_aditivo);
-        // } else if (estagiariosContratados.data[i].dt_termino_2_aditivo !== null) {
-        //   this.dataTermino.push(estagiariosContratados.data[i].dt_termino_2_aditivo);
-        // } else if (estagiariosContratados.data[i].dt_termino_1_aditivo !== null) {
-        //   this.dataTermino.push(estagiariosContratados.data[i].dt_termino_1_aditivo);
-        // } else {
-        //   this.dataTermino.push(estagiariosContratados.data[i].dt_termino);
-        // }
+          for (var i in this.estagiariosContratados) {
+            this.estagiariosContratados[i].instituicoes = this.estagiariosContratados[i].instituicao_ensino;
+          }
         })
         .catch(error => {
           this.msg.success = false;
           this.msg.error = true;
           this.msg.erro = "Erro ao retornar estagiários do banco";
-        });      
+        });
     }
   }
 };
 </script>
-
-<style lang="stylus"></style>
+  
+<style lang="stylus">
+  .centraliza-texto {
+    text-align: center; 
+  }
+</style>
