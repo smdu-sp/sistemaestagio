@@ -30,8 +30,9 @@
               <td>{{ estagiario.supervisor }}</td>
               <td>{{ estagiario.dt_inicio | dataFormatada }}</td>
               <td>{{ estagiario.dataTermino | dataFormatada }}</td>
-              <td>1044</td>
-              <td>{{ estagiario.instituicoes }}</td>
+              <!-- <td>{{ calculoHoras(estagiario.dt_inicio, estagiario.dataTermino) }}</td> -->
+              <td>{{ estagiario.horasEstagiadas }}</td>
+              <td>{{ estagiario.instituicoes ? estagiario.instituicoes.toUpperCase() : '' }}</td>
             </tr>
           </tbody>
         </table>
@@ -43,10 +44,12 @@
 <script>
 import filtros from "../../mixins/filtros";
 import _ from "lodash";
+
 export default {
   data() {
     return {
-      estagiariosContratados: []
+      estagiariosContratados: [],
+      requisicoes: []
     };
   },
   computed: {
@@ -55,7 +58,7 @@ export default {
     }
   },
   beforeMount() {
-    this.retornaEstagiarios();
+    this.retornaEstagiarios();    
   },
   mixins: [filtros],
   methods: {
@@ -84,17 +87,41 @@ export default {
               this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino_1_aditivo;
             } else {
               this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino;
-            }
-          }
-          for (var i in this.estagiariosContratados) {
+            }            
             this.estagiariosContratados[i].instituicoes = this.estagiariosContratados[i].instituicao_ensino;
+            // Popula array de requisições axios (para calcular as horas de cada estagiario)
+// TODO: CONTINUAR - POPULAR ARRAY requisicoes COM AS INFORMAÇÕES ABAIXO E VINCULAR OS DADOS APÓS O REQUEST EM MASSA DO AXIOS
+            this.requisicoes.push({
+              cod: this.estagiariosContratados[i].cod_estudante,
+              inicio: estagiariosContratados[i].dt_inicio,
+              termino: estagiariosContratados[i].dataTermino
+            });
           }
+          console.warn('Requisições:');
+          console.log(this.requisicoes);
         })
         .catch(error => {
           this.msg.success = false;
           this.msg.error = true;
           this.msg.erro = "Erro ao retornar estagiários do banco";
         });
+    },
+
+    calculoHoras(inicial, final) {
+      if (inicial == null || final == null) {
+        return '';
+      }
+      inicial = inicial.substring(0, 10);
+      final = final.substring(0, 10);
+      const uriFeriados = "/api/feriados/periodo/"+inicial+"/"+final;
+      
+      // this.axios.get(uriFeriados).then(response => {
+      //   return parseInt(response.data)*4;
+      // })     
+      /** Axios não suporta fazer todas as requisições simultaneamente. Criar método de requisição em massa para evitar erro 500 */
+      this.axios.get(uriFeriados).then(response => {
+        // return parseInt(response.data)*4;
+      })
     }
   }
 };

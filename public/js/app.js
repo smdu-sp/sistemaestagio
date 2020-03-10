@@ -7654,12 +7654,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      estagiariosContratados: []
+      estagiariosContratados: [],
+      requisicoes: []
     };
   },
   computed: {
@@ -7695,15 +7697,39 @@ __webpack_require__.r(__webpack_exports__);
           } else {
             _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino;
           }
+
+          _this.estagiariosContratados[i].instituicoes = _this.estagiariosContratados[i].instituicao_ensino; // Popula array de requisições axios (para calcular as horas de cada estagiario)
+          // TODO: CONTINUAR - POPULAR ARRAY requisicoes COM AS INFORMAÇÕES ABAIXO E VINCULAR OS DADOS APÓS O REQUEST EM MASSA DO AXIOS
+
+          _this.requisicoes.push({
+            cod: _this.estagiariosContratados[i].cod_estudante,
+            inicio: estagiariosContratados[i].dt_inicio,
+            termino: estagiariosContratados[i].dataTermino
+          });
         }
 
-        for (var i in _this.estagiariosContratados) {
-          _this.estagiariosContratados[i].instituicoes = _this.estagiariosContratados[i].instituicao_ensino;
-        }
+        console.warn('Requisições:');
+        console.log(_this.requisicoes);
       })["catch"](function (error) {
         _this.msg.success = false;
         _this.msg.error = true;
         _this.msg.erro = "Erro ao retornar estagiários do banco";
+      });
+    },
+    calculoHoras: function calculoHoras(inicial, _final) {
+      if (inicial == null || _final == null) {
+        return '';
+      }
+
+      inicial = inicial.substring(0, 10);
+      _final = _final.substring(0, 10);
+      var uriFeriados = "/api/feriados/periodo/" + inicial + "/" + _final; // this.axios.get(uriFeriados).then(response => {
+      //   return parseInt(response.data)*4;
+      // })     
+
+      /** Axios não suporta fazer todas as requisições simultaneamente. Criar método de requisição em massa para evitar erro 500 */
+
+      this.axios.get(uriFeriados).then(function (response) {// return parseInt(response.data)*4;
       });
     }
   }
@@ -83745,9 +83771,17 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("1044")]),
+                  _c("td", [_vm._v(_vm._s(estagiario.horasEstagiadas))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(estagiario.instituicoes))])
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        estagiario.instituicoes
+                          ? estagiario.instituicoes.toUpperCase()
+                          : ""
+                      )
+                    )
+                  ])
                 ])
               }),
               0
