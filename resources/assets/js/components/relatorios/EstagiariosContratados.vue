@@ -94,7 +94,6 @@ export default {
             let arrIndex = i;
             this.axios.get("/api/feriados/periodo/"+inicio+"/"+final).then(response => {
               this.estagiariosContratados[arrIndex].horasEstagiadas = parseInt(response.data)*4;
-              console.log(this.estagiariosContratados[arrIndex].nome, response.data);
               this.requisicoes++; // Atualiza componentkey da tabela para forçar atualização do conteúdo
             }).catch(err => {
               console.error(err);
@@ -109,19 +108,16 @@ export default {
     },
 
     calculoHoras(inicial, final) {
-      console.log(inicial, final);
       if (inicial == null || final == null) {
         return '';
       }
       inicial = inicial.substring(0, 10);
       final = final.substring(0, 10);
       const uriFeriados = "/api/feriados/periodo/"+inicial+"/"+final;
-      console.log(uriFeriados);
       
       this.axios.get(uriFeriados).then(response => {
         return parseInt(response.data)*4;
       })     
-      
     }
   }
 };

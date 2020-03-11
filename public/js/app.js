@@ -7706,7 +7706,6 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.axios.get("/api/feriados/periodo/" + inicio + "/" + _final).then(function (response) {
             _this.estagiariosContratados[arrIndex].horasEstagiadas = parseInt(response.data) * 4;
-            console.log(_this.estagiariosContratados[arrIndex].nome, response.data);
             _this.requisicoes++; // Atualiza componentkey da tabela para forçar atualização do conteúdo
           })["catch"](function (err) {
             console.error(err);
@@ -7723,8 +7722,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     calculoHoras: function calculoHoras(inicial, _final2) {
-      console.log(inicial, _final2);
-
       if (inicial == null || _final2 == null) {
         return '';
       }
@@ -7732,7 +7729,6 @@ __webpack_require__.r(__webpack_exports__);
       inicial = inicial.substring(0, 10);
       _final2 = _final2.substring(0, 10);
       var uriFeriados = "/api/feriados/periodo/" + inicial + "/" + _final2;
-      console.log(uriFeriados);
       this.axios.get(uriFeriados).then(function (response) {
         return parseInt(response.data) * 4;
       });
@@ -106461,8 +106457,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! D:\Iva9\Projetos\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! D:\Iva9\Projetos\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })
