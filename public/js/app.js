@@ -7654,14 +7654,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       estagiariosContratados: [],
-      requisicoes: []
+      requisicoes: 0
     };
   },
   computed: {
@@ -7687,7 +7686,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
 
-        for (var i in _this.estagiariosContratados) {
+        var _loop = function _loop() {
           if (_this.estagiariosContratados[i].dt_termino_3_aditivo !== null) {
             _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_3_aditivo;
           } else if (_this.estagiariosContratados[i].dt_termino_2_aditivo !== null) {
@@ -7698,38 +7697,44 @@ __webpack_require__.r(__webpack_exports__);
             _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino;
           }
 
-          _this.estagiariosContratados[i].instituicoes = _this.estagiariosContratados[i].instituicao_ensino; // Popula array de requisições axios (para calcular as horas de cada estagiario)
-          // TODO: CONTINUAR - POPULAR ARRAY requisicoes COM AS INFORMAÇÕES ABAIXO E VINCULAR OS DADOS APÓS O REQUEST EM MASSA DO AXIOS
+          _this.estagiariosContratados[i].instituicoes = _this.estagiariosContratados[i].instituicao_ensino;
+          var inicio = _this.estagiariosContratados[i].dt_inicio ? _this.estagiariosContratados[i].dt_inicio.substring(0, 10) : "0000-00-00";
 
-          _this.requisicoes.push({
-            cod: _this.estagiariosContratados[i].cod_estudante,
-            inicio: estagiariosContratados[i].dt_inicio,
-            termino: estagiariosContratados[i].dataTermino
+          var _final = _this.estagiariosContratados[i].dataTermino ? _this.estagiariosContratados[i].dataTermino.substring(0, 10) : "0000-00-00";
+
+          var arrIndex = i;
+
+          _this.axios.get("/api/feriados/periodo/" + inicio + "/" + _final).then(function (response) {
+            _this.estagiariosContratados[arrIndex].horasEstagiadas = parseInt(response.data) * 4;
+            console.log(_this.estagiariosContratados[arrIndex].nome, response.data);
+            _this.requisicoes++; // Atualiza componentkey da tabela para forçar atualização do conteúdo
+          })["catch"](function (err) {
+            console.error(err);
           });
-        }
+        };
 
-        console.warn('Requisições:');
-        console.log(_this.requisicoes);
+        for (var i in _this.estagiariosContratados) {
+          _loop();
+        }
       })["catch"](function (error) {
         _this.msg.success = false;
         _this.msg.error = true;
         _this.msg.erro = "Erro ao retornar estagiários do banco";
       });
     },
-    calculoHoras: function calculoHoras(inicial, _final) {
-      if (inicial == null || _final == null) {
+    calculoHoras: function calculoHoras(inicial, _final2) {
+      console.log(inicial, _final2);
+
+      if (inicial == null || _final2 == null) {
         return '';
       }
 
       inicial = inicial.substring(0, 10);
-      _final = _final.substring(0, 10);
-      var uriFeriados = "/api/feriados/periodo/" + inicial + "/" + _final; // this.axios.get(uriFeriados).then(response => {
-      //   return parseInt(response.data)*4;
-      // })     
-
-      /** Axios não suporta fazer todas as requisições simultaneamente. Criar método de requisição em massa para evitar erro 500 */
-
-      this.axios.get(uriFeriados).then(function (response) {// return parseInt(response.data)*4;
+      _final2 = _final2.substring(0, 10);
+      var uriFeriados = "/api/feriados/periodo/" + inicial + "/" + _final2;
+      console.log(uriFeriados);
+      this.axios.get(uriFeriados).then(function (response) {
+        return parseInt(response.data) * 4;
       });
     }
   }
@@ -83749,6 +83754,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
+              { key: _vm.requisicoes },
               _vm._l(_vm.estagiariosOrdenados, function(estagiario, indice) {
                 return _c("tr", { key: estagiario.cod_estudante }, [
                   _c("td", [_vm._v(_vm._s(indice + 1))]),
@@ -106455,8 +106461,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Iva9\Projetos\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! D:\Iva9\Projetos\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })

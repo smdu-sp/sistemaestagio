@@ -19,7 +19,7 @@
               <th scope="col">Instituição de Ensino</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody :key="requisicoes">
             <tr
               v-for="(estagiario, indice) of estagiariosOrdenados"
               :key="estagiario.cod_estudante"
@@ -30,7 +30,6 @@
               <td>{{ estagiario.supervisor }}</td>
               <td>{{ estagiario.dt_inicio | dataFormatada }}</td>
               <td>{{ estagiario.dataTermino | dataFormatada }}</td>
-              <!-- <td>{{ calculoHoras(estagiario.dt_inicio, estagiario.dataTermino) }}</td> -->
               <td>{{ estagiario.horasEstagiadas }}</td>
               <td>{{ estagiario.instituicoes ? estagiario.instituicoes.toUpperCase() : '' }}</td>
             </tr>
@@ -49,7 +48,7 @@ export default {
   data() {
     return {
       estagiariosContratados: [],
-      requisicoes: []
+      requisicoes: 0
     };
   },
   computed: {
@@ -89,16 +88,18 @@ export default {
               this.estagiariosContratados[i].dataTermino = this.estagiariosContratados[i].dt_termino;
             }            
             this.estagiariosContratados[i].instituicoes = this.estagiariosContratados[i].instituicao_ensino;
-            // Popula array de requisições axios (para calcular as horas de cada estagiario)
-// TODO: CONTINUAR - POPULAR ARRAY requisicoes COM AS INFORMAÇÕES ABAIXO E VINCULAR OS DADOS APÓS O REQUEST EM MASSA DO AXIOS
-            this.requisicoes.push({
-              cod: this.estagiariosContratados[i].cod_estudante,
-              inicio: estagiariosContratados[i].dt_inicio,
-              termino: estagiariosContratados[i].dataTermino
-            });
+            
+            let inicio = this.estagiariosContratados[i].dt_inicio ? (this.estagiariosContratados[i].dt_inicio).substring(0, 10) : "0000-00-00";
+            let final = this.estagiariosContratados[i].dataTermino ? (this.estagiariosContratados[i].dataTermino).substring(0, 10) : "0000-00-00";
+            let arrIndex = i;
+            this.axios.get("/api/feriados/periodo/"+inicio+"/"+final).then(response => {
+              this.estagiariosContratados[arrIndex].horasEstagiadas = parseInt(response.data)*4;
+              console.log(this.estagiariosContratados[arrIndex].nome, response.data);
+              this.requisicoes++; // Atualiza componentkey da tabela para forçar atualização do conteúdo
+            }).catch(err => {
+              console.error(err);
+            })
           }
-          console.warn('Requisições:');
-          console.log(this.requisicoes);
         })
         .catch(error => {
           this.msg.success = false;
@@ -108,20 +109,19 @@ export default {
     },
 
     calculoHoras(inicial, final) {
+      console.log(inicial, final);
       if (inicial == null || final == null) {
         return '';
       }
       inicial = inicial.substring(0, 10);
       final = final.substring(0, 10);
       const uriFeriados = "/api/feriados/periodo/"+inicial+"/"+final;
+      console.log(uriFeriados);
       
-      // this.axios.get(uriFeriados).then(response => {
-      //   return parseInt(response.data)*4;
-      // })     
-      /** Axios não suporta fazer todas as requisições simultaneamente. Criar método de requisição em massa para evitar erro 500 */
       this.axios.get(uriFeriados).then(response => {
-        // return parseInt(response.data)*4;
-      })
+        return parseInt(response.data)*4;
+      })     
+      
     }
   }
 };

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Feriado;
-use Illuminate\Auth\Access\Response;
+// use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 
 class FeriadoController extends Controller
