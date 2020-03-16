@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Feriado;
-// use Illuminate\Auth\Access\Response;
+
 use Illuminate\Http\Request;
 
 class FeriadoController extends Controller
@@ -17,20 +17,21 @@ class FeriadoController extends Controller
     public function checkFeriado($diaVerificado)
     {
         if (($timestamp = strtotime($diaVerificado)) !== false) {
-            
+            $diaVerificado = strtotime($diaVerificado);
             $ano = date("Y", $timestamp);
+            
             $feriadosAno = $this->dias_feriados($ano);
-
+            
             foreach ($feriadosAno as $diaFeriado) {
                 if ($diaFeriado == $diaVerificado) {
-                    return "1";
+                    return '1';
                 }                        
             }
-            return "0";
+            return '0';
         }
         else {
             echo 'invalid timestamp!';
-            return "0";
+            return '0';
         }        
     }
 
@@ -45,13 +46,10 @@ class FeriadoController extends Controller
             $diaTimestamp = strtotime($inicio) + ($i * 86400);
             
             $diaVerificado = date("Y-m-d", $diaTimestamp);
-            // echo "ITERAÇÃO: $i de $totalDias.  \n\n<br><br>";
-            // echo $diaVerificado."\n\n<br><br>";
-
+            
             if (date('w', $diaTimestamp) == '0' || date('w', $diaTimestamp) == '6') {
                 continue;
             } else if ($this->checkFeriado($diaVerificado) == '1') {
-                // echo "FERIADO!".$diaVerificado;
                 continue;
             } else {
                 $diasUteis++;
@@ -113,30 +111,4 @@ class FeriadoController extends Controller
 
         return $feriados;
     }
-
-    /*
-        if(!empty($_GET['ver'])){
-
-            //$dia = "12-10-2018";
-            $ano_=$_GET['ver'];
-
-
-                foreach(dias_feriados($ano_) as $a)
-                {
-                    // //if (date("d-m-Y",$a) == $dia) { Echo "FERIADO"; }
-                    echo date("d-m-Y",$a).'<br>';		
-                    
-                }
-        }else{
-                $ano_=date("Y");
-
-
-                foreach(dias_feriados($ano_) as $a)
-                {
-                //	//if (date("d-m-Y",$a) == $dia) { Echo "FERIADO"; }
-                    echo date("d-m-Y",$a).'<br>';		
-                    
-                }
-        }
-        */
 }

@@ -7709,10 +7709,177 @@ __webpack_require__.r(__webpack_exports__);
             _this.requisicoes++; // Atualiza componentkey da tabela para forçar atualização do conteúdo
           })["catch"](function (err) {
             console.error(err);
-          });
+          }); // TODO Calcular dias uteis em dias de recesso;
+          // Calcula dias do recesso
+
+
+          nome = _this.estagiariosContratados[i].nome;
+          diasUteis = 0;
+          recessoTotal = 0;
+
+          if (_this.estagiariosContratados[i].dt_inicial_1 !== null) {
+            inicioRecesso_1 = new Date(_this.estagiariosContratados[i].dt_inicial_1).getTime();
+            terminoRecesso_1 = new Date(_this.estagiariosContratados[i].dt_termino_1).getTime();
+            diffDias = terminoRecesso_1 - inicioRecesso_1;
+            numDias = diffDias / 86400000;
+
+            for (j = 0; j <= numDias; j++) {
+              diasAVerificar = new Date(inicioRecesso_1 + j * 86400000);
+
+              if (_this.verificaDiasUteis(diasAVerificar)) {
+                diasUteis++;
+              }
+            }
+
+            recessoTotal = diasUteis;
+          }
+
+          if (_this.estagiariosContratados[i].dt_inicial_2 !== null) {
+            inicioRecesso_2 = new Date(_this.estagiariosContratados[i].dt_inicial_2).getTime();
+            terminoRecesso_2 = new Date(_this.estagiariosContratados[i].dt_termino_2).getTime();
+            diffDias = terminoRecesso_2 - inicioRecesso_2;
+            numDias = diffDias / 86400000;
+
+            for (j = 0; j <= numDias; j++) {
+              diasAVerificar = new Date(inicioRecesso_2 + j * 86400000);
+
+              if (_this.verificaDiasUteis(diasAVerificar)) {
+                diasUteis++;
+              }
+            }
+
+            recessoTotal = diasUteis;
+          }
+
+          if (_this.estagiariosContratados[i].dt_inicial_3 !== null) {
+            inicioRecesso_3 = new Date(_this.estagiariosContratados[i].dt_inicial_3).getTime();
+            terminoRecesso_3 = new Date(_this.estagiariosContratados[i].dt_termino_3).getTime();
+            diffDias = terminoRecesso_3 - inicioRecesso_3;
+            numDias = diffDias / 86400000;
+
+            for (j = 0; j <= numDias; j++) {
+              diasAVerificar = new Date(inicioRecesso_3 + j * 86400000);
+
+              if (_this.verificaDiasUteis(diasAVerificar)) {
+                diasUteis++;
+              }
+            }
+
+            recessoTotal = diasUteis;
+          }
+
+          if (_this.estagiariosContratados[i].dt_inicial_4 !== null) {
+            inicioRecesso_4 = new Date(_this.estagiariosContratados[i].dt_inicial_4).getTime();
+            terminoRecesso_4 = new Date(_this.estagiariosContratados[i].dt_termino_4).getTime();
+            diffDias = terminoRecesso_4 - inicioRecesso_4;
+            numDias = diffDias / 86400000;
+
+            for (j = 0; j <= numDias; j++) {
+              diasAVerificar = new Date(inicioRecesso_4 + j * 86400000);
+
+              if (_this.verificaDiasUteis(diasAVerificar)) {
+                diasUteis++;
+              }
+            }
+
+            recessoTotal = diasUteis;
+          }
+
+          if (_this.estagiariosContratados[i].dt_inicial_5 !== null) {
+            inicioRecesso_5 = new Date(_this.estagiariosContratados[i].dt_inicial_5).getTime();
+            terminoRecesso_5 = new Date(_this.estagiariosContratados[i].dt_termino_5).getTime();
+            diffDias = terminoRecesso_5 - inicioRecesso_5;
+            numDias = diffDias / 86400000;
+
+            for (j = 0; j <= numDias; j++) {
+              diasAVerificar = new Date(inicioRecesso_5 + j * 86400000);
+
+              if (_this.verificaDiasUteis(diasAVerificar)) {
+                diasUteis++;
+              }
+            }
+
+            recessoTotal = diasUteis;
+          }
+
+          if (_this.estagiariosContratados[i].dt_inicial_6 !== null) {
+            inicioRecesso_6 = new Date(_this.estagiariosContratados[i].dt_inicial_6).getTime();
+            terminoRecesso_6 = new Date(_this.estagiariosContratados[i].dt_termino_6).getTime();
+            diffDias = terminoRecesso_6 - inicioRecesso_6;
+            numDias = diffDias / 86400000;
+
+            for (j = 0; j <= numDias; j++) {
+              diasAVerificar = new Date(inicioRecesso_6 + j * 86400000);
+
+              if (_this.verificaDiasUteis(diasAVerificar)) {
+                diasUteis++;
+              }
+            }
+
+            recessoTotal = diasUteis;
+          }
+
+          if (_this.estagiariosContratados[i].dt_inicial_7 !== null) {
+            inicioRecesso_7 = new Date(_this.estagiariosContratados[i].dt_inicial_7).getTime();
+            terminoRecesso_7 = new Date(_this.estagiariosContratados[i].dt_termino_7).getTime();
+            diffDias = terminoRecesso_7 - inicioRecesso_7;
+            numDias = diffDias / 86400000;
+
+            for (j = 0; j <= numDias; j++) {
+              diasAVerificar = new Date(inicioRecesso_7 + j * 86400000);
+
+              if (_this.verificaDiasUteis(diasAVerificar)) {
+                diasUteis++;
+              }
+            }
+
+            recessoTotal = diasUteis;
+          }
+
+          console.log(nome, recessoTotal);
         };
 
         for (var i in _this.estagiariosContratados) {
+          var nome;
+          var diasAVerificar;
+          var diasUteis;
+          var recessoTotal;
+          var inicioRecesso_1;
+          var terminoRecesso_1;
+          var diffDias;
+          var numDias;
+          var j;
+          var inicioRecesso_2;
+          var terminoRecesso_2;
+          var diffDias;
+          var numDias;
+          var j;
+          var inicioRecesso_3;
+          var terminoRecesso_3;
+          var diffDias;
+          var numDias;
+          var j;
+          var inicioRecesso_4;
+          var terminoRecesso_4;
+          var diffDias;
+          var numDias;
+          var j;
+          var inicioRecesso_5;
+          var terminoRecesso_5;
+          var diffDias;
+          var numDias;
+          var j;
+          var inicioRecesso_6;
+          var terminoRecesso_6;
+          var diffDias;
+          var numDias;
+          var j;
+          var inicioRecesso_7;
+          var terminoRecesso_7;
+          var diffDias;
+          var numDias;
+          var j;
+
           _loop();
         }
       })["catch"](function (error) {
@@ -7721,9 +7888,18 @@ __webpack_require__.r(__webpack_exports__);
         _this.msg.erro = "Erro ao retornar estagiários do banco";
       });
     },
+    verificaDiasUteis: function verificaDiasUteis(stringDia) {
+      var data = new Date(stringDia); // verifica se é FDS
+
+      if (data.getDay() == 0 || data.getDay() == 6) {
+        return false;
+      }
+
+      return true;
+    },
     calculoHoras: function calculoHoras(inicial, _final2) {
       if (inicial == null || _final2 == null) {
-        return '';
+        return "";
       }
 
       inicial = inicial.substring(0, 10);
