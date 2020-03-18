@@ -7710,133 +7710,34 @@ __webpack_require__.r(__webpack_exports__);
           })["catch"](function (err) {
             console.error(err);
           }); // TODO Calcular dias uteis em dias de recesso;
-          // Calcula dias do recesso
 
 
           nome = _this.estagiariosContratados[i].nome;
           diasUteis = 0;
           recessoTotal = 0;
 
-          if (_this.estagiariosContratados[i].dt_inicial_1 !== null) {
-            inicioRecesso_1 = new Date(_this.estagiariosContratados[i].dt_inicial_1).getTime();
-            terminoRecesso_1 = new Date(_this.estagiariosContratados[i].dt_termino_1).getTime();
-            diffDias = terminoRecesso_1 - inicioRecesso_1;
-            numDias = diffDias / 86400000;
+          for (k = 1; k <= 7; k++) {
+            // iteração para usar nas 7 possíveis solicitações de recesso
+            if (_this.estagiariosContratados[i]["dt_inicial_" + k] !== null) {
+              inicioRecesso = new Date(_this.estagiariosContratados[i]["dt_inicial_" + k]).getTime();
+              terminoRecesso = new Date(_this.estagiariosContratados[i]["dt_termino_" + k]).getTime();
+              diffDias = terminoRecesso - inicioRecesso;
+              numDias = diffDias / 86400000;
 
-            for (j = 0; j <= numDias; j++) {
-              diasAVerificar = new Date(inicioRecesso_1 + j * 86400000);
+              for (j = 0; j <= numDias; j++) {
+                // iteração para contar numero de dias entre a dt_inicio até dt_termino
+                diasAVerificar = new Date(inicioRecesso + j * 86400000);
 
-              if (_this.verificaDiasUteis(diasAVerificar)) {
-                diasUteis++;
+                if (_this.verificaDiasUteis(diasAVerificar)) {
+                  diasUteis++;
+                }
               }
-            }
 
-            recessoTotal = diasUteis;
+              recessoTotal = diasUteis;
+            }
           }
 
-          if (_this.estagiariosContratados[i].dt_inicial_2 !== null) {
-            inicioRecesso_2 = new Date(_this.estagiariosContratados[i].dt_inicial_2).getTime();
-            terminoRecesso_2 = new Date(_this.estagiariosContratados[i].dt_termino_2).getTime();
-            diffDias = terminoRecesso_2 - inicioRecesso_2;
-            numDias = diffDias / 86400000;
-
-            for (j = 0; j <= numDias; j++) {
-              diasAVerificar = new Date(inicioRecesso_2 + j * 86400000);
-
-              if (_this.verificaDiasUteis(diasAVerificar)) {
-                diasUteis++;
-              }
-            }
-
-            recessoTotal = diasUteis;
-          }
-
-          if (_this.estagiariosContratados[i].dt_inicial_3 !== null) {
-            inicioRecesso_3 = new Date(_this.estagiariosContratados[i].dt_inicial_3).getTime();
-            terminoRecesso_3 = new Date(_this.estagiariosContratados[i].dt_termino_3).getTime();
-            diffDias = terminoRecesso_3 - inicioRecesso_3;
-            numDias = diffDias / 86400000;
-
-            for (j = 0; j <= numDias; j++) {
-              diasAVerificar = new Date(inicioRecesso_3 + j * 86400000);
-
-              if (_this.verificaDiasUteis(diasAVerificar)) {
-                diasUteis++;
-              }
-            }
-
-            recessoTotal = diasUteis;
-          }
-
-          if (_this.estagiariosContratados[i].dt_inicial_4 !== null) {
-            inicioRecesso_4 = new Date(_this.estagiariosContratados[i].dt_inicial_4).getTime();
-            terminoRecesso_4 = new Date(_this.estagiariosContratados[i].dt_termino_4).getTime();
-            diffDias = terminoRecesso_4 - inicioRecesso_4;
-            numDias = diffDias / 86400000;
-
-            for (j = 0; j <= numDias; j++) {
-              diasAVerificar = new Date(inicioRecesso_4 + j * 86400000);
-
-              if (_this.verificaDiasUteis(diasAVerificar)) {
-                diasUteis++;
-              }
-            }
-
-            recessoTotal = diasUteis;
-          }
-
-          if (_this.estagiariosContratados[i].dt_inicial_5 !== null) {
-            inicioRecesso_5 = new Date(_this.estagiariosContratados[i].dt_inicial_5).getTime();
-            terminoRecesso_5 = new Date(_this.estagiariosContratados[i].dt_termino_5).getTime();
-            diffDias = terminoRecesso_5 - inicioRecesso_5;
-            numDias = diffDias / 86400000;
-
-            for (j = 0; j <= numDias; j++) {
-              diasAVerificar = new Date(inicioRecesso_5 + j * 86400000);
-
-              if (_this.verificaDiasUteis(diasAVerificar)) {
-                diasUteis++;
-              }
-            }
-
-            recessoTotal = diasUteis;
-          }
-
-          if (_this.estagiariosContratados[i].dt_inicial_6 !== null) {
-            inicioRecesso_6 = new Date(_this.estagiariosContratados[i].dt_inicial_6).getTime();
-            terminoRecesso_6 = new Date(_this.estagiariosContratados[i].dt_termino_6).getTime();
-            diffDias = terminoRecesso_6 - inicioRecesso_6;
-            numDias = diffDias / 86400000;
-
-            for (j = 0; j <= numDias; j++) {
-              diasAVerificar = new Date(inicioRecesso_6 + j * 86400000);
-
-              if (_this.verificaDiasUteis(diasAVerificar)) {
-                diasUteis++;
-              }
-            }
-
-            recessoTotal = diasUteis;
-          }
-
-          if (_this.estagiariosContratados[i].dt_inicial_7 !== null) {
-            inicioRecesso_7 = new Date(_this.estagiariosContratados[i].dt_inicial_7).getTime();
-            terminoRecesso_7 = new Date(_this.estagiariosContratados[i].dt_termino_7).getTime();
-            diffDias = terminoRecesso_7 - inicioRecesso_7;
-            numDias = diffDias / 86400000;
-
-            for (j = 0; j <= numDias; j++) {
-              diasAVerificar = new Date(inicioRecesso_7 + j * 86400000);
-
-              if (_this.verificaDiasUteis(diasAVerificar)) {
-                diasUteis++;
-              }
-            }
-
-            recessoTotal = diasUteis;
-          }
-
-          console.log(nome, recessoTotal);
+          console.log(nome, recessoTotal * 4 + ' horas de recesso.'); // saída de dados;
         };
 
         for (var i in _this.estagiariosContratados) {
@@ -7844,38 +7745,9 @@ __webpack_require__.r(__webpack_exports__);
           var diasAVerificar;
           var diasUteis;
           var recessoTotal;
-          var inicioRecesso_1;
-          var terminoRecesso_1;
-          var diffDias;
-          var numDias;
-          var j;
-          var inicioRecesso_2;
-          var terminoRecesso_2;
-          var diffDias;
-          var numDias;
-          var j;
-          var inicioRecesso_3;
-          var terminoRecesso_3;
-          var diffDias;
-          var numDias;
-          var j;
-          var inicioRecesso_4;
-          var terminoRecesso_4;
-          var diffDias;
-          var numDias;
-          var j;
-          var inicioRecesso_5;
-          var terminoRecesso_5;
-          var diffDias;
-          var numDias;
-          var j;
-          var inicioRecesso_6;
-          var terminoRecesso_6;
-          var diffDias;
-          var numDias;
-          var j;
-          var inicioRecesso_7;
-          var terminoRecesso_7;
+          var k;
+          var inicioRecesso;
+          var terminoRecesso;
           var diffDias;
           var numDias;
           var j;
@@ -52268,7 +52140,7 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -52279,7 +52151,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.11';
+  var VERSION = '4.17.13';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -54938,16 +54810,10 @@ return jQuery;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-
-        return result;
-      }
-
-      if (isMap(value)) {
+      } else if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
-
-        return result;
       }
 
       var keysFunc = isFull
@@ -55871,8 +55737,8 @@ return jQuery;
         return;
       }
       baseFor(source, function(srcValue, key) {
+        stack || (stack = new Stack);
         if (isObject(srcValue)) {
-          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -57689,7 +57555,7 @@ return jQuery;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision) {
+        if (precision && nativeIsFinite(number)) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -58872,7 +58738,7 @@ return jQuery;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__".
+     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
      *
      * @private
      * @param {Object} object The object to query.
@@ -58880,6 +58746,10 @@ return jQuery;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
+      if (key === 'constructor' && typeof object[key] === 'function') {
+        return;
+      }
+
       if (key == '__proto__') {
         return;
       }
@@ -62680,6 +62550,7 @@ return jQuery;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
+            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -67066,9 +66937,12 @@ return jQuery;
       , 'g');
 
       // Use a sourceURL for easier debugging.
+      // The sourceURL gets injected into the source that's eval-ed, so be careful
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        ('sourceURL' in options
-          ? options.sourceURL
+        (hasOwnProperty.call(options, 'sourceURL')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -67101,7 +66975,9 @@ return jQuery;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      var variable = options.variable;
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
+      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -69306,10 +69182,11 @@ return jQuery;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = (lodashFunc.name + ''),
-            names = realNames[key] || (realNames[key] = []);
-
-        names.push({ 'name': methodName, 'func': lodashFunc });
+        var key = lodashFunc.name + '';
+        if (!hasOwnProperty.call(realNames, key)) {
+          realNames[key] = [];
+        }
+        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -106633,8 +106510,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Iva9\Projetos\sistemaestagio\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! D:\Iva9\Projetos\sistemaestagio\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! D:\Ricardo\Projetos\estagiarios\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! D:\Ricardo\Projetos\estagiarios\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })

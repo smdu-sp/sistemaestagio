@@ -123,149 +123,36 @@ export default {
               .catch(err => {
                 console.error(err);
               });
-            // TODO Calcular dias uteis em dias de recesso;
-            // Calcula dias do recesso
-            var nome = this.estagiariosContratados[i].nome;
 
+            // TODO Calcular dias uteis em dias de recesso;
+            var nome = this.estagiariosContratados[i].nome;
             var diasAVerificar;
             var diasUteis = 0;
             var recessoTotal = 0;
 
-            if (this.estagiariosContratados[i].dt_inicial_1 !== null) {
-              var inicioRecesso_1 = new Date(
-                this.estagiariosContratados[i].dt_inicial_1
-              ).getTime();
-              var terminoRecesso_1 = new Date(
-                this.estagiariosContratados[i].dt_termino_1
-              ).getTime();
+            for (var k = 1; k <= 7; k++) { // iteração para usar nas 7 possíveis solicitações de recesso
+              if (this.estagiariosContratados[i]["dt_inicial_" + k] !== null) {
+                var inicioRecesso = new Date(
+                  this.estagiariosContratados[i]["dt_inicial_" + k]
+                ).getTime();
+                var terminoRecesso = new Date(
+                  this.estagiariosContratados[i]["dt_termino_" + k]
+                ).getTime();
 
-              var diffDias = terminoRecesso_1 - inicioRecesso_1;
-              var numDias = diffDias / 86400000;
-              for (var j = 0; j <= numDias; j++) {
-                diasAVerificar = new Date(inicioRecesso_1 + j * 86400000);
-                if (this.verificaDiasUteis(diasAVerificar)) {
-                  diasUteis++;
-                }
-              }
-              recessoTotal = diasUteis;
-            }
-            if (this.estagiariosContratados[i].dt_inicial_2 !== null) {
-              var inicioRecesso_2 = new Date(
-                this.estagiariosContratados[i].dt_inicial_2
-              ).getTime();
-              var terminoRecesso_2 = new Date(
-                this.estagiariosContratados[i].dt_termino_2
-              ).getTime();
+                var diffDias = terminoRecesso - inicioRecesso;
+                var numDias = diffDias / 86400000;
 
-              var diffDias = terminoRecesso_2 - inicioRecesso_2;
-              var numDias = diffDias / 86400000;
-              for (var j = 0; j <= numDias; j++) {
-                diasAVerificar = new Date(inicioRecesso_2 + j * 86400000);
-                if (this.verificaDiasUteis(diasAVerificar)) {
-                  diasUteis++;
-                  
+                for (var j = 0; j <= numDias; j++) { // iteração para contar numero de dias entre a dt_inicio até dt_termino
+                  diasAVerificar = new Date(inicioRecesso + j * 86400000);
+                  if (this.verificaDiasUteis(diasAVerificar)) {
+                    diasUteis++;
+                  }
                 }
+                recessoTotal = diasUteis;
               }
-              recessoTotal = diasUteis;
             }
-          if (this.estagiariosContratados[i].dt_inicial_3 !== null) {
-              var inicioRecesso_3 = new Date(
-                this.estagiariosContratados[i].dt_inicial_3
-              ).getTime();
-              var terminoRecesso_3 = new Date(
-                this.estagiariosContratados[i].dt_termino_3
-              ).getTime();
-
-              var diffDias = terminoRecesso_3 - inicioRecesso_3;
-              var numDias = diffDias / 86400000;
-              for (var j = 0; j <= numDias; j++) {
-                diasAVerificar = new Date(inicioRecesso_3 + j * 86400000);
-                if (this.verificaDiasUteis(diasAVerificar)) {
-                  diasUteis++;
-                  
-                }
-              }
-              recessoTotal = diasUteis;
-            }
-            if (this.estagiariosContratados[i].dt_inicial_4 !== null) {
-              var inicioRecesso_4 = new Date(
-                this.estagiariosContratados[i].dt_inicial_4
-              ).getTime();
-              var terminoRecesso_4 = new Date(
-                this.estagiariosContratados[i].dt_termino_4
-              ).getTime();
-
-              var diffDias = terminoRecesso_4 - inicioRecesso_4;
-              var numDias = diffDias / 86400000;
-              for (var j = 0; j <= numDias; j++) {
-                diasAVerificar = new Date(inicioRecesso_4 + j * 86400000);
-                if (this.verificaDiasUteis(diasAVerificar)) {
-                  diasUteis++;
-                  
-                }
-              }
-              recessoTotal = diasUteis;
-            }
-            if (this.estagiariosContratados[i].dt_inicial_5 !== null) {
-              var inicioRecesso_5 = new Date(
-                this.estagiariosContratados[i].dt_inicial_5
-              ).getTime();
-              var terminoRecesso_5 = new Date(
-                this.estagiariosContratados[i].dt_termino_5
-              ).getTime();
-
-              var diffDias = terminoRecesso_5 - inicioRecesso_5;
-              var numDias = diffDias / 86400000;
-              for (var j = 0; j <= numDias; j++) {
-                diasAVerificar = new Date(inicioRecesso_5 + j * 86400000);
-                if (this.verificaDiasUteis(diasAVerificar)) {
-                  diasUteis++;
-                  
-                }
-              }
-              recessoTotal = diasUteis;
-            }
-            if (this.estagiariosContratados[i].dt_inicial_6 !== null) {
-              var inicioRecesso_6 = new Date(
-                this.estagiariosContratados[i].dt_inicial_6
-              ).getTime();
-              var terminoRecesso_6 = new Date(
-                this.estagiariosContratados[i].dt_termino_6
-              ).getTime();
-
-              var diffDias = terminoRecesso_6 - inicioRecesso_6;
-              var numDias = diffDias / 86400000;
-              for (var j = 0; j <= numDias; j++) {
-                diasAVerificar = new Date(inicioRecesso_6 + j * 86400000);
-                if (this.verificaDiasUteis(diasAVerificar)) {
-                  diasUteis++;
-                  
-                }
-              }
-              recessoTotal = diasUteis;
-            }
-            if (this.estagiariosContratados[i].dt_inicial_7 !== null) {
-              var inicioRecesso_7 = new Date(
-                this.estagiariosContratados[i].dt_inicial_7
-              ).getTime();
-              var terminoRecesso_7 = new Date(
-                this.estagiariosContratados[i].dt_termino_7
-              ).getTime();
-
-              var diffDias = terminoRecesso_7 - inicioRecesso_7;
-              var numDias = diffDias / 86400000;
-              for (var j = 0; j <= numDias; j++) {
-                diasAVerificar = new Date(inicioRecesso_7 + j * 86400000);
-                if (this.verificaDiasUteis(diasAVerificar)) {
-                  diasUteis++;
-                }
-              }
-              recessoTotal = diasUteis;
-            }
-            
-            console.log(nome, recessoTotal);
+            console.log(nome, recessoTotal *4 + ' horas de recesso.'); // saída de dados;
           }
-          
         })
         .catch(error => {
           this.msg.success = false;
