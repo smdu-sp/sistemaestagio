@@ -7660,7 +7660,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       estagiariosContratados: [],
-      requisicoes: 0
+      requisicoes: 0,
+      todosFeriados: []
     };
   },
   computed: {
@@ -7677,6 +7678,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var uriEstagiarios = "/api/estagiarios";
+      var thisApp = this;
       this.axios.get(uriEstagiarios).then(function (response) {
         for (var _i in response.data) {
           if (response.data[_i].desligado === null) {
@@ -7704,6 +7706,12 @@ __webpack_require__.r(__webpack_exports__);
 
           var arrIndex = i;
 
+          _this.axios.get("/api/feriados/all").then(function (response) {
+            thisApp.todosFeriados = response.data;
+          })["catch"](function (err) {
+            console.error(err);
+          });
+
           _this.axios.get("/api/feriados/periodo/" + inicio + "/" + _final).then(function (response) {
             _this.estagiariosContratados[arrIndex].horasEstagiadas = parseInt(response.data) * 4;
             _this.requisicoes++; // Atualiza componentkey da tabela para forçar atualização do conteúdo
@@ -7714,7 +7722,6 @@ __webpack_require__.r(__webpack_exports__);
 
           nome = _this.estagiariosContratados[i].nome;
           diasUteis = 0;
-          recessoTotal = 0;
 
           for (k = 1; k <= 7; k++) {
             // iteração para usar nas 7 possíveis solicitações de recesso
@@ -7722,7 +7729,7 @@ __webpack_require__.r(__webpack_exports__);
               inicioRecesso = new Date(_this.estagiariosContratados[i]["dt_inicial_" + k]).getTime();
               terminoRecesso = new Date(_this.estagiariosContratados[i]["dt_termino_" + k]).getTime();
               diffDias = terminoRecesso - inicioRecesso;
-              numDias = diffDias / 86400000;
+              numDias = diffDias / 86400000; // Qtd de dias totais
 
               for (j = 0; j <= numDias; j++) {
                 // iteração para contar numero de dias entre a dt_inicio até dt_termino
@@ -7732,19 +7739,16 @@ __webpack_require__.r(__webpack_exports__);
                   diasUteis++;
                 }
               }
-
-              recessoTotal = diasUteis;
             }
           }
 
-          console.log(nome, recessoTotal * 4 + ' horas de recesso.'); // saída de dados;
+          console.log(nome, diasUteis * 4 + ' horas de recesso.'); // saída de dados;
         };
 
         for (var i in _this.estagiariosContratados) {
           var nome;
           var diasAVerificar;
           var diasUteis;
-          var recessoTotal;
           var k;
           var inicioRecesso;
           var terminoRecesso;
@@ -7761,7 +7765,15 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     verificaDiasUteis: function verificaDiasUteis(stringDia) {
-      var data = new Date(stringDia); // verifica se é FDS
+      var data = new Date(stringDia); // verifica se é feriado
+
+      for (var i in this.todosFeriados) {
+        // TODO - Pq não dá certo?
+        if (data.getTime() / 1000 == this.todosFeriados[i] + 10800) {
+          return false;
+        }
+      } // verifica se é FDS
+
 
       if (data.getDay() == 0 || data.getDay() == 6) {
         return false;
@@ -7916,6 +7928,11 @@ __webpack_require__.r(__webpack_exports__);
       var total = (new Date(dataTermino) - new Date(dataInicial)) / 86400000 + 1;
       return total.toFixed(0);
     },
+    // TODO - calcular dias úteis
+    diasUteis: function diasUteis(dataInicial, dataTermino) {
+      var totalDias = (new Date(dataTermino) - new Date(dataInicial)) / 86400000 + 1;
+      var diasUteis = 0;
+    },
     converteData: function converteData(dataAConverter) {
       var ano = new Date(dataAConverter).getFullYear();
       var mes = new Date(dataAConverter).getMonth() + 1;
@@ -7927,6 +7944,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var uriEstagiarios = "/api/estagiarios";
+      this.axios.get("/api/feriados/all").then(function (response) {
+        _this.todosFeriados = response.data;
+      })["catch"](function (err) {
+        console.error(err);
+      });
       this.axios.get(uriEstagiarios).then(function (response) {
         for (var i in response.data) {
           if (response.data[i].qt_dias_gozados > "0") {

@@ -2,6 +2,9 @@
 // Inicia a sessão
 session_start();
 
+// TODO: APAGAR APÓS TESTES
+$_SESSION['SesID'] = true;
+
 if (isset($_SESSION['SesID'])) {
     $_SESSION["loggedin"] = true;
 }

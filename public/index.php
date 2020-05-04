@@ -3,10 +3,11 @@ session_start();
 
 // Verifica se usuário está logado
 
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
+// TODO - retirar o comentário temporário ! ! ! das linhas 6 a 10 ! ! !
+// if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+//     header("location: login.php");
+//     exit;
+// }
 
 
 

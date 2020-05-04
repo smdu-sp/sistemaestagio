@@ -83,9 +83,11 @@ Route::middleware('cors')->name('api.')->group(function () {
         Route::get('/{cod_estudante}', 'CodEstudanteController@getCodById')->name('cod'); // Retorna o estagiario pelo cod digitado
     });
     
+    // Rota de Feriados
     Route::prefix('feriados')->group(function () {
         Route::get('/', 'FeriadoController@getFeriados')->name('feriados'); // Retorna todos os feriados cadastrados no banco        
         Route::get('/verifica/{data}', 'FeriadoController@checkFeriado')->name('check_feriado'); // Verifica se data informada é feriado
         Route::get('/periodo/{inicio}/{fim}', 'FeriadoController@checkPeriodo')->name('check_periodo');
+        Route::get('/all', 'FeriadoController@dias_feriados')->name('dias_feriados');
     });
 });

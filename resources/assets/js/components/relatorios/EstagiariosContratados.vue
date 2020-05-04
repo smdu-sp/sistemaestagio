@@ -48,7 +48,8 @@ export default {
   data() {
     return {
       estagiariosContratados: [],
-      requisicoes: 0
+      requisicoes: 0,
+      todosFeriados: []
     };
   },
   computed: {
@@ -63,6 +64,8 @@ export default {
   methods: {
     retornaEstagiarios() {
       const uriEstagiarios = "/api/estagiarios";
+
+      var thisApp = this;
 
       this.axios
         .get(uriEstagiarios)
@@ -114,6 +117,14 @@ export default {
             let arrIndex = i;
 
             this.axios
+              .get("/api/feriados/all")
+              .then(response => {
+                thisApp.todosFeriados = response.data;})
+              .catch(err => {
+                console.error(err);
+              });
+
+            this.axios
               .get("/api/feriados/periodo/" + inicio + "/" + final)
               .then(response => {
                 this.estagiariosContratados[arrIndex].horasEstagiadas =
@@ -128,7 +139,6 @@ export default {
             var nome = this.estagiariosContratados[i].nome;
             var diasAVerificar;
             var diasUteis = 0;
-            var recessoTotal = 0;
 
             for (var k = 1; k <= 7; k++) { // iteração para usar nas 7 possíveis solicitações de recesso
               if (this.estagiariosContratados[i]["dt_inicial_" + k] !== null) {
@@ -140,7 +150,7 @@ export default {
                 ).getTime();
 
                 var diffDias = terminoRecesso - inicioRecesso;
-                var numDias = diffDias / 86400000;
+                var numDias = diffDias / 86400000; // Qtd de dias totais
 
                 for (var j = 0; j <= numDias; j++) { // iteração para contar numero de dias entre a dt_inicio até dt_termino
                   diasAVerificar = new Date(inicioRecesso + j * 86400000);
@@ -148,10 +158,9 @@ export default {
                     diasUteis++;
                   }
                 }
-                recessoTotal = diasUteis;
               }
             }
-            console.log(nome, recessoTotal *4 + ' horas de recesso.'); // saída de dados;
+            console.log(nome, diasUteis *4 + ' horas de recesso.'); // saída de dados;
           }
         })
         .catch(error => {
@@ -162,6 +171,14 @@ export default {
     },
     verificaDiasUteis(stringDia) {
       var data = new Date(stringDia);
+
+      // verifica se é feriado
+      for (var i in this.todosFeriados){ // TODO - Pq não dá certo?
+        if (data.getTime()/1000 == this.todosFeriados[i]+10800) {
+          return false;
+        }
+      }
+      
       // verifica se é FDS
       if (data.getDay() == 0 || data.getDay() == 6) {
         return false;

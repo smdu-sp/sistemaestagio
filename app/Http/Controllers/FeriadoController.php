@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Feriado;
 
 use Illuminate\Http\Request;
+use PhpParser\Builder\FunctionTest;
 
 class FeriadoController extends Controller
 {
+    public Function teste() { // TODO - teste
+        echo 'bife';
+    }
 
     public function getFeriados()
     {

@@ -132,6 +132,14 @@ export default {
         (new Date(dataTermino) - new Date(dataInicial)) / 86400000 + 1;
       return total.toFixed(0);
     },
+
+    // TODO - calcular dias úteis
+    diasUteis(dataInicial, dataTermino) {
+      let totalDias = (new Date(dataTermino) - new Date(dataInicial)) / 86400000 + 1;
+      let diasUteis = 0;
+    },
+
+
     converteData(dataAConverter) {
       let ano = new Date(dataAConverter).getFullYear();
       let mes = new Date(dataAConverter).getMonth() + 1;
@@ -143,6 +151,14 @@ export default {
 
     retornaEstagiarios() {
       const uriEstagiarios = "/api/estagiarios";
+
+      this.axios
+              .get("/api/feriados/all")
+              .then(response => {
+                this.todosFeriados = response.data;})
+              .catch(err => {
+                console.error(err);
+                });
 
       this.axios
         .get(uriEstagiarios)
