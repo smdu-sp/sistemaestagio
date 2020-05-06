@@ -7678,104 +7678,134 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var uriEstagiarios = "/api/estagiarios";
-      var thisApp = this;
-      this.axios.get(uriEstagiarios).then(function (response) {
-        for (var _i in response.data) {
-          if (response.data[_i].desligado === null) {
-            response.data[_i].nome = response.data[_i].nome.toUpperCase();
+      this.axios.get("/api/feriados/all").then(function (response) {
+        _this.todosFeriados = response.data;
 
-            _this.estagiariosContratados.push(response.data[_i]);
-          }
-        }
+        _this.axios.get(uriEstagiarios).then(function (response) {
+          for (var _i in response.data) {
+            if (response.data[_i].desligado === null) {
+              response.data[_i].nome = response.data[_i].nome.toUpperCase();
 
-        var _loop = function _loop() {
-          if (_this.estagiariosContratados[i].dt_termino_3_aditivo !== null) {
-            _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_3_aditivo;
-          } else if (_this.estagiariosContratados[i].dt_termino_2_aditivo !== null) {
-            _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_2_aditivo;
-          } else if (_this.estagiariosContratados[i].dt_termino_1_aditivo !== null) {
-            _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_1_aditivo;
-          } else {
-            _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino;
-          }
-
-          _this.estagiariosContratados[i].instituicoes = _this.estagiariosContratados[i].instituicao_ensino;
-          var inicio = _this.estagiariosContratados[i].dt_inicio ? _this.estagiariosContratados[i].dt_inicio.substring(0, 10) : "0000-00-00";
-
-          var _final = _this.estagiariosContratados[i].dataTermino ? _this.estagiariosContratados[i].dataTermino.substring(0, 10) : "0000-00-00";
-
-          var arrIndex = i;
-
-          _this.axios.get("/api/feriados/all").then(function (response) {
-            thisApp.todosFeriados = response.data;
-          })["catch"](function (err) {
-            console.error(err);
-          });
-
-          _this.axios.get("/api/feriados/periodo/" + inicio + "/" + _final).then(function (response) {
-            _this.estagiariosContratados[arrIndex].horasEstagiadas = parseInt(response.data) * 4;
-            _this.requisicoes++; // Atualiza componentkey da tabela para forçar atualização do conteúdo
-          })["catch"](function (err) {
-            console.error(err);
-          }); // TODO Calcular dias uteis em dias de recesso;
-
-
-          nome = _this.estagiariosContratados[i].nome;
-          diasUteis = 0;
-
-          for (k = 1; k <= 7; k++) {
-            // iteração para usar nas 7 possíveis solicitações de recesso
-            if (_this.estagiariosContratados[i]["dt_inicial_" + k] !== null) {
-              inicioRecesso = new Date(_this.estagiariosContratados[i]["dt_inicial_" + k]).getTime();
-              terminoRecesso = new Date(_this.estagiariosContratados[i]["dt_termino_" + k]).getTime();
-              diffDias = terminoRecesso - inicioRecesso;
-              numDias = diffDias / 86400000; // Qtd de dias totais
-
-              for (j = 0; j <= numDias; j++) {
-                // iteração para contar numero de dias entre a dt_inicio até dt_termino
-                diasAVerificar = new Date(inicioRecesso + j * 86400000);
-
-                if (_this.verificaDiasUteis(diasAVerificar)) {
-                  diasUteis++;
-                }
-              }
+              _this.estagiariosContratados.push(response.data[_i]);
             }
           }
 
-          console.log(nome, diasUteis * 4 + ' horas de recesso.'); // saída de dados;
-        };
+          var _loop = function _loop() {
+            if (_this.estagiariosContratados[i].dt_termino_3_aditivo !== null) {
+              _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_3_aditivo;
+            } else if (_this.estagiariosContratados[i].dt_termino_2_aditivo !== null) {
+              _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_2_aditivo;
+            } else if (_this.estagiariosContratados[i].dt_termino_1_aditivo !== null) {
+              _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino_1_aditivo;
+            } else {
+              _this.estagiariosContratados[i].dataTermino = _this.estagiariosContratados[i].dt_termino;
+            }
 
-        for (var i in _this.estagiariosContratados) {
-          var nome;
-          var diasAVerificar;
-          var diasUteis;
-          var k;
-          var inicioRecesso;
-          var terminoRecesso;
-          var diffDias;
-          var numDias;
-          var j;
+            _this.estagiariosContratados[i].instituicoes = _this.estagiariosContratados[i].instituicao_ensino;
+            var inicio = _this.estagiariosContratados[i].dt_inicio ? _this.estagiariosContratados[i].dt_inicio.substring(0, 10) : "0000-00-00";
 
-          _loop();
-        }
-      })["catch"](function (error) {
-        _this.msg.success = false;
-        _this.msg.error = true;
-        _this.msg.erro = "Erro ao retornar estagiários do banco";
+            var _final = _this.estagiariosContratados[i].dataTermino ? _this.estagiariosContratados[i].dataTermino.substring(0, 10) : "0000-00-00";
+
+            var arrIndex = i; // Calcula horas uteis de estágio (Sem recesso)
+
+            start = new Date(_this.estagiariosContratados[i].dt_inicio).getTime();
+            end = new Date(_this.estagiariosContratados[i].dt_termino).getTime();
+            diffDays = end - start;
+            amountDays = diffDays / 86400000;
+            businessDays = 0;
+            businessHours = 0;
+            verifyDays = 0;
+
+            for (l = 0; l < amountDays; l++) {
+              verifyDays = new Date(start + l * 86400000 - 10800);
+
+              if (_this.verificaDiasUteis(verifyDays)) {
+                businessDays++;
+              }
+            }
+
+            businessHours = businessDays * 4; // TODO - está calculando um dia a mais //
+
+            console.log(_this.estagiariosContratados[i].nome, businessHours); // Calcula dias uteis em dias de recesso;
+
+            nome = _this.estagiariosContratados[i].nome;
+            diasUteis = 0;
+            horasUteisRecesso = 0;
+
+            for (k = 1; k <= 7; k++) {
+              // iteração para usar nas 7 possíveis solicitações de recesso
+              if (_this.estagiariosContratados[i]["dt_inicial_" + k] !== null) {
+                inicioRecesso = new Date(_this.estagiariosContratados[i]["dt_inicial_" + k]).getTime();
+                terminoRecesso = new Date(_this.estagiariosContratados[i]["dt_termino_" + k]).getTime();
+                diffDias = terminoRecesso - inicioRecesso;
+                numDias = diffDias / 86400000; // Qtd de dias totais
+
+                for (j = 0; j < numDias; j++) {
+                  // iteração para contar numero de dias entre a dt_inicio até dt_termino
+                  diasAVerificar = new Date(inicioRecesso + j * 86400000);
+
+                  if (_this.verificaDiasUteis(diasAVerificar)) {
+                    diasUteis++;
+                  }
+                }
+              }
+            }
+
+            horasUteisRecesso = diasUteis * 4; // console.log(nome, horasUteisRecesso); // saída de dados;
+
+            _this.axios.get("/api/feriados/periodo/" + inicio + "/" + _final).then(function (response) {
+              _this.estagiariosContratados[arrIndex].horasEstagiadas = parseInt(response.data) * 4;
+              _this.requisicoes++; // Atualiza componentkey da tabela para forçar atualização do conteúdo
+            })["catch"](function (err) {
+              console.error(err);
+            });
+          };
+
+          for (var i in _this.estagiariosContratados) {
+            var start;
+            var end;
+            var diffDays;
+            var amountDays;
+            var businessDays;
+            var businessHours;
+            var verifyDays;
+            var l;
+            var nome;
+            var diasAVerificar;
+            var diasUteis;
+            var horasUteisRecesso;
+            var k;
+            var inicioRecesso;
+            var terminoRecesso;
+            var diffDias;
+            var numDias;
+            var j;
+
+            _loop();
+          }
+        })["catch"](function (error) {
+          _this.msg.success = false;
+          _this.msg.error = true;
+          _this.msg.erro = "Erro ao retornar estagiários do banco";
+        });
+      }) // fim feriados
+      ["catch"](function (err) {
+        console.error(err);
       });
     },
     verificaDiasUteis: function verificaDiasUteis(stringDia) {
       var data = new Date(stringDia); // verifica se é feriado
 
       for (var i in this.todosFeriados) {
-        // TODO - Pq não dá certo?
         if (data.getTime() / 1000 == this.todosFeriados[i] + 10800) {
+          // adicionado 10800 para 3 horas (UTC-3)
           return false;
         }
       } // verifica se é FDS
 
 
       if (data.getDay() == 0 || data.getDay() == 6) {
+        // 0 para domingo e 6 para sábado
         return false;
       }
 
